@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ghost Protocol, Mapped | Citadel AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<canvas class="ascii-wave-canvas" id="ascii-wave-canvas" aria-hidden="true"></canvas>
+<div class="shell">
+  <header class="topbar">
+    <a class="brand" href="index.html" aria-label="Citadel AI home">
+      <span class="ai-blob-logo" data-react-bits="ai-blob-tw" aria-hidden="true"><span class="ai-blob-core"></span></span>
+      <span class="brand-title"><strong>Citadel AI</strong><span>Ghost Protocol report</span></span>
+    </a>
+    <nav class="topnav" aria-label="Primary navigation">
+      <a class="active" href="index.html">Flow Map</a>
+<a class="" href="01-archive-map.html">The Archive Becomes A Map</a>
+<a class="" href="02-semantic-foundation.html">The Semantic Foundation</a>
+<a class="" href="03-concern-retrieval.html">Turning A Concern Into Candidates</a>
+<a class="" href="04-judge-and-facets.html">The 35B Judge And The Facet Lens</a>
+<a class="" href="05-smart-questions.html">The Smart Question Engine</a>
+<a class="" href="06-validation-and-boundaries.html">Boundary Cards, Scope Rules, And Validation</a>
+<a class="" href="07-what-clients-get.html">What This Means For Clients</a>
+    </nav>
+  </header>
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="kicker">Interactive report</div>
+      <h1><span class="decode-title" data-decode-text="Ghost Protocol, Mapped">Ghost Protocol, Mapped</span></h1>
+      <p class="lede">A visual tour of the state-of-the-art concern system: from raw tweets to semantic memory, from evidence packets to one surprisingly powerful smart question.</p>
+    </div>
+  </section>
+  <main class="layout">
+    <article class="main">
+      
+<section class="panel flow-panel">
+  <div class="flow-intro">
+    <div>
+      <h2 class="section-title">The whole machine, at a glance.</h2>
+      <p class="section-lede">Each glowing tile is a stage in the system. Click any tile to open the magazine-style explanation for that part of the workflow.</p>
+    </div>
+    <div class="hint">Tip: click any tile to jump into that part of the system.</div>
+  </div>
+  <div class="chart-wrap">
+<div class="flow-map-v2" role="navigation" aria-label="Clickable Citadel AI workflow map">
+  <div class="flow-column">
+    <a class="flow-node flow-node-hero flow-node-accent-blue" href="01-archive-map.html">
+      <small>Layer 1</small><strong>Tweet Archive</strong><span>The raw record stays intact while the system builds stable context around it.</span>
+    </a>
+  </div>
+  <div class="flow-column">
+    <a class="flow-node flow-node-accent-blue" href="01-archive-map.html"><small>Objective</small><strong>Facts</strong><span>URLs, replies, media, dates, and low-signal patterns.</span></a>
+    <a class="flow-node flow-node-accent-blue" href="01-archive-map.html"><small>Entity layer</small><strong>GLiNER2 Entities</strong><span>Reusable people, places, organizations, and products.</span></a>
+    <a class="flow-node flow-node-accent-blue" href="01-archive-map.html"><small>Metadata</small><strong>LFM2.5 Notes</strong><span>Structured per-tweet recall hints without final judgments.</span></a>
+  </div>
+  <div class="flow-column">
+    <a class="flow-node flow-node-accent-green" href="02-semantic-foundation.html"><small>Foundation</small><strong>Qwen Embeddings</strong><span>Meaning-based vectors for indirect matching.</span></a>
+    <a class="flow-node flow-node-accent-green" href="02-semantic-foundation.html"><small>Context</small><strong>200 Semantic Groups</strong><span>Neighborhoods that make the archive navigable.</span></a>
+    <a class="flow-node flow-node-accent-green" href="02-semantic-foundation.html"><small>Labels</small><strong>Granite Group Names</strong><span>Human-readable labels for the semantic terrain.</span></a>
+  </div>
+  <div class="flow-column">
+    <a class="flow-node flow-node-accent-amber" href="03-concern-retrieval.html"><small>Concern</small><strong>User Concern</strong><span>A temporary overlay, not a permanent tweet label.</span></a>
+    <a class="flow-node flow-node-accent-amber" href="03-concern-retrieval.html"><small>Recall</small><strong>Multi-Source Retrieval</strong><span>Text, facts, embeddings, groups, and labels all hunt together.</span></a>
+    <a class="flow-node flow-node-accent-amber" href="03-concern-retrieval.html"><small>Evidence</small><strong>Candidate Packets</strong><span>Compact explanations of why each candidate surfaced.</span></a>
+  </div>
+  <div class="flow-column">
+    <a class="flow-node flow-node-accent-violet" href="04-judge-and-facets.html"><small>Judge</small><strong>35B Concern Judge</strong><span>Reads packets and separates likely, possible, thin, and noisy matches.</span></a>
+    <a class="flow-node flow-node-accent-violet" href="04-judge-and-facets.html"><small>Facet lens</small><strong>Concern Facets</strong><span>Turns many judgments into explainable uncertainty patterns.</span></a>
+  </div>
+  <div class="flow-column">
+    <a class="flow-node flow-node-accent-red" href="05-smart-questions.html"><small>Scaffold</small><strong>Question Packet</strong><span>Counts, facets, examples, and ambiguity hints for the planner.</span></a>
+    <a class="flow-node flow-node-smart flow-node-accent-red" href="05-smart-questions.html"><small>Smart question</small><strong>35B Planner</strong><span>The high-leverage pass that asks one question to move a whole pocket of uncertainty.</span></a>
+    <a class="flow-node flow-node-accent-teal" href="06-validation-and-boundaries.html"><small>Gate</small><strong>Validation</strong><span>Checks real facets, real candidates, plausible counts, and safe language.</span></a>
+    <a class="flow-node flow-node-accent-teal" href="06-validation-and-boundaries.html"><small>Output</small><strong>Boundary Cards</strong><span>Readable rules, options, and review guidance.</span></a>
+    <a class="flow-node flow-node-accent-teal" href="07-what-clients-get.html"><small>User control</small><strong>Answer & Review</strong><span>The user chooses the boundary. The system stays auditable.</span></a>
+  </div>
+</div>
+</div>
+</section>
+<div class="stats"><div class="stat"><strong>27,578</strong><span>tweets in the current archive</span></div><div class="stat"><strong>23,909</strong><span>tweets embedded after low-signal filtering</span></div><div class="stat"><strong>200</strong><span>semantic groups in the current foundation</span></div><div class="stat"><strong>1</strong><span>high-leverage smart question in the accepted run</span></div></div>
+<section class="panel"><div class="panel-pad">
+  <h2 class="section-title">Why this is different from search.</h2>
+  <p class="section-lede">Ordinary search asks, "Which tweets contain these words?" Ghost Protocol asks a better question: "Which tweets behave like this concern, even when the words are indirect?" The system builds a semantic map, pulls candidates from several recall nets, asks a 35B model to judge the shape of the evidence, and then uses another 35B planning pass to ask the user the one question that can resolve an entire pocket of uncertainty.</p>
+  <div class="pullquote">The smart question is the compression trick: instead of reviewing hundreds of tweets one by one, the system finds the boundary that can move a whole cluster.</div>
+  <div class="toc-grid"><a class="toc-card" href="01-archive-map.html">
+  <small>Layer 1</small>
+  <h3>The Archive Becomes A Map</h3>
+  <p>Before the system asks any model to reason, it turns the raw archive into a set of stable signals.</p>
+</a>
+<a class="toc-card" href="02-semantic-foundation.html">
+  <small>Layer 2</small>
+  <h3>The Semantic Foundation</h3>
+  <p>Embeddings, groups, and model-written labels let the system find tweets by meaning, not just by words.</p>
+</a>
+<a class="toc-card" href="03-concern-retrieval.html">
+  <small>Layer 3</small>
+  <h3>Turning A Concern Into Candidates</h3>
+  <p>A user concern becomes a broad search mission that pulls from many independent evidence sources.</p>
+</a>
+<a class="toc-card" href="04-judge-and-facets.html">
+  <small>Layer 4</small>
+  <h3>The 35B Judge And The Facet Lens</h3>
+  <p>The large model reviews candidate packets, then the system groups the answers into explainable concern patterns.</p>
+</a>
+<a class="toc-card" href="05-smart-questions.html">
+  <small>Layer 5</small>
+  <h3>The Smart Question Engine</h3>
+  <p>The clever part: one LLM question can collapse a whole pocket of uncertainty into a reusable rule.</p>
+</a>
+<a class="toc-card" href="06-validation-and-boundaries.html">
+  <small>Layer 6</small>
+  <h3>Boundary Cards, Scope Rules, And Validation</h3>
+  <p>Every LLM idea is checked against real facets, real candidates, and real counts before it is accepted.</p>
+</a>
+<a class="toc-card" href="07-what-clients-get.html">
+  <small>Outcome</small>
+  <h3>What This Means For Clients</h3>
+  <p>A system that reads like a thoughtful analyst, narrows like a scientist, and preserves the user's final say.</p>
+</a></div>
+</div></section>
+
+    </article>
+    <aside class="toc" aria-label="Table of contents">
+      <h2>Table of contents</h2>
+      <a class="active" href="index.html">Flow Map</a>
+<a class="" href="01-archive-map.html">The Archive Becomes A Map</a>
+<a class="" href="02-semantic-foundation.html">The Semantic Foundation</a>
+<a class="" href="03-concern-retrieval.html">Turning A Concern Into Candidates</a>
+<a class="" href="04-judge-and-facets.html">The 35B Judge And The Facet Lens</a>
+<a class="" href="05-smart-questions.html">The Smart Question Engine</a>
+<a class="" href="06-validation-and-boundaries.html">Boundary Cards, Scope Rules, And Validation</a>
+<a class="" href="07-what-clients-get.html">What This Means For Clients</a>
+    </aside>
+  </main>
+</div>
+<footer class="footer">
+  Citadel AI client workflow report. Generated from the current Ghost Protocol conceptual workflow document.
+</footer>
+
+<script>
+(() => {
+  const reducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const decodeCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$%&*+<>?@";
+
+  function scramble(text, revealed) {
+    return Array.from(text).map((char, index) => {
+      if (char === " " || char === "," || char === "." || char === "&") return char;
+      if (index < revealed) return char;
+      return decodeCharacters[Math.floor(Math.random() * decodeCharacters.length)];
+    }).join("");
+  }
+
+  function decodeTitle(element) {
+    const text = element.dataset.decodeText || element.textContent || "";
+    if (!text || reducedMotion) {
+      element.textContent = text;
+      element.classList.add("is-decoded");
+      return;
+    }
+    let revealed = 0;
+    let tick = 0;
+    element.classList.add("is-decoding");
+    element.textContent = scramble(text, 0);
+    const timer = window.setInterval(() => {
+      tick += 1;
+      revealed += 2;
+      element.textContent = scramble(text, revealed);
+      if (revealed >= text.length) {
+        window.clearInterval(timer);
+        element.textContent = text;
+        element.classList.remove("is-decoding");
+        element.classList.add("is-decoded");
+      }
+    }, 28);
+  }
+
+  function initDecodeTitles() {
+    document.querySelectorAll(".decode-title").forEach((element, index) => {
+      window.setTimeout(() => decodeTitle(element), 90 + index * 70);
+    });
+  }
+
+  function initAsciiWave() {
+    const canvas = document.getElementById("ascii-wave-canvas");
+    if (!canvas) return;
+    const context = canvas.getContext("2d", { alpha: true });
+    if (!context) return;
+    const chars = " .:-+*=%@#";
+    let width = 0;
+    let height = 0;
+    let frame = 0;
+
+    function resize() {
+      const ratio = Math.min(window.devicePixelRatio || 1, 2);
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = Math.floor(width * ratio);
+      canvas.height = Math.floor(height * ratio);
+      canvas.style.width = width + "px";
+      canvas.style.height = height + "px";
+      context.setTransform(ratio, 0, 0, ratio, 0, 0);
+      context.font = "700 13px JetBrains Mono, monospace";
+      context.textBaseline = "top";
+    }
+
+    function draw(time = 0) {
+      frame += 1;
+      context.clearRect(0, 0, width, height);
+      const stepX = width < 700 ? 22 : 18;
+      const stepY = width < 700 ? 24 : 20;
+      const t = time * 0.00045;
+      for (let y = 0; y < height + stepY; y += stepY) {
+        for (let x = 0; x < width + stepX; x += stepX) {
+          const wave = Math.sin(x * 0.014 + t * 3.2) + Math.cos(y * 0.017 - t * 2.8) + Math.sin((x + y) * 0.009 + t * 4.1);
+          const normalized = Math.max(0, Math.min(1, (wave + 2.2) / 4.4));
+          const index = Math.min(chars.length - 1, Math.floor(normalized * chars.length));
+          const alpha = 0.018 + normalized * 0.105;
+          context.fillStyle = `rgba(57, 255, 133, ${alpha})`;
+          context.fillText(chars[index], x, y);
+        }
+      }
+      if (!reducedMotion) window.requestAnimationFrame(draw);
+    }
+
+    resize();
+    window.addEventListener("resize", resize, { passive: true });
+    draw();
+  }
+
+  window.addEventListener("DOMContentLoaded", () => {
+    initAsciiWave();
+    initDecodeTitles();
+  });
+})();
+</script>
+
+</body>
+</html>

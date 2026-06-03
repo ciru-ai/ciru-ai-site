@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>What This Means For Clients | Citadel AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<canvas class="ascii-wave-canvas" id="ascii-wave-canvas" aria-hidden="true"></canvas>
+<div class="shell">
+  <header class="topbar">
+    <a class="brand" href="index.html" aria-label="Citadel AI home">
+      <span class="ai-blob-logo" data-react-bits="ai-blob-tw" aria-hidden="true"><span class="ai-blob-core"></span></span>
+      <span class="brand-title"><strong>Citadel AI</strong><span>Ghost Protocol report</span></span>
+    </a>
+    <nav class="topnav" aria-label="Primary navigation">
+      <a class="" href="index.html">Flow Map</a>
+<a class="" href="01-archive-map.html">The Archive Becomes A Map</a>
+<a class="" href="02-semantic-foundation.html">The Semantic Foundation</a>
+<a class="" href="03-concern-retrieval.html">Turning A Concern Into Candidates</a>
+<a class="" href="04-judge-and-facets.html">The 35B Judge And The Facet Lens</a>
+<a class="" href="05-smart-questions.html">The Smart Question Engine</a>
+<a class="" href="06-validation-and-boundaries.html">Boundary Cards, Scope Rules, And Validation</a>
+<a class="active" href="07-what-clients-get.html">What This Means For Clients</a>
+    </nav>
+  </header>
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="kicker">Outcome</div>
+      <h1><span class="decode-title" data-decode-text="What This Means For Clients">What This Means For Clients</span></h1>
+      <p class="lede">A system that reads like a thoughtful analyst, narrows like a scientist, and preserves the user's final say.</p>
+    </div>
+  </section>
+  <main class="layout">
+    <article class="main">
+      
+<section class="panel"><div class="panel-pad">
+  <h2 class="section-title">The client gets a guided investigation, not a black box.</h2>
+  <p class="section-lede">The system combines semantic search, model judgment, facet discovery, and smart questions to make large archives feel reviewable.</p>
+  <div class="article-grid">
+    <div class="story-card accent-green"><h3>Finds what keywords miss</h3><p>Meaning-based retrieval can surface subtle tweets that never use the user's exact concern words.</p></div>
+    <div class="story-card accent-blue"><h3>Explains why</h3><p>Candidates carry source families, judge reasons, facet labels, examples, and model provenance.</p></div>
+    <div class="story-card accent-coral"><h3>Asks fewer, better questions</h3><p>The system looks for boundary questions that move clusters, not individual tweets.</p></div>
+    <div class="story-card accent-amber"><h3>Keeps the user in control</h3><p>Models narrow and explain. The user approves boundaries and makes final decisions.</p></div>
+  </div>
+  <div class="pullquote">The implication is powerful: a personal archive can become a navigable reasoning space where one good question replaces a long, exhausting manual pass.</div>
+  <p>Future stages apply approved answers as concern-local rules and build an auditable review package. The system still avoids accuracy claims until human labels are imported and measured.</p>
+</div></section>
+
+<div class="next-prev">
+  <a class="button secondary" href="06-validation-and-boundaries.html">Previous</a>
+  <a class="button" href="index.html">Next</a>
+</div>
+
+    </article>
+    <aside class="toc" aria-label="Table of contents">
+      <h2>Table of contents</h2>
+      <a class="" href="index.html">Flow Map</a>
+<a class="" href="01-archive-map.html">The Archive Becomes A Map</a>
+<a class="" href="02-semantic-foundation.html">The Semantic Foundation</a>
+<a class="" href="03-concern-retrieval.html">Turning A Concern Into Candidates</a>
+<a class="" href="04-judge-and-facets.html">The 35B Judge And The Facet Lens</a>
+<a class="" href="05-smart-questions.html">The Smart Question Engine</a>
+<a class="" href="06-validation-and-boundaries.html">Boundary Cards, Scope Rules, And Validation</a>
+<a class="active" href="07-what-clients-get.html">What This Means For Clients</a>
+    </aside>
+  </main>
+</div>
+<footer class="footer">
+  Citadel AI client workflow report. Generated from the current Ghost Protocol conceptual workflow document.
+</footer>
+
+<script>
+(() => {
+  const reducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const decodeCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$%&*+<>?@";
+
+  function scramble(text, revealed) {
+    return Array.from(text).map((char, index) => {
+      if (char === " " || char === "," || char === "." || char === "&") return char;
+      if (index < revealed) return char;
+      return decodeCharacters[Math.floor(Math.random() * decodeCharacters.length)];
+    }).join("");
+  }
+
+  function decodeTitle(element) {
+    const text = element.dataset.decodeText || element.textContent || "";
+    if (!text || reducedMotion) {
+      element.textContent = text;
+      element.classList.add("is-decoded");
+      return;
+    }
+    let revealed = 0;
+    let tick = 0;
+    element.classList.add("is-decoding");
+    element.textContent = scramble(text, 0);
+    const timer = window.setInterval(() => {
+      tick += 1;
+      revealed += 2;
+      element.textContent = scramble(text, revealed);
+      if (revealed >= text.length) {
+        window.clearInterval(timer);
+        element.textContent = text;
+        element.classList.remove("is-decoding");
+        element.classList.add("is-decoded");
+      }
+    }, 28);
+  }
+
+  function initDecodeTitles() {
+    document.querySelectorAll(".decode-title").forEach((element, index) => {
+      window.setTimeout(() => decodeTitle(element), 90 + index * 70);
+    });
+  }
+
+  function initAsciiWave() {
+    const canvas = document.getElementById("ascii-wave-canvas");
+    if (!canvas) return;
+    const context = canvas.getContext("2d", { alpha: true });
+    if (!context) return;
+    const chars = " .:-+*=%@#";
+    let width = 0;
+    let height = 0;
+    let frame = 0;
+
+    function resize() {
+      const ratio = Math.min(window.devicePixelRatio || 1, 2);
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = Math.floor(width * ratio);
+      canvas.height = Math.floor(height * ratio);
+      canvas.style.width = width + "px";
+      canvas.style.height = height + "px";
+      context.setTransform(ratio, 0, 0, ratio, 0, 0);
+      context.font = "700 13px JetBrains Mono, monospace";
+      context.textBaseline = "top";
+    }
+
+    function draw(time = 0) {
+      frame += 1;
+      context.clearRect(0, 0, width, height);
+      const stepX = width < 700 ? 22 : 18;
+      const stepY = width < 700 ? 24 : 20;
+      const t = time * 0.00045;
+      for (let y = 0; y < height + stepY; y += stepY) {
+        for (let x = 0; x < width + stepX; x += stepX) {
+          const wave = Math.sin(x * 0.014 + t * 3.2) + Math.cos(y * 0.017 - t * 2.8) + Math.sin((x + y) * 0.009 + t * 4.1);
+          const normalized = Math.max(0, Math.min(1, (wave + 2.2) / 4.4));
+          const index = Math.min(chars.length - 1, Math.floor(normalized * chars.length));
+          const alpha = 0.018 + normalized * 0.105;
+          context.fillStyle = `rgba(57, 255, 133, ${alpha})`;
+          context.fillText(chars[index], x, y);
+        }
+      }
+      if (!reducedMotion) window.requestAnimationFrame(draw);
+    }
+
+    resize();
+    window.addEventListener("resize", resize, { passive: true });
+    draw();
+  }
+
+  window.addEventListener("DOMContentLoaded", () => {
+    initAsciiWave();
+    initDecodeTitles();
+  });
+})();
+</script>
+
+</body>
+</html>
