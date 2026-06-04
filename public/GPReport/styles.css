@@ -817,8 +817,10 @@ th {
     justify-content: flex-start;
     overflow-x: auto;
     overscroll-behavior-x: contain;
-    padding-inline: 0.75rem;
+    padding-inline: 1rem;
     scrollbar-width: none;
+    mask-image: linear-gradient(90deg, transparent 0, #000 0.78rem, #000 calc(100% - 0.78rem), transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 0.78rem, #000 calc(100% - 0.78rem), transparent 100%);
     -webkit-overflow-scrolling: touch;
   }
 
