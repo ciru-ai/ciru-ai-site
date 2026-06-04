@@ -809,6 +809,7 @@ th {
 
   .topbar {
     gap: 0.55rem;
+    position: sticky;
   }
 
   .topnav {
@@ -816,9 +817,13 @@ th {
     justify-content: flex-start;
     overflow-x: auto;
     overscroll-behavior-x: contain;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(57, 255, 133, 0.42) transparent;
+    padding-inline: 0.75rem;
+    scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
+  }
+
+  .topnav::-webkit-scrollbar {
+    display: none;
   }
 
   .topnav a {
@@ -885,6 +890,31 @@ th {
   .topnav {
     width: 100%;
     padding-bottom: 0.08rem;
+  }
+
+  .topbar::before,
+  .topbar::after {
+    position: absolute;
+    bottom: 1.58rem;
+    z-index: 2;
+    width: 0.42rem;
+    height: 0.42rem;
+    pointer-events: none;
+    content: "";
+    border-top: 1px solid rgba(57, 255, 133, 0.78);
+    border-right: 1px solid rgba(57, 255, 133, 0.78);
+    filter: drop-shadow(0 0 6px rgba(57, 255, 133, 0.24));
+  }
+
+  .topbar::before {
+    left: 0.82rem;
+    opacity: 0.38;
+    transform: rotate(-135deg);
+  }
+
+  .topbar::after {
+    right: 0.82rem;
+    transform: rotate(45deg);
   }
 
   .topnav a {
