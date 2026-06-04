@@ -807,8 +807,26 @@ th {
     grid-template-columns: 1fr;
   }
 
+  .topbar {
+    gap: 0.55rem;
+  }
+
   .topnav {
+    flex-wrap: nowrap;
     justify-content: flex-start;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(57, 255, 133, 0.42) transparent;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .topnav a {
+    flex: 0 0 auto;
+    max-width: min(18rem, 72vw);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .toc {
@@ -859,16 +877,20 @@ th {
     font-size: 0.94rem;
   }
 
+  .ai-blob-logo {
+    width: 2.45rem;
+    height: 2.45rem;
+  }
+
   .topnav {
-    display: grid;
-    grid-template-columns: 1fr;
     width: 100%;
+    padding-bottom: 0.08rem;
   }
 
   .topnav a {
     padding: 0.38rem 0.55rem;
     font-size: 0.68rem;
-    line-height: 1.35;
+    line-height: 1.2;
   }
 
   .stats,
