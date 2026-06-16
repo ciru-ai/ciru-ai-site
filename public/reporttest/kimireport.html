@@ -167,6 +167,7 @@
     li + li { margin-top: 8px; }
     .chart { width: 100%; min-height: 390px; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(0,0,0,.2); overflow: hidden; contain: layout paint; }
     .chart.small { min-height: 320px; }
+    .mobile-data { display: none; }
     figure { margin: 0; }
     figure img { display: block; width: 100%; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(0,0,0,.28); }
     figcaption { color: var(--muted); font: 500 .82rem "IBM Plex Mono", monospace; margin-top: 8px; }
@@ -199,7 +200,46 @@
       .kicker { line-height: 1.45; }
       h1 { font-size: 2rem; line-height: 1.04; }
       .lead { font-size: 1rem; }
-      .chart { min-height: 330px; }
+      .chart { display: none; }
+      .mobile-data { display: grid; gap: 10px; margin: 12px 0; }
+      .mobile-data h3 { margin: 0 0 2px; }
+      .mobile-data-item {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: rgba(255,255,255,.035);
+        padding: 12px;
+      }
+      .mobile-data-item b { display: block; color: var(--cyan); margin-bottom: 6px; }
+      .mobile-data-item span { display: block; color: var(--muted); font-size: .92rem; line-height: 1.4; }
+      .table-wrap {
+        border: 0;
+        background: transparent;
+        overflow: visible;
+      }
+      table, thead, tbody, tr, th, td { display: block; width: 100%; min-width: 0; }
+      table { min-width: 0; background: transparent; }
+      thead { display: none; }
+      tr {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: rgba(255,255,255,.035);
+        padding: 10px;
+        margin: 0 0 10px;
+      }
+      td {
+        border: 0;
+        padding: 7px 0;
+        font-size: .92rem;
+        overflow-wrap: anywhere;
+      }
+      td::before {
+        content: attr(data-label);
+        display: block;
+        color: var(--cyan);
+        font: 700 .72rem "IBM Plex Mono", monospace;
+        text-transform: uppercase;
+        margin-bottom: 3px;
+      }
       .stat { min-height: 0; }
     }
   </style>
@@ -265,17 +305,20 @@
       <h2>Market Shape</h2>
       <p>The Kimi report frames the market as a layered digital-exclusion problem. Millions are offline or unable to use the internet independently, while AI adoption sits above basic digital confidence. That makes institutional access and trusted human delivery more important than app distribution.</p>
       <div class="grid cols-2">
-        <div id="marketChart" class="chart"></div>
+        <div>
+          <div id="marketChart" class="chart"></div>
+          <div class="mobile-data "><h3>Market Size Scenarios</h3><div class="mobile-data-item"><b>Low digital confidence adults</b><span>Low: 8.5M</span><span>Base: 15.0M</span><span>High: 21.7M</span></div><div class="mobile-data-item"><b>Never used generative AI</b><span>Low: 35.0M</span><span>Base: 30.0M</span><span>High: 25.0M</span></div><div class="mobile-data-item"><b>No/fairly low AI knowledge</b><span>Low: 30.0M</span><span>Base: 25.0M</span><span>High: 20.0M</span></div><div class="mobile-data-item"><b>Institutionally reachable</b><span>Low: 2.0M</span><span>Base: 5.0M</span><span>High: 10.0M</span></div><div class="mobile-data-item"><b>Sponsored users</b><span>Low: 0.05M</span><span>Base: 0.2M</span><span>High: 0.5M</span></div></div>
+        </div>
         <figure>
           <img src="assets/kimi/chart1_digital_pyramid.png" alt="UK Digital and AI Adoption Pyramid">
           <figcaption>Original Kimi chart: the digital and AI adoption pyramid.</figcaption>
         </figure>
       </div>
-      <div class="table-wrap "><table><thead><tr><th>Metric</th><th>Low</th><th>Base</th><th>High</th><th>Unit</th></tr></thead><tbody><tr><td>Low digital confidence adults</td><td>8.5</td><td>15.0</td><td>21.7</td><td>million</td></tr>
-<tr><td>Never used generative AI</td><td>35.0</td><td>30.0</td><td>25.0</td><td>million</td></tr>
-<tr><td>No/fairly low AI knowledge</td><td>30.0</td><td>25.0</td><td>20.0</td><td>million</td></tr>
-<tr><td>Institutionally reachable</td><td>2.0</td><td>5.0</td><td>10.0</td><td>million</td></tr>
-<tr><td>Sponsored users</td><td>0.05</td><td>0.2</td><td>0.5</td><td>million</td></tr></tbody></table></div>
+      <div class="table-wrap "><table><thead><tr><th>Metric</th><th>Low</th><th>Base</th><th>High</th><th>Unit</th></tr></thead><tbody><tr><td data-label="Metric">Low digital confidence adults</td><td data-label="Low">8.5</td><td data-label="Base">15.0</td><td data-label="High">21.7</td><td data-label="Unit">million</td></tr>
+<tr><td data-label="Metric">Never used generative AI</td><td data-label="Low">35.0</td><td data-label="Base">30.0</td><td data-label="High">25.0</td><td data-label="Unit">million</td></tr>
+<tr><td data-label="Metric">No/fairly low AI knowledge</td><td data-label="Low">30.0</td><td data-label="Base">25.0</td><td data-label="High">20.0</td><td data-label="Unit">million</td></tr>
+<tr><td data-label="Metric">Institutionally reachable</td><td data-label="Low">2.0</td><td data-label="Base">5.0</td><td data-label="High">10.0</td><td data-label="Unit">million</td></tr>
+<tr><td data-label="Metric">Sponsored users</td><td data-label="Low">0.05</td><td data-label="Base">0.2</td><td data-label="High">0.5</td><td data-label="Unit">million</td></tr></tbody></table></div>
       <div class="grid cols-2">
         <figure>
           <img src="assets/kimi/chart2_ai_awareness.png" alt="UK AI awareness and usage chart">
@@ -300,22 +343,25 @@
             <div class="rank-item"><span class="rank">3</span><div><b>Small business owners</b><span>Admin, marketing, invoicing, customer service; price-sensitive but reachable.</span></div><span class="score">7/10</span></div>
           </div>
         </div>
-        <div id="segmentChart" class="chart small"></div>
+        <div>
+          <div id="segmentChart" class="chart small"></div>
+          <div class="mobile-data "><h3>Segment Scores</h3><div class="mobile-data-item"><b>Non-office workers</b><span>Score: 9/10</span><span>Strongest wedge: clear buyer, budget, scale</span></div><div class="mobile-data-item"><b>Housing association residents</b><span>Score: 7/10</span><span>Volume play; low per-unit revenue</span></div><div class="mobile-data-item"><b>Small business owners</b><span>Score: 7/10</span><span>Price-sensitive; many free alternatives</span></div><div class="mobile-data-item"><b>Low-income working age</b><span>Score: 6/10</span><span>Requires public funding; slow sales cycle</span></div><div class="mobile-data-item"><b>Carers</b><span>Score: 6/10</span><span>Scattered; hard to reach at scale</span></div><div class="mobile-data-item"><b>Women returning to work</b><span>Score: 6/10</span><span>Moderate WTP; free alternatives</span></div><div class="mobile-data-item"><b>NHS chronic-condition patients</b><span>Score: 6/10</span><span>NHS procurement slow; needs credibility</span></div><div class="mobile-data-item"><b>Older adults 65-74</b><span>Score: 5/10</span><span>Low WTP; free alternatives exist</span></div></div>
+        </div>
       </div>
-      <div class="table-wrap "><table><thead><tr><th>Segment</th><th>Size</th><th>Core pain</th><th>Buyer</th><th>Best channel</th><th>Likely product</th><th>Score</th><th>Caution</th></tr></thead><tbody><tr><td>Non-office workers</td><td>8M+</td><td>Digital payslips, scheduling, compliance apps</td><td>Employer</td><td>Employer HR, union rep, team leader</td><td>Digital Confidence at Work workshop</td><td><span class="score">9/10</span></td><td>Strongest wedge: clear buyer, budget, scale</td></tr>
-<tr><td>Housing association residents</td><td>2M+</td><td>Rent portals, repairs, energy bills, benefits</td><td>Housing association</td><td>Housing association offices, community rooms</td><td>Tenant digital support program</td><td><span class="score">7/10</span></td><td>Volume play; low per-unit revenue</td></tr>
-<tr><td>Small business owners</td><td>1.5M+</td><td>Marketing, admin, invoicing, customer service</td><td>Self / chamber</td><td>Small business networks, chambers, Facebook</td><td>AI for Your Business clinic</td><td><span class="score">7/10</span></td><td>Price-sensitive; many free alternatives</td></tr>
-<tr><td>Low-income working age</td><td>4M+</td><td>Benefits, job applications, forms, banking</td><td>Council / DWP / charity</td><td>Job Centre, library, housing association</td><td>Job-seeker digital + assistant training</td><td><span class="score">6/10</span></td><td>Requires public funding; slow sales cycle</td></tr>
-<tr><td>Carers</td><td>5M+</td><td>Form filling, health apps, time pressure, isolation</td><td>Self / employer</td><td>GP surgery, carer support groups, council</td><td>Digital Help for Carers</td><td><span class="score">6/10</span></td><td>Scattered; hard to reach at scale</td></tr>
-<tr><td>Women returning to work</td><td>1M+</td><td>Confidence, skills gap, childcare, flexible work</td><td>Self / employer / DWP</td><td>Job centres, women's networks, Facebook</td><td>Back to Work Digital Confidence</td><td><span class="score">6/10</span></td><td>Moderate WTP; free alternatives</td></tr>
-<tr><td>NHS chronic-condition patients</td><td>15M+</td><td>Appointments, prescriptions, health info, forms</td><td>NHS / family</td><td>GP surgery, pharmacy, hospital</td><td>Managing Your Health Online</td><td><span class="score">6/10</span></td><td>NHS procurement slow; needs credibility</td></tr>
-<tr><td>Older adults 65-74</td><td>2.3M</td><td>Banking, shopping, scams, family contact</td><td>Family / self</td><td>Library, community centre, Facebook</td><td>Stay Safe Online + phone help</td><td><span class="score">5/10</span></td><td>Low WTP; free alternatives exist</td></tr>
-<tr><td>Job seekers</td><td>1.3M+</td><td>CVs, applications, interview prep</td><td>DWP / employment provider</td><td>Job Centre Plus, Work Programme</td><td>AI-powered job search + CV help</td><td><span class="score">5/10</span></td><td>Commoditized; free provision dominant</td></tr>
-<tr><td>People with disabilities</td><td>14M</td><td>Accessibility, assistive tech, service access</td><td>Self / family / PA</td><td>Disability orgs, social care, OTs</td><td>Accessible device setup + AI tools</td><td><span class="score">5/10</span></td><td>High support burden; safeguarding liability</td></tr>
-<tr><td>ESOL / immigrant communities</td><td>1.5M+</td><td>Language barriers, form filling, job search, banking</td><td>Council / community org</td><td>Community centres, mosques, ESOL classes</td><td>Multilingual phone help + form assistance</td><td><span class="score">5/10</span></td><td>Requires specialist partners</td></tr>
-<tr><td>Adults in financial hardship</td><td>3M+</td><td>Budgeting, banking, scams, benefits</td><td>Charity / council</td><td>Citizens Advice, food banks, credit unions</td><td>Scam safety + money management help</td><td><span class="score">5/10</span></td><td>No payment capacity; grant-dependent</td></tr>
-<tr><td>Older adults 75+ offline</td><td>1.7M</td><td>Isolation, service access, health apps</td><td>Family member</td><td>Library drop-in, GP surgery, church</td><td>Phone confidence clinic + tablet loan</td><td><span class="score">4/10</span></td><td>Margins too thin; charity funding only</td></tr>
-<tr><td>Rural communities</td><td>2M+</td><td>Broadband, service access, isolation, transport</td><td>Council / rural charity</td><td>Village halls, mobile libraries, parish</td><td>Mobile digital clinic</td><td><span class="score">4/10</span></td><td>Travel costs erode margins</td></tr></tbody></table></div>
+      <div class="table-wrap "><table><thead><tr><th>Segment</th><th>Size</th><th>Core pain</th><th>Buyer</th><th>Best channel</th><th>Likely product</th><th>Score</th><th>Caution</th></tr></thead><tbody><tr><td data-label="Segment">Non-office workers</td><td data-label="Size">8M+</td><td data-label="Core pain">Digital payslips, scheduling, compliance apps</td><td data-label="Buyer">Employer</td><td data-label="Best channel">Employer HR, union rep, team leader</td><td data-label="Likely product">Digital Confidence at Work workshop</td><td data-label="Score"><span class="score">9/10</span></td><td data-label="Caution">Strongest wedge: clear buyer, budget, scale</td></tr>
+<tr><td data-label="Segment">Housing association residents</td><td data-label="Size">2M+</td><td data-label="Core pain">Rent portals, repairs, energy bills, benefits</td><td data-label="Buyer">Housing association</td><td data-label="Best channel">Housing association offices, community rooms</td><td data-label="Likely product">Tenant digital support program</td><td data-label="Score"><span class="score">7/10</span></td><td data-label="Caution">Volume play; low per-unit revenue</td></tr>
+<tr><td data-label="Segment">Small business owners</td><td data-label="Size">1.5M+</td><td data-label="Core pain">Marketing, admin, invoicing, customer service</td><td data-label="Buyer">Self / chamber</td><td data-label="Best channel">Small business networks, chambers, Facebook</td><td data-label="Likely product">AI for Your Business clinic</td><td data-label="Score"><span class="score">7/10</span></td><td data-label="Caution">Price-sensitive; many free alternatives</td></tr>
+<tr><td data-label="Segment">Low-income working age</td><td data-label="Size">4M+</td><td data-label="Core pain">Benefits, job applications, forms, banking</td><td data-label="Buyer">Council / DWP / charity</td><td data-label="Best channel">Job Centre, library, housing association</td><td data-label="Likely product">Job-seeker digital + assistant training</td><td data-label="Score"><span class="score">6/10</span></td><td data-label="Caution">Requires public funding; slow sales cycle</td></tr>
+<tr><td data-label="Segment">Carers</td><td data-label="Size">5M+</td><td data-label="Core pain">Form filling, health apps, time pressure, isolation</td><td data-label="Buyer">Self / employer</td><td data-label="Best channel">GP surgery, carer support groups, council</td><td data-label="Likely product">Digital Help for Carers</td><td data-label="Score"><span class="score">6/10</span></td><td data-label="Caution">Scattered; hard to reach at scale</td></tr>
+<tr><td data-label="Segment">Women returning to work</td><td data-label="Size">1M+</td><td data-label="Core pain">Confidence, skills gap, childcare, flexible work</td><td data-label="Buyer">Self / employer / DWP</td><td data-label="Best channel">Job centres, women's networks, Facebook</td><td data-label="Likely product">Back to Work Digital Confidence</td><td data-label="Score"><span class="score">6/10</span></td><td data-label="Caution">Moderate WTP; free alternatives</td></tr>
+<tr><td data-label="Segment">NHS chronic-condition patients</td><td data-label="Size">15M+</td><td data-label="Core pain">Appointments, prescriptions, health info, forms</td><td data-label="Buyer">NHS / family</td><td data-label="Best channel">GP surgery, pharmacy, hospital</td><td data-label="Likely product">Managing Your Health Online</td><td data-label="Score"><span class="score">6/10</span></td><td data-label="Caution">NHS procurement slow; needs credibility</td></tr>
+<tr><td data-label="Segment">Older adults 65-74</td><td data-label="Size">2.3M</td><td data-label="Core pain">Banking, shopping, scams, family contact</td><td data-label="Buyer">Family / self</td><td data-label="Best channel">Library, community centre, Facebook</td><td data-label="Likely product">Stay Safe Online + phone help</td><td data-label="Score"><span class="score">5/10</span></td><td data-label="Caution">Low WTP; free alternatives exist</td></tr>
+<tr><td data-label="Segment">Job seekers</td><td data-label="Size">1.3M+</td><td data-label="Core pain">CVs, applications, interview prep</td><td data-label="Buyer">DWP / employment provider</td><td data-label="Best channel">Job Centre Plus, Work Programme</td><td data-label="Likely product">AI-powered job search + CV help</td><td data-label="Score"><span class="score">5/10</span></td><td data-label="Caution">Commoditized; free provision dominant</td></tr>
+<tr><td data-label="Segment">People with disabilities</td><td data-label="Size">14M</td><td data-label="Core pain">Accessibility, assistive tech, service access</td><td data-label="Buyer">Self / family / PA</td><td data-label="Best channel">Disability orgs, social care, OTs</td><td data-label="Likely product">Accessible device setup + AI tools</td><td data-label="Score"><span class="score">5/10</span></td><td data-label="Caution">High support burden; safeguarding liability</td></tr>
+<tr><td data-label="Segment">ESOL / immigrant communities</td><td data-label="Size">1.5M+</td><td data-label="Core pain">Language barriers, form filling, job search, banking</td><td data-label="Buyer">Council / community org</td><td data-label="Best channel">Community centres, mosques, ESOL classes</td><td data-label="Likely product">Multilingual phone help + form assistance</td><td data-label="Score"><span class="score">5/10</span></td><td data-label="Caution">Requires specialist partners</td></tr>
+<tr><td data-label="Segment">Adults in financial hardship</td><td data-label="Size">3M+</td><td data-label="Core pain">Budgeting, banking, scams, benefits</td><td data-label="Buyer">Charity / council</td><td data-label="Best channel">Citizens Advice, food banks, credit unions</td><td data-label="Likely product">Scam safety + money management help</td><td data-label="Score"><span class="score">5/10</span></td><td data-label="Caution">No payment capacity; grant-dependent</td></tr>
+<tr><td data-label="Segment">Older adults 75+ offline</td><td data-label="Size">1.7M</td><td data-label="Core pain">Isolation, service access, health apps</td><td data-label="Buyer">Family member</td><td data-label="Best channel">Library drop-in, GP surgery, church</td><td data-label="Likely product">Phone confidence clinic + tablet loan</td><td data-label="Score"><span class="score">4/10</span></td><td data-label="Caution">Margins too thin; charity funding only</td></tr>
+<tr><td data-label="Segment">Rural communities</td><td data-label="Size">2M+</td><td data-label="Core pain">Broadband, service access, isolation, transport</td><td data-label="Buyer">Council / rural charity</td><td data-label="Best channel">Village halls, mobile libraries, parish</td><td data-label="Likely product">Mobile digital clinic</td><td data-label="Score"><span class="score">4/10</span></td><td data-label="Caution">Travel costs erode margins</td></tr></tbody></table></div>
     </section>
 
     <section id="demand">
@@ -336,50 +382,57 @@
           <figcaption>Original Kimi chart: fraud pressure, trust barriers, and training spend.</figcaption>
         </figure>
       </div>
-      <div class="table-wrap "><table><thead><tr><th>Instead of</th><th>Use</th><th>Why</th></tr></thead><tbody><tr><td>AI training</td><td>Get more from your phone</td><td>Focuses on a device they already own.</td></tr>
-<tr><td>Learn about AI</td><td>Save time on forms and admin</td><td>Direct benefit, no abstraction.</td></tr>
-<tr><td>Digital skills course</td><td>Stay safe from scams and fraud</td><td>Addresses the strongest fear.</td></tr>
-<tr><td>ChatGPT workshop</td><td>Get answers without searching for hours</td><td>Practical outcome, no product jargon.</td></tr>
-<tr><td>AI for work</td><td>Keep up with changes at your workplace</td><td>Frames it as workplace support.</td></tr>
-<tr><td>Technology help</td><td>Someone patient to show you, step by step</td><td>Emphasizes human support.</td></tr></tbody></table></div>
+      <div class="table-wrap "><table><thead><tr><th>Instead of</th><th>Use</th><th>Why</th></tr></thead><tbody><tr><td data-label="Instead of">AI training</td><td data-label="Use">Get more from your phone</td><td data-label="Why">Focuses on a device they already own.</td></tr>
+<tr><td data-label="Instead of">Learn about AI</td><td data-label="Use">Save time on forms and admin</td><td data-label="Why">Direct benefit, no abstraction.</td></tr>
+<tr><td data-label="Instead of">Digital skills course</td><td data-label="Use">Stay safe from scams and fraud</td><td data-label="Why">Addresses the strongest fear.</td></tr>
+<tr><td data-label="Instead of">ChatGPT workshop</td><td data-label="Use">Get answers without searching for hours</td><td data-label="Why">Practical outcome, no product jargon.</td></tr>
+<tr><td data-label="Instead of">AI for work</td><td data-label="Use">Keep up with changes at your workplace</td><td data-label="Why">Frames it as workplace support.</td></tr>
+<tr><td data-label="Instead of">Technology help</td><td data-label="Use">Someone patient to show you, step by step</td><td data-label="Why">Emphasizes human support.</td></tr></tbody></table></div>
     </section>
 
     <section id="offers">
       <h2>Offer Ranking</h2>
       <p>The highest-ranked offer is a workplace workshop. Family-sponsored clinics and scam-safety workshops are useful secondary validation channels, especially through libraries, but the report treats direct older-adult monetization as thin-margin.</p>
       <div id="productChart" class="chart"></div>
-      <div class="table-wrap "><table><thead><tr><th>Concept</th><th>Target user</th><th>Buyer / sponsor</th><th>Price hypothesis</th><th>Margin potential</th><th>30-day MVP?</th><th>Score</th></tr></thead><tbody><tr><td>Digital Confidence at Work</td><td>Non-office workers</td><td>Employer HR/Ops</td><td>£350-500/session</td><td>60-70%</td><td>Yes</td><td><span class="score">9/10</span></td></tr>
-<tr><td>Phone + Life Admin Clinic</td><td>Older adults 65+</td><td>Adult children</td><td>£95-150/session</td><td>50-60%</td><td>Yes</td><td><span class="score">8/10</span></td></tr>
-<tr><td>Scam-Safe Digital</td><td>Adults 50+ worried about fraud</td><td>Council / charity / family</td><td>£45-75/head or £200-350/session</td><td>55-65%</td><td>Yes</td><td><span class="score">7/10</span></td></tr>
-<tr><td>Tenant Digital Support</td><td>Housing residents</td><td>Housing association</td><td>£8-15/resident</td><td>50-60%</td><td>Yes</td><td><span class="score">7/10</span></td></tr>
-<tr><td>Train-the-Trainer</td><td>Digital champions, library staff</td><td>Council / charity</td><td>£1,500-3,000/cohort</td><td>65-75%</td><td>Yes</td><td><span class="score">7/10</span></td></tr>
-<tr><td>Employer AI readiness</td><td>Employers</td><td>L&D / HR</td><td>£1,500-3,000</td><td>60-70%</td><td>Yes</td><td><span class="score">7/10</span></td></tr>
-<tr><td>Job Search Help</td><td>Long-term unemployed</td><td>DWP / provider</td><td>£80-120/participant</td><td>40-55%</td><td>Yes</td><td><span class="score">6/10</span></td></tr>
-<tr><td>Small Business AI Clinic</td><td>Non-tech small businesses</td><td>Self / chamber</td><td>£150-250/workshop</td><td>55-65%</td><td>Yes</td><td><span class="score">6/10</span></td></tr>
-<tr><td>Printed workbook + helpline</td><td>Complete beginners</td><td>Family / charity</td><td>£25-40 + calls</td><td>50-60%</td><td>Yes</td><td><span class="score">6/10</span></td></tr>
-<tr><td>Back to Work course</td><td>Women returners</td><td>Self / DWP / orgs</td><td>£75-150/course</td><td>45-55%</td><td>Yes</td><td><span class="score">6/10</span></td></tr>
-<tr><td>Digital Health Navigator</td><td>Chronic-condition patients</td><td>NHS / charity</td><td>£60-100/patient</td><td>45-55%</td><td>No</td><td><span class="score">5/10</span></td></tr>
-<tr><td>Community ambassador</td><td>Hard-to-reach communities</td><td>Council / funder</td><td>£25-40K/year</td><td>20-35%</td><td>Yes</td><td><span class="score">5/10</span></td></tr>
-<tr><td>QR learning journeys</td><td>Low-literacy mobile users</td><td>Charity / council</td><td>£5-15/user</td><td>50-60%</td><td>Yes</td><td><span class="score">5/10</span></td></tr>
-<tr><td>Done-with-you AI setup</td><td>Older tech-anxious adults</td><td>Family</td><td>£150-250/session</td><td>40-50%</td><td>Yes</td><td><span class="score">5/10</span></td></tr>
-<tr><td>WhatsApp support line</td><td>Low-confidence adults</td><td>Family / employers</td><td>£15-25/month</td><td>30-45%</td><td>Partial</td><td><span class="score">4/10</span></td></tr>
-<tr><td>ESOL + Digital</td><td>Immigrants, low English</td><td>Council / charity</td><td>£80-120/person</td><td>40-50%</td><td>No</td><td><span class="score">4/10</span></td></tr>
-<tr><td>Rural mobile clinic</td><td>Rural isolated residents</td><td>Council / rural charity</td><td>£500-800/day</td><td>35-45%</td><td>No</td><td><span class="score">4/10</span></td></tr>
-<tr><td>Family tech support remote</td><td>Families with older relatives</td><td>Adult children</td><td>£25-40/month</td><td>35-50%</td><td>Partial</td><td><span class="score">4/10</span></td></tr></tbody></table></div>
+      <div class="mobile-data "><h3>Top Offer Scores</h3><div class="mobile-data-item"><b>Digital Confidence at Work</b><span>Score: 9/10</span><span>Buyer: Employer HR/Ops</span><span>Price: £350-500/session</span></div><div class="mobile-data-item"><b>Phone + Life Admin Clinic</b><span>Score: 8/10</span><span>Buyer: Adult children</span><span>Price: £95-150/session</span></div><div class="mobile-data-item"><b>Scam-Safe Digital</b><span>Score: 7/10</span><span>Buyer: Council / charity / family</span><span>Price: £45-75/head or £200-350/session</span></div><div class="mobile-data-item"><b>Tenant Digital Support</b><span>Score: 7/10</span><span>Buyer: Housing association</span><span>Price: £8-15/resident</span></div><div class="mobile-data-item"><b>Train-the-Trainer</b><span>Score: 7/10</span><span>Buyer: Council / charity</span><span>Price: £1,500-3,000/cohort</span></div><div class="mobile-data-item"><b>Employer AI readiness</b><span>Score: 7/10</span><span>Buyer: L&D / HR</span><span>Price: £1,500-3,000</span></div><div class="mobile-data-item"><b>Job Search Help</b><span>Score: 6/10</span><span>Buyer: DWP / provider</span><span>Price: £80-120/participant</span></div><div class="mobile-data-item"><b>Small Business AI Clinic</b><span>Score: 6/10</span><span>Buyer: Self / chamber</span><span>Price: £150-250/workshop</span></div></div>
+      <div class="table-wrap "><table><thead><tr><th>Concept</th><th>Target user</th><th>Buyer / sponsor</th><th>Price hypothesis</th><th>Margin potential</th><th>30-day MVP?</th><th>Score</th></tr></thead><tbody><tr><td data-label="Concept">Digital Confidence at Work</td><td data-label="Target user">Non-office workers</td><td data-label="Buyer / sponsor">Employer HR/Ops</td><td data-label="Price hypothesis">£350-500/session</td><td data-label="Margin potential">60-70%</td><td data-label="30-day MVP?">Yes</td><td data-label="Score"><span class="score">9/10</span></td></tr>
+<tr><td data-label="Concept">Phone + Life Admin Clinic</td><td data-label="Target user">Older adults 65+</td><td data-label="Buyer / sponsor">Adult children</td><td data-label="Price hypothesis">£95-150/session</td><td data-label="Margin potential">50-60%</td><td data-label="30-day MVP?">Yes</td><td data-label="Score"><span class="score">8/10</span></td></tr>
+<tr><td data-label="Concept">Scam-Safe Digital</td><td data-label="Target user">Adults 50+ worried about fraud</td><td data-label="Buyer / sponsor">Council / charity / family</td><td data-label="Price hypothesis">£45-75/head or £200-350/session</td><td data-label="Margin potential">55-65%</td><td data-label="30-day MVP?">Yes</td><td data-label="Score"><span class="score">7/10</span></td></tr>
+<tr><td data-label="Concept">Tenant Digital Support</td><td data-label="Target user">Housing residents</td><td data-label="Buyer / sponsor">Housing association</td><td data-label="Price hypothesis">£8-15/resident</td><td data-label="Margin potential">50-60%</td><td data-label="30-day MVP?">Yes</td><td data-label="Score"><span class="score">7/10</span></td></tr>
+<tr><td data-label="Concept">Train-the-Trainer</td><td data-label="Target user">Digital champions, library staff</td><td data-label="Buyer / sponsor">Council / charity</td><td data-label="Price hypothesis">£1,500-3,000/cohort</td><td data-label="Margin potential">65-75%</td><td data-label="30-day MVP?">Yes</td><td data-label="Score"><span class="score">7/10</span></td></tr>
+<tr><td data-label="Concept">Employer AI readiness</td><td data-label="Target user">Employers</td><td data-label="Buyer / sponsor">L&D / HR</td><td data-label="Price hypothesis">£1,500-3,000</td><td data-label="Margin potential">60-70%</td><td data-label="30-day MVP?">Yes</td><td data-label="Score"><span class="score">7/10</span></td></tr>
+<tr><td data-label="Concept">Job Search Help</td><td data-label="Target user">Long-term unemployed</td><td data-label="Buyer / sponsor">DWP / provider</td><td data-label="Price hypothesis">£80-120/participant</td><td data-label="Margin potential">40-55%</td><td data-label="30-day MVP?">Yes</td><td data-label="Score"><span class="score">6/10</span></td></tr>
+<tr><td data-label="Concept">Small Business AI Clinic</td><td data-label="Target user">Non-tech small businesses</td><td data-label="Buyer / sponsor">Self / chamber</td><td data-label="Price hypothesis">£150-250/workshop</td><td data-label="Margin potential">55-65%</td><td data-label="30-day MVP?">Yes</td><td data-label="Score"><span class="score">6/10</span></td></tr>
+<tr><td data-label="Concept">Printed workbook + helpline</td><td data-label="Target user">Complete beginners</td><td data-label="Buyer / sponsor">Family / charity</td><td data-label="Price hypothesis">£25-40 + calls</td><td data-label="Margin potential">50-60%</td><td data-label="30-day MVP?">Yes</td><td data-label="Score"><span class="score">6/10</span></td></tr>
+<tr><td data-label="Concept">Back to Work course</td><td data-label="Target user">Women returners</td><td data-label="Buyer / sponsor">Self / DWP / orgs</td><td data-label="Price hypothesis">£75-150/course</td><td data-label="Margin potential">45-55%</td><td data-label="30-day MVP?">Yes</td><td data-label="Score"><span class="score">6/10</span></td></tr>
+<tr><td data-label="Concept">Digital Health Navigator</td><td data-label="Target user">Chronic-condition patients</td><td data-label="Buyer / sponsor">NHS / charity</td><td data-label="Price hypothesis">£60-100/patient</td><td data-label="Margin potential">45-55%</td><td data-label="30-day MVP?">No</td><td data-label="Score"><span class="score">5/10</span></td></tr>
+<tr><td data-label="Concept">Community ambassador</td><td data-label="Target user">Hard-to-reach communities</td><td data-label="Buyer / sponsor">Council / funder</td><td data-label="Price hypothesis">£25-40K/year</td><td data-label="Margin potential">20-35%</td><td data-label="30-day MVP?">Yes</td><td data-label="Score"><span class="score">5/10</span></td></tr>
+<tr><td data-label="Concept">QR learning journeys</td><td data-label="Target user">Low-literacy mobile users</td><td data-label="Buyer / sponsor">Charity / council</td><td data-label="Price hypothesis">£5-15/user</td><td data-label="Margin potential">50-60%</td><td data-label="30-day MVP?">Yes</td><td data-label="Score"><span class="score">5/10</span></td></tr>
+<tr><td data-label="Concept">Done-with-you AI setup</td><td data-label="Target user">Older tech-anxious adults</td><td data-label="Buyer / sponsor">Family</td><td data-label="Price hypothesis">£150-250/session</td><td data-label="Margin potential">40-50%</td><td data-label="30-day MVP?">Yes</td><td data-label="Score"><span class="score">5/10</span></td></tr>
+<tr><td data-label="Concept">WhatsApp support line</td><td data-label="Target user">Low-confidence adults</td><td data-label="Buyer / sponsor">Family / employers</td><td data-label="Price hypothesis">£15-25/month</td><td data-label="Margin potential">30-45%</td><td data-label="30-day MVP?">Partial</td><td data-label="Score"><span class="score">4/10</span></td></tr>
+<tr><td data-label="Concept">ESOL + Digital</td><td data-label="Target user">Immigrants, low English</td><td data-label="Buyer / sponsor">Council / charity</td><td data-label="Price hypothesis">£80-120/person</td><td data-label="Margin potential">40-50%</td><td data-label="30-day MVP?">No</td><td data-label="Score"><span class="score">4/10</span></td></tr>
+<tr><td data-label="Concept">Rural mobile clinic</td><td data-label="Target user">Rural isolated residents</td><td data-label="Buyer / sponsor">Council / rural charity</td><td data-label="Price hypothesis">£500-800/day</td><td data-label="Margin potential">35-45%</td><td data-label="30-day MVP?">No</td><td data-label="Score"><span class="score">4/10</span></td></tr>
+<tr><td data-label="Concept">Family tech support remote</td><td data-label="Target user">Families with older relatives</td><td data-label="Buyer / sponsor">Adult children</td><td data-label="Price hypothesis">£25-40/month</td><td data-label="Margin potential">35-50%</td><td data-label="30-day MVP?">Partial</td><td data-label="Score"><span class="score">4/10</span></td></tr></tbody></table></div>
     </section>
 
     <section id="economics">
       <h2>Unit Economics</h2>
       <div class="grid cols-2">
-        <div id="unitChart" class="chart"></div>
-        <div id="monthlyChart" class="chart"></div>
+        <div>
+          <div id="unitChart" class="chart"></div>
+          <div class="mobile-data "><h3>Unit Economics</h3><div class="mobile-data-item"><b>Employer workshop</b><span>Revenue: £450</span><span>Cost: £190</span><span>Gross profit: £260</span></div><div class="mobile-data-item"><b>Family clinic</b><span>Revenue: £120</span><span>Cost: £90</span><span>Gross profit: £30</span></div><div class="mobile-data-item"><b>Scam-safe private workshop</b><span>Revenue: £480</span><span>Cost: £175</span><span>Gross profit: £305</span></div><div class="mobile-data-item"><b>Scam-safe sponsored workshop</b><span>Revenue: £300</span><span>Cost: £175</span><span>Gross profit: £125</span></div><div class="mobile-data-item"><b>Train-the-trainer cohort</b><span>Revenue: £2,200</span><span>Cost: £500</span><span>Gross profit: £1,700</span></div><div class="mobile-data-item"><b>Housing association contract</b><span>Revenue: £12,000</span><span>Cost: £7,800</span><span>Gross profit: £4,200</span></div></div>
+        </div>
+        <div>
+          <div id="monthlyChart" class="chart"></div>
+          <div class="mobile-data "><h3>Year 1 Monthly Model</h3><div class="mobile-data-item"><b>Employer workshops</b><span>Revenue: £1,350</span></div><div class="mobile-data-item"><b>Family-sponsored clinics</b><span>Revenue: £960</span></div><div class="mobile-data-item"><b>Scam-safe workshops</b><span>Revenue: £700</span></div><div class="mobile-data-item"><b>Train-the-trainer cohorts</b><span>Revenue: £1,100</span></div><div class="mobile-data-item"><b>Housing association</b><span>Revenue: £1,000</span></div><div class="mobile-data-item"><b>Delivery costs</b><span>Cost: £2,400</span></div><div class="mobile-data-item"><b>External facilitator fees</b><span>Cost: £1,800</span></div><div class="mobile-data-item"><b>Marketing/ads</b><span>Cost: £600</span></div><div class="mobile-data-item"><b>Software/tools</b><span>Cost: £200</span></div><div class="mobile-data-item"><b>Travel/expenses</b><span>Cost: £400</span></div></div>
+        </div>
       </div>
-      <div class="table-wrap "><table><thead><tr><th>Concept</th><th>Revenue</th><th>Delivery cost</th><th>Gross profit</th><th>Gross margin</th></tr></thead><tbody><tr><td>Employer workshop</td><td>£450</td><td>£190</td><td>£260</td><td>58%</td></tr>
-<tr><td>Family clinic</td><td>£120</td><td>£90</td><td>£30</td><td>25%</td></tr>
-<tr><td>Scam-safe private workshop</td><td>£480</td><td>£175</td><td>£305</td><td>64%</td></tr>
-<tr><td>Scam-safe sponsored workshop</td><td>£300</td><td>£175</td><td>£125</td><td>42%</td></tr>
-<tr><td>Train-the-trainer cohort</td><td>£2,200</td><td>£500</td><td>£1,700</td><td>77%</td></tr>
-<tr><td>Housing association contract</td><td>£12,000</td><td>£7,800</td><td>£4,200</td><td>35%</td></tr></tbody></table></div>
+      <div class="table-wrap "><table><thead><tr><th>Concept</th><th>Revenue</th><th>Delivery cost</th><th>Gross profit</th><th>Gross margin</th></tr></thead><tbody><tr><td data-label="Concept">Employer workshop</td><td data-label="Revenue">£450</td><td data-label="Delivery cost">£190</td><td data-label="Gross profit">£260</td><td data-label="Gross margin">58%</td></tr>
+<tr><td data-label="Concept">Family clinic</td><td data-label="Revenue">£120</td><td data-label="Delivery cost">£90</td><td data-label="Gross profit">£30</td><td data-label="Gross margin">25%</td></tr>
+<tr><td data-label="Concept">Scam-safe private workshop</td><td data-label="Revenue">£480</td><td data-label="Delivery cost">£175</td><td data-label="Gross profit">£305</td><td data-label="Gross margin">64%</td></tr>
+<tr><td data-label="Concept">Scam-safe sponsored workshop</td><td data-label="Revenue">£300</td><td data-label="Delivery cost">£175</td><td data-label="Gross profit">£125</td><td data-label="Gross margin">42%</td></tr>
+<tr><td data-label="Concept">Train-the-trainer cohort</td><td data-label="Revenue">£2,200</td><td data-label="Delivery cost">£500</td><td data-label="Gross profit">£1,700</td><td data-label="Gross margin">77%</td></tr>
+<tr><td data-label="Concept">Housing association contract</td><td data-label="Revenue">£12,000</td><td data-label="Delivery cost">£7,800</td><td data-label="Gross profit">£4,200</td><td data-label="Gross margin">35%</td></tr></tbody></table></div>
       <div class="callout warning"><strong>Year 1 model:</strong> the combined early-stage plan reaches about £5,110 monthly revenue against about £5,400 monthly costs, or a roughly £300/month loss before founder salary. The report treats the first year as validation and relationship building, not profit maximization.</div>
       <p>The path becomes materially healthier at £8,000-10,000/month revenue, which the Kimi report suggests is plausible in Year 2 with several regular employer clients, two council contracts, and some family clinic volume.</p>
     </section>
@@ -387,14 +440,14 @@
     <section id="distribution">
       <h2>Distribution Strategy</h2>
       <p>The distribution conclusion is blunt: trust beats reach. The likely channels are employers, libraries, councils, family referrals, and housing associations. Cold app-store style distribution is a mismatch for low-digital-confidence users.</p>
-      <div class="table-wrap "><table><thead><tr><th>Channel</th><th>Trust</th><th>Conversion likelihood</th><th>Scale potential</th><th>Priority</th></tr></thead><tbody><tr><td>Employers</td><td>Medium-High</td><td>Medium</td><td>High</td><td><span class="score">1</span></td></tr>
-<tr><td>Libraries</td><td>Very High</td><td>High</td><td>Medium-High</td><td><span class="score">2</span></td></tr>
-<tr><td>Councils</td><td>High</td><td>Medium</td><td>High</td><td><span class="score">3</span></td></tr>
-<tr><td>Family referrals</td><td>Very High</td><td>High</td><td>Medium</td><td><span class="score">4</span></td></tr>
-<tr><td>Job Centres</td><td>Medium</td><td>Medium</td><td>Medium</td><td><span class="score">5</span></td></tr>
-<tr><td>Housing associations</td><td>High</td><td>Medium</td><td>Medium</td><td><span class="score">6</span></td></tr>
-<tr><td>Community centres / churches</td><td>Very High</td><td>Medium</td><td>Medium</td><td><span class="score">7</span></td></tr>
-<tr><td>Facebook groups</td><td>Medium</td><td>Medium</td><td>Medium</td><td><span class="score">8</span></td></tr></tbody></table></div>
+      <div class="table-wrap "><table><thead><tr><th>Channel</th><th>Trust</th><th>Conversion likelihood</th><th>Scale potential</th><th>Priority</th></tr></thead><tbody><tr><td data-label="Channel">Employers</td><td data-label="Trust">Medium-High</td><td data-label="Conversion likelihood">Medium</td><td data-label="Scale potential">High</td><td data-label="Priority"><span class="score">1</span></td></tr>
+<tr><td data-label="Channel">Libraries</td><td data-label="Trust">Very High</td><td data-label="Conversion likelihood">High</td><td data-label="Scale potential">Medium-High</td><td data-label="Priority"><span class="score">2</span></td></tr>
+<tr><td data-label="Channel">Councils</td><td data-label="Trust">High</td><td data-label="Conversion likelihood">Medium</td><td data-label="Scale potential">High</td><td data-label="Priority"><span class="score">3</span></td></tr>
+<tr><td data-label="Channel">Family referrals</td><td data-label="Trust">Very High</td><td data-label="Conversion likelihood">High</td><td data-label="Scale potential">Medium</td><td data-label="Priority"><span class="score">4</span></td></tr>
+<tr><td data-label="Channel">Job Centres</td><td data-label="Trust">Medium</td><td data-label="Conversion likelihood">Medium</td><td data-label="Scale potential">Medium</td><td data-label="Priority"><span class="score">5</span></td></tr>
+<tr><td data-label="Channel">Housing associations</td><td data-label="Trust">High</td><td data-label="Conversion likelihood">Medium</td><td data-label="Scale potential">Medium</td><td data-label="Priority"><span class="score">6</span></td></tr>
+<tr><td data-label="Channel">Community centres / churches</td><td data-label="Trust">Very High</td><td data-label="Conversion likelihood">Medium</td><td data-label="Scale potential">Medium</td><td data-label="Priority"><span class="score">7</span></td></tr>
+<tr><td data-label="Channel">Facebook groups</td><td data-label="Trust">Medium</td><td data-label="Conversion likelihood">Medium</td><td data-label="Scale potential">Medium</td><td data-label="Priority"><span class="score">8</span></td></tr></tbody></table></div>
       <div class="grid cols-3">
         <div class="callout"><strong>Employers:</strong> fastest route to a paid buyer and a bounded delivery context.</div>
         <div class="callout"><strong>Libraries:</strong> high-trust venue for clinics, user interviews, and family-sponsored sessions.</div>
@@ -404,12 +457,12 @@
 
     <section id="risks">
       <h2>Risks and Constraints</h2>
-      <div class="table-wrap "><table><thead><tr><th>Risk</th><th>Severity</th><th>Likelihood</th><th>Mitigation</th></tr></thead><tbody><tr><td>Privacy / data handling</td><td>High</td><td>High</td><td>GDPR compliance, explicit consent, clear privacy policy, never ask for passwords.</td></tr>
-<tr><td>Scams / fraud exposure</td><td>Very High</td><td>High</td><td>Make scam safety core, set strict staff boundaries, escalate suspicious activity.</td></tr>
-<tr><td>AI hallucination / misinformation</td><td>High</td><td>Medium</td><td>Human verification, trusted sources, teach users to verify outputs.</td></tr>
-<tr><td>Safeguarding vulnerable users</td><td>Very High</td><td>Medium</td><td>DBS checks, safeguarding training, escalation procedures, charity partners.</td></tr>
-<tr><td>Exploitation perception</td><td>High</td><td>Low-Medium</td><td>Transparent pricing, no pressure selling, visible social mission and user benefit.</td></tr>
-<tr><td>Consent / capacity issues</td><td>High</td><td>Medium</td><td>Capacity protocols and family involvement where appropriate.</td></tr></tbody></table></div>
+      <div class="table-wrap "><table><thead><tr><th>Risk</th><th>Severity</th><th>Likelihood</th><th>Mitigation</th></tr></thead><tbody><tr><td data-label="Risk">Privacy / data handling</td><td data-label="Severity">High</td><td data-label="Likelihood">High</td><td data-label="Mitigation">GDPR compliance, explicit consent, clear privacy policy, never ask for passwords.</td></tr>
+<tr><td data-label="Risk">Scams / fraud exposure</td><td data-label="Severity">Very High</td><td data-label="Likelihood">High</td><td data-label="Mitigation">Make scam safety core, set strict staff boundaries, escalate suspicious activity.</td></tr>
+<tr><td data-label="Risk">AI hallucination / misinformation</td><td data-label="Severity">High</td><td data-label="Likelihood">Medium</td><td data-label="Mitigation">Human verification, trusted sources, teach users to verify outputs.</td></tr>
+<tr><td data-label="Risk">Safeguarding vulnerable users</td><td data-label="Severity">Very High</td><td data-label="Likelihood">Medium</td><td data-label="Mitigation">DBS checks, safeguarding training, escalation procedures, charity partners.</td></tr>
+<tr><td data-label="Risk">Exploitation perception</td><td data-label="Severity">High</td><td data-label="Likelihood">Low-Medium</td><td data-label="Mitigation">Transparent pricing, no pressure selling, visible social mission and user benefit.</td></tr>
+<tr><td data-label="Risk">Consent / capacity issues</td><td data-label="Severity">High</td><td data-label="Likelihood">Medium</td><td data-label="Mitigation">Capacity protocols and family involvement where appropriate.</td></tr></tbody></table></div>
       <div class="callout bad"><strong>Most severe reputational risk:</strong> looking like a company selling AI to vulnerable or anxious adults. The report's mitigation is mission-led positioning, transparent pricing, no pressure selling, and practical benefits that users can understand immediately.</div>
     </section>
 
@@ -431,15 +484,15 @@
           <div class="callout good"><strong>Minimum viable pilot:</strong> 2 employer workshops, 4 library clinic sessions, and 10 user interviews within 30 days.</div>
         </div>
       </div>
-      <div class="table-wrap "><table><thead><tr><th>Metric</th><th>Proceed with caution</th><th>Green light</th></tr></thead><tbody><tr><td>Employer conversations booked</td><td>3</td><td>5+</td></tr>
-<tr><td>Employer pilot delivered</td><td>1</td><td>1+ with positive feedback</td></tr>
-<tr><td>Library partnerships secured</td><td>1 expression of interest</td><td>1 committed pilot</td></tr>
-<tr><td>Family sessions booked</td><td>2</td><td>4+</td></tr>
-<tr><td>User interviews completed</td><td>5</td><td>8+</td></tr>
-<tr><td>Workshop NPS</td><td>30+</td><td>50+</td></tr>
-<tr><td>Would recommend</td><td>60% yes</td><td>80% yes</td></tr>
-<tr><td>Revenue generated in week 4</td><td>£100+</td><td>£300+</td></tr>
-<tr><td>Council conversation secured</td><td>0</td><td>1</td></tr></tbody></table></div>
+      <div class="table-wrap "><table><thead><tr><th>Metric</th><th>Proceed with caution</th><th>Green light</th></tr></thead><tbody><tr><td data-label="Metric">Employer conversations booked</td><td data-label="Proceed with caution">3</td><td data-label="Green light">5+</td></tr>
+<tr><td data-label="Metric">Employer pilot delivered</td><td data-label="Proceed with caution">1</td><td data-label="Green light">1+ with positive feedback</td></tr>
+<tr><td data-label="Metric">Library partnerships secured</td><td data-label="Proceed with caution">1 expression of interest</td><td data-label="Green light">1 committed pilot</td></tr>
+<tr><td data-label="Metric">Family sessions booked</td><td data-label="Proceed with caution">2</td><td data-label="Green light">4+</td></tr>
+<tr><td data-label="Metric">User interviews completed</td><td data-label="Proceed with caution">5</td><td data-label="Green light">8+</td></tr>
+<tr><td data-label="Metric">Workshop NPS</td><td data-label="Proceed with caution">30+</td><td data-label="Green light">50+</td></tr>
+<tr><td data-label="Metric">Would recommend</td><td data-label="Proceed with caution">60% yes</td><td data-label="Green light">80% yes</td></tr>
+<tr><td data-label="Metric">Revenue generated in week 4</td><td data-label="Proceed with caution">£100+</td><td data-label="Green light">£300+</td></tr>
+<tr><td data-label="Metric">Council conversation secured</td><td data-label="Proceed with caution">0</td><td data-label="Green light">1</td></tr></tbody></table></div>
     </section>
 
     <section id="recommendation">
