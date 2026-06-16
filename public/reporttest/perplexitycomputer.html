@@ -1,0 +1,807 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UK AI Digital Inclusion Market Feasibility: Ciru Inference Lab</title>
+  <meta name="description" content="Readable ECharts report derived from perplexityreport.md: market size, buyer fit, product economics, channel strategy, and final recommendation.">
+  <meta name="theme-color" content="#080808">
+  <link rel="icon" type="image/png" href="assets/ccglogo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="assets/echarts.min.js"></script>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #080808;
+      --bg-2: #111114;
+      --panel: rgba(15, 16, 19, 0.94);
+      --panel-2: rgba(23, 24, 29, 0.96);
+      --line: rgba(255, 255, 255, 0.13);
+      --line-strong: rgba(255, 255, 255, 0.26);
+      --text: #f7f7f4;
+      --muted: #a8adb7;
+      --subtle: #767d8a;
+      --amd: #ed1c24;
+      --red: #ff4e5f;
+      --orange: #ff9f43;
+      --yellow: #f6c046;
+      --green: #20d1a2;
+      --cyan: #39d0ff;
+      --blue: #78a8ff;
+      --violet: #c994ff;
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.46);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: "Space Grotesk", system-ui, sans-serif;
+      background:
+        linear-gradient(120deg, rgba(237, 28, 36, 0.2), transparent 29%),
+        linear-gradient(300deg, rgba(57, 208, 255, 0.11), transparent 32%),
+        repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.034) 0 1px, transparent 1px 20px),
+        linear-gradient(180deg, #090809 0%, #111115 45%, #070707 100%);
+      line-height: 1.6;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(237, 28, 36, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+      background-size: 36px 36px;
+      opacity: 0.34;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.76), transparent 84%);
+    }
+
+    a { color: #9ee8ff; text-decoration: none; }
+    a:hover, a:focus-visible { color: #fff; text-decoration: underline; }
+
+    .page {
+      width: min(calc(100% - 28px), 1160px);
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .brand-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 18px 0 14px;
+    }
+
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text);
+      min-width: 0;
+    }
+
+    .logo-plate {
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      border: 1px solid rgba(246, 192, 70, 0.48);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.05);
+      flex: 0 0 auto;
+    }
+
+    .logo-plate img {
+      width: 34px;
+      height: 34px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .brand-title {
+      display: block;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    .brand-subtitle {
+      display: block;
+      color: var(--yellow);
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0;
+    }
+
+    header {
+      margin: 6px auto 0;
+      padding: 26px 24px 28px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background:
+        linear-gradient(120deg, rgba(237, 28, 36, 0.22), transparent 36%),
+        linear-gradient(180deg, rgba(28, 28, 31, 0.96), rgba(9, 9, 10, 0.93));
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      border-top: 3px solid var(--amd);
+      background:
+        linear-gradient(90deg, rgba(237, 28, 36, 0.16), transparent 50%),
+        repeating-linear-gradient(90deg, transparent 0 28px, rgba(255, 255, 255, 0.04) 28px 29px);
+    }
+
+    .hero-content { position: relative; z-index: 1; }
+
+    .kicker {
+      margin: 0 0 12px;
+      color: var(--cyan);
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    h1, h2, h3 { margin-top: 0; line-height: 1.08; letter-spacing: 0; }
+
+    h1 {
+      max-width: 920px;
+      margin-bottom: 14px;
+      font-size: 3rem;
+      font-weight: 700;
+    }
+
+    h2 { font-size: 1.55rem; }
+    h3 { font-size: 1.05rem; }
+
+    .lead {
+      max-width: 870px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.06rem;
+    }
+
+    .source-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+      color: var(--subtle);
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: 0.82rem;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 6px 8px;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 22px 0 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    nav a {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 8px 10px;
+      background: rgba(0, 0, 0, 0.2);
+      color: var(--text);
+      font-size: 0.9rem;
+    }
+
+    main { padding: 24px 0 54px; }
+
+    .section {
+      margin-top: 28px;
+      padding-top: 4px;
+    }
+
+    .section-head {
+      max-width: 850px;
+      margin-bottom: 14px;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .stats-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 18px; }
+    .two-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .three-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    .panel, .stat, .decision, .callout {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .panel { padding: 18px; }
+
+    .stat {
+      min-height: 148px;
+      padding: 16px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.018)),
+        var(--panel-2);
+    }
+
+    .stat span, .label {
+      display: block;
+      color: var(--subtle);
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    .stat b {
+      display: block;
+      margin: 8px 0 6px;
+      color: var(--cyan);
+      font-size: 1.85rem;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .stat p, .decision p, .panel p { margin-bottom: 0; color: var(--muted); }
+
+    .decision {
+      padding: 18px;
+      border-left: 5px solid var(--green);
+    }
+
+    .decision.bad { border-left-color: var(--red); }
+    .decision span { color: var(--cyan); font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.8rem; }
+    .decision.bad span { color: var(--red); }
+    .decision h3 { margin: 8px 0; }
+
+    .callout {
+      padding: 16px 18px;
+      border-color: rgba(57, 208, 255, 0.24);
+      border-left: 5px solid var(--cyan);
+      background: rgba(57, 208, 255, 0.08);
+    }
+
+    .callout.warning {
+      border-color: rgba(255, 159, 67, 0.25);
+      border-left-color: var(--orange);
+      background: rgba(255, 159, 67, 0.08);
+    }
+
+    .callout.bad {
+      border-color: rgba(255, 78, 95, 0.26);
+      border-left-color: var(--red);
+      background: rgba(255, 78, 95, 0.08);
+    }
+
+    .chart {
+      width: 100%;
+      height: 390px;
+      min-height: 320px;
+    }
+
+    .chart.tall { height: 560px; }
+    .chart.extra-tall { height: 650px; }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    table {
+      width: 100%;
+      min-width: 820px;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text);
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    td {
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .steps {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .steps li {
+      border-left: 3px solid var(--cyan);
+      padding: 10px 12px;
+      background: rgba(255, 255, 255, 0.035);
+      color: var(--muted);
+    }
+
+    footer {
+      margin: 36px 0 0;
+      padding: 18px 0 28px;
+      border-top: 1px solid var(--line);
+      color: var(--subtle);
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: 0.82rem;
+    }
+
+    @media (max-width: 920px) {
+      h1 { font-size: 2.2rem; }
+      .stats-grid, .two-grid, .three-grid { grid-template-columns: 1fr; }
+      .brand-strip { align-items: flex-start; flex-direction: column; }
+      .chart, .chart.tall, .chart.extra-tall { height: 460px; }
+    }
+
+    @media (max-width: 560px) {
+      .page { width: min(calc(100% - 18px), 1160px); }
+      header { padding: 20px 16px 22px; }
+      h1 { font-size: 1.85rem; }
+      .lead { font-size: 1rem; }
+      nav a { width: 100%; }
+      .chart, .chart.tall, .chart.extra-tall { height: 520px; }
+      .stat { min-height: auto; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="brand-strip">
+      <a class="brand-lockup" href="https://llm.ciru.ai/">
+        <span class="logo-plate"><img src="assets/ccglogo.png" alt="Crown Citadel Group"></span>
+        <span>
+          <span class="brand-title">Ciru Inference Lab</span>
+          <span class="brand-subtitle">llm.ciru.ai / research</span>
+        </span>
+      </a>
+      <a class="pill" href="perplexityreport.md">Source Markdown</a>
+    </div>
+
+    <header>
+      <div class="hero-content">
+        <p class="kicker">Crown Citadel Research Report</p>
+        <h1>UK AI Digital Inclusion: Market Feasibility</h1>
+        <p class="lead">
+          A readable decision report from <code>perplexityreport.md</code>. The conclusion is direct:
+          the need is large, but the strongest business is institution- and family-paid. A paid
+          direct-to-consumer AI app for the most excluded adults is the weakest path.
+        </p>
+        <div class="source-row">
+          <span class="pill">Generated 2026-06-15 20:58</span>
+          <span class="pill">Source updated 2026-06-15 20:28</span>
+          <span class="pill">ECharts via local asset</span>
+        </div>
+        <nav aria-label="Report sections">
+          <a href="#verdict">Verdict</a>
+          <a href="#market">Market</a>
+          <a href="#segments">Segments</a>
+          <a href="#products">Products</a>
+          <a href="#economics">Economics</a>
+          <a href="#channels">Channels</a>
+          <a href="#pilot">Pilot</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="section" id="verdict">
+        <div class="section-head">
+          <p class="kicker">Bottom Line</p>
+          <h2>Large pain, weak direct-consumer market</h2>
+          <p>
+            The report supports building around this demographic, but only if the payer is usually
+            someone else: institutions, employers, councils, banks, telecoms, housing associations,
+            or adult children. The service should be sold as safety and practical confidence, with
+            AI as the engine under the surface.
+          </p>
+        </div>
+        <div class="grid stats-grid">
+          
+            <article class="stat">
+              <span>Adults lacking digital skills</span>
+              <b>10.2m</b>
+              <p>UK adults lack digital skills overall.</p>
+            </article>
+            
+
+            <article class="stat">
+              <span>Base low-confidence audience</span>
+              <b>16.3m</b>
+              <p>Very Low + Low capability groups.</p>
+            </article>
+            
+
+            <article class="stat">
+              <span>Little/no GenAI usage</span>
+              <b>30m</b>
+              <p>Base estimate for UK adults not yet using GenAI.</p>
+            </article>
+            
+
+            <article class="stat">
+              <span>Base year-1 revenue</span>
+              <b>£95k</b>
+              <p>Realistic 2-person founder case.</p>
+            </article>
+            
+
+            <article class="stat">
+              <span>Ring-fenced public spend</span>
+              <b>£24m</b>
+              <p>Identified 2025-26 digital inclusion / AI upskilling funds.</p>
+            </article>
+            
+
+            <article class="stat">
+              <span>Older people scammed</span>
+              <b>1.9m</b>
+              <p>Primary emotional wedge: scam safety.</p>
+            </article>
+            
+
+            <article class="stat">
+              <span>Estimated fraud losses</span>
+              <b>£7.4bn</b>
+              <p>Older-adult scam loss estimate cited in the source.</p>
+            </article>
+            
+
+            <article class="stat">
+              <span>Base success probability</span>
+              <b>40%</b>
+              <p>Institution- and family-paid, disciplined wedge.</p>
+            </article>
+            
+        </div>
+        <div class="grid two-grid" style="margin-top: 14px;">
+          
+            <article class="decision good">
+              <span>Do first</span>
+              <h3>Primary wedge</h3>
+              <p>Scam-safety-led digital confidence for older and vulnerable adults, paid for by institutions and families.</p>
+            </article>
+            
+
+            <article class="decision good">
+              <span>Add early</span>
+              <h3>Secondary wedge</h3>
+              <p>Small Business AI Adoption Clinics: highest practical margin and the clearest ROI story.</p>
+            </article>
+            
+
+            <article class="decision good">
+              <span>Pilot</span>
+              <h3>Secondary wedge</h3>
+              <p>AI Help Desk / Toolkit for family carers, because the relative can pay where the end user cannot.</p>
+            </article>
+            
+
+            <article class="decision bad">
+              <span>No-go</span>
+              <h3>Avoid</h3>
+              <p>Paid D2C AI-course app requiring the excluded user to self-onboard.</p>
+            </article>
+            
+        </div>
+      </section>
+
+      <section class="section" id="market">
+        <div class="section-head">
+          <p class="kicker">Market Size</p>
+          <h2>Need is huge, monetisable demand is narrow</h2>
+          <p>
+            The underlying audience is tens of millions of adults. The practical bottleneck is not
+            population size; it is budget ownership, trust, and paid access.
+          </p>
+        </div>
+        <div class="grid two-grid">
+          <article class="panel">
+            <h3>Addressable population</h3>
+            <div id="marketChart" class="chart"></div>
+          </article>
+          <article class="panel">
+            <h3>Reach and revenue scenarios</h3>
+            <div id="revenueChart" class="chart"></div>
+          </article>
+        </div>
+        <div style="margin-top: 14px;">
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Metric</th><th>Low</th><th>Base</th><th>High</th><th>Basis</th></tr></thead>
+        <tbody><tr><td>UK adults with low digital confidence</td><td>10.2m</td><td>16.3m</td><td>22.6m</td><td>Lloyds CDI 2024 capability groups and skills-improvement figures.</td></tr><tr><td>UK adults with little/no generative AI usage</td><td>24.3m</td><td>30.0m</td><td>36.4m</td><td>Ofcom/BBC adoption range and inferred 2024-2026 adoption trend.</td></tr></tbody>
+      </table>
+    </div>
+    </div>
+        <div class="callout warning" style="margin-top: 14px;">
+          <strong>Key caveat:</strong> the gap between a 30m+ non-AI-user audience and a £95k base-case
+          year-1 founder revenue estimate is the whole problem. TAM is large; reachable, paid demand is small.
+        </div>
+      </section>
+
+      <section class="section" id="segments">
+        <div class="section-head">
+          <p class="kicker">Segments</p>
+          <h2>Prioritise buyers with budget and trust</h2>
+          <p>
+            The highest-scoring segments are small businesses, family carers, scam-fearful adults,
+            job seekers via funded routes, housing tenants, and older adults reached through institutions.
+          </p>
+        </div>
+        <article class="panel">
+          <h3>Segment attractiveness</h3>
+          <div id="segmentChart" class="chart tall"></div>
+        </article>
+        <div style="margin-top: 14px;">
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Segment</th><th>Size</th><th>Primary buyer</th><th>Best product</th><th>WTP (£)</th><th>Support burden</th><th>Score</th></tr></thead>
+        <tbody><tr><td>Adults 65+, low digital skills</td><td>4.7m</td><td>Family / council</td><td>Scam-safe AI confidence clinic</td><td>0-40</td><td>High</td><td>4/5</td></tr><tr><td>Adults 55-64, lapsed/limited users</td><td>~800k lapsed</td><td>Self / employer</td><td>Job-relevant AI confidence</td><td>20-80</td><td>Medium</td><td>4/5</td></tr><tr><td>Low-income adults on benefits</td><td>High-need group</td><td>Council / DWP</td><td>Funded benefits/forms help</td><td>0</td><td>High</td><td>3/5</td></tr><tr><td>Immigrants / ESOL learners</td><td>Funding-led</td><td>Charity / council</td><td>AI for language + life admin</td><td>0-30</td><td>Medium</td><td>3/5</td></tr><tr><td>Job seekers</td><td>7.3m work EDS gap</td><td>DWP / Skills Bootcamps</td><td>Funded AI job-search bootcamp</td><td>0</td><td>Medium</td><td>4/5</td></tr><tr><td>Small business owners behind digitally</td><td>43% no AI plans</td><td>Business owner</td><td>SME AI adoption clinic</td><td>250-2250</td><td>Low-medium</td><td>5/5</td></tr><tr><td>Care home residents</td><td>Operator-led</td><td>Care home operator</td><td>Activities-led AI sessions</td><td>0</td><td>Very high</td><td>2/5</td></tr><tr><td>Housing association tenants</td><td>Medium-high</td><td>Housing association</td><td>Tenant digital confidence</td><td>0</td><td>Medium</td><td>4/5</td></tr><tr><td>Carers</td><td>Linked to 3.3m 65+ no smartphone</td><td>Family carer / employer</td><td>Help your relative toolkit</td><td>30-150</td><td>Low</td><td>5/5</td></tr><tr><td>Non-office workers</td><td>Work EDS gap</td><td>Employer</td><td>Practical AI for the job</td><td>0-60</td><td>Medium</td><td>3/5</td></tr><tr><td>Rural adults, low confidence</td><td>Dispersed</td><td>Council / self</td><td>Hybrid + remote support</td><td>0-40</td><td>Medium-high</td><td>3/5</td></tr><tr><td>Adults fearful of scams/fraud</td><td>1 in 5 over-60s scammed</td><td>Family / self / bank</td><td>AI scam-safety workshop</td><td>10-50</td><td>Medium</td><td>5/5</td></tr><tr><td>Disabled adults</td><td>Cross-cutting</td><td>Charity / NHS / self</td><td>Accessible AI for independence</td><td>0-40</td><td>High</td><td>3/5</td></tr></tbody>
+      </table>
+    </div>
+    </div>
+      </section>
+
+      <section class="section" id="products">
+        <div class="section-head">
+          <p class="kicker">Product Strategy</p>
+          <h2>Lead with scam safety, then scale through training IP</h2>
+          <p>
+            The best first offer is a funded cohort programme for a housing association or council.
+            The best mature products are train-the-trainer, carers tooling, WhatsApp support, and B2B clinics.
+          </p>
+        </div>
+        <article class="panel">
+          <h3>Gross margin versus scalability</h3>
+          <div id="productChart" class="chart"></div>
+        </article>
+        <div style="margin-top: 14px;">
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Product</th><th>Buyer</th><th>Price</th><th>Gross margin</th><th>Scalability</th><th>Primary risk</th></tr></thead>
+        <tbody><tr><td>AI for Everyday Life Workshop</td><td>Councils / charities</td><td>0-25/head; 600-1500/cohort</td><td>50-70%</td><td>Medium</td><td>Overselling to reluctant users</td></tr><tr><td>Phone &amp; AI Confidence Clinic</td><td>Families / venues</td><td>10-30/session</td><td>40-60%</td><td>Low-medium</td><td>Labour-intensive</td></tr><tr><td>AI Help Desk for Families</td><td>Families</td><td>15-40/mo</td><td>55-75%</td><td>Medium-high</td><td>Support cost spikes</td></tr><tr><td>Library/Council AI Literacy</td><td>Councils / libraries</td><td>5k-40k/contract</td><td>45-65%</td><td>Medium</td><td>Procurement lag</td></tr><tr><td>Small Business AI Adoption Clinic</td><td>SMEs</td><td>250-2250/session</td><td>65-80%</td><td>Medium</td><td>Crowded B2B</td></tr><tr><td>AI Scam Safety Workshop</td><td>Banks / councils</td><td>800-1800 B2B</td><td>55-75%</td><td>Medium-high</td><td>Fear-mongering</td></tr><tr><td>Job Seeker AI Training</td><td>DWP / AEB</td><td>Funded</td><td>40-60%</td><td>Medium</td><td>Outcome pressure</td></tr><tr><td>WhatsApp AI Helper Service</td><td>Families / institutions</td><td>5-15/mo</td><td>60-80%</td><td>High</td><td>Hallucination</td></tr><tr><td>Train-the-Trainer Package</td><td>Community orgs</td><td>1500-6000/org</td><td>70-90%</td><td>Very high</td><td>Needs proof first</td></tr><tr><td>AI for Carers Toolkit</td><td>Carers / employers</td><td>30-150</td><td>70-85%</td><td>High</td><td>Niche awareness</td></tr></tbody>
+      </table>
+    </div>
+    </div>
+      </section>
+
+      <section class="section" id="economics">
+        <div class="section-head">
+          <p class="kicker">Business Model Fit</p>
+          <h2>Third-party paid models win</h2>
+          <p>
+            Train-the-trainer, institutional contracts, family-sponsored support, and B2B workshops
+            beat one-off consumer classes because they align the payer with budget and reduce price resistance.
+          </p>
+        </div>
+        <div class="grid two-grid">
+          <article class="panel">
+            <h3>Model quality score</h3>
+            <div id="modelChart" class="chart tall"></div>
+          </article>
+          <article class="panel">
+            <h3>Read-through</h3>
+            <p>
+              Direct-to-consumer one-time classes are capped by free substitutes and low willingness
+              to pay. The stronger model is B2B2C: deliver the social benefit to the end user, but
+              invoice a funder with a reason to care.
+            </p>
+            <ul class="steps">
+              <li><strong>Best current revenue:</strong> £800-£1,800 scam-safety cohorts for housing associations or councils.</li>
+              <li><strong>Best margin path:</strong> SME clinics and employer-sponsored training.</li>
+              <li><strong>Best scale path:</strong> train-the-trainer licensing after a pilot proves outcomes.</li>
+              <li><strong>Weakest route:</strong> paid consumer app/course requiring self-onboarding.</li>
+            </ul>
+          </article>
+        </div>
+        <div style="margin-top: 14px;">
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Business model</th><th>Typical price</th><th>Gross margin</th><th>Overall</th></tr></thead>
+        <tbody><tr><td>D2C one-time class</td><td>10-50/head</td><td>40-60%</td><td>2/5</td></tr><tr><td>D2C subscription/support</td><td>15-40/mo</td><td>55-75%</td><td>3/5</td></tr><tr><td>Family-sponsored support</td><td>30-150/mo or one-off</td><td>55-80%</td><td>4/5</td></tr><tr><td>B2B small-business workshops</td><td>980-2250/session</td><td>70-80%</td><td>4/5</td></tr><tr><td>Employer-sponsored training</td><td>395-795/person</td><td>65-80%</td><td>4/5</td></tr><tr><td>Council/library/charity contract</td><td>5k-40k/contract</td><td>45-65%</td><td>4/5</td></tr><tr><td>Train-the-trainer</td><td>1.5k-6k/org</td><td>70-90%</td><td>5/5</td></tr><tr><td>Local franchise/licensing</td><td>5k-25k + royalty</td><td>70-90%</td><td>4/5</td></tr><tr><td>Online course + phone support</td><td>30-120 + support</td><td>50-70%</td><td>3/5</td></tr><tr><td>Hybrid workshop + WhatsApp/SMS/print</td><td>0-50/head + contract</td><td>50-70%</td><td>4/5</td></tr></tbody>
+      </table>
+    </div>
+    </div>
+      </section>
+
+      <section class="section" id="channels">
+        <div class="section-head">
+          <p class="kicker">Distribution</p>
+          <h2>Trust is the binding constraint</h2>
+          <p>
+            The cheapest channels are usually the least suitable for the most excluded users. The
+            best starting channels are housing associations, councils, libraries, community groups,
+            family referrals, and SME networks.
+          </p>
+        </div>
+        <article class="panel">
+          <h3>Channel score heatmap</h3>
+          <div id="channelChart" class="chart extra-tall"></div>
+        </article>
+        <div style="margin-top: 14px;">
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Channel</th><th>Trust</th><th>Reach</th><th>Cost</th><th>Conversion</th><th>Complexity</th><th>Scale</th><th>Note</th></tr></thead>
+        <tbody><tr><td>QR codes on flyers</td><td>1</td><td>3</td><td>1</td><td>1</td><td>1</td><td>5</td><td>Awareness only; excludes the least confident users.</td></tr><tr><td>Facebook groups</td><td>3</td><td>5</td><td>1</td><td>3</td><td>1</td><td>5</td><td>Works for family carers, not the excluded user directly.</td></tr><tr><td>WhatsApp groups</td><td>4</td><td>3</td><td>1</td><td>4</td><td>3</td><td>5</td><td>Familiar channel for delivery and follow-up.</td></tr><tr><td>Local newspapers / radio</td><td>5</td><td>3</td><td>3</td><td>3</td><td>1</td><td>3</td><td>Good older-adult reach for scam-safety framing.</td></tr><tr><td>Community / faith groups</td><td>6</td><td>3</td><td>1</td><td>5</td><td>3</td><td>3</td><td>Trusted gatekeepers, especially for ESOL groups.</td></tr><tr><td>Libraries</td><td>5</td><td>4</td><td>2</td><td>4</td><td>3</td><td>5</td><td>Neutral venue and viable contract route.</td></tr><tr><td>GP surgeries / health</td><td>6</td><td>5</td><td>3</td><td>5</td><td>4</td><td>3</td><td>High trust, but data-sensitive.</td></tr><tr><td>Job centres</td><td>5</td><td>3</td><td>1</td><td>5</td><td>3</td><td>3</td><td>Captive funnel for funded job-search delivery.</td></tr><tr><td>Local councils</td><td>5</td><td>5</td><td>3</td><td>4</td><td>5</td><td>5</td><td>Strong buyer, slow procurement.</td></tr><tr><td>Housing associations</td><td>5</td><td>4</td><td>3</td><td>5</td><td>4</td><td>5</td><td>Sticky contracts and captive cohorts.</td></tr><tr><td>Family referrals</td><td>6</td><td>5</td><td>1</td><td>5</td><td>1</td><td>5</td><td>Best D2C route because payer and user differ.</td></tr><tr><td>SME networks / chambers</td><td>5</td><td>3</td><td>2</td><td>4</td><td>1</td><td>3</td><td>Direct route to SME clinic buyers.</td></tr><tr><td>Banks / telecoms</td><td>6</td><td>6</td><td>5</td><td>5</td><td>5</td><td>6</td><td>Year-2 target after proof point.</td></tr><tr><td>Employers</td><td>5</td><td>4</td><td>3</td><td>3</td><td>4</td><td>5</td><td>Budget exists, sales cycle matters.</td></tr></tbody>
+      </table>
+    </div>
+    </div>
+      </section>
+
+      <section class="section" id="ethics">
+        <div class="section-head">
+          <p class="kicker">Ethics And Risk</p>
+          <h2>Trust design is part of the product</h2>
+        </div>
+        <div class="grid three-grid">
+          <article class="callout bad">
+            <h3>Data handling</h3>
+            <p>Do not store sensitive NHS, benefit, bill, or financial data unless the service truly needs it. Consent has to be plain and informed.</p>
+          </article>
+          <article class="callout warning">
+            <h3>AI failure</h3>
+            <p>Official forms, health, benefits, legal, and money decisions need human verification. AI output must be framed as fallible.</p>
+          </article>
+          <article class="callout">
+            <h3>Safeguarding</h3>
+            <p>DBS checks, escalation routes, verified identity, and no unsolicited payment requests are baseline controls, not nice-to-haves.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="pilot">
+        <div class="section-head">
+          <p class="kicker">Minimum Viable Pilot</p>
+          <h2>Run a 12-week proof point before scaling</h2>
+          <p>
+            The report recommends 6-8 scam-safety plus AI-confidence cohorts for a single housing
+            association or council area, with printed materials and phone/WhatsApp follow-up.
+          </p>
+        </div>
+        <div class="grid two-grid">
+          <article class="panel">
+            <h3>First paid offer</h3>
+            <ul class="steps">
+              <li><strong>Buyer:</strong> housing association or council inclusion lead.</li>
+              <li><strong>Offer:</strong> AI Scam Safety + Digital Confidence cohort.</li>
+              <li><strong>Price:</strong> £800-£1,800 per cohort.</li>
+              <li><strong>Delivery:</strong> trusted local venue, printed guide, phone/WhatsApp follow-up.</li>
+              <li><strong>Proof:</strong> satisfaction, confidence gain, renewal intent, funder anecdotes.</li>
+            </ul>
+          </article>
+          <article class="panel">
+            <h3>Decision thresholds</h3>
+            <ul class="steps">
+              <li><strong>Upgrade:</strong> buyers pay over £1,500/cohort with annual renewal.</li>
+              <li><strong>Upgrade:</strong> bank or telecom signs an AI-specific CSR partnership.</li>
+              <li><strong>Upgrade:</strong> family help-desk trial-to-paid conversion clears 20% with low churn.</li>
+              <li><strong>Downgrade:</strong> no-show or attrition exceeds 40%.</li>
+              <li><strong>Downgrade:</strong> institutional sales cycles exceed 9-12 months with low close rates.</li>
+            </ul>
+          </article>
+        </div>
+        <div class="callout" style="margin-top: 14px;">
+          <strong>Closing verdict:</strong> this can be a worthwhile mission-led business, but it is not
+          a venture-scale consumer app. Build for the payer, frame for the user's fears and needs,
+          lead with safety, and keep AI quiet until it solves a concrete problem.
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      Built from <code>perplexityreport.md</code> by <code>build_perplexity_report.py</code>.
+      Tables and charts are report-derived; cited source links remain in the Markdown.
+    </footer>
+  </div>
+
+  <script>
+    const chartOptions = {"marketChart": {"color": ["#ed1c24", "#39d0ff", "#20d1a2", "#ff9f43", "#c994ff"], "tooltip": {"trigger": "axis"}, "legend": {"textStyle": {"color": "#a8adb7"}, "top": 0}, "grid": {"left": 64, "right": 24, "top": 52, "bottom": 58}, "xAxis": {"type": "category", "data": ["UK adults with low digital confidence", "UK adults with little/no generative AI usage"], "axisLabel": {"color": "#a8adb7", "interval": 0, "lineHeight": 16}, "axisLine": {"lineStyle": {"color": "rgba(255,255,255,0.12)"}}}, "yAxis": {"type": "value", "name": "Millions of adults", "nameTextStyle": {"color": "#a8adb7"}, "axisLabel": {"color": "#a8adb7"}, "splitLine": {"lineStyle": {"color": "rgba(255,255,255,0.12)"}}}, "series": [{"name": "Low", "type": "bar", "data": [10.2, 24.3], "barMaxWidth": 48}, {"name": "Base", "type": "bar", "data": [16.3, 30.0], "barMaxWidth": 48}, {"name": "High", "type": "bar", "data": [22.6, 36.4], "barMaxWidth": 48}]}, "revenueChart": {"color": ["#ed1c24", "#39d0ff", "#20d1a2", "#ff9f43", "#c994ff"], "tooltip": {"trigger": "axis"}, "legend": {"textStyle": {"color": "#a8adb7"}, "top": 0}, "grid": {"left": 74, "right": 20, "top": 52, "bottom": 86}, "xAxis": {"type": "category", "data": ["Reachable users, year 1", "Reachable paying customers, year 1", "Sponsored users", "Realistic year-1 revenue", "Possible 5-year revenue"], "axisLabel": {"color": "#a8adb7", "interval": 0, "rotate": 18}, "axisLine": {"lineStyle": {"color": "rgba(255,255,255,0.12)"}}}, "yAxis": {"type": "value", "axisLabel": {"color": "#a8adb7"}, "splitLine": {"lineStyle": {"color": "rgba(255,255,255,0.12)"}}}, "series": [{"name": "Low", "type": "bar", "data": [800, 120, 400, 35, 250]}, {"name": "Base", "type": "bar", "data": [2000, 350, 1300, 95, 1200]}, {"name": "High", "type": "bar", "data": [4500, 900, 3200, 190, 3500]}]}, "segmentChart": {"color": ["#39d0ff"], "tooltip": {"trigger": "axis", "axisPointer": {"type": "shadow"}}, "grid": {"left": 190, "right": 28, "top": 20, "bottom": 30}, "xAxis": {"type": "value", "min": 0, "max": 5, "axisLabel": {"color": "#a8adb7"}, "splitLine": {"lineStyle": {"color": "rgba(255,255,255,0.12)"}}}, "yAxis": {"type": "category", "data": ["Care home residents", "Disabled adults", "Immigrants / ESOL learners", "Low-income adults on benefits", "Non-office workers", "Rural adults, low confidence", "Adults 55-64, lapsed/limited users", "Adults 65+, low digital skills", "Housing association tenants", "Job seekers", "Adults fearful of scams/fraud", "Carers", "Small business owners behind digitally"], "axisLabel": {"color": "#a8adb7"}, "axisLine": {"lineStyle": {"color": "rgba(255,255,255,0.12)"}}}, "series": [{"name": "Attractiveness", "type": "bar", "data": [2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5], "barWidth": 14}]}, "productChart": {"color": ["#20d1a2", "#ff9f43"], "tooltip": {"trigger": "item"}, "grid": {"left": 66, "right": 30, "top": 24, "bottom": 58}, "xAxis": {"type": "value", "name": "Gross margin midpoint (%)", "nameTextStyle": {"color": "#a8adb7"}, "min": 35, "max": 90, "axisLabel": {"color": "#a8adb7"}, "splitLine": {"lineStyle": {"color": "rgba(255,255,255,0.12)"}}}, "yAxis": {"type": "value", "name": "Scalability score", "nameTextStyle": {"color": "#a8adb7"}, "min": 1, "max": 5.4, "axisLabel": {"color": "#a8adb7"}, "splitLine": {"lineStyle": {"color": "rgba(255,255,255,0.12)"}}}, "series": [{"name": "Product concepts", "type": "scatter", "symbolSize": 24, "label": {"show": true, "formatter": "{b}", "position": "right", "color": "#f7f7f4", "fontSize": 10}, "data": [{"name": "AI for Everyday Life Workshop", "value": [60, 3, 3], "scale": "Medium", "price": "0-25/head; 600-1500/cohort"}, {"name": "Phone & AI Confidence Clinic", "value": [50, 2, 2], "scale": "Low-medium", "price": "10-30/session"}, {"name": "AI Help Desk for Families", "value": [65, 4, 4], "scale": "Medium-high", "price": "15-40/mo"}, {"name": "Library/Council AI Literacy", "value": [55, 3, 3], "scale": "Medium", "price": "5k-40k/contract"}, {"name": "Small Business AI Adoption Clinic", "value": [72.5, 3, 3], "scale": "Medium", "price": "250-2250/session"}, {"name": "AI Scam Safety Workshop", "value": [65, 4, 4], "scale": "Medium-high", "price": "800-1800 B2B"}, {"name": "Job Seeker AI Training", "value": [50, 3, 3], "scale": "Medium", "price": "Funded"}, {"name": "WhatsApp AI Helper Service", "value": [70, 5, 5], "scale": "High", "price": "5-15/mo"}, {"name": "Train-the-Trainer Package", "value": [80, 5, 5], "scale": "Very high", "price": "1500-6000/org"}, {"name": "AI for Carers Toolkit", "value": [77.5, 5, 5], "scale": "High", "price": "30-150"}]}]}, "modelChart": {"color": ["#ed1c24"], "tooltip": {"trigger": "axis", "axisPointer": {"type": "shadow"}}, "grid": {"left": 198, "right": 28, "top": 24, "bottom": 30}, "xAxis": {"type": "value", "min": 0, "max": 5, "axisLabel": {"color": "#a8adb7"}, "splitLine": {"lineStyle": {"color": "rgba(255,255,255,0.12)"}}}, "yAxis": {"type": "category", "data": ["D2C one-time class", "D2C subscription/support", "Family-sponsored support", "B2B small-business workshops", "Employer-sponsored training", "Council/library/charity contract", "Train-the-trainer", "Local franchise/licensing", "Online course + phone support", "Hybrid workshop + WhatsApp/SMS/print"], "axisLabel": {"color": "#a8adb7"}, "axisLine": {"lineStyle": {"color": "rgba(255,255,255,0.12)"}}}, "series": [{"name": "Overall", "type": "bar", "data": [2, 3, 4, 4, 4, 4, 5, 4, 3, 4], "barWidth": 14}]}, "channelChart": {"tooltip": {"position": "top"}, "grid": {"left": 176, "right": 34, "top": 32, "bottom": 68}, "xAxis": {"type": "category", "data": ["Trust", "Reach", "Cost", "Conversion", "Complexity", "Scale"], "axisLabel": {"color": "#a8adb7"}, "axisLine": {"lineStyle": {"color": "rgba(255,255,255,0.12)"}}}, "yAxis": {"type": "category", "data": ["QR codes on flyers", "Facebook groups", "WhatsApp groups", "Local newspapers / radio", "Community / faith groups", "Libraries", "GP surgeries / health", "Job centres", "Local councils", "Housing associations", "Family referrals", "SME networks / chambers", "Banks / telecoms", "Employers"], "axisLabel": {"color": "#a8adb7"}, "axisLine": {"lineStyle": {"color": "rgba(255,255,255,0.12)"}}}, "visualMap": {"min": 1, "max": 6, "calculable": true, "orient": "horizontal", "left": "center", "bottom": 0, "textStyle": {"color": "#a8adb7"}, "inRange": {"color": ["#16171b", "#39d0ff", "#20d1a2", "#ff9f43", "#ed1c24"]}}, "series": [{"name": "Channel score", "type": "heatmap", "data": [[0, 0, 1], [1, 0, 3], [2, 0, 1], [3, 0, 1], [4, 0, 1], [5, 0, 5], [0, 1, 3], [1, 1, 5], [2, 1, 1], [3, 1, 3], [4, 1, 1], [5, 1, 5], [0, 2, 4], [1, 2, 3], [2, 2, 1], [3, 2, 4], [4, 2, 3], [5, 2, 5], [0, 3, 5], [1, 3, 3], [2, 3, 3], [3, 3, 3], [4, 3, 1], [5, 3, 3], [0, 4, 6], [1, 4, 3], [2, 4, 1], [3, 4, 5], [4, 4, 3], [5, 4, 3], [0, 5, 5], [1, 5, 4], [2, 5, 2], [3, 5, 4], [4, 5, 3], [5, 5, 5], [0, 6, 6], [1, 6, 5], [2, 6, 3], [3, 6, 5], [4, 6, 4], [5, 6, 3], [0, 7, 5], [1, 7, 3], [2, 7, 1], [3, 7, 5], [4, 7, 3], [5, 7, 3], [0, 8, 5], [1, 8, 5], [2, 8, 3], [3, 8, 4], [4, 8, 5], [5, 8, 5], [0, 9, 5], [1, 9, 4], [2, 9, 3], [3, 9, 5], [4, 9, 4], [5, 9, 5], [0, 10, 6], [1, 10, 5], [2, 10, 1], [3, 10, 5], [4, 10, 1], [5, 10, 5], [0, 11, 5], [1, 11, 3], [2, 11, 2], [3, 11, 4], [4, 11, 1], [5, 11, 3], [0, 12, 6], [1, 12, 6], [2, 12, 5], [3, 12, 5], [4, 12, 5], [5, 12, 6], [0, 13, 5], [1, 13, 4], [2, 13, 3], [3, 13, 3], [4, 13, 4], [5, 13, 5]], "label": {"show": true, "color": "#f7f7f4", "fontSize": 10}}]}};
+    const charts = [];
+
+    function responsiveOption(id) {
+      const compact = window.matchMedia("(max-width: 700px)").matches;
+      const option = JSON.parse(JSON.stringify(chartOptions[id]));
+      if (!compact) return option;
+
+      if (id === "marketChart") {
+        option.grid = { left: 46, right: 12, top: 52, bottom: 92 };
+        option.xAxis.axisLabel.rotate = 24;
+        option.xAxis.axisLabel.fontSize = 10;
+      }
+
+      if (id === "revenueChart") {
+        option.grid = { left: 52, right: 12, top: 52, bottom: 118 };
+        option.xAxis.axisLabel.rotate = 34;
+        option.xAxis.axisLabel.fontSize = 10;
+      }
+
+      if (id === "segmentChart") {
+        option.grid = { left: 126, right: 10, top: 16, bottom: 28 };
+        option.yAxis.axisLabel = { color: "#a8adb7", width: 116, overflow: "truncate", fontSize: 10 };
+      }
+
+      if (id === "productChart") {
+        option.grid = { left: 44, right: 12, top: 24, bottom: 52 };
+        option.series[0].label.show = false;
+      }
+
+      if (id === "modelChart") {
+        option.grid = { left: 126, right: 10, top: 20, bottom: 28 };
+        option.yAxis.axisLabel = { color: "#a8adb7", width: 116, overflow: "truncate", fontSize: 10 };
+      }
+
+      if (id === "channelChart") {
+        option.grid = { left: 108, right: 8, top: 28, bottom: 84 };
+        option.xAxis.axisLabel.fontSize = 10;
+        option.yAxis.axisLabel = { color: "#a8adb7", width: 98, overflow: "truncate", fontSize: 10 };
+        option.series[0].label.fontSize = 9;
+      }
+
+      return option;
+    }
+
+    function mountChart(id) {
+      const el = document.getElementById(id);
+      if (!el || !window.echarts) return;
+      const chart = echarts.init(el, null, { renderer: "canvas" });
+      chart.__reportId = id;
+      chart.setOption(responsiveOption(id), true);
+      charts.push(chart);
+    }
+
+    Object.keys(chartOptions).forEach(mountChart);
+    window.addEventListener("resize", () => {
+      charts.forEach((chart) => {
+        chart.setOption(responsiveOption(chart.__reportId), true);
+        chart.resize();
+      });
+    });
+  </script>
+</body>
+</html>
