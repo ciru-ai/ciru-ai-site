@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kimi Report - UK AI Inclusion Feasibility</title>
+  <meta name="description" content="Kimi report: UK AI inclusion feasibility, market findings, recommended wedge, economics, risks, and validation plan.">
+  <meta name="theme-color" content="#080808">
+  <link rel="icon" type="image/png" href="assets/ccglogo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="assets/echarts.min.js"></script>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #080808;
+      --bg-2: #111114;
+      --panel: rgba(15, 16, 19, 0.94);
+      --panel-2: rgba(23, 24, 29, 0.96);
+      --line: rgba(255, 255, 255, 0.13);
+      --line-strong: rgba(255, 255, 255, 0.26);
+      --text: #f7f7f4;
+      --muted: #a8adb7;
+      --subtle: #767d8a;
+      --amd: #ed1c24;
+      --red: #ff4e5f;
+      --orange: #ff9f43;
+      --yellow: #f6c046;
+      --green: #20d1a2;
+      --cyan: #39d0ff;
+      --blue: #78a8ff;
+      --violet: #c994ff;
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.46);
+      --radius: 8px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--text);
+      font-family: "Space Grotesk", system-ui, sans-serif;
+      background:
+        linear-gradient(120deg, rgba(237, 28, 36, 0.2), transparent 29%),
+        linear-gradient(300deg, rgba(57, 208, 255, 0.11), transparent 32%),
+        repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.034) 0 1px, transparent 1px 20px),
+        linear-gradient(180deg, #090809 0%, #111115 45%, #070707 100%);
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(237, 28, 36, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+      background-size: 36px 36px;
+      opacity: 0.34;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.76), transparent 84%);
+    }
+    a { color: var(--cyan); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .page { position: relative; z-index: 1; width: min(calc(100% - 28px), 1160px); margin: 0 auto; padding: 18px 0 56px; }
+    .brand-lockup {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text);
+      margin: 0 0 10px;
+    }
+    .logo-plate {
+      width: 48px;
+      height: 48px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(237, 28, 36, .2), rgba(57, 208, 255, .08));
+      font-family: "IBM Plex Mono", monospace;
+      font-weight: 700;
+      color: var(--cyan);
+    }
+    .logo-plate img { width: 34px; height: 34px; object-fit: contain; display: block; }
+    .brand-title, .brand-subtitle { display: block; line-height: 1.05; }
+    .brand-title { font-weight: 700; }
+    .brand-subtitle { color: var(--muted); font: 500 .78rem "IBM Plex Mono", monospace; }
+    header {
+      margin: 6px 0 16px;
+      padding: 22px 22px 24px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background:
+        linear-gradient(120deg, rgba(237, 28, 36, 0.22), transparent 36%),
+        linear-gradient(180deg, rgba(28, 28, 31, 0.96), rgba(9, 9, 10, 0.93));
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      border-top: 3px solid var(--amd);
+      background:
+        linear-gradient(90deg, rgba(237, 28, 36, 0.16), transparent 50%),
+        repeating-linear-gradient(90deg, transparent 0 28px, rgba(255, 255, 255, 0.04) 28px 29px);
+    }
+    header > * { position: relative; }
+    .kicker { color: var(--cyan); font: 700 .78rem "IBM Plex Mono", monospace; letter-spacing: .08em; text-transform: uppercase; }
+    h1 { margin: 10px 0 10px; font-size: clamp(2.05rem, 5vw, 4.2rem); line-height: .98; letter-spacing: 0; max-width: 980px; }
+    h2 { margin: 0 0 14px; font-size: 1.5rem; letter-spacing: 0; }
+    h3 { margin: 20px 0 10px; font-size: 1.05rem; letter-spacing: 0; }
+    p { color: var(--muted); line-height: 1.62; }
+    .lead { color: var(--text); font-size: 1.1rem; max-width: 930px; }
+    .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .tag { border: 1px solid var(--line); border-radius: 7px; padding: 7px 9px; background: rgba(255,255,255,.045); color: var(--muted); font: 500 .78rem "IBM Plex Mono", monospace; max-width: 100%; overflow-wrap: anywhere; }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 16px 0;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(0,0,0,.22);
+    }
+    nav a { padding: 7px 9px; border-radius: 6px; color: var(--text); font-size: .9rem; }
+    nav a:hover { background: rgba(57, 208, 255, .1); text-decoration: none; }
+    section, .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      margin: 16px 0;
+    }
+    .grid { display: grid; gap: 14px; }
+    .grid > *, .split > *, .stats > *, section, header, nav, .panel, .callout, .stat { min-width: 0; }
+    .grid.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 20px 0 0; }
+    .stat {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.018)), var(--panel-2);
+      padding: 15px;
+      min-height: 116px;
+    }
+    .stat b { display: block; color: var(--cyan); font: 700 1.75rem "IBM Plex Mono", monospace; }
+    .stat span { display: block; color: var(--muted); margin-top: 8px; line-height: 1.35; }
+    .callout {
+      border: 1px solid rgba(57, 208, 255, 0.24);
+      border-left: 5px solid var(--cyan);
+      border-radius: var(--radius);
+      background: rgba(57, 208, 255, 0.08);
+      padding: 16px 18px;
+      margin: 14px 0;
+    }
+    .callout.warning { border-color: rgba(255,159,67,.25); border-left-color: var(--orange); background: rgba(255,159,67,.08); }
+    .callout.bad { border-color: rgba(255,78,95,.26); border-left-color: var(--red); background: rgba(255,78,95,.08); }
+    .callout.good { border-color: rgba(32,209,162,.26); border-left-color: var(--green); background: rgba(32,209,162,.08); }
+    .callout strong { color: var(--text); }
+    ul { color: var(--muted); line-height: 1.55; padding-left: 1.15rem; }
+    li + li { margin-top: 8px; }
+    .chart { width: 100%; min-height: 390px; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(0,0,0,.2); overflow: hidden; contain: layout paint; }
+    .chart.small { min-height: 320px; }
+    figure { margin: 0; }
+    figure img { display: block; width: 100%; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(0,0,0,.28); }
+    figcaption { color: var(--muted); font: 500 .82rem "IBM Plex Mono", monospace; margin-top: 8px; }
+    .table-wrap { width: 100%; overflow: auto; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(0,0,0,.18); }
+    table { width: 100%; border-collapse: collapse; min-width: 760px; }
+    th, td { border-bottom: 1px solid var(--line); padding: 10px 12px; text-align: left; vertical-align: top; }
+    th { background: rgba(255,255,255,.06); color: var(--text); font-size: .85rem; }
+    td { color: var(--muted); font-size: .92rem; }
+    td:last-child, th:last-child { border-right: 0; }
+    .num, .score { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; font-family: "IBM Plex Mono", monospace; }
+    .score { color: var(--cyan); font-weight: 700; }
+    .mono { font-family: "IBM Plex Mono", monospace; }
+    h1, h2, h3, p, li, .kicker, .lead, .rank-item b, .rank-item span { overflow-wrap: anywhere; }
+    .split { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(320px, .9fr); gap: 16px; align-items: start; }
+    .rank-list { display: grid; gap: 10px; }
+    .rank-item { display: grid; grid-template-columns: 34px 1fr auto; gap: 10px; align-items: start; border: 1px solid var(--line); border-radius: var(--radius); padding: 12px; background: rgba(255,255,255,.035); }
+    .rank { color: var(--cyan); font: 700 1rem "IBM Plex Mono", monospace; }
+    .rank-item b { display: block; }
+    .rank-item span { color: var(--muted); }
+    .footer { color: var(--subtle); font: 500 .82rem "IBM Plex Mono", monospace; padding: 18px 0 0; }
+    @media (max-width: 860px) {
+      .stats, .grid.cols-3, .grid.cols-2, .split { grid-template-columns: 1fr; }
+      header, section, .panel { padding: 18px; }
+      h1 { font-size: 2.2rem; }
+      .chart { min-height: 340px; }
+    }
+    @media (max-width: 520px) {
+      .page { width: min(calc(100% - 20px), 1160px); }
+      header, section, .panel, nav { padding: 18px; overflow: hidden; }
+      .kicker { line-height: 1.45; }
+      h1 { font-size: 2rem; line-height: 1.04; }
+      .lead { font-size: 1rem; }
+      .chart { min-height: 330px; }
+      .stat { min-height: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <a class="brand-lockup" href="../">
+      <span class="logo-plate"><img src="assets/ccglogo.png" alt="Crown Citadel Group"></span>
+      <span>
+        <span class="brand-title">Ciru Inference Lab</span>
+        <span class="brand-subtitle">llm.ciru.ai / research</span>
+      </span>
+    </a>
+
+    <header>
+      <div class="kicker">Crown Citadel Research Report / Kimi Report</div>
+      <h1>Kimi Report: UK AI Inclusion Feasibility</h1>
+      <p class="lead">A readable decision report from <span class="mono">kimi.zip</span> on whether to build a business around AI onboarding for low-digital-confidence adults in the UK.</p>
+      <div class="meta">
+        <span class="tag">Research date: 16 June 2026</span>
+        <span class="tag">Scope: United Kingdom</span>
+        <span class="tag">Source: kimi.zip</span>
+        <span class="tag">60+ cited sources in source report</span>
+      </div>
+    </header>
+
+    <nav>
+      <a href="#verdict">Verdict</a>
+      <a href="#market">Market</a>
+      <a href="#segments">Segments</a>
+      <a href="#demand">Demand</a>
+      <a href="#offers">Offers</a>
+      <a href="#economics">Economics</a>
+      <a href="#distribution">Distribution</a>
+      <a href="#risks">Risks</a>
+      <a href="#validation">Validation</a>
+      <a href="#recommendation">Recommendation</a>
+    </nav>
+
+    <section id="verdict">
+      <h2>Executive Verdict</h2>
+      <div class="callout good"><strong>Direct answer:</strong> yes, the demographic is worth building around, but the Kimi report says not to sell a direct-to-consumer AI education product. The recommended path is B2B2C: sell practical digital-confidence programs to trusted institutions that deliver them free or subsidized to end users.</div>
+      <div class="stats">
+        <div class="stat"><b>21.7M</b><span>Working-age adults unable to complete all essential digital work tasks.</span></div>
+        <div class="stat"><b>35M</b><span>Approximate adults who have not used generative AI.</span></div>
+        <div class="stat"><b>£23.1B</b><span>Annual GVA opportunity attached to closing digital skills gaps.</span></div>
+        <div class="stat"><b>40-50%</b><span>Estimated chance of a sustainable small business if B2B2C validates.</span></div>
+      </div>
+      <div class="grid cols-2">
+        <div>
+          <h3>Core Insight</h3>
+          <p>The opportunity is not teaching people to want AI. The report's central finding is that low-digital-confidence adults need practical help with forms, scams, banking, health apps, job applications, and phone confidence. AI should be the hidden engine that makes support faster and better, not the first-contact pitch.</p>
+        </div>
+        <div>
+          <h3>Best Wedge</h3>
+          <p>Employer-sponsored <strong>Digital Confidence for Frontline Staff</strong> is the strongest first move. Employers have budgets, non-office workers face real digitization pressure, delivery can happen in groups, and the value proposition is operational rather than abstract.</p>
+        </div>
+      </div>
+      <div class="callout bad"><strong>Top no-go:</strong> a pure direct-to-consumer subscription app or generic online AI course. The Kimi report is explicit that this target user will not self-serve, will not reliably pay, and may reject the framing.</div>
+    </section>
+
+    <section id="market">
+      <h2>Market Shape</h2>
+      <p>The Kimi report frames the market as a layered digital-exclusion problem. Millions are offline or unable to use the internet independently, while AI adoption sits above basic digital confidence. That makes institutional access and trusted human delivery more important than app distribution.</p>
+      <div class="grid cols-2">
+        <div id="marketChart" class="chart"></div>
+        <figure>
+          <img src="assets/kimi/chart1_digital_pyramid.png" alt="UK Digital and AI Adoption Pyramid">
+          <figcaption>Original Kimi chart: the digital and AI adoption pyramid.</figcaption>
+        </figure>
+      </div>
+      <div class="table-wrap "><table><thead><tr><th>Metric</th><th>Low</th><th>Base</th><th>High</th><th>Unit</th></tr></thead><tbody><tr><td>Low digital confidence adults</td><td>8.5</td><td>15.0</td><td>21.7</td><td>million</td></tr>
+<tr><td>Never used generative AI</td><td>35.0</td><td>30.0</td><td>25.0</td><td>million</td></tr>
+<tr><td>No/fairly low AI knowledge</td><td>30.0</td><td>25.0</td><td>20.0</td><td>million</td></tr>
+<tr><td>Institutionally reachable</td><td>2.0</td><td>5.0</td><td>10.0</td><td>million</td></tr>
+<tr><td>Sponsored users</td><td>0.05</td><td>0.2</td><td>0.5</td><td>million</td></tr></tbody></table></div>
+      <div class="grid cols-2">
+        <figure>
+          <img src="assets/kimi/chart2_ai_awareness.png" alt="UK AI awareness and usage chart">
+          <figcaption>Original Kimi chart: AI awareness and usage.</figcaption>
+        </figure>
+        <div>
+          <h3>Awareness Gap</h3>
+          <p>Only 34% of UK adults are reported as knowing at least a fair amount about AI; 54% know only a little, and 12% have never heard of it or know nothing about it. The report also highlights that nearly half of UK adults have not used generative AI tools in the past 12 months.</p>
+          <p>The trust gap is material: 56% of non-users see AI as a risk to society, compared with 26% of regular users. That is why the recommended offer needs trusted intermediaries and practical language.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="segments">
+      <h2>Target Segments</h2>
+      <div class="split">
+        <div>
+          <p>The Kimi report scores 14 segments. Non-office workers are the standout because they combine scale, a clear buyer, workplace pressure, and manageable support burden. Older adults are emotionally compelling but direct revenue is harder because willingness to pay is low and support needs are high.</p>
+          <div class="rank-list">
+            <div class="rank-item"><span class="rank">1</span><div><b>Non-office workers</b><span>Retail, hospitality, care, logistics, manufacturing; employer-funded workshops.</span></div><span class="score">9/10</span></div>
+            <div class="rank-item"><span class="rank">2</span><div><b>Housing association residents</b><span>Tenant portals, repairs, rent, energy and benefits support.</span></div><span class="score">7/10</span></div>
+            <div class="rank-item"><span class="rank">3</span><div><b>Small business owners</b><span>Admin, marketing, invoicing, customer service; price-sensitive but reachable.</span></div><span class="score">7/10</span></div>
+          </div>
+        </div>
+        <div id="segmentChart" class="chart small"></div>
+      </div>
+      <div class="table-wrap "><table><thead><tr><th>Segment</th><th>Size</th><th>Core pain</th><th>Buyer</th><th>Best channel</th><th>Likely product</th><th>Score</th><th>Caution</th></tr></thead><tbody><tr><td>Non-office workers</td><td>8M+</td><td>Digital payslips, scheduling, compliance apps</td><td>Employer</td><td>Employer HR, union rep, team leader</td><td>Digital Confidence at Work workshop</td><td><span class="score">9/10</span></td><td>Strongest wedge: clear buyer, budget, scale</td></tr>
+<tr><td>Housing association residents</td><td>2M+</td><td>Rent portals, repairs, energy bills, benefits</td><td>Housing association</td><td>Housing association offices, community rooms</td><td>Tenant digital support program</td><td><span class="score">7/10</span></td><td>Volume play; low per-unit revenue</td></tr>
+<tr><td>Small business owners</td><td>1.5M+</td><td>Marketing, admin, invoicing, customer service</td><td>Self / chamber</td><td>Small business networks, chambers, Facebook</td><td>AI for Your Business clinic</td><td><span class="score">7/10</span></td><td>Price-sensitive; many free alternatives</td></tr>
+<tr><td>Low-income working age</td><td>4M+</td><td>Benefits, job applications, forms, banking</td><td>Council / DWP / charity</td><td>Job Centre, library, housing association</td><td>Job-seeker digital + assistant training</td><td><span class="score">6/10</span></td><td>Requires public funding; slow sales cycle</td></tr>
+<tr><td>Carers</td><td>5M+</td><td>Form filling, health apps, time pressure, isolation</td><td>Self / employer</td><td>GP surgery, carer support groups, council</td><td>Digital Help for Carers</td><td><span class="score">6/10</span></td><td>Scattered; hard to reach at scale</td></tr>
+<tr><td>Women returning to work</td><td>1M+</td><td>Confidence, skills gap, childcare, flexible work</td><td>Self / employer / DWP</td><td>Job centres, women's networks, Facebook</td><td>Back to Work Digital Confidence</td><td><span class="score">6/10</span></td><td>Moderate WTP; free alternatives</td></tr>
+<tr><td>NHS chronic-condition patients</td><td>15M+</td><td>Appointments, prescriptions, health info, forms</td><td>NHS / family</td><td>GP surgery, pharmacy, hospital</td><td>Managing Your Health Online</td><td><span class="score">6/10</span></td><td>NHS procurement slow; needs credibility</td></tr>
+<tr><td>Older adults 65-74</td><td>2.3M</td><td>Banking, shopping, scams, family contact</td><td>Family / self</td><td>Library, community centre, Facebook</td><td>Stay Safe Online + phone help</td><td><span class="score">5/10</span></td><td>Low WTP; free alternatives exist</td></tr>
+<tr><td>Job seekers</td><td>1.3M+</td><td>CVs, applications, interview prep</td><td>DWP / employment provider</td><td>Job Centre Plus, Work Programme</td><td>AI-powered job search + CV help</td><td><span class="score">5/10</span></td><td>Commoditized; free provision dominant</td></tr>
+<tr><td>People with disabilities</td><td>14M</td><td>Accessibility, assistive tech, service access</td><td>Self / family / PA</td><td>Disability orgs, social care, OTs</td><td>Accessible device setup + AI tools</td><td><span class="score">5/10</span></td><td>High support burden; safeguarding liability</td></tr>
+<tr><td>ESOL / immigrant communities</td><td>1.5M+</td><td>Language barriers, form filling, job search, banking</td><td>Council / community org</td><td>Community centres, mosques, ESOL classes</td><td>Multilingual phone help + form assistance</td><td><span class="score">5/10</span></td><td>Requires specialist partners</td></tr>
+<tr><td>Adults in financial hardship</td><td>3M+</td><td>Budgeting, banking, scams, benefits</td><td>Charity / council</td><td>Citizens Advice, food banks, credit unions</td><td>Scam safety + money management help</td><td><span class="score">5/10</span></td><td>No payment capacity; grant-dependent</td></tr>
+<tr><td>Older adults 75+ offline</td><td>1.7M</td><td>Isolation, service access, health apps</td><td>Family member</td><td>Library drop-in, GP surgery, church</td><td>Phone confidence clinic + tablet loan</td><td><span class="score">4/10</span></td><td>Margins too thin; charity funding only</td></tr>
+<tr><td>Rural communities</td><td>2M+</td><td>Broadband, service access, isolation, transport</td><td>Council / rural charity</td><td>Village halls, mobile libraries, parish</td><td>Mobile digital clinic</td><td><span class="score">4/10</span></td><td>Travel costs erode margins</td></tr></tbody></table></div>
+    </section>
+
+    <section id="demand">
+      <h2>Demand Reality</h2>
+      <div class="callout warning"><strong>Framing problem:</strong> the report says "AI education" is the wrong first-contact language. Non-users cite privacy and security concerns, many see AI as societal risk, and only a minority feel confident recognizing AI-generated content.</div>
+      <div class="grid cols-2">
+        <div>
+          <h3>What They Actually Want</h3>
+          <ul>
+            <li>Help filling in forms and understanding official letters.</li>
+            <li>Scam safety, fraud confidence, and help deciding whether a message is legitimate.</li>
+            <li>Phone confidence, banking, health apps, GP appointments, prescriptions, job applications, and family contact.</li>
+            <li>A patient person in a familiar place, not a self-serve online course.</li>
+          </ul>
+        </div>
+        <figure>
+          <img src="assets/kimi/chart3_barriers_training.png" alt="Scam impact and training spend chart">
+          <figcaption>Original Kimi chart: fraud pressure, trust barriers, and training spend.</figcaption>
+        </figure>
+      </div>
+      <div class="table-wrap "><table><thead><tr><th>Instead of</th><th>Use</th><th>Why</th></tr></thead><tbody><tr><td>AI training</td><td>Get more from your phone</td><td>Focuses on a device they already own.</td></tr>
+<tr><td>Learn about AI</td><td>Save time on forms and admin</td><td>Direct benefit, no abstraction.</td></tr>
+<tr><td>Digital skills course</td><td>Stay safe from scams and fraud</td><td>Addresses the strongest fear.</td></tr>
+<tr><td>ChatGPT workshop</td><td>Get answers without searching for hours</td><td>Practical outcome, no product jargon.</td></tr>
+<tr><td>AI for work</td><td>Keep up with changes at your workplace</td><td>Frames it as workplace support.</td></tr>
+<tr><td>Technology help</td><td>Someone patient to show you, step by step</td><td>Emphasizes human support.</td></tr></tbody></table></div>
+    </section>
+
+    <section id="offers">
+      <h2>Offer Ranking</h2>
+      <p>The highest-ranked offer is a workplace workshop. Family-sponsored clinics and scam-safety workshops are useful secondary validation channels, especially through libraries, but the report treats direct older-adult monetization as thin-margin.</p>
+      <div id="productChart" class="chart"></div>
+      <div class="table-wrap "><table><thead><tr><th>Concept</th><th>Target user</th><th>Buyer / sponsor</th><th>Price hypothesis</th><th>Margin potential</th><th>30-day MVP?</th><th>Score</th></tr></thead><tbody><tr><td>Digital Confidence at Work</td><td>Non-office workers</td><td>Employer HR/Ops</td><td>£350-500/session</td><td>60-70%</td><td>Yes</td><td><span class="score">9/10</span></td></tr>
+<tr><td>Phone + Life Admin Clinic</td><td>Older adults 65+</td><td>Adult children</td><td>£95-150/session</td><td>50-60%</td><td>Yes</td><td><span class="score">8/10</span></td></tr>
+<tr><td>Scam-Safe Digital</td><td>Adults 50+ worried about fraud</td><td>Council / charity / family</td><td>£45-75/head or £200-350/session</td><td>55-65%</td><td>Yes</td><td><span class="score">7/10</span></td></tr>
+<tr><td>Tenant Digital Support</td><td>Housing residents</td><td>Housing association</td><td>£8-15/resident</td><td>50-60%</td><td>Yes</td><td><span class="score">7/10</span></td></tr>
+<tr><td>Train-the-Trainer</td><td>Digital champions, library staff</td><td>Council / charity</td><td>£1,500-3,000/cohort</td><td>65-75%</td><td>Yes</td><td><span class="score">7/10</span></td></tr>
+<tr><td>Employer AI readiness</td><td>Employers</td><td>L&D / HR</td><td>£1,500-3,000</td><td>60-70%</td><td>Yes</td><td><span class="score">7/10</span></td></tr>
+<tr><td>Job Search Help</td><td>Long-term unemployed</td><td>DWP / provider</td><td>£80-120/participant</td><td>40-55%</td><td>Yes</td><td><span class="score">6/10</span></td></tr>
+<tr><td>Small Business AI Clinic</td><td>Non-tech small businesses</td><td>Self / chamber</td><td>£150-250/workshop</td><td>55-65%</td><td>Yes</td><td><span class="score">6/10</span></td></tr>
+<tr><td>Printed workbook + helpline</td><td>Complete beginners</td><td>Family / charity</td><td>£25-40 + calls</td><td>50-60%</td><td>Yes</td><td><span class="score">6/10</span></td></tr>
+<tr><td>Back to Work course</td><td>Women returners</td><td>Self / DWP / orgs</td><td>£75-150/course</td><td>45-55%</td><td>Yes</td><td><span class="score">6/10</span></td></tr>
+<tr><td>Digital Health Navigator</td><td>Chronic-condition patients</td><td>NHS / charity</td><td>£60-100/patient</td><td>45-55%</td><td>No</td><td><span class="score">5/10</span></td></tr>
+<tr><td>Community ambassador</td><td>Hard-to-reach communities</td><td>Council / funder</td><td>£25-40K/year</td><td>20-35%</td><td>Yes</td><td><span class="score">5/10</span></td></tr>
+<tr><td>QR learning journeys</td><td>Low-literacy mobile users</td><td>Charity / council</td><td>£5-15/user</td><td>50-60%</td><td>Yes</td><td><span class="score">5/10</span></td></tr>
+<tr><td>Done-with-you AI setup</td><td>Older tech-anxious adults</td><td>Family</td><td>£150-250/session</td><td>40-50%</td><td>Yes</td><td><span class="score">5/10</span></td></tr>
+<tr><td>WhatsApp support line</td><td>Low-confidence adults</td><td>Family / employers</td><td>£15-25/month</td><td>30-45%</td><td>Partial</td><td><span class="score">4/10</span></td></tr>
+<tr><td>ESOL + Digital</td><td>Immigrants, low English</td><td>Council / charity</td><td>£80-120/person</td><td>40-50%</td><td>No</td><td><span class="score">4/10</span></td></tr>
+<tr><td>Rural mobile clinic</td><td>Rural isolated residents</td><td>Council / rural charity</td><td>£500-800/day</td><td>35-45%</td><td>No</td><td><span class="score">4/10</span></td></tr>
+<tr><td>Family tech support remote</td><td>Families with older relatives</td><td>Adult children</td><td>£25-40/month</td><td>35-50%</td><td>Partial</td><td><span class="score">4/10</span></td></tr></tbody></table></div>
+    </section>
+
+    <section id="economics">
+      <h2>Unit Economics</h2>
+      <div class="grid cols-2">
+        <div id="unitChart" class="chart"></div>
+        <div id="monthlyChart" class="chart"></div>
+      </div>
+      <div class="table-wrap "><table><thead><tr><th>Concept</th><th>Revenue</th><th>Delivery cost</th><th>Gross profit</th><th>Gross margin</th></tr></thead><tbody><tr><td>Employer workshop</td><td>£450</td><td>£190</td><td>£260</td><td>58%</td></tr>
+<tr><td>Family clinic</td><td>£120</td><td>£90</td><td>£30</td><td>25%</td></tr>
+<tr><td>Scam-safe private workshop</td><td>£480</td><td>£175</td><td>£305</td><td>64%</td></tr>
+<tr><td>Scam-safe sponsored workshop</td><td>£300</td><td>£175</td><td>£125</td><td>42%</td></tr>
+<tr><td>Train-the-trainer cohort</td><td>£2,200</td><td>£500</td><td>£1,700</td><td>77%</td></tr>
+<tr><td>Housing association contract</td><td>£12,000</td><td>£7,800</td><td>£4,200</td><td>35%</td></tr></tbody></table></div>
+      <div class="callout warning"><strong>Year 1 model:</strong> the combined early-stage plan reaches about £5,110 monthly revenue against about £5,400 monthly costs, or a roughly £300/month loss before founder salary. The report treats the first year as validation and relationship building, not profit maximization.</div>
+      <p>The path becomes materially healthier at £8,000-10,000/month revenue, which the Kimi report suggests is plausible in Year 2 with several regular employer clients, two council contracts, and some family clinic volume.</p>
+    </section>
+
+    <section id="distribution">
+      <h2>Distribution Strategy</h2>
+      <p>The distribution conclusion is blunt: trust beats reach. The likely channels are employers, libraries, councils, family referrals, and housing associations. Cold app-store style distribution is a mismatch for low-digital-confidence users.</p>
+      <div class="table-wrap "><table><thead><tr><th>Channel</th><th>Trust</th><th>Conversion likelihood</th><th>Scale potential</th><th>Priority</th></tr></thead><tbody><tr><td>Employers</td><td>Medium-High</td><td>Medium</td><td>High</td><td><span class="score">1</span></td></tr>
+<tr><td>Libraries</td><td>Very High</td><td>High</td><td>Medium-High</td><td><span class="score">2</span></td></tr>
+<tr><td>Councils</td><td>High</td><td>Medium</td><td>High</td><td><span class="score">3</span></td></tr>
+<tr><td>Family referrals</td><td>Very High</td><td>High</td><td>Medium</td><td><span class="score">4</span></td></tr>
+<tr><td>Job Centres</td><td>Medium</td><td>Medium</td><td>Medium</td><td><span class="score">5</span></td></tr>
+<tr><td>Housing associations</td><td>High</td><td>Medium</td><td>Medium</td><td><span class="score">6</span></td></tr>
+<tr><td>Community centres / churches</td><td>Very High</td><td>Medium</td><td>Medium</td><td><span class="score">7</span></td></tr>
+<tr><td>Facebook groups</td><td>Medium</td><td>Medium</td><td>Medium</td><td><span class="score">8</span></td></tr></tbody></table></div>
+      <div class="grid cols-3">
+        <div class="callout"><strong>Employers:</strong> fastest route to a paid buyer and a bounded delivery context.</div>
+        <div class="callout"><strong>Libraries:</strong> high-trust venue for clinics, user interviews, and family-sponsored sessions.</div>
+        <div class="callout"><strong>Councils:</strong> useful funding and credibility, but slower procurement.</div>
+      </div>
+    </section>
+
+    <section id="risks">
+      <h2>Risks and Constraints</h2>
+      <div class="table-wrap "><table><thead><tr><th>Risk</th><th>Severity</th><th>Likelihood</th><th>Mitigation</th></tr></thead><tbody><tr><td>Privacy / data handling</td><td>High</td><td>High</td><td>GDPR compliance, explicit consent, clear privacy policy, never ask for passwords.</td></tr>
+<tr><td>Scams / fraud exposure</td><td>Very High</td><td>High</td><td>Make scam safety core, set strict staff boundaries, escalate suspicious activity.</td></tr>
+<tr><td>AI hallucination / misinformation</td><td>High</td><td>Medium</td><td>Human verification, trusted sources, teach users to verify outputs.</td></tr>
+<tr><td>Safeguarding vulnerable users</td><td>Very High</td><td>Medium</td><td>DBS checks, safeguarding training, escalation procedures, charity partners.</td></tr>
+<tr><td>Exploitation perception</td><td>High</td><td>Low-Medium</td><td>Transparent pricing, no pressure selling, visible social mission and user benefit.</td></tr>
+<tr><td>Consent / capacity issues</td><td>High</td><td>Medium</td><td>Capacity protocols and family involvement where appropriate.</td></tr></tbody></table></div>
+      <div class="callout bad"><strong>Most severe reputational risk:</strong> looking like a company selling AI to vulnerable or anxious adults. The report's mitigation is mission-led positioning, transparent pricing, no pressure selling, and practical benefits that users can understand immediately.</div>
+    </section>
+
+    <section id="validation">
+      <h2>30-Day Validation Plan</h2>
+      <div class="grid cols-2">
+        <div>
+          <h3>Week-by-Week Test</h3>
+          <ul>
+            <li><strong>Week 1:</strong> finalize 3 offers, build workshop outlines, create landing pages and employer sell sheet.</li>
+            <li><strong>Week 2:</strong> contact 10 employers, approach 5 libraries, post in local groups, run discovery conversations.</li>
+            <li><strong>Week 3:</strong> deliver one employer pilot, one library phone clinic, and interview users and family members.</li>
+            <li><strong>Week 4:</strong> attempt first paid employer session, first paid family session, flyer test, and one council pitch.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Budget</h3>
+          <p>Under £500 covers printing, small Facebook tests, venue hire, travel, refreshments, and basic materials. Under £2,000 adds facilitator coverage, landing-page tooling, scheduling/CRM, promotional video, and more paid acquisition.</p>
+          <div class="callout good"><strong>Minimum viable pilot:</strong> 2 employer workshops, 4 library clinic sessions, and 10 user interviews within 30 days.</div>
+        </div>
+      </div>
+      <div class="table-wrap "><table><thead><tr><th>Metric</th><th>Proceed with caution</th><th>Green light</th></tr></thead><tbody><tr><td>Employer conversations booked</td><td>3</td><td>5+</td></tr>
+<tr><td>Employer pilot delivered</td><td>1</td><td>1+ with positive feedback</td></tr>
+<tr><td>Library partnerships secured</td><td>1 expression of interest</td><td>1 committed pilot</td></tr>
+<tr><td>Family sessions booked</td><td>2</td><td>4+</td></tr>
+<tr><td>User interviews completed</td><td>5</td><td>8+</td></tr>
+<tr><td>Workshop NPS</td><td>30+</td><td>50+</td></tr>
+<tr><td>Would recommend</td><td>60% yes</td><td>80% yes</td></tr>
+<tr><td>Revenue generated in week 4</td><td>£100+</td><td>£300+</td></tr>
+<tr><td>Council conversation secured</td><td>0</td><td>1</td></tr></tbody></table></div>
+    </section>
+
+    <section id="recommendation">
+      <h2>Final Recommendation</h2>
+      <div class="callout good"><strong>Proceed with the employer-facing B2B2C workshop model as the primary wedge.</strong> Use family-sponsored sessions and council/library partnerships as secondary validation channels, not as the main monetization bet.</div>
+      <div class="grid cols-2">
+        <div>
+          <h3>Ranked Playbook</h3>
+          <ul>
+            <li><strong>Primary wedge:</strong> Digital Confidence at Work for non-office sectors.</li>
+            <li><strong>Secondary wedge 1:</strong> Phone + Life Admin Clinics through libraries and community centres.</li>
+            <li><strong>Secondary wedge 2:</strong> council or charity contracted digital inclusion programs and train-the-trainer.</li>
+            <li><strong>Best first paid offer:</strong> £350 employer workshop or £120 family-sponsored clinic.</li>
+            <li><strong>Best lead magnet:</strong> "5 Scams Targeting People Over 65 - And How to Spot Them".</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Decision Boundaries</h3>
+          <ul>
+            <li>Continue if employer interest and library engagement appear in weeks 3-4.</li>
+            <li>Pivot to B2B digital readiness consultancy if users engage but institutions only want employer-level advisory.</li>
+            <li>Park the idea if there is zero employer interest after 20 qualified outreach attempts and no library partnership traction.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout warning"><strong>Venture-scale caveat:</strong> the Kimi report estimates a 10-15% chance of a £5M+ venture-scale business without major outside funding and a platform shift. The stronger realistic opportunity is a sustainable, mission-led £500K-£1M business if B2B2C validates.</div>
+    </section>
+
+    <section>
+      <h2>Source Artifacts</h2>
+      <p>This HTML was generated from <span class="mono">/srv/desktop-data/cirudata/kimi.zip</span>. The extracted source Markdown is preserved as <span class="mono">assets/kimi/uk_ai_inclusion_feasibility_report.md</span>, and the three original Kimi charts are preserved in <span class="mono">assets/kimi/</span>.</p>
+    </section>
+
+    <div class="footer">Generated locally for Crown/Ciru from the Kimi report archive.</div>
+  </div>
+
+  <script>
+    const textColor = '#f7f7f4';
+    const muted = '#a8adb7';
+    const gridColor = 'rgba(255,255,255,.12)';
+    const cyan = '#39d0ff';
+    const red = '#ed1c24';
+    const orange = '#ff9f43';
+    const green = '#20d1a2';
+    const blue = '#78a8ff';
+    const violet = '#c994ff';
+    const common = {
+      textStyle: { fontFamily: 'Space Grotesk', color: textColor },
+      tooltip: { trigger: 'axis', backgroundColor: '#111114', borderColor: gridColor, textStyle: { color: textColor } },
+      legend: { textStyle: { color: muted } },
+      grid: { left: 56, right: 20, top: 54, bottom: 56 },
+      xAxis: { axisLine: { lineStyle: { color: gridColor } }, axisLabel: { color: muted }, splitLine: { lineStyle: { color: gridColor } } },
+      yAxis: { axisLine: { lineStyle: { color: gridColor } }, axisLabel: { color: muted }, splitLine: { lineStyle: { color: gridColor } } }
+    };
+
+    const market = [["Low digital confidence adults", 8.5, 15.0, 21.7, "million"], ["Never used generative AI", 35.0, 30.0, 25.0, "million"], ["No/fairly low AI knowledge", 30.0, 25.0, 20.0, "million"], ["Institutionally reachable", 2.0, 5.0, 10.0, "million"], ["Sponsored users", 0.05, 0.2, 0.5, "million"]];
+    echarts.init(document.getElementById('marketChart')).setOption({
+      ...common,
+      title: { text: 'Market Size Scenarios', left: 16, top: 12, textStyle: { color: textColor, fontSize: 16 } },
+      legend: { ...common.legend, top: 16, right: 16 },
+      xAxis: { ...common.xAxis, type: 'category', data: market.map(d => d[0]), axisLabel: { color: muted, rotate: 24, interval: 0 } },
+      yAxis: { ...common.yAxis, type: 'value', name: 'Millions', nameTextStyle: { color: muted } },
+      series: [
+        { name: 'Low', type: 'bar', data: market.map(d => d[1]), itemStyle: { color: blue } },
+        { name: 'Base', type: 'bar', data: market.map(d => d[2]), itemStyle: { color: cyan } },
+        { name: 'High', type: 'bar', data: market.map(d => d[3]), itemStyle: { color: red } }
+      ]
+    });
+
+    const segments = [["Non-office workers", 9], ["Housing association residents", 7], ["Small business owners", 7], ["Low-income working age", 6], ["Carers", 6], ["Women returning to work", 6], ["NHS chronic-condition patients", 6], ["Older adults 65-74", 5], ["Job seekers", 5], ["People with disabilities", 5], ["ESOL / immigrant communities", 5], ["Adults in financial hardship", 5], ["Older adults 75+ offline", 4], ["Rural communities", 4]];
+    echarts.init(document.getElementById('segmentChart')).setOption({
+      ...common,
+      title: { text: 'Segment Attractiveness', left: 16, top: 12, textStyle: { color: textColor, fontSize: 16 } },
+      grid: { left: 128, right: 24, top: 52, bottom: 28 },
+      xAxis: { ...common.xAxis, type: 'value', max: 10 },
+      yAxis: { ...common.yAxis, type: 'category', data: segments.map(d => d[0]).reverse(), axisLabel: { color: muted } },
+      series: [{ name: 'Score', type: 'bar', data: segments.map(d => d[1]).reverse(), itemStyle: { color: params => params.value >= 8 ? green : params.value >= 6 ? cyan : orange } }]
+    });
+
+    const products = [["Digital Confidence at Work", 9], ["Phone + Life Admin Clinic", 8], ["Scam-Safe Digital", 7], ["Tenant Digital Support", 7], ["Train-the-Trainer", 7], ["Employer AI readiness", 7], ["Job Search Help", 6], ["Small Business AI Clinic", 6], ["Printed workbook + helpline", 6], ["Back to Work course", 6], ["Digital Health Navigator", 5], ["Community ambassador", 5], ["QR learning journeys", 5], ["Done-with-you AI setup", 5], ["WhatsApp support line", 4], ["ESOL + Digital", 4], ["Rural mobile clinic", 4], ["Family tech support remote", 4]];
+    echarts.init(document.getElementById('productChart')).setOption({
+      ...common,
+      title: { text: 'Product Opportunity Scores', left: 16, top: 12, textStyle: { color: textColor, fontSize: 16 } },
+      grid: { left: 190, right: 24, top: 52, bottom: 28 },
+      xAxis: { ...common.xAxis, type: 'value', max: 10 },
+      yAxis: { ...common.yAxis, type: 'category', data: products.map(d => d[0]).reverse(), axisLabel: { color: muted } },
+      series: [{ name: 'Score', type: 'bar', data: products.map(d => d[1]).reverse(), itemStyle: { color: params => params.value >= 8 ? green : params.value >= 6 ? cyan : orange } }]
+    });
+
+    const unit = [["Employer workshop", 450, 190, 260, 58], ["Family clinic", 120, 90, 30, 25], ["Scam-safe private workshop", 480, 175, 305, 64], ["Scam-safe sponsored workshop", 300, 175, 125, 42], ["Train-the-trainer cohort", 2200, 500, 1700, 77], ["Housing association contract", 12000, 7800, 4200, 35]];
+    echarts.init(document.getElementById('unitChart')).setOption({
+      ...common,
+      title: { text: 'Revenue vs Delivery Cost', left: 16, top: 12, textStyle: { color: textColor, fontSize: 16 } },
+      legend: { ...common.legend, top: 16, right: 16 },
+      xAxis: { ...common.xAxis, type: 'category', data: unit.map(d => d[0]), axisLabel: { color: muted, rotate: 28, interval: 0 } },
+      yAxis: { ...common.yAxis, type: 'value', name: 'GBP', nameTextStyle: { color: muted } },
+      series: [
+        { name: 'Revenue', type: 'bar', data: unit.map(d => d[1]), itemStyle: { color: cyan } },
+        { name: 'Delivery cost', type: 'bar', data: unit.map(d => d[2]), itemStyle: { color: orange } },
+        { name: 'Gross profit', type: 'line', data: unit.map(d => d[3]), itemStyle: { color: green }, lineStyle: { width: 3 } }
+      ]
+    });
+
+    const revenue = [["Employer workshops", 1350], ["Family-sponsored clinics", 960], ["Scam-safe workshops", 700], ["Train-the-trainer cohorts", 1100], ["Housing association", 1000]];
+    const costs = [["Delivery costs", 2400], ["External facilitator fees", 1800], ["Marketing/ads", 600], ["Software/tools", 200], ["Travel/expenses", 400]];
+    echarts.init(document.getElementById('monthlyChart')).setOption({
+      title: { text: 'Year 1 Monthly Model', left: 16, top: 12, textStyle: { color: textColor, fontSize: 16 } },
+      tooltip: { trigger: 'item', backgroundColor: '#111114', borderColor: gridColor, textStyle: { color: textColor } },
+      legend: { ...common.legend, top: 38, left: 14, type: 'scroll' },
+      series: [
+        {
+          name: 'Revenue',
+          type: 'pie',
+          radius: ['24%', '44%'],
+          center: ['30%', '58%'],
+          label: { color: muted, formatter: '{b}\n£{c}' },
+          data: revenue.map(d => ({ name: d[0], value: d[1] }))
+        },
+        {
+          name: 'Costs',
+          type: 'pie',
+          radius: ['24%', '44%'],
+          center: ['74%', '58%'],
+          label: { color: muted, formatter: '{b}\n£{c}' },
+          data: costs.map(d => ({ name: d[0], value: d[1] }))
+        }
+      ],
+      color: [cyan, green, blue, violet, red, orange, '#f6c046']
+    });
+
+    addEventListener('resize', () => {
+      document.querySelectorAll('.chart').forEach(el => echarts.getInstanceByDom(el)?.resize());
+    });
+  </script>
+</body>
+</html>
