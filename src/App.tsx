@@ -4,6 +4,10 @@ import "./App.css";
 function App() {
   return (
     <main className="site-shell">
+      <header className="business-header" aria-label="Business identity">
+        Crown Citadel Group LLC
+      </header>
+
       <StarBurst
         className="star-burst"
         color="#b3eab4"
