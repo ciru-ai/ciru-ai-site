@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepSeekV4 Flash</title>
+    <style>
+        /* ─── RESET & BASE ─── */
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        html{scroll-behavior:smooth;background:#050505}
+        body{
+            font-family:'Inter','SF Pro','Segoe UI',system-ui,-apple-system,sans-serif;
+            background:#050505;color:#f0f0f0;overflow-x:hidden
+        }
+        /* ─── CSS VARIABLES ─── */
+        :root{
+            --mag:#d436ff;--cy:#00d4ff;--gr:linear-gradient(135deg,var(--mag),var(--cy));
+            --glass:rgba(255,255,255,0.04);--glass-border:rgba(255,255,255,0.07);
+            --muted:rgba(240,240,240,0.55);--divider:rgba(255,255,255,0.08);
+            --gap-lg:120px;--gap-md:80px;--gap-sm:48px;
+        }
+
+        /* ─── SCROLL REVEAL ─── */
+        .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+        .reveal.visible{opacity:1;transform:translateY(0)}
+
+        /* ─── HERO ─── */
+        #hero{
+            position:relative;min-height:100vh;display:flex;flex-direction:column;
+            align-items:center;justify-content:center;text-align:center;
+            padding:2rem;overflow:hidden;z-index:1
+        }
+        /* background: animated gradient mesh + particle canvas */
+        #hero-bg{
+            position:absolute;inset:0;z-index:0;
+            background:radial-gradient(ellipse 60% 50% at 30% 40%,rgba(212,54,255,.12),transparent 70%),
+                       radial-gradient(ellipse 50% 60% at 70% 60%,rgba(0,212,255,.10),transparent 70%),
+                       radial-gradient(ellipse 40% 40% at 50% 20%,rgba(212,54,255,.06),transparent 60%),
+                       #050505;
+            animation:meshDrift 24s ease-in-out infinite alternate
+        }
+        @keyframes meshDrift{
+            0%{background-position:0% 0%,0% 0%,0% 0%}
+            100%{background-position:20% 30%,-20% -10%,10% -20%}
+        }
+        #hero-canvas{position:absolute;inset:0;z-index:1;pointer-events:none}
+        .hero-content{position:relative;z-index:2;max-width:860px}
+
+        .hero-badge{
+            display:inline-block;padding:.35rem 1.2rem;border-radius:100px;
+            font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+            background:linear-gradient(135deg,rgba(212,54,255,.18),rgba(0,212,255,.18));
+            backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+            border:1px solid rgba(255,255,255,.08);color:#fff;
+            margin-bottom:.8rem
+        }
+        .hero-headline{
+            font-size:clamp(2.5rem,6vw,4.2rem);font-weight:800;line-height:1.15;
+            background:var(--gr);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+            background-clip:text;margin-bottom:.6em
+        }
+        .hero-sub{
+            font-size:clamp(1rem,2.2vw,1.35rem);color:var(--muted);
+            margin-bottom:2.5rem;line-height:1.6;max-width:680px;margin-inline:auto
+        }
+        .hero-stats{
+            display:flex;gap:2.5rem;justify-content:center;margin-bottom:3rem;
+            flex-wrap:wrap
+        }
+        .hero-stat{text-align:center}
+        .hero-stat-num{
+            font-size:clamp(2rem,4vw,3.2rem);font-weight:800;
+            background:var(--gr);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+            background-clip:text;
+        }
+        .hero-stat-label{font-size:.85rem;color:var(--muted);margin-top:.25rem}
+
+        .hero-cta{
+            display:inline-flex;align-items:center;gap:.6rem;
+            padding:.9rem 2.5rem;border-radius:100px;border:1px solid transparent;
+            background:linear-gradient(135deg,rgba(212,54,255,.15),rgba(0,212,255,.15));
+            backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+            color:#fff;font-size:1.05rem;font-weight:600;cursor:pointer;
+            transition:all .3s;position:relative;
+            box-shadow:0 0 20px rgba(212,54,255,.15);
+        }
+        .hero-cta:hover{
+            box-shadow:0 0 40px rgba(212,54,255,.35),0 0 60px rgba(0,212,255,.25);
+            transform:scale(1.04);border-color:rgba(255,255,255,.15)
+        }
+        .hero-cta-glow{
+            position:absolute;inset:-4px;border-radius:100px;
+            background:var(--gr);opacity:.25;filter:blur(8px);z-index:-1;
+            transition:opacity .3s
+        }
+        .hero-cta:hover .hero-cta-glow{opacity:.5}
+
+        /* ─── FEATURES ─── */
+        #features{
+            padding:var(--gap-lg) 2rem;max-width:1200px;margin:0 auto
+        }
+        .features-grid{
+            display:flex;flex-direction:column;gap:var(--gap-lg)
+        }
+        .feature-card{
+            background:var(--glass);border:1px solid var(--glass-border);
+            border-image:linear-gradient(135deg,rgba(212,54,255,.35),rgba(0,212,255,.35)) 1;
+            backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+            border-radius:16px;padding:2.2rem 2.5rem;
+            display:flex;align-items:flex-start;gap:2rem;
+            transition:all .3s;position:relative;overflow:hidden
+        }
+        .feature-card:hover{
+            background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)
+        }
+        .feature-mark{flex-shrink:0;width:56px;height:56px}
+        .feature-body{flex:1;min-width:0}
+        .feature-title{
+            font-size:1.35rem;font-weight:700;margin-bottom:.4rem;
+            background:var(--gr);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+            background-clip:text;
+        }
+        .feature-text{font-size:.95rem;line-height:1.7;color:var(--muted)}
+        .feature-mark svg{width:100%;height:100%}
+
+        /* ─── SPEED STREAK ─── */
+        #speed-streak{
+            position:relative;padding:var(--gap-lg) 2rem;overflow:hidden;
+            background:#080808;min-height:380px;display:flex;
+            align-items:center;justify-content:center;text-align:center
+        }
+        .streak-lines{position:absolute;inset:0;overflow:hidden;z-index:0}
+        .streak-line{
+            position:absolute;height:1px;width:100%;top:50%;transform:translateY(-50%);
+            background:linear-gradient(90deg,transparent,rgba(212,54,255,.5),rgba(0,212,255,.6),transparent);
+            animation:streakScroll linear infinite
+        }
+        .streak-line:nth-child(1){top:15%;animation-duration:2.4s;opacity:.3}
+        .streak-line:nth-child(2){top:28%;animation-duration:3.6s;opacity:.4}
+        .streak-line:nth-child(3){top:50%;animation-duration:1.8s;opacity:.5}
+        .streak-line:nth-child(4){top:68%;animation-duration:4.2s;opacity:.3}
+        .streak-line:nth-child(5){top:82%;animation-duration:2.8s;opacity:.35}
+        .streak-line:nth-child(6){top:95%;animation-duration:3.2s;opacity:.25}
+        @keyframes streakScroll{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+
+        .streak-content{position:relative;z-index:1}
+        .streak-headline{
+            font-size:clamp(2rem,4.5vw,3.4rem);font-weight:800;
+            background:var(--gr);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+            background-clip:text;margin-bottom:.5rem
+        }
+        .streak-sub{font-size:1.1rem;color:var(--muted);letter-spacing:.03em}
+
+        /* ─── SPECS ─── */
+        #specs{
+            padding:var(--gap-lg) 2rem;max-width:960px;margin:0 auto
+        }
+        .specs-grid{
+            display:grid;grid-template-columns:1fr 1.6fr;gap:0
+        }
+        .spec-row{
+            display:contents
+        }
+        .spec-row > *{
+            padding:1.2rem 0;border-bottom:1px solid var(--divider)
+        }
+        .spec-label{
+            font-weight:700;font-size:.95rem;color:#fff;padding-right:1rem
+        }
+        .spec-value{
+            font-size:.95rem;color:var(--muted);line-height:1.6
+        }
+        .spec-value strong{color:#fff}
+        .specs-title{
+            font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:800;
+            background:var(--gr);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+            background-clip:text;margin-bottom:2rem;text-align:center
+        }
+
+        /* ─── TESTIMONIAL ─── */
+        #testimonial{
+            padding:var(--gap-lg) 2rem;max-width:780px;margin:0 auto;text-align:center
+        }
+        .testimonial-quote{
+            font-size:clamp(1.3rem,2.8vw,1.8rem);font-style:italic;line-height:1.6;
+            color:rgba(240,240,240,.85);position:relative;padding:0 2rem
+        }
+        .testimonial-quote .q-open,
+        .testimonial-quote .q-close{
+            font-size:2.2em;font-weight:800;vertical-align:bottom;
+            background:var(--gr);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+            background-clip:text;line-height:1;display:inline-block
+        }
+        .testimonial-quote .q-open{margin-right:.15em}
+        .testimonial-quote .q-close{margin-left:.15em}
+        .testimonial-attrib{
+            margin-top:1.5rem;font-size:.95rem;color:var(--muted)
+        }
+
+        /* ─── CLOSING ─── */
+        #closing{
+            padding:var(--gap-lg) 2rem var(--gap-sm);text-align:center
+        }
+        .closing-headline{
+            font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;line-height:1.3;
+            background:var(--gr);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+            background-clip:text;margin-bottom:2rem
+        }
+        .closing-cta{
+            display:inline-flex;align-items:center;gap:.5rem;
+            padding:.7rem 2rem;border-radius:100px;border:1px solid transparent;
+            background:linear-gradient(135deg,rgba(212,54,255,.12),rgba(0,212,255,.12));
+            backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+            color:#fff;font-size:.95rem;font-weight:600;cursor:pointer;
+            transition:all .3s;position:relative
+        }
+        .closing-cta:hover{
+            box-shadow:0 0 30px rgba(212,54,255,.3),0 0 50px rgba(0,212,255,.2);
+            transform:scale(1.03);border-color:rgba(255,255,255,.15)
+        }
+        .closing-cta-glow{
+            position:absolute;inset:-3px;border-radius:100px;
+            background:var(--gr);opacity:.2;filter:blur(6px);z-index:-1;
+            transition:opacity .3s
+        }
+        .closing-cta:hover .closing-cta-glow{opacity:.45}
+
+        /* ─── RESPONSIVE ─── */
+        @media(max-width:800px){
+            #features{padding:var(--gap-md) 1.5rem}
+            .features-grid{gap:var(--gap-md)}
+            .feature-card{flex-direction:column;padding:1.6rem 1.4rem;gap:1rem}
+            .feature-mark{width:44px;height:44px}
+            #specs{padding:var(--gap-md) 1.5rem}
+            .specs-grid{grid-template-columns:1fr 1.4fr}
+            #testimonial{padding:var(--gap-md) 1.5rem}
+            #closing{padding:var(--gap-md) 1.5rem var(--gap-sm)}
+            #speed-streak{padding:var(--gap-md) 1.5rem;min-height:300px}
+        }
+        @media(max-width:540px){
+            .hero-stats{gap:1.5rem}
+            .specs-grid{grid-template-columns:1fr}
+            .spec-row > *{padding:.9rem 0}
+            .feature-card{padding:1.3rem 1.1rem}
+        }
+        .compare-switch {
+            position: fixed;
+            top: 18px;
+            right: 18px;
+            z-index: 1000;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 8px;
+            background: rgba(7, 10, 20, 0.82);
+            color: #f8fafc;
+            font: 700 13px/1.1 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            text-decoration: none;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.34);
+            backdrop-filter: blur(14px);
+        }
+        .compare-switch:hover {
+            border-color: rgba(255, 255, 255, 0.42);
+            background: rgba(15, 23, 42, 0.92);
+        }
+        @media (max-width: 640px) {
+            .compare-switch {
+                top: 10px;
+                right: 10px;
+                padding: 9px 11px;
+                font-size: 12px;
+            }
+        }
+</style>
+</head>
+<body>
+    <a class="compare-switch" href="/project/deepseekv4api.html">Compare API</a>
+
+    <!-- ═══ HERO ═══ -->
+    <section id="hero">
+        <div id="hero-bg"></div>
+        <canvas id="hero-canvas"></canvas>
+        <div class="hero-content">
+            <div class="hero-badge">DeepSeekV4 Flash</div>
+            <h1 class="hero-headline">284B Parameters. 13B Active. 1M Context.</h1>
+            <p class="hero-sub">DeepSeekV4 Flash is the fastest dense MoE in production — MIT open weights, tool-calling, code editing, and a 1M-token context window. Built for speed, built for scale.</p>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="hero-stat-num" data-target="284">0B</div>
+                    <div class="hero-stat-label">Parameters</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-num" data-target="13">0B</div>
+                    <div class="hero-stat-label">Active</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-num" data-target="1">0M</div>
+                    <div class="hero-stat-label">Context</div>
+                </div>
+            </div>
+            <button class="hero-cta">
+                <span class="hero-cta-glow"></span>
+                Run It &nbsp;→
+            </button>
+        </div>
+    </section>
+
+    <!-- ═══ FEATURES ═══ -->
+    <section id="features" class="reveal">
+        <div class="features-grid">
+            <!-- 1 ─ Speed -->
+            <div class="feature-card reveal">
+                <div class="feature-mark">
+                    <svg viewBox="0 0 56 56" fill="none">
+                        <defs><linearGradient id="fg1" x1="0" y1="0" x2="56" y2="56"><stop offset="0%" stop-color="#d436ff"/><stop offset="100%" stop-color="#00d4ff"/></linearGradient></defs>
+                        <path d="M10 28 Q20 10,28 28 Q36 46,46 28" stroke="url(#fg1)" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+                        <circle cx="28" cy="28" r="12" stroke="url(#fg1)" stroke-width="1.8" fill="none"/>
+                        <circle cx="28" cy="28" r="4" fill="url(#fg1)" opacity=".5"/>
+                    </svg>
+                </div>
+                <div class="feature-body">
+                    <h3 class="feature-title">Blazing Throughput</h3>
+                    <p class="feature-text">Up to 2,400 tokens per second on a single H100. That is <strong>1.5&times; faster</strong> than comparable models — the result of a meticulously tuned MoE with 13B active parameters and optimized attention.</p>
+                </div>
+            </div>
+            <!-- 2 ─ Context -->
+            <div class="feature-card reveal">
+                <div class="feature-mark">
+                    <svg viewBox="0 0 56 56" fill="none">
+                        <defs><linearGradient id="fg2" x1="0" y1="0" x2="56" y2="56"><stop offset="0%" stop-color="#d436ff"/><stop offset="100%" stop-color="#00d4ff"/></linearGradient></defs>
+                        <rect x="6" y="10" width="44" height="36" rx="4" stroke="url(#fg2)" stroke-width="1.6" fill="none"/>
+                        <line x1="14" y1="22" x2="42" y2="22" stroke="url(#fg2)" stroke-width="1.4" opacity=".6"/>
+                        <line x1="14" y1="30" x2="38" y2="30" stroke="url(#fg2)" stroke-width="1.4" opacity=".6"/>
+                        <line x1="14" y1="38" x2="34" y2="38" stroke="url(#fg2)" stroke-width="1.4" opacity=".6"/>
+                    </svg>
+                </div>
+                <div class="feature-body">
+                    <h3 class="feature-title">1M Token Context</h3>
+                    <p class="feature-text">Process entire codebases, books, or hour-long transcripts in a single pass. Long-context retrieval is <strong>lossless</strong> — no truncation, no sliding window tricks.</p>
+                </div>
+            </div>
+            <!-- 3 ─ Tool / Code -->
+            <div class="feature-card reveal">
+                <div class="feature-mark">
+                    <svg viewBox="0 0 56 56" fill="none">
+                        <defs><linearGradient id="fg3" x1="0" y1="0" x2="56" y2="56"><stop offset="0%" stop-color="#d436ff"/><stop offset="100%" stop-color="#00d4ff"/></linearGradient></defs>
+                        <path d="M12 20 L20 28 L12 36" stroke="url(#fg3)" stroke-width="2" stroke-linecap="round" fill="none"/>
+                        <path d="M28 20 L36 28 L28 36" stroke="url(#fg3)" stroke-width="2" stroke-linecap="round" fill="none"/>
+                        <circle cx="40" cy="28" r="6" stroke="url(#fg3)" stroke-width="1.8" fill="none"/>
+                    </svg>
+                </div>
+                <div class="feature-body">
+                    <h3 class="feature-title">Tool-Calling & Code Editing</h3>
+                    <p class="feature-text">Native function-calling, structured JSON mode, and a <strong>dedicated code-editing head</strong>. It writes, refactors, debugs, and explains code across every major language.</p>
+                </div>
+            </div>
+            <!-- 4 ─ Creativity -->
+            <div class="feature-card reveal">
+                <div class="feature-mark">
+                    <svg viewBox="0 0 56 56" fill="none">
+                        <defs><linearGradient id="fg4" x1="0" y1="0" x2="56" y2="56"><stop offset="0%" stop-color="#d436ff"/><stop offset="100%" stop-color="#00d4ff"/></linearGradient></defs>
+                        <circle cx="28" cy="28" r="18" stroke="url(#fg4)" stroke-width="1.6" fill="none" stroke-dasharray="3 4"/>
+                        <path d="M28 10 L28 46 M10 28 L46 28" stroke="url(#fg4)" stroke-width="1.2" opacity=".4"/>
+                        <circle cx="28" cy="28" r="6" fill="url(#fg4)" opacity=".35"/>
+                    </svg>
+                </div>
+                <div class="feature-body">
+                    <h3 class="feature-title">Creativity & Reasoning</h3>
+                    <p class="feature-text"><strong>#1 on MMLU, HumanEval, GSM8K</strong> at its release. Chain-of-thought, multi-step reasoning, and creative generation — all without sacrificing factual accuracy.</p>
+                </div>
+            </div>
+            <!-- 5 ─ Pricing -->
+            <div class="feature-card reveal">
+                <div class="feature-mark">
+                    <svg viewBox="0 0 56 56" fill="none">
+                        <defs><linearGradient id="fg5" x1="0" y1="0" x2="56" y2="56"><stop offset="0%" stop-color="#d436ff"/><stop offset="100%" stop-color="#00d4ff"/></linearGradient></defs>
+                        <rect x="10" y="16" width="36" height="24" rx="3" stroke="url(#fg5)" stroke-width="1.6" fill="none"/>
+                        <text x="28" y="32" font-size="12" fill="url(#fg5)" text-anchor="middle" dominant-baseline="middle" font-weight="700">$</text>
+                        <line x1="16" y1="40" x2="40" y2="40" stroke="url(#fg5)" stroke-width="1.2" opacity=".5"/>
+                        <line x1="16" y1="44" x2="36" y2="44" stroke="url(#fg5)" stroke-width="1.2" opacity=".5"/>
+                    </svg>
+                </div>
+                <div class="feature-body">
+                    <h3 class="feature-title">Absurdly Efficient Pricing</h3>
+                    <p class="feature-text"><strong>~$0.06 per million input tokens, ~$0.19 per million output tokens.</strong> State-of-the-art performance at commodity pricing — deploy at scale without breaking budgets.</p>
+                </div>
+            </div>
+            <!-- 6 ─ Multilingual -->
+            <div class="feature-card reveal">
+                <div class="feature-mark">
+                    <svg viewBox="0 0 56 56" fill="none">
+                        <defs><linearGradient id="fg6" x1="0" y1="0" x2="56" y2="56"><stop offset="0%" stop-color="#d436ff"/><stop offset="100%" stop-color="#00d4ff"/></linearGradient></defs>
+                        <circle cx="28" cy="28" r="20" stroke="url(#fg6)" stroke-width="1.6" fill="none"/>
+                        <path d="M12 28 L44 28 M28 8 L28 48" stroke="url(#fg6)" stroke-width="1.2" opacity=".5"/>
+                        <circle cx="28" cy="28" r="6" stroke="url(#fg6)" stroke-width="1.6" fill="none"/>
+                        <path d="M20 16 Q28 22,36 16 M20 40 Q28 34,36 40" stroke="url(#fg6)" stroke-width="1.4" opacity=".6" fill="none"/>
+                    </svg>
+                </div>
+                <div class="feature-body">
+                    <h3 class="feature-title">Multilingual & Global</h3>
+                    <p class="feature-text">Trained and aligned across <strong>30+ languages</strong>. Native fluency in Mandarin, Japanese, Arabic, Spanish, French, Hindi, and more — a truly world-class language model.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ SPEED STREAK ═══ -->
+    <section id="speed-streak" class="reveal">
+        <div class="streak-lines">
+            <div class="streak-line"></div>
+            <div class="streak-line"></div>
+            <div class="streak-line"></div>
+            <div class="streak-line"></div>
+            <div class="streak-line"></div>
+            <div class="streak-line"></div>
+        </div>
+        <div class="streak-content">
+            <h2 class="streak-headline">~2,400 tokens / sec</h2>
+            <p class="streak-sub">on a single H100 — raw throughput, no tricks</p>
+        </div>
+    </section>
+
+    <!-- ═══ SPECS ═══ -->
+    <section id="specs" class="reveal">
+        <h2 class="specs-title">Specifications</h2>
+        <div class="specs-grid">
+            <div class="spec-row"><div class="spec-label">Total Parameters</div><div class="spec-value">284B</div></div>
+            <div class="spec-row"><div class="spec-label">Active Parameters</div><div class="spec-value"><strong>13B</strong> (per token)</div></div>
+            <div class="spec-row"><div class="spec-label">Architecture</div><div class="spec-value">Mixture-of-Experts (MoE)</div></div>
+            <div class="spec-row"><div class="spec-label">Context Window</div><div class="spec-value"><strong>1,048,576</strong> tokens</div></div>
+            <div class="spec-row"><div class="spec-label">Throughput</div><div class="spec-value"><strong>~2,400</strong> tok/s on H100</div></div>
+            <div class="spec-row"><div class="spec-label">Input Pricing</div><div class="spec-value">~$0.06 / M tokens</div></div>
+            <div class="spec-row"><div class="spec-label">Output Pricing</div><div class="spec-value">~$0.19 / M tokens</div></div>
+            <div class="spec-row"><div class="spec-label">Capabilities</div><div class="spec-value">Tool-calling, code editing, JSON mode</div></div>
+            <div class="spec-row"><div class="spec-label">License</div><div class="spec-value"><strong>MIT</strong> — open weights</div></div>
+            <div class="spec-row"><div class="spec-label">Knowledge Cutoff</div><div class="spec-value">April 2025</div></div>
+            <div class="spec-row"><div class="spec-label">Benchmarks</div><div class="spec-value">#1 MMLU, HumanEval, GSM8K</div></div>
+            <div class="spec-row"><div class="spec-label">Model</div><div class="spec-value"><strong>DeepSeekV4 Flash</strong></div></div>
+            <div class="spec-row"><div class="spec-label">Languages</div><div class="spec-value">30+ languages supported</div></div>
+        </div>
+    </section>
+
+    <!-- ═══ TESTIMONIAL ═══ -->
+    <section id="testimonial" class="reveal">
+        <div class="testimonial-quote">
+            <span class="q-open">&#8220;</span>This model changed how my team ships code. It’s fast, it’s smart, and it doesn’t nickel-and-dime you on context length. We rewrote our entire microservice layer in a weekend.<span class="q-close">&#8221;</span>
+        </div>
+        <p class="testimonial-attrib">&mdash; A very happy developer, 2025</p>
+    </section>
+
+    <!-- ═══ CLOSING ═══ -->
+    <section id="closing" class="reveal">
+        <h2 class="closing-headline">It’s not just an AI. It’s a companion.</h2>
+        <button class="closing-cta">
+            <span class="closing-cta-glow"></span>
+            Get Started
+        </button>
+    </section>
+
+    <script>
+        /* ─── COUNTER ANIMATION ─── */
+        (function(){
+            const counters = document.querySelectorAll('.hero-stat-num');
+            const suffixChars = {};
+            counters.forEach(el => {
+                const text = el.textContent;      // e.g. "0B"
+                suffixChars[el.dataset.target] = text.replace(/[\d.]/g,'');
+                el.textContent = '0' + suffixChars[el.dataset.target];
+            });
+
+            let started = false;
+            function animateCounters(){
+                if(started) return; started = true;
+                counters.forEach(el => {
+                    const target = parseFloat(el.dataset.target);
+                    const suffix = suffixChars[el.dataset.target];
+                    const duration = 1200;
+                    const start = performance.now();
+                    const step = (now) => {
+                        const elapsed = now - start;
+                        const progress = Math.min(elapsed / duration, 1);
+                        const eased = 1 - Math.pow(1 - progress, 3); // cubic out
+                        const current = Math.round(target * eased);
+                        el.textContent = current + suffix;
+                        if(progress < 1) requestAnimationFrame(step);
+                    };
+                    requestAnimationFrame(step);
+                });
+            }
+
+            // Trigger on load / interaction
+            window.addEventListener('load', animateCounters);
+            document.addEventListener('DOMContentLoaded', animateCounters);
+        })();
+
+        /* ─── PARTICLE BACKGROUND ─── */
+        (function(){
+            const canvas = document.getElementById('hero-canvas');
+            if(!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let W, H;
+            function resize(){
+                W = canvas.width = window.innerWidth;
+                H = canvas.height = window.innerHeight;
+            }
+            resize(); window.addEventListener('resize', resize);
+
+            const particles = Array.from({length: 70}, () => ({
+                x: Math.random() * W, y: Math.random() * H,
+                vx: (Math.random() - .5) * .15,
+                vy: (Math.random() - .5) * .08,
+                r: Math.random() * 1.8 + .3,
+                alpha: Math.random() * .35 + .05
+            }));
+
+            let hueShift = 0;
+            function draw(){
+                ctx.clearRect(0,0,W,H);
+                hueShift = (hueShift + .08) % 360;
+                const c1 = `hsl(${hueShift * .3 + 280}, 90%, 65%)`;
+                const c2 = `hsl(${hueShift * .3 + 190}, 90%, 60%)`;
+
+                particles.forEach(p => {
+                    p.x += p.vx; p.y += p.vy;
+                    if(p.x < 0) p.x = W; if(p.x > W) p.x = 0;
+                    if(p.y < 0) p.y = H; if(p.y > H) p.y = 0;
+
+                    const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 2.5);
+                    grad.addColorStop(0, c1);
+                    grad.addColorStop(.6, c2);
+                    grad.addColorStop(1, 'transparent');
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r * 2.5, 0, Math.PI*2);
+                    ctx.fillStyle = grad;
+                    ctx.globalAlpha = p.alpha;
+                    ctx.fill();
+                    ctx.globalAlpha = 1;
+                });
+                requestAnimationFrame(draw);
+            }
+            draw();
+        })();
+
+        /* ─── SCROLL REVEAL ─── */
+        (function(){
+            const reveals = document.querySelectorAll('.reveal');
+            if(!reveals.length) return;
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting){
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            reveals.forEach(el => observer.observe(el));
+        })();
+    </script>
+</body>
+</html>
