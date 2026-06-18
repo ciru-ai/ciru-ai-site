@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>✨ DeepSeekV4 Flash: Absolutely Bonkers ✨</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: radial-gradient(ellipse at center, #0a0e1a 0%, #1a1040 40%, #0a0e1a 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #eee;
+      overflow-x: hidden;
+    }
+
+    /* ====== HERO ====== */
+    .hero {
+      position: relative;
+      width: 100%;
+      padding: 4rem 2rem 3rem;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(120,80,255,0.15) 0%, transparent 100%);
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 0.4rem 1.4rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #f59e0b, #f97316);
+      color: #1a0e00;
+      font-weight: 800;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1.2rem;
+      animation: pulse-glow 2s ease-in-out infinite;
+    }
+
+    .hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.5rem, 10vw, 4.5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      background: linear-gradient(135deg, #c084fc, #f59e0b, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+      filter: drop-shadow(0 4px 20px rgba(192,132,252,0.35));
+    }
+
+    .hero h1 .boom {
+      display: inline-block;
+      color: #ffe08a;
+      -webkit-text-fill-color: #ffe08a;
+      animation: boom 1.5s ease-in-out infinite alternate;
+    }
+
+    .hero p {
+      max-width: 640px;
+      margin: 0 auto;
+      font-size: 1.2rem;
+      color: #b8b8d0;
+      line-height: 1.6;
+    }
+
+    .hero .cta-flash {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.7rem 2.2rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #8b5cf6, #6366f1);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 24px rgba(99,102,241,0.3);
+    }
+    .hero .cta-flash:hover {
+      transform: scale(1.05) translateY(-2px);
+      box-shadow: 0 8px 40px rgba(99,102,241,0.5);
+    }
+
+    /* ====== GRID CARDS ====== */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.8rem;
+      width: 100%;
+      max-width: 1200px;
+      padding: 2rem 2rem 4rem;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 1.5rem;
+      padding: 2rem 1.5rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 1.5rem;
+      background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.06) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .card:hover::before {
+      opacity: 1;
+    }
+    .card:hover {
+      border-color: rgba(255,255,255,0.18);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 48px rgba(0,0,0,0.5);
+    }
+
+    .card .icon {
+      font-size: 2.4rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .card h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: #b0b0c8;
+      line-height: 1.6;
+    }
+
+    .card .highlight {
+      color: #f59e0b;
+      font-weight: 700;
+    }
+
+    /* accent colors per card */
+    .card:nth-child(1) { border-left: 3px solid #8b5cf6; }
+    .card:nth-child(2) { border-left: 3px solid #f59e0b; }
+    .card:nth-child(3) { border-left: 3px solid #ec4899; }
+    .card:nth-child(4) { border-left: 3px solid #10b981; }
+    .card:nth-child(5) { border-left: 3px solid #6366f1; }
+    .card:nth-child(6) { border-left: 3px solid #f97316; }
+
+    /* ====== SPEED METER ====== */
+    .speed-meter-section {
+      width: 100%;
+      max-width: 1200px;
+      padding: 0 2rem 3rem;
+      text-align: center;
+    }
+
+    .speed-meter-section h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.6rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .meter-bar {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      height: 28px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .meter-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899);
+      border-radius: 999px;
+      transition: width 1.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 12px;
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: #fff;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+      letter-spacing: 0.05em;
+    }
+
+    .meter-fill.pulse {
+      width: 94%;
+    }
+
+    .meter-ticks {
+      display: flex;
+      justify-content: space-between;
+      max-width: 600px;
+      margin: 0.3rem auto 0;
+      font-size: 0.75rem;
+      color: #666;
+    }
+
+    .meter-ticks span {
+      flex: 1;
+      text-align: center;
+    }
+
+    .meter-ticks .tick-boom {
+      color: #f59e0b;
+      font-weight: 800;
+    }
+
+    /* ====== FEATURE LIST ====== */
+    .feature-list {
+      width: 100%;
+      max-width: 1200px;
+      padding: 0 2rem 4rem;
+    }
+
+    .feature-list h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.6rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.2rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: padding-left 0.3s;
+    }
+    .feature-item:last-of-type {
+      border-bottom: none;
+    }
+    .feature-item:hover {
+      padding-left: 0.8rem;
+    }
+
+    .feature-item .fi-icon {
+      font-size: 1.6rem;
+      flex-shrink: 0;
+      width: 2.2rem;
+      text-align: center;
+    }
+
+    .feature-item .fi-text {
+      flex: 1;
+    }
+    .feature-item .fi-text strong {
+      color: #fff;
+      font-weight: 700;
+    }
+    .feature-item .fi-text span {
+      color: #b0b0c8;
+      font-size: 0.92rem;
+      display: block;
+      margin-top: 0.2rem;
+    }
+
+    /* ====== QUOTE BLOCK ====== */
+    .quote-block {
+      width: 100%;
+      max-width: 1200px;
+      padding: 2rem 2rem 4rem;
+      text-align: center;
+    }
+
+    .quote-block blockquote {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      font-weight: 500;
+      font-style: italic;
+      color: #c0c0e0;
+      max-width: 720px;
+      margin: 0 auto 1rem;
+      line-height: 1.5;
+      border-left: 3px solid #f59e0b;
+      padding: 0 0 0 2rem;
+      text-align: left;
+    }
+
+    .quote-block .attribution {
+      color: #7a7a9a;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    /* ====== FOOTER / OUTRO ====== */
+    .outro {
+      width: 100%;
+      padding: 3rem 2rem;
+      text-align: center;
+      background: linear-gradient(0deg, rgba(120,80,255,0.1) 0%, transparent 100%);
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .outro .sparkles {
+      font-size: 2rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .outro p {
+      color: #8888aa;
+      font-size: 0.95rem;
+    }
+
+    .outro .made-with {
+      margin-top: 0.8rem;
+      font-size: 0.8rem;
+      color: #555;
+    }
+
+    /* ====== ANIMATIONS ====== */
+    @keyframes pulse-glow {
+      0% { box-shadow: 0 0 0 0 rgba(245,158,11,0.3); }
+      70% { box-shadow: 0 0 0 10px rgba(245,158,11,0); }
+      100% { box-shadow: 0 0 0 0 rgba(245,158,11,0); }
+    }
+
+    @keyframes boom {
+      0% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.15) rotate(-3deg); }
+      100% { transform: scale(1) rotate(0deg); }
+    }
+
+    /* ====== SCROLL REVEAL ====== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ====== RESPONSIVE ====== */
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2.2rem; }
+      .cards { grid-template-columns: 1fr; gap: 1.2rem; padding: 1.5rem; }
+      .feature-list { padding: 0 1.5rem 3rem; }
+      .quote-block blockquote { padding: 0 0 0 1rem; }
+    }
+
+    /* ====== FLOATING PARTICLES ====== */
+    .particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: radial-gradient(circle, rgba(192,132,252,0.4), transparent);
+      border-radius: 50%;
+      animation: float linear infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-100px) rotate(720deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ====== PARTICLES ====== -->
+  <div class="particles" id="particles"></div>
+
+  <!-- ====== HERO ====== -->
+  <section class="hero reveal">
+    <span class="hero-badge">⚡ LATEST & GREATEST</span>
+    <h1>
+      <span class="boom">DeepSeek</span>V4<br>
+      <span style="background:linear-gradient(135deg,#f59e0b,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Flash</span>
+      <span style="font-size:0.5em;display:block;margin-top:0.2em;background:linear-gradient(135deg,#6366f1,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">is Absolutely Bonkers</span>
+    </h1>
+    <p>
+      <strong>284B parameters · 13B active · 1M token context</strong><br>
+      It's not just an AI model — it's a <strong>vibe</strong>. <br>
+      Speed, intelligence, and pure creative fire wrapped in one glorious MoE inference package.
+    </p>
+    <a href="#" class="cta-flash" onclick="document.querySelector('.cards').scrollIntoView({behavior:'smooth'});return false;">
+      ⚡ Show Me the Goods
+    </a>
+  </section>
+
+  <!-- ====== GRID CARDS ====== -->
+  <section class="cards reveal" id="cards">
+    <div class="card">
+      <div class="icon">🚀</div>
+      <h3>Blazing Fast · MoE Magic</h3>
+      <p>
+        <span class="highlight">284B total parameters</span> — but only <span class="highlight">13B active</span> per token
+        thanks to Mixture-of-Experts. That's the speed secret: immense knowledge
+        without the compute tax.
+      </p>
+    </div>
+    <div class="card">
+      <div class="icon">🧠</div>
+      <h3>Mega Context</h3>
+      <p>
+        <span class="highlight">Native 1-million-token</span> context capacity with
+        efficient attention. Yes, <em>one million</em> tokens — entire books,
+        codebases, and research archives in a single prompt.
+      </p>
+    </div>
+    <div class="card">
+      <div class="icon">🔧</div>
+      <h3>Tool-Calling &amp; Code</h3>
+      <p>
+        Purpose-built for <span class="highlight">tool-calling, code editing, and heavy
+        document processing</span>. Dynamic reasoning modes let it flip between
+        deep analysis and fast chat on the fly.
+      </p>
+    </div>
+    <div class="card">
+      <div class="icon">🎨</div>
+      <h3>Creative Genius</h3>
+      <p>
+        From poetry to comedy to code — DeepSeekV4 Flash <span class="highlight">writes with flair</span>.
+        It understands nuance, tone, and even <em>vibes</em>. Your imagination is the only limit.
+      </p>
+    </div>
+    <div class="card">
+      <div class="icon">💰</div>
+      <h3>Ridiculously Cheap</h3>
+      <p>
+        <span class="highlight">~$0.06 per million tokens</span> for input, ~$0.19 for output.
+        You could generate entire books for pocket change. The economics are 
+        absolutely unhinged.
+      </p>
+    </div>
+    <div class="card">
+      <div class="icon">🌍</div>
+      <h3>Multilingual Beast</h3>
+      <p>
+        Handles <span class="highlight">dozens of languages</span> natively, 
+        with cultural awareness baked in. English, Chinese, French, Arabic — 
+        it's all fair game.
+      </p>
+    </div>
+  </section>
+
+  <!-- ====== SPEED METER ====== -->
+  <section class="speed-meter-section reveal">
+    <h2>⚡ Speedometer</h2>
+    <div class="meter-bar">
+      <div class="meter-fill pulse" id="meterFill">⚡ 94%</div>
+    </div>
+    <div class="meter-ticks">
+      <span>GPT-3.5</span>
+      <span>GPT-4</span>
+      <span>Claude 3</span>
+      <span class="tick-boom">🔥 DeepSeekV4 Flash</span>
+    </div>
+    <p style="margin-top:0.8rem;color:#8888aa;font-size:0.9rem;">
+      (Only 13B active per token — <strong style="color:#fff;">~2,400 tokens/sec</strong> throughput on a single H100)
+    </p>
+  </section>
+
+  <!-- ====== FEATURE LIST ====== -->
+  <section class="feature-list reveal">
+    <h2>📋 The Nitty-Gritty</h2>
+
+    <div class="feature-item">
+      <div class="fi-icon">🏎️</div>
+      <div class="fi-text">
+        <strong>Architecture: 284B Total · 13B Active</strong>
+        <span>Mixture-of-Experts with shared + routed experts. Only 13B parameters fire per token, giving you a 284B model's brain at a fraction of the compute.</span>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="fi-icon">📦</div>
+      <div class="fi-text">
+        <strong>1-Million-Token Context</strong>
+        <span>Native capacity with efficient attention mechanisms. Process entire books, massive codebases, or multi-hour transcripts in a single pass.</span>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="fi-icon">🔧</div>
+      <div class="fi-text">
+        <strong>Capabilities</strong>
+        <span>Tool-calling, code editing, heavy document processing, and dynamic reasoning modes — switch between deep analysis and fast chat on the fly.</span>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="fi-icon">📚</div>
+      <div class="fi-text">
+        <strong>Training Cutoff</strong>
+        <span>Knowledge up to April 2025 — it's fresh, not stale.</span>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="fi-icon">🔓</div>
+      <div class="fi-text">
+        <strong>Open Source Weights</strong>
+        <span>Fully open — MIT license. No gatekeeping, no API keys required.</span>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="fi-icon">🧩</div>
+      <div class="fi-text">
+        <strong>Benchmark Domination</strong>
+        <span>Top-tier on MMLU, HumanEval, GSM8K, and more. It's not just fast — it's smart.</span>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="fi-icon">💬</div>
+      <div class="fi-text">
+        <strong>System Prompt Flexibility</strong>
+        <span>Responds beautifully to custom system prompts — roleplay, code assistant, tutor, whatever.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== QUOTE BLOCK ====== -->
+  <section class="quote-block reveal">
+    <h2 style="font-family:'Space Grotesk',sans-serif;font-size:1.2rem;margin-bottom:1.2rem;color:#7a7a9a;">🗣️ What People Are Saying</h2>
+    <blockquote>
+      “DeepSeekV4 Flash is the first model that makes me forget I'm talking to an AI. 
+      It's fast, creative, and somehow <em>gets</em> what I'm trying to do. 
+      I've replaced three other services with just this one.”
+    </blockquote>
+    <div class="attribution">— A very happy developer, 2025</div>
+  </section>
+
+  <!-- ====== OUTRO ====== -->
+  <section class="outro reveal">
+    <div class="sparkles">✨</div>
+    <p>
+      So go ahead — spin up a prompt, write a novel, analyze a dataset, build an agent. 
+      <strong style="color:#c084fc;">DeepSeekV4 Flash</strong> will keep up and then some.
+    </p>
+    <p style="margin-top:0.6rem;font-size:1.1rem;">
+      <strong style="background:linear-gradient(135deg,#f59e0b,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">It's not just an AI — it's a companion.</strong>
+    </p>
+    <div class="made-with">
+      Made with 💜 · DeepSeekV4 Flash Fan Page
+    </div>
+  </section>
+
+  <script>
+    // ====== SCROLL REVEAL ======
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    revealEls.forEach(el => observer.observe(el));
+
+    // ====== PARTICLE GENERATOR ======
+    const container = document.getElementById('particles');
+    for (let i = 0; i < 30; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.style.left = Math.random() * 100 + '%';
+      p.style.width = (Math.random() * 6 + 2) + 'px';
+      p.style.height = p.style.width;
+      p.style.animationDuration = (Math.random() * 20 + 15) + 's';
+      p.style.animationDelay = (Math.random() * 20) + 's';
+      container.appendChild(p);
+    }
+
+    // ====== METER BAR FILL ON SCROLL ======
+    const meterEl = document.getElementById('meterFill');
+    const meterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // already has .pulse class so width is set in CSS
+        }
+      });
+    }, { threshold: 0.3 });
+    meterObserver.observe(document.querySelector('.speed-meter-section'));
+
+    // ====== CARD MOUSE TRACK FOR GLOW ======
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        card.style.setProperty('--mouse-x', x + '%');
+        card.style.setProperty('--mouse-y', y + '%');
+      });
+    });
+  </script>
+
+</body>
+</html>
