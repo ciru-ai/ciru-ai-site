@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>LFM 2.5</title>
+<style>
+:root {
+  --bg: #050505;
+  --accent-magenta: #ff00ff;
+  --accent-cyan: #00ffff;
+  --gradient: linear-gradient(90deg, var(--accent-magenta) 0%, var(--accent-cyan) 100%);
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+}
+h1 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  text-shadow: 0 2px 4px rgba(255,255,255,0.3);
+  font-size: 2.5rem;
+  background: var(--accent-magenta);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+p.subtitle {
+  position: fixed;
+  top: 50px;
+  left: 20px;
+  font-size: 0.9rem;
+  opacity: 0.8;
+  text-shadow: 0 1px 2px rgba(255,255,255,0.2);
+}
+.stat-counter {
+  position: fixed;
+  top: 100px;
+  left: 20px;
+  font-size: 1.5rem;
+  margin-right: 15px;
+  animation: fadeIn 0.8s linear;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.features {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 80px 20px;
+}
+.glass-panel {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid transparent;
+  border-image: linear-gradient(to right, var(--accent-magenta), transparent) 1;
+  background-size: 200% 1;
+  padding: 30px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+.glass-panel .title {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.glass-panel p {
+  margin: 0;
+}
+.speed-streak {
+  background: var(--bg);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+.speed-streak::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  background: var(--accent-magenta);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  from { background-position: -50% 50%; }
+  to { background-position: 50% 50%; }
+}
+.testimonial {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+.closing {
+  position: fixed;
+  bottom: 40px;
+  right: 20px;
+  background: rgba(255,255,255,0.2);
+  color: #a0a0a0;
+  padding: 30px;
+  border-radius: 8px;
+  animation: fadeOut 4s ease-out;
+}
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+</style>
+</head>
+<body>
+<section class="hero">
+  <h1>8B Parameters. 1B Active. 128K Context.</h1>
+  <p class="subtitle">Built for blazing‑fast local inference.</p>
+  <div class="stat-counter">1B</div><span class="stat-counter">128K</span><span class="stat-counter">per token</span>
+</section>
+
+<div class="features">
+  <div class="glass-panel">
+    <h2>Features</h2>
+    <p>Liquid speed, 128K context, tool‑calling, code generation, open weights.</p>
+  </div>
+  <div class="glass-panel">
+    <h2>Speed Streak</h2>
+    <div class="speed-streak"></div>
+  </div>
+  <div class="glass-panel">
+    <h2>Specs</h2>
+    <table>
+      <tr><th>8B total / 1B active</th><td>8B</td></tr>
+      <tr><th>128K context</th><td>yes</td></tr>
+      <tr><th>Liquid/MoE architecture</th><td>yes</td></tr>
+      <tr><th>Tool‑calling</th><td>yes</td></tr>
+      <tr><th>Code generation</th><td>yes</td></tr>
+      <tr><th>Open weights</th><td>yes</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="speed-streak">
+  <span>~1B active per token</span>
+  <span>maximum efficiency, minimum compute</span>
+</div>
+
+<div class="specs">
+  <h2>Specs</h2>
+  <div class="grid-grid">
+    <div class="col-sm-6"><strong>8B total / 1B active</strong></div>
+    <div class="col-sm-6"><strong>128K context</strong></div>
+    <div class="col-sm-6"><strong>Liquid/MoE architecture</strong></div>
+    <div class="col-sm-6"><strong>Tool‑calling</strong></div>
+    <div class="col-sm-6"><strong>Code generation</strong></div>
+    <div class="col-sm-6"><strong>Open weights</strong></div>
+  </div>
+</div>
+
+<div class="testimonial">
+  <p>"A very happy developer, 2025"</p>
+  <cite>— A very happy developer, 2025</cite>
+</div>
+
+<div class="closing">
+  <h1>It’s not just an AI. It’s a companion.</h1>
+  <button class="glow-btn">Run It</button>
+</div>
+
+<script>
+const counters = [
+  {text: '8B', value: '1B active per token'},
+  {text: '128K', value: 'context'},
+  {text: 'per token', unit: ''}
+];
+function fadeIn(el) {
+  setTimeout(() => el.style.opacity = '1', 100);
+}
+document.querySelectorAll('.stat-counter').forEach(el => {
+  if (el) fadeIn(el);
+});
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.style.animation = 'fadeIn';
+  });
+}, {rootMargin: '0px 0% 200px'});
+document.querySelectorAll('.glass-panel').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
