@@ -8,8 +8,8 @@
     "valueFormatter": "{value} sec"
   },
   "grid": {
-    "left": 156,
-    "right": 34,
+    "left": 230,
+    "right": 58,
     "top": 26,
     "bottom": 34
   },
@@ -32,19 +32,22 @@
     "type": "category",
     "inverse": true,
     "data": [
-      "DeepSeek V4 Flash Local",
-      "Qwen3.6 27B Chadrock",
+      "DeepSeek V4\nFlash Local",
+      "Qwen3.6 27B\nChadrock",
       "GPT-5.5 Medium",
       "CROWN HALO",
-      "Gemma4 26B QAT MTP",
+      "Gemma4 26B\nQAT MTP",
       "LFM2.5",
-      "Gemma4 E2B QAT MTP",
+      "Gemma4 E2B\nQAT MTP",
       "Codex 5.3 Spark"
     ],
     "axisLabel": {
       "color": "#f7f7f4",
       "fontSize": 12,
-      "fontFamily": "IBM Plex Mono"
+      "fontFamily": "IBM Plex Mono",
+      "lineHeight": 16,
+      "width": 190,
+      "overflow": "break"
     },
     "axisTick": {
       "show": false

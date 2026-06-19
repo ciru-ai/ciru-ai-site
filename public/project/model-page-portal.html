@@ -82,12 +82,21 @@
     .logo-plate {
       width: 34px;
       height: 34px;
+      display: grid;
+      place-items: center;
       border: 1px solid rgba(237, 28, 36, 0.48);
       border-radius: 8px;
       background:
         linear-gradient(135deg, rgba(237, 28, 36, 0.65), rgba(57, 208, 255, 0.26)),
         #151518;
       box-shadow: 0 0 28px rgba(237, 28, 36, 0.28);
+      overflow: hidden;
+    }
+
+    .logo-plate img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
     }
 
     .brand-title,
@@ -197,6 +206,45 @@
       font-size: 0.85rem;
     }
 
+    .video-callout {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-top: 18px;
+      padding: 16px 18px;
+      border: 1px solid rgba(57, 208, 255, 0.24);
+      border-left: 5px solid var(--cyan);
+      border-radius: var(--radius);
+      background: rgba(57, 208, 255, 0.08);
+    }
+
+    .video-callout strong {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--text);
+    }
+
+    .video-callout span {
+      color: var(--muted);
+    }
+
+    .video-callout a {
+      flex: 0 0 auto;
+      border: 1px solid rgba(57, 208, 255, 0.42);
+      border-radius: var(--radius);
+      padding: 10px 12px;
+      color: var(--cyan);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.82rem;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .video-callout a:hover {
+      background: rgba(57, 208, 255, 0.12);
+    }
+
     section {
       margin-top: 18px;
       background: var(--panel);
@@ -226,12 +274,12 @@
     }
 
     .chart-panel {
-      min-height: 440px;
+      min-height: 510px;
     }
 
     #buildChart {
       width: 100%;
-      height: 380px;
+      height: 450px;
     }
 
     .card-grid {
@@ -366,21 +414,64 @@
         flex-direction: column;
       }
 
+      .video-callout {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .video-callout a {
+        text-align: center;
+      }
+
       #buildChart {
-        height: 470px;
+        height: 560px;
       }
 
       th,
       td {
         padding: 9px 8px;
       }
+
+      table,
+      thead,
+      tbody,
+      tr,
+      th,
+      td {
+        display: block;
+        width: 100%;
+      }
+
+      thead {
+        display: none;
+      }
+
+      tr {
+        border: 1px solid var(--line);
+        border-bottom: 0;
+      }
+
+      tr:last-child {
+        border-bottom: 1px solid var(--line);
+      }
+
+      th,
+      td {
+        border: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        overflow-wrap: anywhere;
+      }
+
+      .num {
+        text-align: left;
+      }
     }
   </style>
 </head>
 <body>
   <main class="wrap">
-    <a class="brand-lockup" href="/">
-      <span class="logo-plate" aria-hidden="true"></span>
+    <a class="brand-lockup" href="/" aria-label="Ciru home">
+      <span class="logo-plate"><img src="/ciruai.png" alt=""></span>
       <span>
         <span class="brand-title">Ciru Inference Lab</span>
         <span class="brand-subtitle">ciru.ai / project portal</span>
@@ -396,6 +487,13 @@
         <div class="stat"><b>8</b><span>timed builds</span></div>
         <div class="stat"><b>22s</b><span>fastest recorded page</span></div>
         <div class="stat"><b>12:34</b><span>longest recorded page</span></div>
+      </div>
+      <div class="video-callout">
+        <div>
+          <strong>Want to see the pages being made?</strong>
+          <span>The X thread has the videos for this model-page run.</span>
+        </div>
+        <a href="https://x.com/ciruai/status/2067765110903320614" target="_blank" rel="noopener">Watch videos</a>
       </div>
     </header>
 
