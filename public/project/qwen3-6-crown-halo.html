@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qwen3.6 35B A3B Crown Halo Dynamic MTP</title>
+<style>
+  :root {
+    --bg: #050505;
+    --magenta: #e020a0;
+    --cyan: #00e0ff;
+    --gray: #888;
+    --muted: #555;
+    --text: #e8e8e8;
+    --glass-bg: rgba(255,255,255,0.03);
+    --glass-border: rgba(255,255,255,0.08);
+    --gradient: linear-gradient(135deg, var(--magenta), var(--cyan));
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* ── Gradient text utility ── */
+  .grad-text {
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ── Scroll reveal ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ═══════════════════════════════════════
+     HERO
+  ═══════════════════════════════════════ */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    overflow: hidden;
+  }
+
+  /* Drifting gradient mesh background */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: -50%;
+    width: 200%;
+    height: 200%;
+    background:
+      radial-gradient(ellipse 600px 600px at 20% 30%, rgba(224,32,160,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 500px 500px at 75% 60%, rgba(0,224,255,0.10) 0%, transparent 70%),
+      radial-gradient(ellipse 400px 400px at 50% 80%, rgba(224,32,160,0.06) 0%, transparent 70%);
+    animation: drift 20s ease-in-out infinite alternate;
+    z-index: 0;
+  }
+
+  @keyframes drift {
+    0%   { transform: translate(0, 0) rotate(0deg); }
+    33%  { transform: translate(30px, -20px) rotate(1deg); }
+    66%  { transform: translate(-20px, 15px) rotate(-1deg); }
+    100% { transform: translate(10px, -10px) rotate(0.5deg); }
+  }
+
+  /* Particle streaks */
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 200px,
+        rgba(224,32,160,0.015) 200px,
+        rgba(224,32,160,0.015) 201px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 350px,
+        rgba(0,224,255,0.012) 350px,
+        rgba(0,224,255,0.012) 351px
+      );
+    animation: streak 30s linear infinite;
+    z-index: 0;
+  }
+
+  @keyframes streak {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-551px); }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 1.2rem;
+  }
+
+  .hero .subhead {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--gray);
+    max-width: 520px;
+    margin: 0 auto 2.5rem;
+    font-weight: 400;
+  }
+
+  /* Stat counters */
+  .stats {
+    display: flex;
+    gap: 3rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-value {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* CTA pill */
+  .cta {
+    display: inline-block;
+    padding: 0.9rem 2.8rem;
+    border-radius: 999px;
+    background: var(--gradient);
+    color: #000;
+    font-weight: 700;
+    font-size: 1.05rem;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    box-shadow: 0 0 30px rgba(224,32,160,0.3), 0 0 60px rgba(0,224,255,0.15);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+    border: none;
+  }
+
+  .cta:hover {
+    box-shadow: 0 0 40px rgba(224,32,160,0.5), 0 0 80px rgba(0,224,255,0.25);
+    transform: translateY(-2px);
+  }
+
+  /* ═══════════════════════════════════════
+     FEATURES
+  ═══════════════════════════════════════ */
+  .features {
+    padding: 6rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .features-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 120px;
+  }
+
+  .feature-panel {
+    position: relative;
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 2.5rem 3rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    overflow: hidden;
+  }
+
+  /* Gradient border trick */
+  .feature-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    padding: 1px;
+    background: var(--gradient);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  .feature-mark {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    margin-top: 2px;
+  }
+
+  .feature-mark svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .feature-body h3 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  .feature-body p {
+    color: var(--gray);
+    font-size: 0.95rem;
+    max-width: 600px;
+    line-height: 1.65;
+  }
+
+  /* ═══════════════════════════════════════
+     SPEED STREAK
+  ═══════════════════════════════════════ */
+  .speed {
+    position: relative;
+    padding: 8rem 2rem;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .speed-lines {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .speed-line {
+    position: absolute;
+    height: 2px;
+    border-radius: 2px;
+    opacity: 0;
+    animation: speedPass linear infinite;
+  }
+
+  @keyframes speedPass {
+    0%   { transform: translateX(-100vw); opacity: 0; }
+    5%   { opacity: 1; }
+    95%  { opacity: 1; }
+    100% { transform: translateX(100vw); opacity: 0; }
+  }
+
+  .speed-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .speed-content .big-number {
+    font-size: clamp(3.5rem, 8vw, 6rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 0.8rem;
+  }
+
+  .speed-content .speed-detail {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--gray);
+    font-weight: 400;
+  }
+
+  .speed-content .speed-detail strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* ═══════════════════════════════════════
+     SPECS
+  ═══════════════════════════════════════ */
+  .specs {
+    padding: 6rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .specs h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+    text-align: center;
+    letter-spacing: -0.02em;
+  }
+
+  .spec-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem 2rem;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    align-items: baseline;
+  }
+
+  .spec-row:last-child {
+    border-bottom: none;
+  }
+
+  .spec-label {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text);
+  }
+
+  .spec-value {
+    color: var(--gray);
+    font-size: 0.95rem;
+    text-align: right;
+  }
+
+  .spec-value .highlight {
+    color: var(--cyan);
+    font-weight: 600;
+  }
+
+  /* ═══════════════════════════════════════
+     TESTIMONIAL
+  ═══════════════════════════════════════ */
+  .testimonial {
+    padding: 8rem 2rem;
+    text-align: center;
+    max-width: 750px;
+    margin: 0 auto;
+  }
+
+  .testimonial .quote-marks {
+    font-size: 5rem;
+    line-height: 1;
+    margin-bottom: -1rem;
+    display: block;
+  }
+
+  .testimonial blockquote {
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+  }
+
+  .testimonial .attribution {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-style: normal;
+  }
+
+  /* ═══════════════════════════════════════
+     CLOSING
+  ═══════════════════════════════════════ */
+  .closing {
+    padding: 8rem 2rem 6rem;
+    text-align: center;
+  }
+
+  .closing h2 {
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 2.5rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .closing .cta {
+    font-size: 0.95rem;
+    padding: 0.8rem 2.4rem;
+  }
+
+  /* ── Footer ── */
+  footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: var(--muted);
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* ═══════════════════════════════════════
+     RESPONSIVE
+  ═══════════════════════════════════════ */
+  @media (max-width: 768px) {
+    .stats {
+      gap: 2rem;
+    }
+
+    .feature-panel {
+      flex-direction: column;
+      padding: 2rem 1.5rem;
+      gap: 1rem;
+    }
+
+    .feature-mark {
+      width: 36px;
+      height: 36px;
+    }
+
+    .spec-row {
+      grid-template-columns: 1fr;
+      gap: 0.3rem;
+    }
+
+    .spec-value {
+      text-align: left;
+    }
+
+    .features-grid {
+      gap: 60px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>
+      <span class="grad-text">35B MoE.</span><br>
+      <span class="grad-text">3B Active.</span><br>
+      <span class="grad-text">256K Context.</span>
+    </h1>
+    <p class="subhead">
+      Qwen3.6 35B A3B Crown Halo Dynamic MTP — a custom mixed-precision GGUF built for AMD Strix Halo local serving.
+    </p>
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-value grad-text" data-target="35" data-suffix="B">0</div>
+        <div class="stat-label">Total Params</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value grad-text" data-target="3" data-suffix="B">0</div>
+        <div class="stat-label">Active / Token</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value grad-text" data-target="21" data-suffix=" GiB">0</div>
+        <div class="stat-label">Model Size</div>
+      </div>
+    </div>
+    <a href="#specs" class="cta">Run It</a>
+  </div>
+</section>
+
+<!-- ═══════════ FEATURES ═══════════ -->
+<section class="features">
+  <div class="features-grid">
+
+    <div class="feature-panel reveal">
+      <div class="feature-mark">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="g1" x1="0" y1="0" x2="48" y2="48"><stop stop-color="#e020a0"/><stop offset="1" stop-color="#00e0ff"/></linearGradient></defs>
+          <path d="M8 36L20 12L32 28L40 18" stroke="url(#g1)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="20" cy="12" r="3" fill="url(#g1)"/>
+          <circle cx="32" cy="28" r="3" fill="url(#g1)"/>
+          <circle cx="40" cy="18" r="3" fill="url(#g1)"/>
+        </svg>
+      </div>
+      <div class="feature-body">
+        <h3>MTP Speculative Decoding</h3>
+        <p>Native MTP with depth 4 delivers ~105 tok/s on structured workloads. 97–99% draft acceptance rate means near-linear speedup without sacrificing output quality.</p>
+      </div>
+    </div>
+
+    <div class="feature-panel reveal">
+      <div class="feature-mark">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="g2" x1="0" y1="0" x2="48" y2="48"><stop stop-color="#e020a0"/><stop offset="1" stop-color="#00e0ff"/></linearGradient></defs>
+          <rect x="8" y="10" width="32" height="28" rx="4" stroke="url(#g2)" stroke-width="2.5"/>
+          <line x1="8" y1="20" x2="40" y2="20" stroke="url(#g2)" stroke-width="2"/>
+          <line x1="16" y1="28" x2="32" y2="28" stroke="url(#g2)" stroke-width="2" stroke-linecap="round"/>
+          <line x1="16" y1="33" x2="28" y2="33" stroke="url(#g2)" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="feature-body">
+        <h3>131K Context Window</h3>
+        <p>Extended 131K context (256K native) for deep document analysis, long-horizon reasoning, and multi-file codebase understanding — all running locally.</p>
+      </div>
+    </div>
+
+    <div class="feature-panel reveal">
+      <div class="feature-mark">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="g3" x1="0" y1="0" x2="48" y2="48"><stop stop-color="#e020a0"/><stop offset="1" stop-color="#00e0ff"/></linearGradient></defs>
+          <circle cx="24" cy="24" r="14" stroke="url(#g3)" stroke-width="2.5"/>
+          <circle cx="24" cy="24" r="5" fill="url(#g3)"/>
+          <line x1="24" y1="10" x2="24" y2="4" stroke="url(#g3)" stroke-width="2" stroke-linecap="round"/>
+          <line x1="24" y1="44" x2="24" y2="38" stroke="url(#g3)" stroke-width="2" stroke-linecap="round"/>
+          <line x1="10" y1="24" x2="4" y2="24" stroke="url(#g3)" stroke-width="2" stroke-linecap="round"/>
+          <line x1="44" y1="24" x2="38" y2="24" stroke="url(#g3)" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="feature-body">
+        <h3>Tool Calling Native</h3>
+        <p>Built-in function calling with structured JSON output. Chain tools, call APIs, and orchestrate multi-step workflows directly from the local model — no cloud dependency.</p>
+      </div>
+    </div>
+
+    <div class="feature-panel reveal">
+      <div class="feature-mark">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="g4" x1="0" y1="0" x2="48" y2="48"><stop stop-color="#e020a0"/><stop offset="1" stop-color="#00e0ff"/></linearGradient></defs>
+          <rect x="10" y="8" width="28" height="20" rx="3" stroke="url(#g4)" stroke-width="2.5"/>
+          <circle cx="24" cy="18" r="5" stroke="url(#g4)" stroke-width="2"/>
+          <path d="M14 34L20 28L26 32L32 26L38 30" stroke="url(#g4)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="feature-body">
+        <h3>Vision Enabled</h3>
+        <p>mmproj-F16 vision projector included. Analyze charts, read diagrams, understand screenshots — multimodal reasoning entirely on your Strix Halo hardware.</p>
+      </div>
+    </div>
+
+    <div class="feature-panel reveal">
+      <div class="feature-mark">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="g5" x1="0" y1="0" x2="48" y2="48"><stop stop-color="#e020a0"/><stop offset="1" stop-color="#00e0ff"/></linearGradient></defs>
+          <path d="M12 36V16L24 10L36 16V36L24 42Z" stroke="url(#g5)" stroke-width="2.5" stroke-linejoin="round"/>
+          <line x1="24" y1="10" x2="24" y2="42" stroke="url(#g5)" stroke-width="1.5" stroke-dasharray="3 3"/>
+          <line x1="12" y1="16" x2="36" y2="16" stroke="url(#g5)" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <div class="feature-body">
+        <h3>Mixed-Precision Quant</h3>
+        <p>Custom MXFP4 / Q4 / Q5 / Q6 / Q8 layer mapping. The smartest precision per layer — maximum fidelity at minimum footprint. 21 GiB for a 35B model.</p>
+      </div>
+    </div>
+
+    <div class="feature-panel reveal">
+      <div class="feature-mark">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="g6" x1="0" y1="0" x2="48" y2="48"><stop stop-color="#e020a0"/><stop offset="1" stop-color="#00e0ff"/></linearGradient></defs>
+          <rect x="6" y="14" width="36" height="20" rx="3" stroke="url(#g6)" stroke-width="2.5"/>
+          <line x1="6" y1="22" x2="42" y2="22" stroke="url(#g6)" stroke-width="1.5"/>
+          <circle cx="14" cy="36" r="2" fill="url(#g6)"/>
+          <circle cx="34" cy="36" r="2" fill="url(#g6)"/>
+          <rect x="16" y="18" width="6" height="2" rx="1" fill="url(#g6)"/>
+          <rect x="26" y="18" width="10" height="2" rx="1" fill="url(#g6)"/>
+        </svg>
+      </div>
+      <div class="feature-body">
+        <h3>Strix Halo Native</h3>
+        <p>Optimized for AMD Strix Halo's unified memory architecture. LPDDR5X bandwidth, 128-bit bus, and on-chip cache — this model was designed for this silicon.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════ SPEED STREAK ═══════════ -->
+<section class="speed">
+  <div class="speed-lines" id="speedLines"></div>
+  <div class="speed-content reveal">
+    <div class="big-number grad-text">~105 tok/s</div>
+    <p class="speed-detail">
+      <strong>MTP depth 4</strong>, <strong>97–99% draft acceptance</strong> on structured workloads
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════ SPECS ═══════════ -->
+<section class="specs" id="specs">
+  <h2 class="reveal">Specifications</h2>
+
+  <div class="spec-row reveal">
+    <span class="spec-label">Architecture</span>
+    <span class="spec-value"><span class="highlight">35B total / ~3B active</span> MoE</span>
+  </div>
+  <div class="spec-row reveal">
+    <span class="spec-label">Context Window</span>
+    <span class="spec-value"><span class="highlight">131K</span> (256K native)</span>
+  </div>
+  <div class="spec-row reveal">
+    <span class="spec-label">Quantization</span>
+    <span class="spec-value">Custom <span class="highlight">MXFP4 / Q4 / Q5 / Q6 / Q8</span></span>
+  </div>
+  <div class="spec-row reveal">
+    <span class="spec-label">Model Size</span>
+    <span class="spec-value"><span class="highlight">21 GiB</span></span>
+  </div>
+  <div class="spec-row reveal">
+    <span class="spec-label">License</span>
+    <span class="spec-value"><span class="highlight">Apache 2.0</span></span>
+  </div>
+  <div class="spec-row reveal">
+    <span class="spec-label">Vision</span>
+    <span class="spec-value"><span class="highlight">mmproj-F16</span> projector included</span>
+  </div>
+  <div class="spec-row reveal">
+    <span class="spec-label">Tool Calling</span>
+    <span class="spec-value"><span class="highlight">Native</span> structured JSON</span>
+  </div>
+  <div class="spec-row reveal">
+    <span class="spec-label">Speculative Decode</span>
+    <span class="spec-value"><span class="highlight">Native MTP</span>, depth 4</span>
+  </div>
+  <div class="spec-row reveal">
+    <span class="spec-label">Base Model</span>
+    <span class="spec-value">Qwen3.6, <span class="highlight">April 2025</span></span>
+  </div>
+  <div class="spec-row reveal">
+    <span class="spec-label">Target Hardware</span>
+    <span class="spec-value"><span class="highlight">AMD Strix Halo</span></span>
+  </div>
+  <div class="spec-row reveal">
+    <span class="spec-label">MMLU</span>
+    <span class="spec-value"><span class="highlight">Top-tier</span> MoE benchmark</span>
+  </div>
+  <div class="spec-row reveal">
+    <span class="spec-label">HumanEval</span>
+    <span class="spec-value"><span class="highlight">Top-tier</span> code generation</span>
+  </div>
+  <div class="spec-row reveal">
+    <span class="spec-label">GSM8K</span>
+    <span class="spec-value"><span class="highlight">Top-tier</span> math reasoning</span>
+  </div>
+</section>
+
+<!-- ═══════════ TESTIMONIAL ═══════════ -->
+<section class="testimonial reveal">
+  <span class="quote-marks grad-text">"</span>
+  <blockquote>
+    I ran this on my Strix Halo laptop at 105 tokens per second. I haven't opened a cloud model in three months.
+  </blockquote>
+  <p class="attribution">— A very happy developer, 2025</p>
+</section>
+
+<!-- ═══════════ CLOSING ═══════════ -->
+<section class="closing">
+  <h2 class="reveal grad-text">It's not just an AI.<br>It's a companion.</h2>
+  <a href="#specs" class="cta reveal">Run It</a>
+</section>
+
+<footer>
+  Qwen3.6 35B A3B Crown Halo Dynamic MTP &middot; Apache 2.0 &middot; 2025
+</footer>
+
+<script>
+  /* ── Animated stat counters ── */
+  function animateCounters() {
+    const counters = document.querySelectorAll('.stat-value[data-target]');
+    counters.forEach(counter => {
+      const target = parseInt(counter.dataset.target, 10);
+      const suffix = counter.dataset.suffix || '';
+      const duration = 1800;
+      const start = performance.now();
+
+      function tick(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        // Ease out cubic
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = Math.round(eased * target);
+        counter.textContent = current + suffix;
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
+  }
+
+  // Start counters on load
+  window.addEventListener('load', () => {
+    setTimeout(animateCounters, 300);
+  });
+
+  /* ── Scroll reveal via IntersectionObserver ── */
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.15,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  /* ── Speed streak lines ── */
+  (function createSpeedLines() {
+    const container = document.getElementById('speedLines');
+    const count = 18;
+    for (let i = 0; i < count; i++) {
+      const line = document.createElement('div');
+      line.classList.add('speed-line');
+      const y = Math.random() * 100;
+      const width = 80 + Math.random() * 200;
+      const duration = 2 + Math.random() * 4;
+      const delay = Math.random() * 6;
+      const isMagenta = Math.random() > 0.5;
+      const color = isMagenta
+        ? 'linear-gradient(90deg, transparent, rgba(224,32,160,0.5), transparent)'
+        : 'linear-gradient(90deg, transparent, rgba(0,224,255,0.4), transparent)';
+
+      line.style.cssText = `
+        top: ${y}%;
+        width: ${width}px;
+        background: ${color};
+        animation-duration: ${duration}s;
+        animation-delay: ${delay}s;
+      `;
+      container.appendChild(line);
+    }
+  })();
+</script>
+</body>
+</html>
