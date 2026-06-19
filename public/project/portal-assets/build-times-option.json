@@ -1,0 +1,107 @@
+{
+  "backgroundColor": "transparent",
+  "tooltip": {
+    "trigger": "axis",
+    "axisPointer": {
+      "type": "shadow"
+    },
+    "valueFormatter": "{value} sec"
+  },
+  "grid": {
+    "left": 156,
+    "right": 34,
+    "top": 26,
+    "bottom": 34
+  },
+  "xAxis": {
+    "type": "value",
+    "name": "seconds",
+    "nameTextStyle": {
+      "color": "#a8adb7"
+    },
+    "axisLabel": {
+      "color": "#a8adb7"
+    },
+    "splitLine": {
+      "lineStyle": {
+        "color": "rgba(255,255,255,0.08)"
+      }
+    }
+  },
+  "yAxis": {
+    "type": "category",
+    "inverse": true,
+    "data": [
+      "DeepSeek V4 Flash Local",
+      "Qwen3.6 27B Chadrock",
+      "GPT-5.5 Medium",
+      "CROWN HALO",
+      "Gemma4 26B QAT MTP",
+      "LFM2.5",
+      "Gemma4 E2B QAT MTP",
+      "Codex 5.3 Spark"
+    ],
+    "axisLabel": {
+      "color": "#f7f7f4",
+      "fontSize": 12,
+      "fontFamily": "IBM Plex Mono"
+    },
+    "axisTick": {
+      "show": false
+    },
+    "axisLine": {
+      "lineStyle": {
+        "color": "rgba(255,255,255,0.16)"
+      }
+    }
+  },
+  "series": [
+    {
+      "name": "Build time",
+      "type": "bar",
+      "data": [
+        754,
+        245,
+        165,
+        105,
+        59,
+        29,
+        24,
+        22
+      ],
+      "barWidth": 16,
+      "itemStyle": {
+        "borderRadius": [
+          0,
+          6,
+          6,
+          0
+        ],
+        "color": {
+          "type": "linear",
+          "x": 0,
+          "y": 0,
+          "x2": 1,
+          "y2": 0,
+          "colorStops": [
+            {
+              "offset": 0,
+              "color": "#ed1c24"
+            },
+            {
+              "offset": 1,
+              "color": "#39d0ff"
+            }
+          ]
+        }
+      },
+      "label": {
+        "show": true,
+        "position": "right",
+        "color": "#f7f7f4",
+        "fontFamily": "IBM Plex Mono",
+        "formatter": "{c}s"
+      }
+    }
+  ]
+}
