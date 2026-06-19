@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemma 4 E2B QAT - Extreme Edge AI</title>
+    <style>
+        :root {
+            --bg-color: #050505;
+            --accent-start: #ff00ff; /* Electric Magenta */
+            --accent-end: #00ffff;   /* Electric Cyan */
+            --text-color: #e0e0e0;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- Background Mesh/Particles --- */
+        .background-mesh {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 0, 255, 0.05) 0%, transparent 70%);
+        }
+
+        /* --- Utility Classes --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        /* --- Hero Section --- */
+        #hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            z-index: 10;
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        .hero-headline {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            background: linear-gradient(90deg, var(--accent-start), var(--accent-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            animation: text-gradient 5s ease infinite alternate;
+        }
+
+        .hero-subhead {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: #aaa;
+            margin-bottom: 40px;
+        }
+
+        .stat-counters {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .stat-item {
+            text-align: center;
+            flex: 1;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--accent-start);
+            display: block;
+            margin-bottom: 5px;
+            transition: transform 0.5s ease-out;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        .cta-button {
+            padding: 15px 35px;
+            background: linear-gradient(45deg, var(--accent-start), var(--accent-end));
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            box-shadow: 0 0 30px var(--accent-end), 0 0 50px var(--accent-start);
+            transform: translateY(-3px);
+        }
+
+        /* --- Features Section --- */
+        #features {
+            padding: 100px 0;
+            background-color: #0a0a0a;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-panel {
+            background: var(--glass-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-panel:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 255, 255, 0.1);
+        }
+
+        .feature-panel h3 {
+            color: var(--accent-end);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .feature-panel p {
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+
+        .feature-panel .svg-mark {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            opacity: 0.5;
+            filter: drop-shadow(0 0 5px var(--accent-start));
+        }
+
+        /* --- Speed Streak Section --- */
+        #speed-streak {
+            padding: 80px 0;
+            background-color: #000;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .streak-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 0, 255, 0.05) 50%, transparent 100%);
+            z-index: 1;
+        }
+
+        .streak-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent 0%, rgba(0, 255, 255, 0.1) 50%, transparent 100%);
+            animation: streak-move 15s linear infinite;
+            z-index: 2;
+        }
+
+        @keyframes streak-move {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .speed-text {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            padding: 40px 0;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            margin-top: 30px;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        .speed-text h2 {
+            color: var(--accent-end);
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        /* --- Specs Section --- */
+        #specs {
+            padding: 100px 0;
+            background-color: #0a0a0a;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .spec-item strong {
+            color: var(--accent-start);
+            font-weight: 600;
+        }
+
+        /* --- Testimonial Section --- */
+        #testimonial {
+            padding: 100px 0;
+            text-align: center;
+            background-color: #050505;
+        }
+
+        .testimonial-quote {
+            font-style: italic;
+            font-size: 1.8rem;
+            max-width: 700px;
+            margin: 0 auto 20px auto;
+            color: #ccc;
+            position: relative;
+            padding: 0 40px;
+        }
+
+        .quote-marks {
+            font-size: 4rem;
+            color: var(--accent-start);
+            position: absolute;
+            top: -20px;
+            left: 0;
+            opacity: 0.15;
+            text-shadow: 0 0 15px var(--accent-start);
+        }
+
+        .testimonial-attribution {
+            font-size: 1.1rem;
+            color: #888;
+        }
+
+        /* --- Closing Section --- */
+        #closing {
+            padding: 100px 0;
+            text-align: center;
+            background: linear-gradient(180deg, #050505 0%, #000000 100%);
+        }
+
+        .closing-headline {
+            font-size: clamp(2rem, 5vw, 4rem);
+            margin-bottom: 30px;
+            background: linear-gradient(90deg, var(--accent-start), var(--accent-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: text-gradient 4s ease infinite alternate;
+        }
+
+        .closing-button {
+            padding: 12px 30px;
+            background: transparent;
+            border: 1px solid var(--accent-end);
+            color: var(--accent-end);
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .closing-button:hover {
+            background: var(--accent-end);
+            color: var(--bg-color);
+            box-shadow: 0 0 15px var(--accent-end);
+        }
+
+        /* --- Animations --- */
+        @keyframes text-gradient {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .hero-headline {
+                font-size: 3rem;
+            }
+            .stat-counters {
+                flex-direction: column;
+            }
+            .feature-panel {
+                padding: 20px;
+            }
+            .specs-grid {
+                grid-template-columns: 1fr;
+            }
+            .testimonial-quote {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background-mesh"></div>
+
+    <header id="hero">
+        <div class="container hero-content">
+            <h1 class="hero-headline">2B Parameters. QAT-Optimized. 128K Context.</h1>
+            <p class="hero-subhead">The next generation of dense transformer models, engineered for extreme edge and mobile inference.</p>
+
+            <div class="stat-counters">
+                <div class="stat-item">
+                    <span class="stat-number" data-target="2B">0</span>
+                    <span class="stat-label">Parameters</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="128K">0</span>
+                    <span class="stat-label">Context Window</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="INT4">0</span>
+                    <span class="stat-label">Inference Precision</span>
+                </div>
+            </div>
+
+            <button class="cta-button">Run It</button>
+        </div>
+    </header>
+
+    <section id="features">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 60px;">Engineered for the Edge</h2>
+            <div class="features-grid">
+                <div class="feature-panel">
+                    <h3>QAT Efficiency</h3>
+                    <p>Quantization-Aware Training ensures peak performance when deploying on resource-constrained hardware, maximizing throughput without sacrificing accuracy.</p>
+                    <div class="svg-mark"></div>
+                </div>
+                <div class="feature-panel">
+                    <h3>128K Context</h3>
+                    <p>Handle massive inputs, from long documents to complex codebases, all within a single, efficient inference pass.</p>
+                    <div class="svg-mark"></div>
+                </div>
+                <div class="feature-panel">
+                    <h3>Multimodal Vision</h3>
+                    <p>Native support for vision tasks, allowing the model to interpret and reason over images and visual data seamlessly.</p>
+                    <div class="svg-mark"></div>
+                </div>
+                <div class="feature-panel">
+                    <h3>Tool-Calling</h3>
+                    <p>Intelligent orchestration of external tools, enabling the model to interact with APIs and execute complex workflows autonomously.</p>
+                    <div class="svg-mark"></div>
+                </div>
+                <div class="feature-panel">
+                    <h3>Code Generation</h3>
+                    <p>Produce high-quality, context-aware code snippets and complete functions, making it a powerful pair programmer on the go.</p>
+                    <div class="svg-mark"></div>
+                </div>
+                <div class="feature-panel">
+                    <h3>Open Weights</h3>
+                    <p>Full transparency and community-driven innovation. Built on open weights, empowering developers to fine-tune and customize.</p>
+                    <div class="svg-mark"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="speed-streak">
+        <div class="container">
+            <div class="streak-overlay"></div>
+            <div class="streak-lines"></div>
+            <div class="speed-text">
+                <h2>Native INT4/INT8 edge inference</h2>
+                <p>2B dense, QAT from the ground up</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="specs">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 50px;">Technical Specifications</h2>
+            <div class="specs-grid">
+                <div class="spec-item"><strong>Model Size</strong> <span>2B dense</span></div>
+                <div class="spec-item"><strong>Quantization</strong> <span>QAT for INT8/INT4</span></div>
+                <div class="spec-item"><strong>Context Length</strong> <span>128K Tokens</span></div>
+                <div class="spec-item"><strong>Modality</strong> <span>Multimodal Vision</span></div>
+                <div class="spec-item"><strong>Capability</strong> <span>Tool-Calling</span></div>
+                <div class="spec-item"><strong>Strength</strong> <span>Code Generation</span></div>
+                <div class="spec-item"><strong>License</strong> <span>Open Weights</span></div>
+                <div class="spec-item"><strong>Benchmarks</strong> <span>Strong MMLU/GSM8K/HumanEval</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonial">
+        <div class="container">
+            <p class="testimonial-quote">
+                <span class="quote-marks">&ldquo;</span>
+                A very happy developer, 2025
+                <span class="quote-marks">&rdquo;</span>
+            </p>
+            <p class="testimonial-attribution">— A very happy developer, 2025</p>
+        </div>
+    </section>
+
+    <footer id="closing">
+        <div class="container">
+            <h2 class="closing-headline">It’s not just an AI. It’s a companion.</h2>
+            <button class="closing-button">Explore the SDK</button>
+        </div>
+    </footer>
+
+    <script>
+        // --- 1. Animated Stat Counters ---
+        const statCounters = document.querySelectorAll('.stat-number');
+        const targetValues = {
+            '2B': 2000000000, // 2 Billion
+            '128K': 128000,
+            'INT4': 4 // Representing INT4 precision
+        };
+
+        function animateCounter(element, target) {
+            let start = 0;
+            const duration = 2000; // 2 seconds
+            const step = Math.ceil((target - start) / (duration / 100)); // 100 steps for smooth animation
+
+            const interval = setInterval(() => {
+                start += step;
+                if (start >= target) {
+                    clearInterval(interval);
+                    element.textContent = target.toLocaleString();
+                } else {
+                    element.textContent = start.toLocaleString();
+                }
+            }, 100);
+        }
+
+        // Initialize counters
+        statCounters.forEach(counter => {
+            const key = counter.dataset.target;
+            animateCounter(counter, targetValues[key]);
+        });
+
+
+        // --- 2. Scroll Reveal Animation ---
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1 // Trigger when 10% of the element is visible
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Target elements for fade-up reveal
+        const revealElements = document.querySelectorAll('#features .feature-panel, #specs .spec-item, #testimonial, #closing');
+
+        revealElements.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            observer.observe(el);
+        });
+
+    </script>
+</body>
+</html>
