@@ -1,6 +1,6 @@
 ---
 name: italianclownz-blueprint-theme
-description: "Create polished @Italianclownz / charlie12345 technical webpages, reports, profile pages, release notes, and research artifacts using the dark/light blue Blueprint theme: high-contrast blue gradients, deep cut-corner cards, angled technical composition, friendly top-right profile/contact treatment, transparent RGBA image assets, strict attribution boundaries, first-person personal-report voice when requested, and Python-generated ECharts data. Use when Codex is asked to make pages or reports for Italianclownz, charlie12345, ROCmFP4, ROCmFPX, MTP, speculative decoding, or related AMD inference work in this visual style."
+description: "Create polished @Italianclownz / charlie12345 technical webpages, reports, profile pages, release notes, and research artifacts using the dark/light blue Blueprint theme: high-contrast blue gradients, deep cut-corner cards, angled technical composition, far-left operator contact dock, compact monospaced title-plate hero, transparent RGBA image assets, strict attribution boundaries, first-person personal-report voice when requested, and Python-generated ECharts data. Use when Codex is asked to make pages or reports for Italianclownz, charlie12345, ROCmFP4, ROCmFPX, MTP, speculative decoding, or related AMD inference work in this visual style."
 ---
 
 # Italianclownz Blueprint Theme
@@ -10,7 +10,8 @@ description: "Create polished @Italianclownz / charlie12345 technical webpages, 
 Use this skill to build a distinctive technical page family for Italianclownz
 (`@Italianclownz`, `charlie12345`). The look should feel like a precision AMD
 inference workbench: dark/light blue gradients, hard angles, cut corners,
-transparent blue technical ornaments, and readable evidence-first content.
+transparent blue technical ornaments, a left-side operator contact dock, compact
+monospaced title plates, and readable evidence-first content.
 
 ## Workflow
 
@@ -21,8 +22,9 @@ transparent blue technical ornaments, and readable evidence-first content.
    file before designing or coding.
 3. Copy the reusable assets from `assets/` into the project, preserving
    filenames unless the target project already has a naming scheme.
-4. Put the profile/contact module near the top right on desktop and near the
-   top on mobile. Include:
+4. Put the profile/contact module in a far-left top operator dock on desktop and
+   before the title on mobile. Do not place it under a giant title or make it
+   look like an afterthought. Include:
    - X: `https://x.com/Italianclownz`
    - GitHub: `https://github.com/charlie12345`
    - Profile image: `assets/italianclownz-pfp.jpg`
@@ -69,6 +71,12 @@ transparent blue technical ornaments, and readable evidence-first content.
 - Do not put a card inside another card.
 - Do not embed square/rectangular generated-image backgrounds. Use RGBA PNGs
   as irregular overlays or ornaments.
+- Do not use a giant stacked Inter-style title treatment. The hero title should
+  be a compact monospaced or condensed technical plate with rails, clipped
+  corners, or small signal marks.
+- Keep the profile module strategically separate from the title: far-left dock,
+  side rail, or a later anchored contact block. Avoid top-right floating profile
+  cards unless the user specifically asks for that placement.
 
 ## Theme Spec
 
@@ -80,8 +88,14 @@ transparent blue technical ornaments, and readable evidence-first content.
   rounded pastel panels.
 - Use full-width bands and unframed layouts for page structure. Cards are for
   repeated facts, evidence items, compact profile/contact modules, and charts.
-- Hero layout should have a direct title, one-paragraph thesis, top-right
-  profile/contact module, and an oversized irregular RGBA ornament.
+- Hero layout should use a far-left profile/contact dock plus a separate
+  technical title plate. The title plate should use a monospaced stack such as
+  `ui-monospace`, `Cascadia Code`, `SFMono-Regular`, or `Roboto Mono`, with
+  body copy in a narrower technical sans stack such as `Bahnschrift`,
+  `Aptos Narrow`, `Arial Narrow`, or `Segoe UI`.
+- Title text should not be a huge free-floating stacked headline. Prefer a
+  smaller clipped plate, rail, console label, or field-note marker.
+- Keep `letter-spacing: 0`; use weight, geometry, and contrast for hierarchy.
 - Generate chart data/options with Python. Render with Apache ECharts in the
   browser, using transparent backgrounds, cyan/blue series colors, low-contrast
   grid lines, and readable mobile labels.
