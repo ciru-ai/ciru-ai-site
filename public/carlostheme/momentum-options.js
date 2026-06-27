@@ -17,13 +17,14 @@ window.momentumOption = {
   "xAxis": {
     "type": "category",
     "data": [
+      "Jun 5",
+      "Jun 10",
+      "Jun 11",
+      "Jun 13",
+      "Jun 13",
       "Jun 20",
-      "Jun 21",
-      "Jun 21",
       "Jun 23",
       "Jun 23",
-      "Jun 23",
-      "Jun 24",
       "Jun 24"
     ],
     "axisLabel": {
@@ -44,7 +45,7 @@ window.momentumOption = {
     "type": "value",
     "min": 40,
     "max": 100,
-    "name": "stack signal",
+    "name": "repo signal",
     "nameTextStyle": {
       "color": "#9dc4e9"
     },
@@ -103,67 +104,75 @@ window.momentumOption = {
       },
       "data": [
         [
-          "Jun 20",
-          58,
-          "Imatrix scale search",
-          "864f263",
-          "Quant",
-          "#84eaff"
+          "Jun 5",
+          56,
+          "Prune ROCmFP4 scale search",
+          "27b4801",
+          "Backend",
+          "#0a6dff"
         ],
         [
-          "Jun 21",
+          "Jun 10",
+          66,
+          "Port Qwen/Gemma/Step MTP",
+          "e766769",
+          "Models",
+          "#4fd8ff"
+        ],
+        [
+          "Jun 11",
           70,
-          "Request-level MTP controls",
-          "c226d1f",
-          "Serve",
-          "#18c8ff"
+          "Add Diffusion Gemma path",
+          "2fc27de / 2cc69b7",
+          "Models",
+          "#4fd8ff"
         ],
         [
-          "Jun 21",
-          82,
-          "Dynamic Drafting",
-          "7be6304 / ac7e259",
-          "Serve",
-          "#18c8ff"
+          "Jun 13",
+          74,
+          "Clarify AMD build support",
+          "1c566e9",
+          "Docs",
+          "#ffffff"
+        ],
+        [
+          "Jun 13",
+          78,
+          "Add CM2 vector decode",
+          "1c1d4f5 / 4860505 / 4795079",
+          "Backend",
+          "#0a6dff"
+        ],
+        [
+          "Jun 20",
+          80,
+          "Use imatrix scale search",
+          "864f263",
+          "Format",
+          "#84eaff"
         ],
         [
           "Jun 23",
           84,
-          "Decode hot paths",
-          "547321d / c3342ee",
-          "Kernel",
-          "#0a6dff"
-        ],
-        [
-          "Jun 23",
-          78,
-          "Speculative state safety",
-          "c823b4c / 7a4f009",
-          "Safety",
+          "Support EAGLE3 state",
+          "7a4f009",
+          "Speculative",
           "#7bb7ff"
         ],
         [
           "Jun 23",
           88,
-          "Step MTP3 heads",
+          "Support Step MTP3 heads",
           "11d76c2",
-          "Models",
-          "#4fd8ff"
+          "Speculative",
+          "#7bb7ff"
         ],
         [
           "Jun 24",
-          92,
-          "MTP profiles and preflight",
-          "db24788",
-          "Proof",
-          "#ffffff"
-        ],
-        [
-          "Jun 24",
-          86,
-          "Benchmark tables",
-          "9157acd",
-          "Proof",
+          90,
+          "Add safety/profile docs",
+          "db24788 / 9157acd / e22278e",
+          "Docs",
           "#ffffff"
         ]
       ]
@@ -174,7 +183,7 @@ window.momentumOption = {
 window.momentumOption.tooltip.formatter = function(params) {
   var p = params[0];
   var d = p.data;
-  return "<b>" + d[2] + "</b><br/>" + d[0] + " · " + d[4] + "<br/>commit " + d[3] + "<br/>stack signal " + d[1];
+  return "<b>" + d[2] + "</b><br/>" + d[0] + " · " + d[4] + "<br/>commit " + d[3] + "<br/>repo signal " + d[1];
 };
 window.momentumOption.series[0].label.formatter = function(params) {
   return params.data[4];

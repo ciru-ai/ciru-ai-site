@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>The Draft Engine That Became a Stack</title>
+  <title>How My ROCmFP4 Work Became a Workbench</title>
   <link rel="stylesheet" href="/carlostheme/report.css">
 </head>
 <body>
@@ -11,13 +11,13 @@
     <section class="hero">
       <div class="hero-copy">
         <p class="eyebrow">Italianclownz / charlie12345</p>
-        <h1>The Draft Engine That Became a Stack</h1>
+        <h1>How My ROCmFP4 Work Became a Workbench</h1>
         <p class="lede">
-          The meaningful moment in Charlie's recent development work is the
-          June 21-24 run where ROCmFPX stopped looking like only a custom
-          quant format and became an adaptive AMD serving stack: model-weight
-          formats, decode kernels, request-level MTP controls, safety gates,
-          and benchmark evidence moving together.
+          My most meaningful development moment was not a single benchmark. It
+          was the stretch where my ROCmFP4 and ROCmFPX work started looking
+          like a usable AMD inference path: explicit GGUF formats, AMD build
+          instructions, backend decode coverage, speculative model support, and
+          repo notes other people could audit.
         </p>
         <div class="hero-actions">
           <a class="button-link" href="https://x.com/Italianclownz">X / @Italianclownz</a>
@@ -32,8 +32,8 @@
           <div class="profile-row">
             <img class="profile-photo" src="/carlostheme/assets/italianclownz-pfp.jpg" alt="Italianclownz profile photo">
             <div>
-              <p class="profile-name">Carlo Pasquale</p>
-              <p class="profile-role">Git author `caf`, GitHub owner `charlie12345`, X handle `@Italianclownz`.</p>
+              <p class="profile-name">Italianclownz</p>
+              <p class="profile-role">I publish code as `caf` in repos owned by `charlie12345`; my public links are X `@Italianclownz` and GitHub `charlie12345`.</p>
             </div>
           </div>
           <div class="contact-links">
@@ -55,40 +55,39 @@
     <section class="section">
       <div class="section-head">
         <p class="eyebrow">The inflection</p>
-        <h2>From artifact to operating discipline.</h2>
+        <h2>From format work to an AMD workbench.</h2>
         <p>
-          The strongest story is not a single speed trick. The artifacts point
-          to a coupled local-inference system: AMD-shaped GGUF tensor formats,
-          tensor-aware recipes, GPU decode paths, MTP request policy, and
-          validation scaffolding designed to agree with each other.
+          The useful shift in my recent work is that the pieces started serving
+          one operating goal: make low-bit AMD inference buildable, explainable,
+          and testable in the open. The claim here is limited to my public repos
+          and commit history.
         </p>
       </div>
 
       <div class="grid three">
         <article class="card">
-          <h3>1. Weight formats became AMD-native.</h3>
+          <h3>1. I kept the format explicit.</h3>
           <p>
-            ROCmFPX is documented as real GGUF model-weight formats, not a
-            K/V-only compression trick. FP3, FP4, FP6, and FP8 share a 32-weight
-            block discipline with finite UE4M3 scale bytes and direct CPU,
-            HIP/ROCm, and Vulkan coverage.
+            ROCmFPX and ROCmFP4 are treated as model-weight format work in
+            GGUF, with block structure, scale handling, and CPU, HIP/ROCm, and
+            Vulkan implementation paths described in the repos instead of being
+            hidden behind one speed claim.
           </p>
         </article>
         <article class="card">
-          <h3>2. Agent work became a routing problem.</h3>
+          <h3>2. I made AMD builds a first-class path.</h3>
           <p>
-            The newer recipes treat the model as zones of risk: protect
-            embeddings, attention, selected FFN paths, and other tensors that
-            decide whether JSON, tool calls, chat, and code stay coherent.
+            The `rocmfp4-llama` docs and scripts call out AMD architecture
+            choices and ROCm/Vulkan build routes so RDNA and Strix-class users
+            can reproduce the fork instead of rediscovering the flags.
           </p>
         </article>
         <article class="card">
-          <h3>3. Serving became adaptive.</h3>
+          <h3>3. I kept widening model coverage.</h3>
           <p>
-            Request-level speculative fields let clients lower draft risk
-            without restarting the server. Dynamic Drafting then scopes feedback
-            by mode, backend, model, and context instead of using one blunt
-            `n_max` everywhere.
+            My commits move through Qwen, Gemma, Step, Diffusion Gemma, and
+            related MTP/speculative paths. That matters because a format fork
+            becomes useful when it survives more than one model family.
           </p>
         </article>
       </div>
@@ -97,31 +96,30 @@
     <section class="section alt">
       <img class="token-ribbon" src="/carlostheme/assets/token-ribbon-rgba.png" alt="">
       <div class="section-head">
-        <p class="eyebrow">June 20-24, 2026</p>
-        <h2>The week the parts snapped together.</h2>
+        <p class="eyebrow">June 2026</p>
+        <h2>The week the repo started reading like a stack.</h2>
         <p>
           This chart was generated from Python as an ECharts option file. It
-          is a compact reading of the commit arc: quantization, request policy,
-          kernel speed, checkpoint safety, new speculative model families, and
-          public benchmark/profile scaffolding.
+          traces my public repo arc: scale-search cleanup, AMD build docs,
+          MTP/model-family ports, Diffusion Gemma support, Vulkan CM2 decode
+          work, EAGLE3/Step speculative support, and benchmark/profile docs.
         </p>
       </div>
 
       <div class="moment">
         <article class="card">
-          <h3>Best interpretation</h3>
+          <h3>What I was trying to make real</h3>
           <p>
-            Charlie's most meaningful moment here is the shift from format
-            invention to system integration. The code starts acting as if local
-            inference speed is only real when the model file, GPU kernels,
-            K/V policy, MTP heads, request shape, and measurement protocol all
-            agree.
+            I wanted the work to be more than a patch people admire from a
+            distance. The useful version is a path somebody can clone, build for
+            AMD hardware, run against real model families, and inspect through
+            plain repo evidence.
           </p>
           <p>
-            That is why `ROCmFPX` main and the experimental branch matter
-            together: main shows granular engineering movement; the experimental
-            branch packages safety, profiles, and tables so other people can
-            actually test the work.
+            Some commits integrate upstream and community work; the story I am
+            claiming here is my maintenance and integration work in the
+            `charlie12345` repos, plus the choices that made the fork easier to
+            test.
           </p>
         </article>
 
@@ -133,42 +131,40 @@
 
     <section class="section">
       <div class="section-head">
-        <p class="eyebrow">Evidence with teeth</p>
-        <h2>The artifacts make the claim auditable.</h2>
+        <p class="eyebrow">Repo evidence</p>
+        <h2>The proof is the work people can inspect.</h2>
       </div>
 
       <div class="grid three">
         <article class="card">
-          <h3>Decode and generation gains</h3>
-          <span class="metric">27.6 vs 15.7</span>
+          <h3>Build surface</h3>
+          <span class="metric">AMD-first</span>
           <p>
-            The local ROCmFP4 comparison records 27B MTP ROCmFP4 at `27.6`
-            decode tok/s versus UD-Q5_K_XL at `15.7` on ROCm0, with the same
-            merged binary and shared MTP settings.
+            The fork includes AMD-focused build notes and scripts instead of
+            treating ROCm and Vulkan as afterthoughts.
           </p>
-          <p class="subline">Source: local ROCmFP4 MTP comparison notes.</p>
+          <p class="subline">Source: `rocmfp4-llama` build docs and commits.</p>
         </article>
 
         <article class="card">
-          <h3>FP6 quality recovered</h3>
-          <span class="metric">0.78</span>
+          <h3>Model coverage</h3>
+          <span class="metric">Qwen / Gemma / Step</span>
           <p>
-            The Chadrockv2 ROCmFP6 STRIX QUALITY lane reports HermesAgent-20
-            `0.78`, beating the Unsloth Q6 baseline's `0.76`, while also
-            reporting `155/164` HumanEval+.
+            Recent commits touch multiple model families and speculative/MTP
+            paths, which is the difference between a demo branch and a
+            maintainable inference fork.
           </p>
-          <p class="subline">Source: Chadrockv2 ROCmFP6 STRIX QUALITY model card.</p>
+          <p class="subline">Source: `ROCmFPX` and `rocmfp4-llama` commit history.</p>
         </article>
 
         <article class="card">
-          <h3>MTP can become the headline</h3>
-          <span class="metric">105-106</span>
+          <h3>Backend coverage</h3>
+          <span class="metric">CPU / HIP / Vulkan</span>
           <p>
-            The Crown Dynamic 35B A3B Strix profile reports structured decode
-            slices around `105-106` tok/s with `97-99%` draft acceptance at MTP
-            depth 4.
+            The low-bit format work stays connected to execution paths,
+            including HIP/ROCm support and Vulkan CM2/vector-decode commits.
           </p>
-          <p class="subline">Source: Crown Dynamic MTP v7 model card.</p>
+          <p class="subline">Source: backend commits in the public repos.</p>
         </article>
       </div>
     </section>
@@ -176,44 +172,39 @@
     <section class="section alt">
       <div class="section-head">
         <p class="eyebrow">What changed technically</p>
-        <h2>The stack got reflexes.</h2>
+        <h2>The work became easier to build, test, and extend.</h2>
       </div>
 
       <div class="grid two">
         <article class="card">
-          <h3>Dynamic Drafting</h3>
+          <h3>Format discipline</h3>
           <p>
-            The serving path can inspect prompt length and workload mode, inject
-            speculative request fields, record accepted draft tokens, and adjust
-            future draft depth. JSON/tool requests can be conservative; coding
-            prompts can try deeper drafts.
+            I kept ROCmFPX and ROCmFP4 tied to explicit GGUF block and scale
+            behavior plus backend implementation notes. That makes a low-bit
+            format easier to reason about than a loose speed claim.
           </p>
         </article>
         <article class="card">
-          <h3>Speculative model diversity</h3>
+          <h3>AMD build discipline</h3>
           <p>
-            Qwen EAGLE3 state restore and Step MTP3 chained-head support extend
-            the speculative layer beyond one happy path. The same driver learns
-            to handle shared memory, single-head MTP, and multi-head Step-style
-            drafting.
+            I added and maintained architecture-aware build paths and docs so
+            the repo can be used on AMD systems without rediscovering the same
+            flags.
           </p>
         </article>
         <article class="card">
-          <h3>FP6 decode paths</h3>
+          <h3>Speculative model support</h3>
           <p>
-            The Vulkan FP6 work moves toward aligned vector dequant and safer
-            packed-bit handling in matvec, matmul, and Flash Attention paths.
-            That is the kernel-side reason compressed weights can still feed a
-            fast speculative loop.
+            EAGLE3 and Step MTP3 support show the speculative layer being
+            adapted to different state and head layouts instead of being locked
+            to one path.
           </p>
         </article>
         <article class="card">
-          <h3>Proof discipline</h3>
+          <h3>Decode coverage</h3>
           <p>
-            Preflight scripts, model capability detection, strict benchmark
-            settings, and README tables make the work easier to reproduce and
-            easier to challenge. That is the difference between a fork trick and
-            a useful local-inference workflow.
+            Vulkan CM2/vector decode and related backend work keep the
+            compressed formats connected to real execution paths.
           </p>
         </article>
       </div>
@@ -222,27 +213,23 @@
     <section class="section">
       <div class="section-head">
         <p class="eyebrow">Sources used</p>
-        <h2>Primary and local artifacts.</h2>
+        <h2>Public repos only for attribution.</h2>
       </div>
       <div class="source-list">
         <div class="source-item">
           GitHub: <a href="https://github.com/charlie12345/ROCmFPX">charlie12345/ROCmFPX</a>,
-          including commits `c226d1f`, `ac7e259`, `c3342ee`, `7a4f009`,
-          `11d76c2`, `db24788`, and `9157acd`.
+          including commits `864f263`, `547321d`, `c3342ee`, `7a4f009`,
+          `11d76c2`, `db24788`, `9157acd`, and `e22278e`.
         </div>
         <div class="source-item">
           GitHub: <a href="https://github.com/charlie12345/rocmfp4-llama">charlie12345/rocmfp4-llama</a>,
-          especially the June 10-13 MTP, Diffusion Gemma, and Vulkan CM2
-          vector-decode work on `mtp-rocmfp4-strix`.
+          including commits `27b4801`, `e766769`, `2fc27de`, `2cc69b7`,
+          `1c566e9`, `1c1d4f5`, `4860505`, and `4795079`.
         </div>
         <div class="source-item">
-          Local: `/srv/desktop-data/cirudata/charlie12345-rocmfpx-innovation.me`
-          and `/srv/desktop-data/cirudata/research/rocmfp4-rocmfpx-speed-technical-report-2026-06-25.md`.
-        </div>
-        <div class="source-item">
-          Local model cards:
-          `/home/crown/hf-chadrockv2-qwen36-27b-rocmfp6-strix-quality/README.md`
-          and `/home/crown/hf-crown-dynamic-mtp/README.md`.
+          Attribution boundary: this report only claims work visible in my
+          public `charlie12345` repositories and does not attribute unrelated
+          benchmark, model-card, or local artifacts to me.
         </div>
       </div>
     </section>
@@ -250,8 +237,8 @@
     <footer class="footer">
       Profile image sourced from current X profile metadata for
       <a href="https://x.com/Italianclownz">@Italianclownz</a> on 2026-06-26.
-      Commit identity note: recent technical commits are authored as `caf` in
-      repositories owned by `charlie12345`.
+      Commit identity note: the recent technical commits cited here are authored
+      as `caf` in repositories owned by `charlie12345`.
     </footer>
   </main>
 

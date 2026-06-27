@@ -1,13 +1,13 @@
 ---
 name: italianclownz-blueprint-theme
-description: "Create polished @Italianclownz / charlie12345 technical webpages, reports, profile pages, release notes, and research artifacts using the dark/light blue Blueprint theme: high-contrast blue gradients, deep cut-corner cards, angled technical composition, friendly top-right profile/contact treatment, transparent RGBA image assets, and Python-generated ECharts data. Use when Codex is asked to make pages or reports for Italianclownz, Charlie, charlie12345, ROCmFP4, ROCmFPX, AMD Strix Halo, MTP, speculative decoding, or related local-inference work in this visual style."
+description: "Create polished @Italianclownz / charlie12345 technical webpages, reports, profile pages, release notes, and research artifacts using the dark/light blue Blueprint theme: high-contrast blue gradients, deep cut-corner cards, angled technical composition, friendly top-right profile/contact treatment, transparent RGBA image assets, strict attribution boundaries, first-person personal-report voice when requested, and Python-generated ECharts data. Use when Codex is asked to make pages or reports for Italianclownz, charlie12345, ROCmFP4, ROCmFPX, MTP, speculative decoding, or related AMD inference work in this visual style."
 ---
 
 # Italianclownz Blueprint Theme
 
 ## Overview
 
-Use this skill to build a distinctive technical page family for Carlo Pasquale
+Use this skill to build a distinctive technical page family for Italianclownz
 (`@Italianclownz`, `charlie12345`). The look should feel like a precision AMD
 inference workbench: dark/light blue gradients, hard angles, cut corners,
 transparent blue technical ornaments, and readable evidence-first content.
@@ -16,7 +16,9 @@ transparent blue technical ornaments, and readable evidence-first content.
 
 1. Start from the content goal: profile page, development report, release page,
    artifact index, or benchmark summary.
-2. Read `references/theme-spec.md` before designing or coding.
+2. Use the Theme Spec and Content Integrity Rules below. If this skill is
+   installed as a full folder and includes `references/theme-spec.md`, read that
+   file before designing or coding.
 3. Copy the reusable assets from `assets/` into the project, preserving
    filenames unless the target project already has a naming scheme.
 4. Put the profile/contact module near the top right on desktop and near the
@@ -37,6 +39,23 @@ transparent blue technical ornaments, and readable evidence-first content.
    text, cramped cards, blank charts, and rectangular-looking transparent image
    placements before finishing.
 
+## Content Integrity Rules
+
+- When a requested report is meant to be from Italianclownz's perspective, write
+  in first person. Use `I`, `my`, and `the work I maintained` rather than
+  third-person profile language.
+- Attribute work only to public `charlie12345` repositories, commits authored
+  as `caf`, his X/GitHub profile, or sources the user explicitly says are his.
+- Do not attribute unrelated organization work, model-card releases, benchmark
+  notes, local artifacts, or user-created artifacts to Italianclownz unless a
+  source explicitly shows he authored them.
+- For a "meaningful moment" development report, prefer repo-visible artifacts:
+  ROCmFPX/ROCmFP4 format work, AMD build support, model-family coverage,
+  backend decode paths, speculative/MTP support, docs, profiles, and benchmark
+  tables that live in the `charlie12345` repos.
+- If external artifacts are included for comparison or impact context, label
+  them as external and do not write as if Italianclownz created them.
+
 ## Non-Negotiables
 
 - Use dark blue, light blue, cyan, and near-white contrast.
@@ -50,6 +69,22 @@ transparent blue technical ornaments, and readable evidence-first content.
 - Do not put a card inside another card.
 - Do not embed square/rectangular generated-image backgrounds. Use RGBA PNGs
   as irregular overlays or ornaments.
+
+## Theme Spec
+
+- Primary surfaces: `#050b18`, `#07172d`, and `#0a2d56`.
+- Accent gradients: `#0a6dff`, `#18c8ff`, and `#84eaff`.
+- Text: `#eef8ff`; secondary text: `#9dc4e9`.
+- Cards use cut corners, one-pixel cyan/blue translucent borders, deep navy
+  shadows, and small cyan highlights. Use `clip-path` geometry rather than
+  rounded pastel panels.
+- Use full-width bands and unframed layouts for page structure. Cards are for
+  repeated facts, evidence items, compact profile/contact modules, and charts.
+- Hero layout should have a direct title, one-paragraph thesis, top-right
+  profile/contact module, and an oversized irregular RGBA ornament.
+- Generate chart data/options with Python. Render with Apache ECharts in the
+  browser, using transparent backgrounds, cyan/blue series colors, low-contrast
+  grid lines, and readable mobile labels.
 
 ## Assets
 
