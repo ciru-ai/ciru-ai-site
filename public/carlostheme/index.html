@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Draft Engine That Became a Stack</title>
+  <link rel="stylesheet" href="report.css">
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Italianclownz / charlie12345</p>
+        <h1>The Draft Engine That Became a Stack</h1>
+        <p class="lede">
+          The meaningful moment in Charlie's recent development work is the
+          June 21-24 run where ROCmFPX stopped looking like only a custom
+          quant format and became an adaptive AMD serving stack: model-weight
+          formats, decode kernels, request-level MTP controls, safety gates,
+          and benchmark evidence moving together.
+        </p>
+        <div class="hero-actions">
+          <a class="button-link" href="https://x.com/Italianclownz">X / @Italianclownz</a>
+          <a class="button-link secondary" href="https://github.com/charlie12345">GitHub / charlie12345</a>
+          <a class="button-link secondary" href="SKILL.md" download>Download Skill.md</a>
+        </div>
+      </div>
+
+      <aside class="profile-module" aria-label="Contact">
+        <img class="profile-orbit" src="assets/profile-orbit-rgba.png" alt="">
+        <div class="profile-card">
+          <div class="profile-row">
+            <img class="profile-photo" src="assets/italianclownz-pfp.jpg" alt="Italianclownz profile photo">
+            <div>
+              <p class="profile-name">Carlo Pasquale</p>
+              <p class="profile-role">Git author `caf`, GitHub owner `charlie12345`, X handle `@Italianclownz`.</p>
+            </div>
+          </div>
+          <div class="contact-links">
+            <a class="contact-link" href="https://x.com/Italianclownz">
+              <span class="contact-label">X</span>
+              <span class="contact-value">x.com/Italianclownz</span>
+            </a>
+            <a class="contact-link" href="https://github.com/charlie12345">
+              <span class="contact-label">GitHub</span>
+              <span class="contact-value">github.com/charlie12345</span>
+            </a>
+          </div>
+        </div>
+      </aside>
+
+      <img class="hero-art" src="assets/engine-core-rgba.png" alt="">
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <p class="eyebrow">The inflection</p>
+        <h2>From artifact to operating discipline.</h2>
+        <p>
+          The strongest story is not a single speed trick. The artifacts point
+          to a coupled local-inference system: AMD-shaped GGUF tensor formats,
+          tensor-aware recipes, GPU decode paths, MTP request policy, and
+          validation scaffolding designed to agree with each other.
+        </p>
+      </div>
+
+      <div class="grid three">
+        <article class="card">
+          <h3>1. Weight formats became AMD-native.</h3>
+          <p>
+            ROCmFPX is documented as real GGUF model-weight formats, not a
+            K/V-only compression trick. FP3, FP4, FP6, and FP8 share a 32-weight
+            block discipline with finite UE4M3 scale bytes and direct CPU,
+            HIP/ROCm, and Vulkan coverage.
+          </p>
+        </article>
+        <article class="card">
+          <h3>2. Agent work became a routing problem.</h3>
+          <p>
+            The newer recipes treat the model as zones of risk: protect
+            embeddings, attention, selected FFN paths, and other tensors that
+            decide whether JSON, tool calls, chat, and code stay coherent.
+          </p>
+        </article>
+        <article class="card">
+          <h3>3. Serving became adaptive.</h3>
+          <p>
+            Request-level speculative fields let clients lower draft risk
+            without restarting the server. Dynamic Drafting then scopes feedback
+            by mode, backend, model, and context instead of using one blunt
+            `n_max` everywhere.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <img class="token-ribbon" src="assets/token-ribbon-rgba.png" alt="">
+      <div class="section-head">
+        <p class="eyebrow">June 20-24, 2026</p>
+        <h2>The week the parts snapped together.</h2>
+        <p>
+          This chart was generated from Python as an ECharts option file. It
+          is a compact reading of the commit arc: quantization, request policy,
+          kernel speed, checkpoint safety, new speculative model families, and
+          public benchmark/profile scaffolding.
+        </p>
+      </div>
+
+      <div class="moment">
+        <article class="card">
+          <h3>Best interpretation</h3>
+          <p>
+            Charlie's most meaningful moment here is the shift from format
+            invention to system integration. The code starts acting as if local
+            inference speed is only real when the model file, GPU kernels,
+            K/V policy, MTP heads, request shape, and measurement protocol all
+            agree.
+          </p>
+          <p>
+            That is why `ROCmFPX` main and the experimental branch matter
+            together: main shows granular engineering movement; the experimental
+            branch packages safety, profiles, and tables so other people can
+            actually test the work.
+          </p>
+        </article>
+
+        <article class="card chart-card">
+          <div id="momentum-chart" class="chart" role="img" aria-label="ROCmFPX milestone chart"></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <p class="eyebrow">Evidence with teeth</p>
+        <h2>The artifacts make the claim auditable.</h2>
+      </div>
+
+      <div class="grid three">
+        <article class="card">
+          <h3>Decode and generation gains</h3>
+          <span class="metric">27.6 vs 15.7</span>
+          <p>
+            The local ROCmFP4 comparison records 27B MTP ROCmFP4 at `27.6`
+            decode tok/s versus UD-Q5_K_XL at `15.7` on ROCm0, with the same
+            merged binary and shared MTP settings.
+          </p>
+          <p class="subline">Source: local ROCmFP4 MTP comparison notes.</p>
+        </article>
+
+        <article class="card">
+          <h3>FP6 quality recovered</h3>
+          <span class="metric">0.78</span>
+          <p>
+            The Chadrockv2 ROCmFP6 STRIX QUALITY lane reports HermesAgent-20
+            `0.78`, beating the Unsloth Q6 baseline's `0.76`, while also
+            reporting `155/164` HumanEval+.
+          </p>
+          <p class="subline">Source: Chadrockv2 ROCmFP6 STRIX QUALITY model card.</p>
+        </article>
+
+        <article class="card">
+          <h3>MTP can become the headline</h3>
+          <span class="metric">105-106</span>
+          <p>
+            The Crown Dynamic 35B A3B Strix profile reports structured decode
+            slices around `105-106` tok/s with `97-99%` draft acceptance at MTP
+            depth 4.
+          </p>
+          <p class="subline">Source: Crown Dynamic MTP v7 model card.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="section-head">
+        <p class="eyebrow">What changed technically</p>
+        <h2>The stack got reflexes.</h2>
+      </div>
+
+      <div class="grid two">
+        <article class="card">
+          <h3>Dynamic Drafting</h3>
+          <p>
+            The serving path can inspect prompt length and workload mode, inject
+            speculative request fields, record accepted draft tokens, and adjust
+            future draft depth. JSON/tool requests can be conservative; coding
+            prompts can try deeper drafts.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Speculative model diversity</h3>
+          <p>
+            Qwen EAGLE3 state restore and Step MTP3 chained-head support extend
+            the speculative layer beyond one happy path. The same driver learns
+            to handle shared memory, single-head MTP, and multi-head Step-style
+            drafting.
+          </p>
+        </article>
+        <article class="card">
+          <h3>FP6 decode paths</h3>
+          <p>
+            The Vulkan FP6 work moves toward aligned vector dequant and safer
+            packed-bit handling in matvec, matmul, and Flash Attention paths.
+            That is the kernel-side reason compressed weights can still feed a
+            fast speculative loop.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Proof discipline</h3>
+          <p>
+            Preflight scripts, model capability detection, strict benchmark
+            settings, and README tables make the work easier to reproduce and
+            easier to challenge. That is the difference between a fork trick and
+            a useful local-inference workflow.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <p class="eyebrow">Sources used</p>
+        <h2>Primary and local artifacts.</h2>
+      </div>
+      <div class="source-list">
+        <div class="source-item">
+          GitHub: <a href="https://github.com/charlie12345/ROCmFPX">charlie12345/ROCmFPX</a>,
+          including commits `c226d1f`, `ac7e259`, `c3342ee`, `7a4f009`,
+          `11d76c2`, `db24788`, and `9157acd`.
+        </div>
+        <div class="source-item">
+          GitHub: <a href="https://github.com/charlie12345/rocmfp4-llama">charlie12345/rocmfp4-llama</a>,
+          especially the June 10-13 MTP, Diffusion Gemma, and Vulkan CM2
+          vector-decode work on `mtp-rocmfp4-strix`.
+        </div>
+        <div class="source-item">
+          Local: `/srv/desktop-data/cirudata/charlie12345-rocmfpx-innovation.me`
+          and `/srv/desktop-data/cirudata/research/rocmfp4-rocmfpx-speed-technical-report-2026-06-25.md`.
+        </div>
+        <div class="source-item">
+          Local model cards:
+          `/home/crown/hf-chadrockv2-qwen36-27b-rocmfp6-strix-quality/README.md`
+          and `/home/crown/hf-crown-dynamic-mtp/README.md`.
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      Profile image sourced from current X profile metadata for
+      <a href="https://x.com/Italianclownz">@Italianclownz</a> on 2026-06-26.
+      Commit identity note: recent technical commits are authored as `caf` in
+      repositories owned by `charlie12345`.
+    </footer>
+  </main>
+
+  <script src="assets/echarts.min.js"></script>
+  <script src="momentum-options.js"></script>
+  <script>
+    const chartElement = document.getElementById("momentum-chart");
+    const chart = echarts.init(chartElement, null, { renderer: "canvas" });
+    chart.setOption(window.momentumOption);
+    window.addEventListener("resize", () => chart.resize());
+  </script>
+</body>
+</html>
