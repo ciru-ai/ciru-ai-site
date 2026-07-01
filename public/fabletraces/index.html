@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fable 5 Trace Dataset Collection</title>
+  <style>
+    :root { color-scheme: dark; --bg:#0d0f12; --panel:#171b20; --text:#f4f5f6; --muted:#aab1ba; --line:#2b323b; --accent:#38c8a8; }
+    body { margin:0; font:15px/1.5 Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif; background:var(--bg); color:var(--text); }
+    main { max-width:1120px; margin:0 auto; padding:48px 20px 72px; }
+    h1 { font-size:34px; line-height:1.1; margin:0 0 12px; letter-spacing:0; }
+    h2 { margin:34px 0 12px; font-size:20px; }
+    p { color:var(--muted); max-width:860px; }
+    a { color:var(--accent); text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    .stats { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin:24px 0; }
+    .stat { border:1px solid var(--line); background:var(--panel); border-radius:6px; padding:14px; }
+    .stat strong { display:block; font-size:22px; color:var(--text); }
+    .stat span { color:var(--muted); }
+    table { width:100%; border-collapse:collapse; margin-top:12px; border:1px solid var(--line); }
+    th, td { padding:10px 12px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+    th { color:#dfe4ea; background:#12161a; }
+    code { font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size:13px; }
+    .links { display:flex; flex-wrap:wrap; gap:12px; margin-top:20px; }
+    .links a { border:1px solid var(--line); border-radius:6px; padding:8px 10px; background:var(--panel); }
+    @media (max-width:760px) { .stats { grid-template-columns:1fr; } table { font-size:13px; } th, td { padding:8px; } }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Fable 5 Trace Dataset Collection</h1>
+  <p>Curated Hugging Face Fable 5 trace datasets collected for internal model-research work. Large files are mirrored in Cloudflare R2 as compressed dataset snapshots.</p>
+  <div class="stats">
+    <div class="stat"><strong>15</strong><span>dataset archives</span></div>
+    <div class="stat"><strong>2.46 GB</strong><span>compressed mirror</span></div>
+    <div class="stat"><strong>2026-07-01</strong><span>collection date</span></div>
+  </div>
+  <div class="links">
+    <a href="https://pub-fb4e398367f44b9f98ef47acef1ce3e4.r2.dev/asset-manifest.json">asset manifest</a>
+    <a href="https://pub-fb4e398367f44b9f98ef47acef1ce3e4.r2.dev/SHA256SUMS">SHA256SUMS</a>
+    <a href="https://pub-fb4e398367f44b9f98ef47acef1ce3e4.r2.dev/collection.json">collection JSON</a>
+    <a href="https://pub-fb4e398367f44b9f98ef47acef1ce3e4.r2.dev/collection.md">research notes</a>
+  </div>
+  <h2>Dataset Archives</h2>
+  <table>
+    <thead><tr><th>Dataset</th><th>Size</th><th>Object</th><th>SHA-256 prefix</th></tr></thead>
+    <tbody>
+      <tr><td><code>AlinCiocan__fable-5-claude-code-traces</code></td><td>0.018 GB</td><td><a href="https://pub-fb4e398367f44b9f98ef47acef1ce3e4.r2.dev/datasets/AlinCiocan__fable-5-claude-code-traces.tar.zst">download</a></td><td><code>d497ce886d0bf367...</code></td></tr><tr><td><code>Crownelius__Complete-FABLE.5-traces-2M</code></td><td>2.077 GB</td><td><a href="https://pub-fb4e398367f44b9f98ef47acef1ce3e4.r2.dev/datasets/Crownelius__Complete-FABLE.5-traces-2M.tar.zst">download</a></td><td><code>2d886a858a8269da...</code></td></tr><tr><td><code>Glint-Research__Fable-5-traces</code></td><td>0.029 GB</td><td><a href="https://pub-fb4e398367f44b9f98ef47acef1ce3e4.r2.dev/datasets/Glint-Research__Fable-5-traces.tar.zst">download</a></td><td><code>6efaa7532f515482...</code></td></tr><tr><td><code>Nexlab__fable5-agentic-coding-sft</code></td><td>0.188 GB</td><td><a href="https://pub-fb4e398367f44b9f98ef47acef1ce3e4.r2.dev/datasets/Nexlab__fable5-agentic-coding-sft.tar.zst">download</a></td><td><code>e32e4ee1931dc03f...</code></td></tr><tr><td><code>PawanKrd__claude-fable-5-code</code></td><td>0.001 GB</td><td><a href="https://pub-fb4e398367f44b9f98ef47acef1ce3e4.r2.dev/datasets/PawanKrd__claude-fable-5-code.tar.zst">download</a></td><td><code>ab3d46dd86192246...</code></td></tr><tr><td><code>Swarm-AI-Research__fable5-traces-sft</code></td><td>0.007 GB</td><td><a href="https://pub-fb4e398367f44b9f98ef47acef1ce3e4.r2.dev/datasets/Swarm-AI-Research__fable5-traces-sft.tar.zst">download</a></td><td><code>34198603804faa07...</code></td></tr><tr><td><code>WithinUsAI__fable_5_distillation_merged_cleaned_25k</code></td><td>0.047 GB</td><td><a href="https://pub-fb4e398367f44b9f98ef47acef1ce3e4.r2.dev/datasets/WithinUsAI__fable_5_distillation_merged_cleaned_25k.tar.zst">download</a></td><td><code>39e029d49864c85c...</code></td></tr><tr><td><code>armand0e__claude-fable-5-claude-code</code></td><td>0.019 GB</td><td><a href="https://pub-fb4e398367f44b9f98ef47acef1ce3e4.r2.dev/datasets/armand0e__claude-fable-5-claude-code.tar.zst">download</a></td><td><code>870ec03d94245e4b...</code></td></tr><tr><td><code>cfahlgren1__Fable-5-traces</code></td><td>0.015 GB</td><td><a href="https://pub-fb4e398367f44b9f98ef47acef1ce3e4.r2.dev/datasets/cfahlgren1__Fable-5-traces.tar.zst">download</a></td><td><code>05596fb53e20d157...</code></td></tr><tr><td><code>kelexine__fable-5-sft-traces</code></td><td>0.024 GB</td><td><a href="https://pub-fb4e398367f44b9f98ef47acef1ce3e4.r2.dev/datasets/kelexine__fable-5-sft-traces.tar.zst">download</a></td><td><code>0149fb87d617ea24...</code></td></tr><tr><td><code>lordx64__agentic-distill-fable-5-sft</code></td><td>0.011 GB</td><td><a href="https://pub-fb4e398367f44b9f98ef47acef1ce3e4.r2.dev/datasets/lordx64__agentic-distill-fable-5-sft.tar.zst">download</a></td><td><code>46e84e71b19e56ce...</code></td></tr><tr><td><code>lordx64__fable-sft-combined-v2</code></td><td>0.016 GB</td><td><a href="https://pub-fb4e398367f44b9f98ef47acef1ce3e4.r2.dev/datasets/lordx64__fable-sft-combined-v2.tar.zst">download</a></td><td><code>51df49361ec855b6...</code></td></tr><tr><td><code>lordx64__fable-tool-use-sft</code></td><td>0.005 GB</td><td><a href="https://pub-fb4e398367f44b9f98ef47acef1ce3e4.r2.dev/datasets/lordx64__fable-tool-use-sft.tar.zst">download</a></td><td><code>2f5a0b3506eafe44...</code></td></tr><tr><td><code>notune__fable5-repos</code></td><td>0.000 GB</td><td><a href="https://pub-fb4e398367f44b9f98ef47acef1ce3e4.r2.dev/datasets/notune__fable5-repos.tar.zst">download</a></td><td><code>2b88ef33ad76a83e...</code></td></tr><tr><td><code>suayptalha__fable-5-claude-code</code></td><td>0.003 GB</td><td><a href="https://pub-fb4e398367f44b9f98ef47acef1ce3e4.r2.dev/datasets/suayptalha__fable-5-claude-code.tar.zst">download</a></td><td><code>d190347f33c5d152...</code></td></tr>
+    </tbody>
+  </table>
+  <h2>Notes</h2>
+  <p><code>notune/fable5-repos</code> is metadata-only here; the full repository tarball payload was intentionally skipped. The Qwable-5-27B-Coder model card does not publicly identify its exact Fable seed dataset; this collection preserves the closest public Fable 5 trace sources found during the research pass.</p>
+</main>
+</body>
+</html>
