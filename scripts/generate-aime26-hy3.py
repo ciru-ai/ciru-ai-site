@@ -14,7 +14,7 @@ import zstandard
 
 RUN = Path(os.environ["AIME26_RUN_DIR"])
 OUTPUT = Path(__file__).resolve().parents[1] / "public/aime26/hy3-data.js"
-SNAPSHOT_PROBLEMS = tuple(range(1, 13))
+SNAPSHOT_PROBLEMS = tuple(range(1, 16))
 
 MODELS = {
     "local": {
@@ -298,6 +298,72 @@ SUMMARIES = {
             "style": "Efficient affine formulation with coordinate verification at all three known spheres.",
         },
     },
+    13: {
+        "local": {
+            "overview": "Reduced the residue-class binomial sums modulo 503 to a single binomial coefficient, then used Lucas’ theorem to identify the zero range.",
+            "steps": [
+                "Applied a 502nd-root-of-unity filter over the field with 503 elements.",
+                "Transformed the sum to S_r congruent to (-1)^r times C(r+40,40).",
+                "Used Lucas’ theorem to find divisibility exactly for r=463 through 501.",
+                "Counted those 39 residue classes and answered 39.",
+            ],
+            "style": "Long finite-field derivation with repeated checks of the endpoint and Lucas-theorem conditions.",
+        },
+        "api": {
+            "overview": "Used the base-503 digits of 10000 and Vandermonde’s identity to collapse each residue sum modulo 503.",
+            "steps": [
+                "Wrote 10000 as 19 times 503 plus 443.",
+                "Applied Lucas’ theorem to each indexed binomial coefficient.",
+                "Observed that nonzero terms satisfy a+b at most 462, so no residue wrap occurs.",
+                "Obtained C(462,r), leaving exactly 39 zero residues.",
+            ],
+            "style": "A cleaner Lucas-and-Vandermonde route, followed by careful inclusive endpoint counting.",
+        },
+    },
+    14: {
+        "local": {
+            "overview": "Encoded the equiangular pentagon with side vectors turning by 72 degrees and related side, diagonal, and perimeter sums.",
+            "steps": [
+                "Let Q be the side-square sum and split pair products into adjacent and nonadjacent sums.",
+                "Used the diagonal-square total to determine the adjacent product sum.",
+                "Used vector closure and cosines of 72 and 144 degrees to determine the nonadjacent sum.",
+                "Computed the perimeter square as 676 sqrt(5), giving 681.",
+            ],
+            "style": "Vector geometry with extensive numerical and regular-pentagon sanity checks.",
+        },
+        "api": {
+            "overview": "Used the same cyclic side-vector invariants to recover the two pair-product sums and hence the perimeter.",
+            "steps": [
+                "Summed the five diagonal-square formulas.",
+                "Solved for the adjacent side-product sum using cos(72 degrees).",
+                "Applied polygon closure to solve for the nonadjacent product sum.",
+                "Simplified the perimeter square to 676 sqrt(5) and answered 681.",
+            ],
+            "style": "Structured invariant derivation with a coordinate-style numerical check at the end.",
+        },
+    },
+    15: {
+        "local": {
+            "overview": "Classified loops as solid strips or hollow frames and attempted to count partitions by the number of frames, but omitted valid non-nested frame layouts.",
+            "steps": [
+                "Converted each loop to an axis-aligned rectangular perimeter.",
+                "Split the count into cases with zero through four hollow frames.",
+                "Counted nested configurations and some sibling configurations.",
+                "Converged on 57, but exhausted the token budget without a boxed answer; the correct count is 83.",
+            ],
+            "style": "Exhaustive but circular case analysis; a false dismissal of side-by-side frames caused the undercount.",
+        },
+        "api": {
+            "overview": "Explored recursive frame-and-strip tilings for the full token budget but never completed a valid enumeration.",
+            "steps": [
+                "Modeled loops as solid width-two rectangles or hollow rectangular frames.",
+                "Tried to constrain possible tilings using area and nesting arguments.",
+                "Revisited several classifications without reaching a complete case count.",
+                "Ended without a submitted answer; the correct count is 83.",
+            ],
+            "style": "Very long exploratory enumeration that remained unfinished at the output limit.",
+        },
+    },
 }
 
 
@@ -339,6 +405,9 @@ def model_record(model_key: str, problem: int) -> tuple[dict, dict]:
         "thinking": thinking,
         "finalResponse": answer,
     }
+    if problem == 15 and not result["correct"]:
+        result["answer"] = "No final answer"
+        result["finalResponse"] = "No boxed answer was submitted before the output limit."
     return record, result
 
 
@@ -358,8 +427,6 @@ def main() -> None:
         api_record, api = model_record("api", problem)
         if local_record["problem"] != api_record["problem"]:
             raise RuntimeError(f"Question mismatch on problem {problem}")
-        if not (local["correct"] and api["correct"]):
-            raise RuntimeError(f"Frozen demo requires two correct completed answers for problem {problem}")
         problems.append(
             {
                 "number": problem,
