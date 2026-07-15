@@ -288,7 +288,7 @@
         <button class="action-button" id="collapse-all" type="button">Collapse all</button>
       </div>
     </div>
-    <div class="callout"><strong>This is a demo snapshot, not the final score.</strong> It includes only problems completed by both systems at the snapshot time. Each summary below is editorial navigation; the expandable trace and final response are the verbatim successful model outputs.</div>
+    <div class="callout"><strong>This is a demo snapshot, not the final score.</strong> It includes only problems completed by both systems at the snapshot time. Generated-token counts include both reasoning and the final response. Each summary below is editorial navigation; the expandable trace and final response are the verbatim successful model outputs.</div>
 
     <main id="problems"><div class="loading">Loading the shared Hy3 snapshot…</div></main>
 
@@ -381,7 +381,7 @@
       node.querySelector('.thinking-style').textContent = `Thinking style: ${model.summary.style}`;
       node.querySelector('.metrics').append(
         metric('answer', model.answer),
-        metric('output tokens', formatNumber(model.tokens)),
+        metric('generated tokens', formatNumber(model.tokens)),
         metric('thinking chars', compactChars(model.thinkingChars))
       );
       const map = node.querySelector('.reasoning-map');
@@ -401,7 +401,7 @@
       const stats = [
         [data.problems.length, 'shared completed problems'],
         [`${correct}/${data.problems.length * 2}`, 'correct model answers'],
-        [formatNumber(tokens), 'combined output tokens'],
+        [formatNumber(tokens), 'generated tokens · reasoning + final'],
         [compactChars(thinking), 'reasoning characters available'],
       ];
       const statRoot = document.getElementById('stats');

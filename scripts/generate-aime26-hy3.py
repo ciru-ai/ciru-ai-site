@@ -14,7 +14,7 @@ import zstandard
 
 RUN = Path(os.environ["AIME26_RUN_DIR"])
 OUTPUT = Path(__file__).resolve().parents[1] / "public/aime26/hy3-data.js"
-SNAPSHOT_PROBLEMS = tuple(range(1, 9))
+SNAPSHOT_PROBLEMS = tuple(range(1, 11))
 
 MODELS = {
     "local": {
@@ -208,6 +208,50 @@ SUMMARIES = {
                 "Evaluate the count as 26244 and reduce it to 244 modulo 1000.",
             ],
             "style": "Concise modular counting, reinforced by a CRT-style parity cross-check.",
+        },
+    },
+    9: {
+        "local": {
+            "overview": "Modeled the six rolls as independent face choices, imposed the visibility constraints for stickers 2, 4, and 6, then counted outcomes with exactly five occupied faces.",
+            "steps": [
+                "Represent the top faces by an ordered sequence f1 through f6.",
+                "Require f2 to avoid all later rolls and f4 to avoid rolls 5 and 6.",
+                "Fix the distinct faces carrying stickers 2 and 4 and count 480 conditioned assignments.",
+                "Count 216 assignments with one blank face, reduce 216/480 to 9/20, and answer 29.",
+            ],
+            "style": "Detailed occupancy counting with inclusion-exclusion and repeated checks of which stickers remain visible.",
+        },
+        "api": {
+            "overview": "Translated sticker visibility into restrictions on repeated die faces and counted the allowed one-repeat patterns under that condition.",
+            "steps": [
+                "Treat each roll as an independent uniform choice among six geometric faces.",
+                "Enforce that no later sticker covers 2 or 4; sticker 6 is automatically visible.",
+                "Classify the valid sequences that occupy exactly five distinct faces.",
+                "Obtain conditional probability 9/20 and return 9+20=29.",
+            ],
+            "style": "Long combinatorial case analysis, ending with a minimal boxed response after several counting cross-checks.",
+        },
+    },
+    10: {
+        "local": {
+            "overview": "Placed both rotated triangles on their common circumcircle, resolved the orientation condition, and computed the cyclic hexagon area from its central sectors.",
+            "steps": [
+                "Use the 13-14-15 triangle's area 84 and circumradius 65/8.",
+                "Determine the rotation angle and the valid circular order of A, A', C, C', B, and B'.",
+                "Express the hexagon as six triangles sharing the circumcenter.",
+                "Evaluate the area as 155.7 and round to 156.",
+            ],
+            "style": "Highly exploratory coordinate and angle analysis with extensive checks against alternate rotations and self-intersecting orders.",
+        },
+        "api": {
+            "overview": "Used exact circumradius and double-angle identities to sum the six central-triangle areas of the rotated cyclic hexagon.",
+            "steps": [
+                "Compute R=65/8 from Heron's area formula.",
+                "Set the selected rotation angle to 90 degrees minus angle C.",
+                "Derive the six consecutive central angles and their exact sines.",
+                "Apply R squared over 2 times the sine sum to get 155.7, whose nearest integer is 156.",
+            ],
+            "style": "Compact exact trigonometry with the orientation condition used to select the correct cyclic order.",
         },
     },
 }
