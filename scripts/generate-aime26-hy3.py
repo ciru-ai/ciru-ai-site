@@ -14,7 +14,7 @@ import zstandard
 
 RUN = Path(os.environ["AIME26_RUN_DIR"])
 OUTPUT = Path(__file__).resolve().parents[1] / "public/aime26/hy3-data.js"
-SNAPSHOT_PROBLEMS = tuple(range(1, 11))
+SNAPSHOT_PROBLEMS = tuple(range(1, 13))
 
 MODELS = {
     "local": {
@@ -25,11 +25,11 @@ MODELS = {
         "runtime": "Local ROCmFPX · Radeon 8060S · native MTP n=2",
     },
     "api": {
-        "name": "Tencent Hy3 API",
-        "short": "API Hy3",
+        "name": "Hy3 API — Novita (OpenRouter)",
+        "short": "Novita API",
         "accent": "cyan",
         "root": RUN / "raw/matharena-api-full/outputs",
-        "runtime": "OpenRouter · Novita · high reasoning",
+        "runtime": "Novita via OpenRouter · third-party · high reasoning",
     },
 }
 
@@ -254,6 +254,50 @@ SUMMARIES = {
             "style": "Compact exact trigonometry with the orientation condition used to select the correct cyclic order.",
         },
     },
+    11: {
+        "local": {
+            "overview": "Used the grid's bipartite coloring and cell degrees to place high values on positive high-degree cells and low values on negative high-degree cells.",
+            "steps": [
+                "Color the grid like a chessboard so every edge crosses colors.",
+                "Put 33 through 64 on one color and 1 through 32 on the other.",
+                "Match extreme values to the degree-4, degree-3, and degree-2 cells.",
+                "Compute the weighted difference as 3896 and return 896 modulo 1000.",
+            ],
+            "style": "Careful extremal assignment with explicit degree counts and weighted sums.",
+        },
+        "api": {
+            "overview": "Applied the same bipartite-degree optimization, orienting every edge from the high-number color to the low-number color.",
+            "steps": [
+                "Use the chessboard partition to separate every adjacent pair.",
+                "Assign the largest half to positive coefficients and the smallest half to negative coefficients.",
+                "Sort values against each color's matching degree multiset.",
+                "Obtain 3896 and reduce it to 896 modulo 1000.",
+            ],
+            "style": "Compact extremal proof with a coefficient interpretation of the edge sum.",
+        },
+    },
+    12: {
+        "local": {
+            "overview": "Placed the triangle in coordinates, reflected its centroid across BC, and used the plane through the first three sphere centers to determine the fourth radius.",
+            "steps": [
+                "Set A=(0,0), B=(6,0), and C=(0,4).",
+                "Reflect the centroid across 2x+3y=12 to locate D.",
+                "Find the common center plane x+3y−6z+6=0 from radii 1, 2, and 3.",
+                "Substitute the center above D to get r=122/39 and answer 161.",
+            ],
+            "style": "Direct coordinate geometry followed by a linear plane calculation.",
+        },
+        "api": {
+            "overview": "Converted tangency to a linear radius formula over the base plane, then evaluated it at the reflected centroid.",
+            "steps": [
+                "Represent the first three sphere centers above A, B, and C.",
+                "Derive the tangent plane and the radius rule R=x/6+y/2+1.",
+                "Reflect the centroid across BC to obtain D=(42/13,124/39).",
+                "Evaluate the rule at D to get 122/39 and return 161.",
+            ],
+            "style": "Efficient affine formulation with coordinate verification at all three known spheres.",
+        },
+    },
 }
 
 
@@ -298,6 +342,15 @@ def model_record(model_key: str, problem: int) -> tuple[dict, dict]:
     return record, result
 
 
+def model_status(model_key: str) -> dict:
+    records = [load_zst(path) for path in MODELS[model_key]["root"].rglob("*.json.zst")]
+    return {
+        "completed": len(records),
+        "correct": sum(bool(record["correct"][0]) for record in records),
+        "total": 30,
+    }
+
+
 def main() -> None:
     problems = []
     for problem in SNAPSHOT_PROBLEMS:
@@ -317,9 +370,10 @@ def main() -> None:
         )
 
     payload = {
-        "title": "Hy3 vs Hy3 · AIME 2026",
+        "title": "Hy3 Chadrock vs Hy3 API — Novita · AIME 2026",
         "snapshotLabel": f"Shared-completion demo · Problems {SNAPSHOT_PROBLEMS[0]}–{SNAPSHOT_PROBLEMS[-1]}",
         "snapshotUtc": datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z"),
+        "runStatus": {"local": model_status("local"), "api": model_status("api")},
         "problems": problems,
     }
     encoded = json.dumps(payload, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")

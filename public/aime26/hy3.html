@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A side-by-side look at local Hy3 Chadrock and Tencent Hy3 API solving shared AIME 2026 problems.">
+  <meta name="description" content="Local Hy3 Chadrock and the Novita-served Hy3 API solving shared AIME 2026 problems.">
   <meta name="theme-color" content="#080808">
-  <title>Hy3 vs Hy3 · AIME 2026 | Ciru Inference Lab</title>
+  <title>Hy3 Chadrock vs Hy3 API — Novita · AIME 2026 | Ciru Inference Lab</title>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -275,7 +275,7 @@
       <div class="hero-content">
         <div class="kicker">AIME 2026 · Shared-completion snapshot</div>
         <h1>Same model family.<br>Two inference paths.</h1>
-        <p class="lede">A guided, side-by-side view of local Hy3 Chadrock and Tencent’s hosted Hy3 solving the same olympiad problems. Read the strategy first—or open every token of the model-generated reasoning.</p>
+        <p class="lede">Local Hy3 Chadrock and Hy3 served by Novita via OpenRouter solve the same olympiad problems. Read the strategy first—or open every token of the model-generated reasoning.</p>
         <div class="hero-meta"><span>one sample per problem</span><span>high reasoning</span><span>verbatim traces preserved</span></div>
       </div>
     </header>
@@ -288,7 +288,7 @@
         <button class="action-button" id="collapse-all" type="button">Collapse all</button>
       </div>
     </div>
-    <div class="callout"><strong>This is a demo snapshot, not the final score.</strong> It includes only problems completed by both systems at the snapshot time. Generated-token counts include both reasoning and the final response. Each summary below is editorial navigation; the expandable trace and final response are the verbatim successful model outputs.</div>
+    <div class="callout"><strong>12 shared completions; local run ongoing.</strong> The API lane is Novita via OpenRouter, a third-party endpoint. Generated-token counts include reasoning and final responses.</div>
 
     <main id="problems"><div class="loading">Loading the shared Hy3 snapshot…</div></main>
 
@@ -395,14 +395,14 @@
     function render() {
       const data = window.AIME_HY3_DATA;
       if (!data) { document.querySelector('.loading').textContent = 'Snapshot data could not be loaded.'; return; }
-      const correct = data.problems.reduce((sum, p) => sum + p.models.filter(m => m.correct).length, 0);
       const tokens = data.problems.reduce((sum, p) => sum + p.models.reduce((s, m) => s + m.tokens, 0), 0);
-      const thinking = data.problems.reduce((sum, p) => sum + p.models.reduce((s, m) => s + m.thinkingChars, 0), 0);
+      const localStatus = data.runStatus.local;
+      const apiStatus = data.runStatus.api;
       const stats = [
         [data.problems.length, 'shared completed problems'],
-        [`${correct}/${data.problems.length * 2}`, 'correct model answers'],
+        [`${localStatus.correct}/${localStatus.completed}`, `local correct · ${localStatus.completed}/${localStatus.total} complete`],
+        [`${apiStatus.correct}/${apiStatus.total}`, 'Novita API · final'],
         [formatNumber(tokens), 'generated tokens · reasoning + final'],
-        [compactChars(thinking), 'reasoning characters available'],
       ];
       const statRoot = document.getElementById('stats');
       stats.forEach(([value, label]) => { const el = document.createElement('div'); el.className = 'stat'; el.innerHTML = `<b>${value}</b><span>${label}</span>`; statRoot.append(el); });
