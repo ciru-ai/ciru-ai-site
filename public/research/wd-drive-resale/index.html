@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#080808">
   <title>WD External Drive Resale Market Report | Ciru Research</title>
-  <meta name="description" content="A sourced July 2026 eBay resale analysis for 79 boxed WD Elements and easystore external hard drives totaling 1.136 PB advertised raw capacity.">
+  <meta name="description" content="A sourced July 2026 eBay resale analysis with recent-price windows, sell-through estimates, costs, and listing strategy for 79 boxed WD external drives totaling 1.136 PB.">
   <link rel="icon" href="/ciruai.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -132,9 +132,12 @@
     .fill { display: block; height: 100%; width: var(--w); background: linear-gradient(90deg, var(--cyan), #78a8ff); }
     .fill.red { background: linear-gradient(90deg, var(--amd), var(--orange)); }
     .fill.green { background: linear-gradient(90deg, var(--green), var(--cyan)); }
+    .fill.violet { background: linear-gradient(90deg, var(--violet), var(--blue)); }
     .legend { display: flex; flex-wrap: wrap; gap: 13px; margin: 12px 0 0; color: var(--muted); font-size: .78rem; }
     .dot { display: inline-block; width: 8px; height: 8px; margin-right: 6px; border-radius: 50%; background: var(--cyan); }
     .dot.red { background: var(--orange); }
+    .dot.green { background: var(--green); }
+    .dot.violet { background: var(--violet); }
     .scenario { position: relative; overflow: hidden; }
     .scenario::before { content: ""; position: absolute; left: 0; top: 0; right: 0; height: 3px; background: var(--cyan); }
     .scenario.conservative::before { background: var(--orange); }
@@ -180,7 +183,7 @@
     .hero-caption { position: absolute; right: 10px; bottom: 8px; z-index: 2; max-width: 260px; color: rgba(255,255,255,.58); font: 500 .63rem "IBM Plex Mono", monospace; text-align: right; }
     @media (max-width: 900px) {
       .hero, .verdict, .inventory-grid, .cost-grid { grid-template-columns: 1fr; }
-      .hero-art { min-height: 310px; order: -1; }
+      .hero-art { min-height: 260px; }
       .hero-art::after { background: linear-gradient(0deg, rgba(12,12,14,1), transparent 36%); }
       .stats { grid-template-columns: repeat(2, 1fr); }
       .capacity-grid, .scenario-grid { grid-template-columns: 1fr; }
@@ -195,6 +198,7 @@
       .nav { overflow-x: auto; flex-wrap: nowrap; }
       .nav a { white-space: nowrap; }
       th, td { padding: 9px; }
+      .hero-art { min-height: 200px; }
     }
     @media print {
       body { background: white; color: #111; }
@@ -220,11 +224,11 @@
         <div class="hero-copy">
           <span class="kicker">Crown Citadel Research Report · July 20, 2026</span>
           <h1>1.136 PB<br>resale plan</h1>
-          <p class="dek">Current eBay sold-price evidence, active asking prices, three cash-out ranges, cost modeling, and a practical listing strategy for 79 boxed WD Elements and easystore desktop drives.</p>
+          <p class="dek">Current eBay sold-price evidence, recent-market sensitivity, sell-through estimates, three duration-adjusted cash-out ranges, cost modeling, and a practical listing strategy for 79 boxed WD Elements and easystore desktop drives.</p>
           <div class="badges">
             <span class="badge"><strong>79</strong> drives</span>
             <span class="badge"><strong>1,136 TB</strong> advertised raw</span>
-            <span class="badge"><strong>58</strong> qualified sold records</span>
+            <span class="badge"><strong>58</strong> exact price observations</span>
             <span class="badge"><strong>US eBay</strong> market</span>
           </div>
         </div>
@@ -234,32 +238,37 @@
         </div>
       </div>
       <nav class="nav" aria-label="Report sections">
-        <a href="#verdict">Verdict</a><a href="#inventory">Inventory</a><a href="#market">Market</a><a href="#scenarios">Scenarios</a><a href="#costs">Costs</a><a href="#plan">Selling plan</a><a href="#evidence">Evidence</a><a href="#sources">Sources</a>
+        <a href="#verdict">Verdict</a><a href="#inventory">Inventory</a><a href="#market">Market</a><a href="#recency">Recency</a><a href="#scenarios">Scenarios</a><a href="#velocity">Sell-through</a><a href="#costs">Costs</a><a href="#plan">Selling plan</a><a href="#evidence">Evidence</a><a href="#sources">Sources</a>
       </nav>
     </header>
 
     <main id="main">
       <section id="verdict">
         <div class="section-head">
-          <div><span class="eyebrow">Bottom line</span><h2>Plan around about $17,200 net</h2></div>
+          <div><span class="eyebrow">Bottom line</span><h2>Plan around about $16,600 duration-adjusted net</h2></div>
           <span class="asof">NET CASH · BEFORE LABOR &amp; INCOME TAX</span>
         </div>
         <div class="stats">
-          <div class="stat"><b>$13.3–14.5k</b><span>Conservative modeled net range</span></div>
-          <div class="stat"><b>$16.3–18.1k</b><span>Normal modeled net range</span></div>
-          <div class="stat"><b>$19.3–20.8k</b><span>Aggressive modeled net range</span></div>
-          <div class="stat"><b>$1.3k</b><span>Normal-case Basic Store advantage</span></div>
+          <div class="stat"><b>$12.9–14.3k</b><span>Conservative price + time range</span></div>
+          <div class="stat"><b>$15.4–17.8k</b><span>Normal price + time range</span></div>
+          <div class="stat"><b>$16.9–20.0k</b><span>Aggressive price + time range</span></div>
+          <div class="stat"><b>$17.6–18.6k</b><span>Recent tape, duration-adjusted</span></div>
         </div>
         <div class="verdict">
           <div class="callout good">
             <span class="label">My estimate</span>
-            <div class="big-number">≈ $17,200</div>
-            <p>This is the normal midpoint after modeled eBay fees, average domestic label cost, packing materials, six months of a Basic Store, and a 5% returns/claims reserve. It assumes all 79 drives test healthy and include the correct power adapter and USB cable.</p>
+            <div class="big-number">≈ $16,600</div>
+            <p>This is the normal midpoint adjusted to a 36-month Store-carrying assumption, after modeled eBay fees, average domestic label cost, packing materials, and a 5% returns/claims reserve. It assumes all 79 drives test healthy and include the correct power adapter and USB cable.</p>
+            <p class="small"><strong>Transaction midpoint before extended carrying: $17,223.</strong> The sell-through evidence is incomplete, so duration is shown as a range rather than a promised liquidation date. This is not a present-value calculation and does not model inflation or future price drift.</p>
           </div>
           <div class="callout warning">
             <span class="label">What controls the outcome</span>
             <p><strong>SMART health and power-on hours matter more than the cardboard.</strong> Original boxes and complete accessories improve trust and help support upper-half pricing, but the evidence does not prove a fixed “box premium.”</p>
           </div>
+        </div>
+        <div class="callout" style="margin-top:14px">
+          <span class="label">Recent-market sensitivity</span>
+          <p>Marking the inventory mechanically to trailing-30-day medians produces about <strong>$18,505 transaction net</strong>; July MTD medians produce about <strong>$18,960</strong>. After the normal 24–48-month Store window, those sensitivities become roughly <strong>$17,619–$18,601</strong>. They are useful upside checks, not the core forecast: most of the uplift comes from applying one $363.50 July 16TB sale to all 39 units.</p>
         </div>
       </section>
 
@@ -280,7 +289,7 @@
           <div class="card">
             <span class="label">Inventory reality</span>
             <h3 style="margin-top:9px">The 16TB pool drives the financial result</h3>
-            <p class="small">The 39 × 16TB units are 49% of the drive count, 55% of raw capacity, and roughly 56–60% of modeled gross receipts. Their current market is also the least stable: April sold prices clustered near $250 delivered, while one July sale reached $363.50 and live asks moved sharply higher.</p>
+            <p class="small">The 39 × 16TB units are 49% of the drive count, 55% of raw capacity, and roughly 56% of gross receipts in the three main scenarios. Their current market is also the least stable: April sold prices clustered near $250 delivered, while one July sale reached $363.50 and live asks sit sharply above that older sold-price cluster.</p>
             <p class="small"><strong>Implication:</strong> price the first few 16TB drives as a discovery batch, not all 39 from one optimistic comp.</p>
           </div>
         </div>
@@ -292,12 +301,12 @@
           <span class="asof">SNAPSHOT · JUL 20, 2026</span>
         </div>
         <div class="callout">
-          <p><strong>Method:</strong> U.S. used/pre-owned, single working WD Elements or easystore desktop externals. Empty boxes, enclosures, shucked/bare disks, lots, wrong capacities, nonworking drives, foreign listings, and new-only units were excluded. “Delivered” is item price plus shipping displayed during research, before tax. Best Offer acceptances with hidden prices were excluded from exact sold statistics.</p>
+          <p><strong>Method:</strong> U.S. used/pre-owned, single working WD Elements or easystore desktop externals. Empty boxes, enclosures, shucked/bare disks, lots, wrong capacities, nonworking drives, foreign listings, and new-only units were excluded. “Delivered” is item price plus shipping displayed during research, before tax. Best Offer acceptances with hidden prices were excluded from exact sold statistics. Quartiles use linear interpolation (type 7).</p>
         </div>
         <div class="capacity-grid">
-          <article class="card"><div class="capacity">12TB</div><p class="range">Sold median $202.93</p><p class="sub">n=38 · Q1 $191.16 · Q3 $225.19<br>Two complete-box observations: $230.87 delivered.</p></article>
-          <article class="card"><div class="capacity">14TB</div><p class="range">Sold median $226.34</p><p class="sub">n=10 · Q1 $179.67 · Q3 $236.71<br>Complete-box observations: $252.70 and $269.57.</p></article>
-          <article class="card"><div class="capacity">16TB</div><p class="range">Sold median $259.45</p><p class="sub">n=10 exact delivered · Q1 $250.83 · Q3 $266.99<br>Current July high: $363.50; treat as trend evidence, not the new floor.</p></article>
+          <article class="card"><div class="capacity">12TB</div><p class="range">Sold median $202.93</p><p class="sub">n=38 · Q1 $191.16 · Q3 $225.20<br>Two complete-box observations: $230.87 delivered.</p></article>
+          <article class="card"><div class="capacity">14TB</div><p class="range">Sold median $226.34</p><p class="sub">n=10 · Q1 $184.31 · Q3 $236.24<br>Complete-box observations: $252.70 and $269.57.</p></article>
+          <article class="card"><div class="capacity">16TB</div><p class="range">Sold median $259.45</p><p class="sub">n=10 exact delivered · Q1 $252.08 · Q3 $266.92<br>Current July high: $363.50; treat as recent price evidence, not the new floor.</p></article>
         </div>
         <div class="card" style="margin-top:14px">
           <span class="label">Median market comparison</span>
@@ -311,32 +320,88 @@
         </div>
       </section>
 
+      <section id="recency">
+        <div class="section-head">
+          <div><span class="eyebrow">Price recency</span><h2>Recent prices are higher—but the sample thins sharply</h2></div>
+          <span class="asof">DELIVERED · PRE-TAX · EXACT SOLD PRICES</span>
+        </div>
+        <div class="callout warning">
+          <p><strong>The concern about old prices is valid for the displayed market medians.</strong> The scenario model did not simply apply those medians: its normal midpoints are already 13.3% above the full-period 12TB median, 12.7% above 14TB, and 23.3% above 16TB. Recent-window counts are shown beside every value so a single sale cannot masquerade as a market.</p>
+        </div>
+        <div class="capacity-grid">
+          <article class="card">
+            <div class="capacity">12TB</div>
+            <div class="bars">
+              <div class="bar-group"><div class="bar-label"><strong>Full period · n=38</strong><span>$202.93</span></div><div class="track"><span class="fill" style="--w:50.73%"></span></div></div>
+              <div class="bar-group"><div class="bar-label"><strong>Trailing 30d · n=10</strong><span>$234.09</span></div><div class="track"><span class="fill green" style="--w:58.52%"></span></div></div>
+              <div class="bar-group"><div class="bar-label"><strong>July MTD · n=7</strong><span>$249.85</span></div><div class="track"><span class="fill red" style="--w:62.46%"></span></div></div>
+              <div class="bar-group"><div class="bar-label"><strong>Normal model</strong><span>$230.00</span></div><div class="track"><span class="fill violet" style="--w:57.50%"></span></div></div>
+            </div>
+          </article>
+          <article class="card">
+            <div class="capacity">14TB</div>
+            <div class="bars">
+              <div class="bar-group"><div class="bar-label"><strong>Full period · n=10</strong><span>$226.34</span></div><div class="track"><span class="fill" style="--w:56.59%"></span></div></div>
+              <div class="bar-group"><div class="bar-label"><strong>Trailing 30d · n=3</strong><span>$234.81</span></div><div class="track"><span class="fill green" style="--w:58.70%"></span></div></div>
+              <div class="bar-group"><div class="bar-label"><strong>July MTD · n=2</strong><span>$243.76</span></div><div class="track"><span class="fill red" style="--w:60.94%"></span></div></div>
+              <div class="bar-group"><div class="bar-label"><strong>Normal model</strong><span>$255.00</span></div><div class="track"><span class="fill violet" style="--w:63.75%"></span></div></div>
+            </div>
+          </article>
+          <article class="card">
+            <div class="capacity">16TB</div>
+            <div class="bars">
+              <div class="bar-group"><div class="bar-label"><strong>Full period · n=10</strong><span>$259.45</span></div><div class="track"><span class="fill" style="--w:64.86%"></span></div></div>
+              <div class="bar-group"><div class="bar-label"><strong>Trailing 30d · n=1</strong><span>$363.50</span></div><div class="track"><span class="fill green" style="--w:90.88%"></span></div></div>
+              <div class="bar-group"><div class="bar-label"><strong>July MTD · n=1</strong><span>$363.50</span></div><div class="track"><span class="fill red" style="--w:90.88%"></span></div></div>
+              <div class="bar-group"><div class="bar-label"><strong>Normal model</strong><span>$320.00</span></div><div class="track"><span class="fill violet" style="--w:80%"></span></div></div>
+            </div>
+          </article>
+        </div>
+        <div class="legend"><span><i class="dot"></i>Full-period median</span><span><i class="dot green"></i>Trailing 30-day median</span><span><i class="dot red"></i>July MTD median (Jul 1–20)</span><span><i class="dot violet"></i>Normal model midpoint</span><span>Scale maximum: $400</span></div>
+        <div class="table-wrap" style="margin-top:14px">
+          <table>
+            <thead><tr><th>Capacity</th><th>Full sample span</th><th class="num">Full median</th><th class="num">Trailing 30d</th><th class="num">July MTD</th><th class="num">Normal band</th><th class="num">Aggressive band</th></tr></thead>
+            <tbody>
+              <tr><td>12TB</td><td>Apr 26–Jul 20 · n=38</td><td class="num">$202.93</td><td class="num recommended">$234.09 · n=10</td><td class="num">$249.85 · n=7</td><td class="num">$225–235</td><td class="num">$270–280</td></tr>
+              <tr><td>14TB</td><td>Jan 26–Jul 19 · n=10</td><td class="num">$226.34</td><td class="num recommended">$234.81 · n=3</td><td class="num">$243.76 · n=2</td><td class="num">$245–265</td><td class="num">$275–295</td></tr>
+              <tr><td>16TB</td><td>Feb 9–Jul 2 · n=10</td><td class="num">$259.45</td><td class="num outlier">$363.50 · n=1</td><td class="num outlier">$363.50 · n=1</td><td class="num">$300–340</td><td class="num">$350–380</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="capacity-grid" style="margin-top:14px">
+          <article class="card"><span class="label">Core transaction model</span><div class="big-number" style="font-size:2rem">$17,223</div><p class="small">$22,080 gross. Uses the normal scenario bands and a 5% reserve.</p></article>
+          <article class="card"><span class="label">Trailing-30d sensitivity</span><div class="big-number" style="font-size:2rem">$18,505</div><p class="small">$23,552 gross if every unit clears at the capacity-specific 30-day median.</p></article>
+          <article class="card"><span class="label">July MTD sensitivity</span><div class="big-number" style="font-size:2rem">$18,960</div><p class="small">$24,073 gross. Approximately 85% of the gross uplift over normal comes from the lone 16TB July comp.</p></article>
+        </div>
+        <p class="small" style="margin:11px 0 0">Sensitivity nets use the normal transaction-cost assumptions, including six monthly Store payments. Extended Store carrying is modeled separately below. The exact recent 16TB source is <a href="https://www.ebay.com/itm/257583959262" target="_blank" rel="noopener">item 257583959262</a>.</p>
+      </section>
+
       <section id="scenarios">
         <div class="section-head">
-          <div><span class="eyebrow">Three outcomes</span><h2>Gross receipts and realistic net cash</h2></div>
-          <span class="asof">ALL VALUES PRE-TAX · BUYER-DELIVERED</span>
+          <div><span class="eyebrow">Three outcomes</span><h2>Gross receipts and duration-adjusted cash</h2></div>
+          <span class="asof">PRICE + LIQUIDATION DURATION · PRE-TAX</span>
         </div>
         <div class="scenario-grid">
           <article class="card scenario conservative">
             <span class="label">Conservative</span>
             <p class="gross">Gross $17.5–18.9k · midpoint $18,180</p>
-            <div class="net">$13.3–14.5k</div>
-            <p class="small">Modeled net midpoint <strong>$13,909</strong></p>
-            <ul><li>12TB: $190–200 delivered</li><li>14TB: $200–220 delivered</li><li>16TB: $250–270 delivered</li><li>5% risk reserve · 3 store months</li></ul>
+            <div class="net">$12.9–14.3k</div>
+            <p class="small">Midpoint at modeled duration <strong>$13,466–13,729</strong></p>
+            <ul><li>12TB: $190–200 delivered</li><li>14TB: $200–220 delivered</li><li>16TB: $250–270 delivered</li><li>10–24 months · 12-month minimum Store cost</li><li>5% risk reserve</li></ul>
           </article>
           <article class="card scenario normal">
             <span class="label">Normal · planning case</span>
             <p class="gross">Gross $21.0–23.1k · midpoint $22,080</p>
-            <div class="net">$16.3–18.1k</div>
-            <p class="small">Modeled net midpoint <strong>$17,223</strong></p>
-            <ul><li>12TB: $225–235 delivered</li><li>14TB: $245–265 delivered</li><li>16TB: $300–340 delivered</li><li>5% risk reserve · 6 store months</li></ul>
+            <div class="net">$15.4–17.8k</div>
+            <p class="small">Midpoint at modeled duration <strong>$16,337–16,864</strong></p>
+            <ul><li>12TB: $225–235 delivered</li><li>14TB: $245–265 delivered</li><li>16TB: $300–340 delivered</li><li>24–48 months · 5% risk reserve</li></ul>
           </article>
           <article class="card scenario aggressive">
             <span class="label">Aggressive</span>
             <p class="gross">Gross $24.5–26.3k · midpoint $25,395</p>
-            <div class="net">$19.3–20.8k</div>
-            <p class="small">Modeled net midpoint <strong>$20,016</strong></p>
-            <ul><li>12TB: $270–280 delivered</li><li>14TB: $275–295 delivered</li><li>16TB: $350–380 delivered</li><li>5% risk reserve · annual Basic Store</li></ul>
+            <div class="net">$16.9–20.0k</div>
+            <p class="small">Midpoint at modeled duration <strong>$17,645–19,226</strong></p>
+            <ul><li>12TB: $270–280 delivered</li><li>14TB: $275–295 delivered</li><li>16TB: $350–380 delivered</li><li>48–120 months · 5% risk reserve</li></ul>
           </article>
         </div>
         <div class="table-wrap" style="margin-top:14px">
@@ -350,15 +415,75 @@
             </tbody>
           </table>
         </div>
-        <p class="small" style="margin:11px 0 0">The scenario midpoints are judgment calls informed by the observed distributions, current listing market, completeness, recent price movement, and the inventory’s ability to depress its own niche if released all at once. They are not confidence intervals. Every range now holds back the same conservative 5% claims reserve; if final claims are only 3%, the normal midpoint rises to about $17,665.</p>
+        <p class="small" style="margin:11px 0 0">The cash bands are independent-extreme envelopes: they pair the lowest price with the longest duration and the highest price with the shortest duration. Real price and speed are likely inversely related, so the midpoint lines are the better planning view. These are judgment ranges, not confidence intervals, and every scenario holds back the same conservative 5% claims reserve. “Duration-adjusted” means Store carrying only; it is not a discounted-cash-flow calculation.</p>
         <div class="callout warning" style="margin-top:14px">
-          <p><strong>Timing is a budget assumption, not a forecast.</strong> Three, six, and twelve months are Store-cost windows used in the scenarios. The market sample does not prove that all 79 units will clear that quickly, and the 39-unit 16TB position could take materially longer.</p>
+          <p><strong>Long timelines do not mean every drive sits that long.</strong> The 12TB and 14TB pools may clear much earlier; the finish date is controlled by the 39-unit 16TB position. The aggressive floor is modeled at 120 months; every additional year of continuous Basic Store membership subtracts another $263.40. Future market prices can change enough that a multi-year projection becomes less reliable.</p>
+        </div>
+      </section>
+
+      <section id="velocity">
+        <div class="section-head">
+          <div><span class="eyebrow">Sell-through</span><h2>How fast can 79 drives actually sell?</h2></div>
+          <span class="asof">PRICE OBSERVATIONS + MULTI-QUANTITY EVIDENCE</span>
+        </div>
+        <div class="callout bad">
+          <p><strong>The 39 × 16TB pool determines the finish date.</strong> The recent $363.50 completion is useful price evidence, but it is the only exact 16TB sale captured in the last 60 days. It does not prove that dozens will clear quickly near $365.</p>
+        </div>
+        <div class="capacity-grid" style="margin-top:14px">
+          <article class="card">
+            <div class="capacity">12TB</div>
+            <div class="bars">
+              <div class="bar-group"><div class="bar-label"><strong>Full observed rate</strong><span>3.09 obs/wk</span></div><div class="track"><span class="fill" style="--w:99.7%"></span></div></div>
+              <div class="bar-group"><div class="bar-label"><strong>Trailing 30d</strong><span>2.33 obs/wk</span></div><div class="track"><span class="fill green" style="--w:75.2%"></span></div></div>
+            </div>
+            <p class="small" style="margin:12px 0 0">38 dated price observations across 86 days; 10 in the trailing 30 days.</p>
+          </article>
+          <article class="card">
+            <div class="capacity">14TB</div>
+            <div class="bars">
+              <div class="bar-group"><div class="bar-label"><strong>Full observed rate</strong><span>0.40 obs/wk</span></div><div class="track"><span class="fill" style="--w:12.9%"></span></div></div>
+              <div class="bar-group"><div class="bar-label"><strong>Trailing 30d</strong><span>0.70 obs/wk</span></div><div class="track"><span class="fill green" style="--w:22.6%"></span></div></div>
+            </div>
+            <p class="small" style="margin:12px 0 0">10 dated price observations across 176 days; 3 in the trailing 30 days.</p>
+          </article>
+          <article class="card">
+            <div class="capacity">16TB</div>
+            <div class="bars">
+              <div class="bar-group"><div class="bar-label"><strong>Full observed rate</strong><span>0.43 obs/wk</span></div><div class="track"><span class="fill" style="--w:13.9%"></span></div></div>
+              <div class="bar-group"><div class="bar-label"><strong>Trailing 30d</strong><span>0.23 obs/wk</span></div><div class="track"><span class="fill red" style="--w:7.4%"></span></div></div>
+            </div>
+            <p class="small" style="margin:12px 0 0">10 exact delivered-price observations through Jul 20; 1 in 30 days, and still only 1 in 60 days.</p>
+          </article>
+        </div>
+        <p class="small" style="margin:11px 0 0">These are qualifying price observations per week, not total physical market units. The research was designed for clean price comparisons, not as a complete demand census, so multi-quantity listings were counted once and the rates above understate unit volume.</p>
+
+        <div class="table-wrap" style="margin-top:14px">
+          <table>
+            <thead><tr><th>Pricing posture</th><th class="num">12TB clearance</th><th class="num">14TB clearance</th><th class="num">16TB clearance</th><th class="num">Whole inventory</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Conservative proceeds / price to move</strong><br><span class="small">$190–200 / $200–220 / $250–270 delivered</span></td><td class="num">1–4 mo</td><td class="num">3–10 mo</td><td class="num">10–24 mo</td><td class="num recommended">10–24 mo</td></tr>
+              <tr><td><strong>Normal proceeds</strong><br><span class="small">$225–235 / $245–265 / $300–340 delivered</span></td><td class="num">3–8 mo</td><td class="num">9–20 mo</td><td class="num">24–48 mo</td><td class="num recommended">24–48 mo</td></tr>
+              <tr><td><strong>Aggressive proceeds / high asks</strong><br><span class="small">$270–280 / $275–295 / $350–380 delivered</span></td><td class="num">7–18 mo</td><td class="num">18–48 mo</td><td class="num">48–120 mo</td><td class="num outlier">48–120 mo</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="formula">Orientation baseline, trailing 90 days: 12TB = 38 observations / 90 days = 12.67 per 30 days; 14TB = 7 / 90 = 2.33; 16TB = 7 / 90 = 2.33. Clearance bands are judgment assumptions—not outputs from a fixed factor—because physical units inside multi-quantity pages, incomplete search capture, seller share, account reputation, and the price/velocity relationship are not publicly observable.</div>
+
+        <div class="capacity-grid" style="margin-top:14px">
+          <article class="card"><span class="label">12TB volume evidence</span><div class="big-number" style="font-size:2rem">50 sold</div><p class="small">The seller title and buyer feedback identify tested 12TB easystore units with original packaging; the page displays $229.99 and 50 sold cumulatively, but its item-specific fields conflict. Treat this as directional volume evidence only. <a href="https://www.ebay.com/itm/358034798489" target="_blank" rel="noopener">Source</a></p></article>
+          <article class="card"><span class="label">14TB volume evidence</span><div class="big-number" style="font-size:2rem">26 sold</div><p class="small">A tested easystore page displays $219 + $5.97 shipping and 26 sold cumulatively. <a href="https://www.ebay.com/itm/278099427974" target="_blank" rel="noopener">Source</a></p></article>
+          <article class="card"><span class="label">16TB volume evidence</span><div class="big-number" style="font-size:2rem">6 sold</div><p class="small">An open-box easystore page displays $250 + $16.99 shipping and 6 sold cumulatively. <a href="https://www.ebay.com/itm/235446720284" target="_blank" rel="noopener">Source</a></p></article>
+        </div>
+        <p class="small" style="margin:11px 0 0">Cumulative counters prove that multi-unit demand exists; they do not expose transaction dates or unit-level accepted-price history, so they cannot establish a monthly rate or prove that every unit sold at the currently displayed price.</p>
+        <div class="callout good" style="margin-top:14px">
+          <span class="label">Turn the forecast into measured data</span>
+          <p>Launch two units per capacity at the target price for 30 days. Track impressions, views, watchers, offers, accepted price, and days to sale; replenish only after a sale. Reforecast after six weeks or ten completed sales. Keep only 2–4 units per capacity/grade visibly available so the listing does not advertise oversupply.</p>
         </div>
       </section>
 
       <section id="costs">
         <div class="section-head">
-          <div><span class="eyebrow">Normal-case cost bridge</span><h2>How $22,080 becomes about $17,223</h2></div>
+          <div><span class="eyebrow">Normal-case cost bridge</span><h2>How $22,080 becomes about $16,600 over time</h2></div>
           <span class="asof">BASIC STORE · DOMESTIC · NO ADS</span>
         </div>
         <div class="cost-grid">
@@ -369,12 +494,14 @@
             <div class="cost-row"><span>Outer cartons/padding · $4.50 × 79</span><strong>−$356</strong></div>
             <div class="cost-row"><span>Basic Store · 6 × $27.95</span><strong>−$168</strong></div>
             <div class="cost-row"><span>Returns/claims reserve · 5%</span><strong>−$1,104</strong></div>
-            <div class="cost-row total"><span>Modeled net cash</span><strong>$17,223</strong></div>
+            <div class="cost-row total"><span>Transaction net after initial Store budget</span><strong>$17,223</strong></div>
+            <div class="cost-row"><span>Additional Store carrying to 24–48 mo</span><strong>−$359–886</strong></div>
+            <div class="cost-row total"><span>Duration-adjusted normal midpoint</span><strong>$16,337–16,864</strong></div>
           </div>
           <div>
             <div class="callout good">
               <span class="label">Basic Store is worth it</span>
-              <p>eBay’s current U.S. hard-drive rate is <strong>7.35% + $0.40/order</strong> for a Basic-or-higher Store versus <strong>13.6% + $0.40/order</strong> without a qualifying Store. In the normal case, the modeled Basic Store saves about <strong>$1,309 net</strong> even after six monthly subscriptions.</p>
+              <p>eBay’s current U.S. hard-drive rate is <strong>7.35% + $0.40/order</strong> for a Basic-or-higher Store versus <strong>13.6% + $0.40/order</strong> without a qualifying Store. The Store clearly pays during the active high-volume phase, but review it annually: at roughly <strong>$3,939 delivered sales per year</strong>, the annual Basic subscription and percentage-fee savings break even.</p>
             </div>
             <div class="callout warning" style="margin-top:10px">
               <span class="label">Fee assumptions</span>
@@ -382,10 +509,10 @@
             </div>
           </div>
         </div>
-        <div class="formula">FVF estimate = delivered pre-tax receipts × 7.35% × (1 + 7% assumed buyer tax) + $0.40 × 79 orders. Shipping charged to buyers is included in delivered receipts, then the matching label budget is deducted.</div>
+        <div class="formula">FVF estimate = delivered pre-tax receipts × 7.35% × (1 + 7% assumed buyer tax) + $0.40 × 79 orders. Shipping charged to buyers is included in delivered receipts, then the matching label budget is deducted. Duration-adjusted values replace the initial six-month $167.70 Store budget with $526.80–$1,053.60 for 24–48 months on annual Basic terms.</div>
         <div class="table-wrap" style="margin-top:14px">
           <table>
-            <thead><tr><th>Not deducted from headline net</th><th>Planning treatment</th></tr></thead>
+            <thead><tr><th>Not deducted from duration-adjusted net</th><th>Planning treatment</th></tr></thead>
             <tbody>
               <tr><td>Labor</td><td>Expect roughly 40–60 hands-on hours for inventory control, health captures, wiping, photos, listings, messages, and packing. At $25/hour, that is an optional $1,000–$1,500 opportunity-cost adjustment.</td></tr>
               <tr><td>Promoted Listings</td><td>Modeled at 0%. A 2% ad rate applied to every normal-case sale would cost roughly $473 after the model’s buyer-tax assumption. Use ads only on stale units.</td></tr>
@@ -437,20 +564,20 @@
       <section id="evidence">
         <div class="section-head">
           <div><span class="eyebrow">Auditable evidence</span><h2>Direct eBay listing records</h2></div>
-          <span class="asof">58 SOLD · 20 ACTIVE/ASK RECORDS</span>
+          <span class="asof">58 EXACT SOLD-PRICE OBS · 20 ACTIVE/ASK OBS</span>
         </div>
-        <p class="small">Open any item number to inspect the source page. Ended listings may eventually disappear or be relisted. Shipping is the amount eBay displayed during research and can vary by destination. Rows marked excluded were retained for transparency but were not used in exact sold statistics.</p>
+        <p class="small">Open any item number to inspect the source page. Ended listings may eventually disappear or be relisted. Shipping is the amount eBay displayed during research and can vary by destination. Rows marked excluded were retained for transparency but were not used in exact sold statistics. Multi-quantity pages are one price observation here even when eBay shows several cumulative units sold; their unit counts are handled separately in the sell-through section. The 20 active/ask observations comprise 16 direct listings and four 16TB category-page snapshots.</p>
 
-        <details open><summary>12TB · 38 qualified sold records + 4 active asks</summary><div class="detail-body">
+        <details open><summary>12TB · 38 exact sold-price observations + 4 active asks</summary><div class="detail-body">
           <p class="small"><a href="https://www.ebay.com/sch/i.html?_nkw=WD+12TB+external+hard+drive&amp;_sacat=0&amp;_from=R40&amp;rt=nc&amp;LH_Sold=1&amp;LH_Complete=1&amp;LH_ItemCondition=3000&amp;_ipg=240" target="_blank" rel="noopener">Refresh the eBay sold search</a> · <a href="https://www.ebay.com/sch/i.html?_nkw=WD+12TB+external+hard+drive&amp;_sacat=0&amp;_from=R40&amp;rt=nc&amp;LH_ItemCondition=3000&amp;_ipg=240" target="_blank" rel="noopener">Refresh active listings</a></p>
           <div class="table-wrap"><table><thead><tr><th>Date/status</th><th>Family</th><th class="num">Item</th><th class="num">Ship</th><th class="num">Delivered</th><th>Source</th><th>Notes</th></tr></thead><tbody id="sold12"></tbody><tbody id="active12"></tbody></table></div>
         </div></details>
 
-        <details><summary>14TB · 10 qualified sold records + 10 active asks</summary><div class="detail-body">
+        <details><summary>14TB · 10 exact sold-price observations + 10 active asks</summary><div class="detail-body">
           <div class="table-wrap"><table><thead><tr><th>Date/status</th><th>Family</th><th class="num">Item</th><th class="num">Ship</th><th class="num">Delivered</th><th>Source</th><th>Notes</th></tr></thead><tbody id="sold14"></tbody><tbody id="active14"></tbody></table></div>
         </div></details>
 
-        <details><summary>16TB · exact sold records, opaque sale evidence, and current asks</summary><div class="detail-body">
+        <details><summary>16TB · exact sold-price observations, opaque sale evidence, and current asks</summary><div class="detail-body">
           <div class="table-wrap"><table><thead><tr><th>Date/status</th><th>Family</th><th class="num">Item</th><th class="num">Ship</th><th class="num">Delivered</th><th>Source</th><th>Notes</th></tr></thead><tbody id="sold16"></tbody><tbody id="active16"></tbody></table></div>
         </div></details>
       </section>
@@ -465,6 +592,9 @@
           <a class="source" href="https://www.ebay.com/help/selling/fees-credits-invoices/store-selling-fees-managed-payments-sellers?id=4809" target="_blank" rel="noopener"><b>eBay Store selling fees</b><span>Basic subscription price and 7.35% hard-drive category rate.</span></a>
           <a class="source" href="https://www.ebay.com/help/policies/listing-policies/duplicate-listings-policy?id=4255" target="_blank" rel="noopener"><b>eBay duplicate-listing policy</b><span>Identical fixed-price items belong in a multi-quantity listing.</span></a>
           <a class="source" href="https://www.ebay.com/help/selling/listings/selling-limits?id=4107" target="_blank" rel="noopener"><b>eBay selling limits</b><span>Active and sold listings count against account limits; check before launch.</span></a>
+          <a class="source" href="https://www.ebay.com/itm/358034798489" target="_blank" rel="noopener"><b>12TB multi-quantity evidence</b><span>Seller-title and buyer-feedback evidence showing 50 cumulative sales; conflicting item-specific fields require caution.</span></a>
+          <a class="source" href="https://www.ebay.com/itm/278099427974" target="_blank" rel="noopener"><b>14TB multi-quantity evidence</b><span>Tested easystore page displaying $219 + $5.97 shipping and 26 cumulative sales.</span></a>
+          <a class="source" href="https://www.ebay.com/itm/235446720284" target="_blank" rel="noopener"><b>16TB multi-quantity evidence</b><span>Open-box easystore page displaying $250 + $16.99 shipping and six cumulative sales.</span></a>
           <a class="source" href="https://documents.westerndigital.com/content/dam/doc-library/en_us/assets/public/wd/product/external-storage/wd_elements/wd_elements_desktop/product-overview-wd-elements-desktop.pdf" target="_blank" rel="noopener"><b>WD Elements data sheet</b><span>Dimensions, weight, supported capacities, and official box contents.</span></a>
           <a class="source" href="https://documents.westerndigital.com/content/dam/doc-library/en_us/assets/public/wd/product/external-storage/wd_easy_store/easystore-desktop/product-overview-easystore-desktop.pdf" target="_blank" rel="noopener"><b>WD easystore data sheet</b><span>Dimensions, weight, supported capacities, and official box contents.</span></a>
           <a class="source" href="https://www.fedex.com/en-us/shipping/declared-value.html" target="_blank" rel="noopener"><b>FedEx declared value</b><span>Standard $100 liability limit, higher declared-value treatment, and packaging conditions.</span></a>
