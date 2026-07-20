@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#080808">
-  <title>WD External Drive Resale Market Report | Ciru Research</title>
-  <meta name="description" content="A sourced July 2026 eBay resale analysis with recent-price windows, sell-through estimates, costs, and listing strategy for 79 boxed WD external drives totaling 1.136 PB.">
+  <title>Corrected WD External Drive Resale Report | Ciru Research</title>
+  <meta name="description" content="A corrected, sourced July 2026 eBay resale analysis with recent-price windows, physical-unit counters, sell-through ranges, costs, and listing strategy for 79 boxed WD external drives totaling 1.136 PB.">
   <link rel="icon" href="/ciruai.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,223 +13,173 @@
   <style>
     :root {
       color-scheme: dark;
-      --bg: #080808;
-      --bg-2: #111114;
-      --panel: rgba(15, 16, 19, 0.94);
-      --panel-2: rgba(23, 24, 29, 0.96);
-      --line: rgba(255, 255, 255, 0.13);
-      --line-strong: rgba(255, 255, 255, 0.26);
-      --text: #f7f7f4;
-      --muted: #a8adb7;
-      --subtle: #767d8a;
-      --amd: #ed1c24;
-      --red: #ff4e5f;
-      --orange: #ff9f43;
-      --yellow: #f6c046;
-      --green: #20d1a2;
-      --cyan: #39d0ff;
-      --blue: #78a8ff;
-      --violet: #c994ff;
-      --shadow: 0 24px 70px rgba(0, 0, 0, 0.46);
-      --radius: 8px;
+      --bg:#080808; --panel:rgba(15,16,19,.95); --panel2:rgba(24,25,30,.97);
+      --line:rgba(255,255,255,.13); --line2:rgba(255,255,255,.25);
+      --text:#f7f7f4; --muted:#a8adb7; --subtle:#747b88;
+      --red:#ff4e5f; --amd:#ed1c24; --orange:#ff9f43; --yellow:#f6c046;
+      --green:#20d1a2; --cyan:#39d0ff; --blue:#78a8ff; --violet:#c994ff;
+      --shadow:0 24px 70px rgba(0,0,0,.46); --radius:8px;
     }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      color: var(--text);
-      font-family: "Space Grotesk", system-ui, sans-serif;
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; min-height:100vh; color:var(--text); font-family:"Space Grotesk",system-ui,sans-serif;
       background:
-        linear-gradient(120deg, rgba(237, 28, 36, 0.20), transparent 29%),
-        linear-gradient(300deg, rgba(57, 208, 255, 0.11), transparent 32%),
-        repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.034) 0 1px, transparent 1px 20px),
-        linear-gradient(180deg, #090809 0%, #111115 45%, #070707 100%);
+        linear-gradient(120deg,rgba(237,28,36,.20),transparent 29%),
+        linear-gradient(300deg,rgba(57,208,255,.11),transparent 32%),
+        repeating-linear-gradient(135deg,rgba(255,255,255,.034) 0 1px,transparent 1px 20px),
+        linear-gradient(180deg,#090809 0%,#111115 45%,#070707 100%);
     }
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background-image:
-        linear-gradient(rgba(237, 28, 36, 0.10) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
-      background-size: 36px 36px;
-      opacity: 0.34;
-      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.76), transparent 84%);
+    body::before{
+      content:""; position:fixed; inset:0; pointer-events:none;
+      background-image:linear-gradient(rgba(237,28,36,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);
+      background-size:36px 36px; opacity:.34; mask-image:linear-gradient(180deg,rgba(0,0,0,.76),transparent 84%);
     }
-    a { color: var(--cyan); text-underline-offset: 3px; text-decoration-color: rgba(57, 208, 255, 0.42); }
-    a:hover { color: #8ce7ff; }
-    .page, header, main, main > *, .hero, .hero > *, .verdict > *, .inventory-grid > *, .capacity-grid > *, .scenario-grid > *, .ops-grid > *, .cost-grid > *, .card { min-width: 0; }
-    .skip-link { position: fixed; left: 12px; top: -60px; z-index: 99; padding: 10px 14px; color: #080808; background: var(--cyan); }
-    .skip-link:focus { top: 12px; }
-    .page { width: min(calc(100% - 28px), 1180px); margin: 0 auto; padding: 18px 0 64px; position: relative; z-index: 1; }
-    .brand-lockup { display: inline-flex; align-items: center; gap: 12px; margin-bottom: 14px; color: var(--text); text-decoration: none; }
-    .logo-plate { width: 44px; height: 44px; padding: 7px; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(255,255,255,.06); display: grid; place-items: center; }
-    .logo-plate img { width: 100%; height: 100%; object-fit: contain; }
-    .brand-title, .brand-subtitle { display: block; }
-    .brand-title { font-weight: 700; }
-    .brand-subtitle { color: var(--muted); font: 500 .76rem "IBM Plex Mono", monospace; }
-    header {
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      background: linear-gradient(120deg, rgba(237, 28, 36, 0.22), transparent 36%), linear-gradient(180deg, rgba(28, 28, 31, 0.96), rgba(9, 9, 10, 0.93));
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      position: relative;
+    a{color:var(--cyan);text-underline-offset:3px;text-decoration-color:rgba(57,208,255,.42)}
+    a:hover{color:#8ce7ff}
+    .page,header,main,main>*,.hero,.hero>*,.grid>*,.card{min-width:0}
+    .skip{position:fixed;left:12px;top:-60px;z-index:99;padding:10px 14px;color:#080808;background:var(--cyan)}
+    .skip:focus{top:12px}
+    .page{width:min(calc(100% - 28px),1180px);margin:0 auto;padding:18px 0 64px;position:relative;z-index:1}
+    .brand{display:inline-flex;align-items:center;gap:12px;margin-bottom:14px;color:var(--text);text-decoration:none}
+    .logo{width:44px;height:44px;padding:7px;border:1px solid var(--line);border-radius:var(--radius);background:rgba(255,255,255,.06);display:grid;place-items:center}
+    .logo img{width:100%;height:100%;object-fit:contain}
+    .brand-title{display:block;font-weight:700}
+    .brand-sub{display:block;color:var(--muted);font:500 .76rem "IBM Plex Mono",monospace}
+    header{
+      border:1px solid var(--line);border-radius:10px;overflow:hidden;position:relative;box-shadow:var(--shadow);
+      background:linear-gradient(120deg,rgba(237,28,36,.22),transparent 36%),linear-gradient(180deg,rgba(28,28,31,.96),rgba(9,9,10,.93));
     }
-    header::before { content: ""; position: absolute; inset: 0; pointer-events: none; border-top: 3px solid var(--amd); background: repeating-linear-gradient(90deg, transparent 0 28px, rgba(255,255,255,.04) 28px 29px); }
-    .hero { display: grid; grid-template-columns: 1.2fr .8fr; min-height: 455px; }
-    .hero-copy { padding: 34px 32px 28px; position: relative; z-index: 2; display: flex; flex-direction: column; justify-content: center; }
-    .hero-art { min-height: 360px; position: relative; overflow: hidden; background: #050505; }
-    .hero-art img { width: 100%; height: 100%; object-fit: cover; object-position: 58% center; filter: saturate(.9) contrast(1.05); }
-    .hero-art::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(12,12,14,1), transparent 27%), linear-gradient(0deg, rgba(5,5,6,.45), transparent 42%); }
-    .kicker, .eyebrow, .label { color: var(--cyan); font: 700 .75rem "IBM Plex Mono", monospace; letter-spacing: .09em; text-transform: uppercase; }
-    h1, h2, h3, p { margin-top: 0; }
-    h1 { margin: 10px 0 16px; font-size: clamp(2.45rem, 5vw, 5.15rem); line-height: .96; letter-spacing: -.055em; }
-    h2 { margin-bottom: 10px; font-size: clamp(1.55rem, 3vw, 2.35rem); letter-spacing: -.035em; }
-    h3 { margin-bottom: 9px; font-size: 1.05rem; }
-    .dek { max-width: 720px; margin-bottom: 21px; color: var(--muted); font-size: 1.07rem; line-height: 1.62; }
-    .badges, .nav { display: flex; flex-wrap: wrap; gap: 8px; }
-    .badge, .nav a { border: 1px solid var(--line); border-radius: 5px; padding: 7px 9px; background: rgba(0,0,0,.28); color: var(--muted); font: 500 .72rem "IBM Plex Mono", monospace; text-decoration: none; }
-    .badge strong { color: var(--text); }
-    .nav { padding: 13px 16px; border-top: 1px solid var(--line); background: rgba(0,0,0,.34); position: relative; z-index: 3; }
-    .nav a:hover { border-color: rgba(57,208,255,.5); color: var(--cyan); }
-    main { display: grid; gap: 18px; margin-top: 18px; }
-    section, .panel { padding: 25px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); box-shadow: var(--shadow); }
-    .section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; margin-bottom: 18px; }
-    .section-head p { max-width: 690px; margin-bottom: 0; color: var(--muted); line-height: 1.6; }
-    .asof { color: var(--subtle); font: 500 .72rem "IBM Plex Mono", monospace; white-space: nowrap; }
-    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-    .stat { border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.018)), var(--panel-2); padding: 16px; }
-    .stat b { display: block; color: var(--cyan); font: 700 clamp(1.4rem, 2.8vw, 2rem) "IBM Plex Mono", monospace; letter-spacing: -.04em; }
-    .stat span { display: block; margin-top: 5px; color: var(--muted); font-size: .83rem; line-height: 1.35; }
-    .verdict { display: grid; grid-template-columns: 1.25fr .75fr; gap: 14px; margin-top: 14px; }
-    .callout { border: 1px solid rgba(57,208,255,.24); border-left: 5px solid var(--cyan); border-radius: var(--radius); background: rgba(57,208,255,.08); padding: 18px; }
-    .callout.warning { border-color: rgba(255,159,67,.25); border-left-color: var(--orange); background: rgba(255,159,67,.08); }
-    .callout.good { border-color: rgba(32,209,162,.25); border-left-color: var(--green); background: rgba(32,209,162,.08); }
-    .callout.bad { border-color: rgba(255,78,95,.26); border-left-color: var(--red); background: rgba(255,78,95,.08); }
-    .callout p:last-child { margin-bottom: 0; }
-    .big-number { margin: 2px 0 7px; color: var(--green); font: 700 clamp(2rem, 5vw, 3.6rem) "IBM Plex Mono", monospace; letter-spacing: -.06em; }
-    .small { color: var(--muted); font-size: .86rem; line-height: 1.55; }
-    .mono, .num, code { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; }
-    .inventory-grid, .capacity-grid, .scenario-grid, .ops-grid { display: grid; gap: 12px; }
-    .inventory-grid { grid-template-columns: .72fr 1.28fr; }
-    .capacity-grid { grid-template-columns: repeat(3, 1fr); margin-top: 14px; }
-    .scenario-grid { grid-template-columns: repeat(3, 1fr); }
-    .ops-grid { grid-template-columns: repeat(2, 1fr); }
-    .card { padding: 18px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel-2); }
-    .card p:last-child { margin-bottom: 0; }
-    .capacity { color: var(--cyan); font: 700 2.2rem "IBM Plex Mono", monospace; }
-    .card .range { color: var(--text); font: 700 1.12rem "IBM Plex Mono", monospace; }
-    .card .sub { color: var(--muted); font-size: .82rem; line-height: 1.5; }
-    .bars { display: grid; gap: 14px; }
-    .bar-group { display: grid; gap: 7px; }
-    .bar-label { display: flex; justify-content: space-between; gap: 12px; color: var(--muted); font-size: .82rem; }
-    .bar-label strong { color: var(--text); }
-    .track { height: 13px; border: 1px solid var(--line); border-radius: 3px; overflow: hidden; background: rgba(0,0,0,.32); }
-    .fill { display: block; height: 100%; width: var(--w); background: linear-gradient(90deg, var(--cyan), #78a8ff); }
-    .fill.red { background: linear-gradient(90deg, var(--amd), var(--orange)); }
-    .fill.green { background: linear-gradient(90deg, var(--green), var(--cyan)); }
-    .fill.violet { background: linear-gradient(90deg, var(--violet), var(--blue)); }
-    .legend { display: flex; flex-wrap: wrap; gap: 13px; margin: 12px 0 0; color: var(--muted); font-size: .78rem; }
-    .dot { display: inline-block; width: 8px; height: 8px; margin-right: 6px; border-radius: 50%; background: var(--cyan); }
-    .dot.red { background: var(--orange); }
-    .dot.green { background: var(--green); }
-    .dot.violet { background: var(--violet); }
-    .scenario { position: relative; overflow: hidden; }
-    .scenario::before { content: ""; position: absolute; left: 0; top: 0; right: 0; height: 3px; background: var(--cyan); }
-    .scenario.conservative::before { background: var(--orange); }
-    .scenario.normal::before { background: var(--green); }
-    .scenario.aggressive::before { background: var(--red); }
-    .scenario .gross { color: var(--muted); font: 500 .86rem "IBM Plex Mono", monospace; }
-    .scenario .net { margin: 4px 0; color: var(--text); font: 700 clamp(1.65rem, 3.6vw, 2.45rem) "IBM Plex Mono", monospace; letter-spacing: -.05em; }
-    .scenario.normal .net { color: var(--green); }
-    .scenario ul { padding-left: 18px; margin-bottom: 0; color: var(--muted); font-size: .84rem; line-height: 1.6; }
-    .table-wrap { width: 100%; overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); }
-    table { width: 100%; border-collapse: collapse; background: rgba(0,0,0,.18); font-size: .84rem; }
-    th, td { padding: 10px 11px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
-    th { background: rgba(255,255,255,.06); color: var(--text); font-size: .75rem; letter-spacing: .02em; }
-    tr:last-child td { border-bottom: 0; }
-    td.num, th.num { text-align: right; white-space: nowrap; }
-    tbody tr:hover { background: rgba(57,208,255,.035); }
-    .recommended { color: var(--green); font-weight: 700; }
-    .outlier { color: var(--orange); font-weight: 700; }
-    .excluded { color: var(--red); }
-    .formula { margin-top: 13px; padding: 12px 14px; border: 1px dashed var(--line-strong); background: rgba(0,0,0,.24); color: var(--muted); font: 500 .77rem/1.6 "IBM Plex Mono", monospace; }
-    .cost-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
-    .cost-stack { display: grid; gap: 7px; }
-    .cost-row { display: grid; grid-template-columns: 1fr auto; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--line); color: var(--muted); }
-    .cost-row strong { color: var(--text); font-family: "IBM Plex Mono", monospace; }
-    .cost-row.total { border: 0; color: var(--text); font-weight: 700; }
-    .cost-row.total strong { color: var(--green); font-size: 1.28rem; }
-    .steps { counter-reset: steps; display: grid; gap: 10px; }
-    .step { counter-increment: steps; display: grid; grid-template-columns: 38px 1fr; gap: 12px; padding: 14px; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(255,255,255,.025); }
-    .step::before { content: counter(steps, decimal-leading-zero); width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid rgba(57,208,255,.35); border-radius: 4px; color: var(--cyan); font: 700 .8rem "IBM Plex Mono", monospace; }
-    .step p { margin-bottom: 0; color: var(--muted); font-size: .86rem; line-height: 1.55; }
-    details { border: 1px solid var(--line); border-radius: var(--radius); background: rgba(0,0,0,.18); overflow: hidden; }
-    details + details { margin-top: 9px; }
-    summary { cursor: pointer; padding: 13px 15px; font-weight: 700; list-style-position: inside; }
-    details[open] summary { border-bottom: 1px solid var(--line); background: rgba(255,255,255,.035); }
-    .detail-body { padding: 14px; }
-    .source-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .source { padding: 13px; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(255,255,255,.025); }
-    .source b { display: block; margin-bottom: 4px; }
-    .source span { color: var(--muted); font-size: .8rem; line-height: 1.45; }
-    .notes { margin: 0; padding-left: 19px; color: var(--muted); line-height: 1.65; }
-    .notes li + li { margin-top: 7px; }
-    footer { margin-top: 18px; padding: 18px 4px; color: var(--subtle); font: 500 .72rem/1.65 "IBM Plex Mono", monospace; }
-    .hero-caption { position: absolute; right: 10px; bottom: 8px; z-index: 2; max-width: 260px; color: rgba(255,255,255,.58); font: 500 .63rem "IBM Plex Mono", monospace; text-align: right; }
-    @media (max-width: 900px) {
-      .hero, .verdict, .inventory-grid, .cost-grid { grid-template-columns: 1fr; }
-      .hero-art { min-height: 260px; }
-      .hero-art::after { background: linear-gradient(0deg, rgba(12,12,14,1), transparent 36%); }
-      .stats { grid-template-columns: repeat(2, 1fr); }
-      .capacity-grid, .scenario-grid { grid-template-columns: 1fr; }
-      .section-head { align-items: flex-start; flex-direction: column; }
-      .asof { white-space: normal; }
+    header::before{content:"";position:absolute;inset:0;pointer-events:none;border-top:3px solid var(--amd);background:repeating-linear-gradient(90deg,transparent 0 28px,rgba(255,255,255,.04) 28px 29px)}
+    .hero{display:grid;grid-template-columns:1.2fr .8fr;min-height:455px}
+    .hero-copy{padding:34px 32px 28px;position:relative;z-index:2;display:flex;flex-direction:column;justify-content:center}
+    .hero-art{min-height:360px;position:relative;overflow:hidden;background:#050505}
+    .hero-art img{width:100%;height:100%;object-fit:cover;object-position:58% center;filter:saturate(.9) contrast(1.05)}
+    .hero-art::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(12,12,14,1),transparent 27%),linear-gradient(0deg,rgba(5,5,6,.45),transparent 42%)}
+    .hero-caption{position:absolute;right:10px;bottom:8px;z-index:2;max-width:270px;color:rgba(255,255,255,.58);font:500 .63rem "IBM Plex Mono",monospace;text-align:right}
+    .kicker,.eyebrow,.label{color:var(--cyan);font:700 .75rem "IBM Plex Mono",monospace;letter-spacing:.09em;text-transform:uppercase}
+    h1,h2,h3,p{margin-top:0}
+    h1{margin:10px 0 16px;font-size:clamp(2.45rem,5vw,5.15rem);line-height:.96;letter-spacing:-.055em}
+    h2{margin-bottom:10px;font-size:clamp(1.55rem,3vw,2.35rem);letter-spacing:-.035em}
+    h3{margin-bottom:9px;font-size:1.05rem}
+    .dek{max-width:720px;margin-bottom:21px;color:var(--muted);font-size:1.07rem;line-height:1.62}
+    .badges,.nav,.legend{display:flex;flex-wrap:wrap;gap:8px}
+    .badge,.nav a{border:1px solid var(--line);border-radius:5px;padding:7px 9px;background:rgba(0,0,0,.28);color:var(--muted);font:500 .72rem "IBM Plex Mono",monospace;text-decoration:none}
+    .badge strong{color:var(--text)}
+    .nav{padding:13px 16px;border-top:1px solid var(--line);background:rgba(0,0,0,.34);position:relative;z-index:3}
+    .nav a:hover{border-color:rgba(57,208,255,.5);color:var(--cyan)}
+    main{display:grid;gap:18px;margin-top:18px}
+    section,.panel{padding:25px;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);box-shadow:var(--shadow)}
+    .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:18px}
+    .section-head p{max-width:700px;margin-bottom:0;color:var(--muted);line-height:1.6}
+    .asof{color:var(--subtle);font:500 .72rem "IBM Plex Mono",monospace;white-space:nowrap}
+    .grid{display:grid;gap:12px}
+    .g2{grid-template-columns:repeat(2,1fr)}
+    .g3{grid-template-columns:repeat(3,1fr)}
+    .g4{grid-template-columns:repeat(4,1fr)}
+    .card,.stat{padding:18px;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel2)}
+    .stat b{display:block;color:var(--cyan);font:700 clamp(1.35rem,2.8vw,2rem) "IBM Plex Mono",monospace;letter-spacing:-.04em}
+    .stat span{display:block;margin-top:5px;color:var(--muted);font-size:.83rem;line-height:1.35}
+    .callout{border:1px solid rgba(57,208,255,.24);border-left:5px solid var(--cyan);border-radius:var(--radius);background:rgba(57,208,255,.08);padding:18px}
+    .callout.warning{border-color:rgba(255,159,67,.25);border-left-color:var(--orange);background:rgba(255,159,67,.08)}
+    .callout.good{border-color:rgba(32,209,162,.25);border-left-color:var(--green);background:rgba(32,209,162,.08)}
+    .callout.bad{border-color:rgba(255,78,95,.26);border-left-color:var(--red);background:rgba(255,78,95,.08)}
+    .callout p:last-child,.card p:last-child{margin-bottom:0}
+    .big{margin:2px 0 7px;color:var(--green);font:700 clamp(2rem,5vw,3.55rem) "IBM Plex Mono",monospace;letter-spacing:-.06em}
+    .small{color:var(--muted);font-size:.86rem;line-height:1.56}
+    .tiny{color:var(--subtle);font-size:.76rem;line-height:1.5}
+    .mono,.num,code{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums}
+    .capacity{color:var(--cyan);font:700 2.2rem "IBM Plex Mono",monospace}
+    .range{color:var(--text);font:700 1.12rem "IBM Plex Mono",monospace}
+    .scenario{position:relative;overflow:hidden}
+    .scenario::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--cyan)}
+    .scenario.quick::before{background:var(--orange)}
+    .scenario.normal::before{background:var(--green)}
+    .scenario.max::before{background:var(--red)}
+    .scenario .net{margin:4px 0;color:var(--text);font:700 clamp(1.55rem,3.4vw,2.35rem) "IBM Plex Mono",monospace;letter-spacing:-.05em}
+    .scenario.normal .net{color:var(--green)}
+    .scenario ul{padding-left:18px;margin-bottom:0;color:var(--muted);font-size:.84rem;line-height:1.65}
+    .chart{padding:17px;border:1px solid var(--line);border-radius:var(--radius);background:rgba(0,0,0,.2)}
+    .bar-row{display:grid;grid-template-columns:112px 1fr 76px;align-items:center;gap:10px;margin-top:10px}
+    .bar-row:first-child{margin-top:0}
+    .bar-name{color:var(--muted);font-size:.78rem}
+    .bar-track{height:13px;border:1px solid var(--line);border-radius:3px;overflow:hidden;background:rgba(255,255,255,.035)}
+    .bar-fill{display:block;height:100%;width:var(--w);background:linear-gradient(90deg,var(--cyan),var(--blue))}
+    .bar-fill.old{background:linear-gradient(90deg,#59606c,#858c98)}
+    .bar-fill.july{background:linear-gradient(90deg,var(--violet),var(--blue))}
+    .bar-fill.green{background:linear-gradient(90deg,var(--green),var(--cyan))}
+    .bar-fill.orange{background:linear-gradient(90deg,var(--orange),var(--yellow))}
+    .bar-value{text-align:right;color:var(--text);font:700 .78rem "IBM Plex Mono",monospace}
+    .legend{margin-top:12px;color:var(--muted);font-size:.76rem}
+    .dot{display:inline-block;width:8px;height:8px;margin-right:5px;border-radius:50%;background:var(--cyan)}
+    .dot.old{background:#858c98}.dot.july{background:var(--violet)}.dot.green{background:var(--green)}.dot.orange{background:var(--orange)}
+    .table-wrap{width:100%;overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius)}
+    table{width:100%;border-collapse:collapse;background:rgba(0,0,0,.18);font-size:.82rem}
+    th,td{padding:10px 11px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+    th{background:rgba(255,255,255,.06);color:var(--text);font-size:.74rem;letter-spacing:.02em}
+    tr:last-child td{border-bottom:0}
+    td.num,th.num{text-align:right;white-space:nowrap}
+    tbody tr:hover{background:rgba(57,208,255,.035)}
+    .good-text{color:var(--green);font-weight:700}.warn-text{color:var(--orange);font-weight:700}.bad-text{color:var(--red);font-weight:700}
+    .formula{margin-top:13px;padding:12px 14px;border:1px dashed var(--line2);background:rgba(0,0,0,.24);color:var(--muted);font:500 .77rem/1.65 "IBM Plex Mono",monospace}
+    .cost-stack{display:grid;gap:7px}
+    .cost-row{display:grid;grid-template-columns:1fr auto;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);color:var(--muted)}
+    .cost-row strong{color:var(--text);font-family:"IBM Plex Mono",monospace}
+    .cost-row.total{border:0;color:var(--text);font-weight:700}
+    .cost-row.total strong{color:var(--green);font-size:1.28rem}
+    .steps{counter-reset:steps;display:grid;gap:10px}
+    .step{counter-increment:steps;display:grid;grid-template-columns:38px 1fr;gap:12px;padding:14px;border:1px solid var(--line);border-radius:var(--radius);background:rgba(255,255,255,.025)}
+    .step::before{content:counter(steps,decimal-leading-zero);width:34px;height:34px;display:grid;place-items:center;border:1px solid rgba(57,208,255,.35);border-radius:4px;color:var(--cyan);font:700 .8rem "IBM Plex Mono",monospace}
+    .step p{margin-bottom:0;color:var(--muted);font-size:.86rem;line-height:1.55}
+    details{border:1px solid var(--line);border-radius:var(--radius);background:rgba(0,0,0,.18);overflow:hidden}
+    details+details{margin-top:9px}
+    summary{cursor:pointer;padding:13px 15px;font-weight:700;list-style-position:inside}
+    details[open] summary{border-bottom:1px solid var(--line);background:rgba(255,255,255,.035)}
+    .detail-body{padding:14px}
+    .sources{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    .source{padding:13px;border:1px solid var(--line);border-radius:var(--radius);background:rgba(255,255,255,.025)}
+    .source b{display:block;margin-bottom:4px}
+    .source span{color:var(--muted);font-size:.8rem;line-height:1.45}
+    .notes{margin:0;padding-left:19px;color:var(--muted);line-height:1.65}
+    .notes li+li{margin-top:7px}
+    footer{margin-top:18px;padding:18px 4px;color:var(--subtle);font:500 .72rem/1.65 "IBM Plex Mono",monospace}
+    @media(max-width:900px){
+      .hero,.g2{grid-template-columns:1fr}.g4{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:1fr}
+      .hero-art{min-height:260px}.hero-art::after{background:linear-gradient(0deg,rgba(12,12,14,1),transparent 36%)}
+      .section-head{align-items:flex-start;flex-direction:column}.asof{white-space:normal}
     }
-    @media (max-width: 620px) {
-      .page { width: min(calc(100% - 18px), 1180px); padding-top: 9px; }
-      .hero-copy, section, .panel { padding: 19px; }
-      h1 { font-size: clamp(2.2rem, 13vw, 3.45rem); }
-      .stats, .ops-grid, .source-list { grid-template-columns: 1fr; }
-      .nav { overflow-x: auto; flex-wrap: nowrap; }
-      .nav a { white-space: nowrap; }
-      th, td { padding: 9px; }
-      .hero-art { min-height: 200px; }
+    @media(max-width:620px){
+      .page{width:min(calc(100% - 18px),1180px);padding-top:9px}.hero-copy,section,.panel{padding:19px}
+      h1{font-size:clamp(2.2rem,13vw,3.45rem)}.g4,.sources{grid-template-columns:1fr}
+      .nav{overflow-x:auto;flex-wrap:nowrap}.nav a{white-space:nowrap}
+      .bar-row{grid-template-columns:88px 1fr 66px;gap:7px}th,td{padding:9px}.hero-art{min-height:200px}
     }
-    @media print {
-      body { background: white; color: #111; }
-      body::before, .nav { display: none; }
-      .page { width: 100%; }
-      header, section, .panel, .card, details { box-shadow: none; background: white; color: #111; border-color: #ccc; break-inside: avoid; }
-      .hero-art { display: none; }
-      .hero { grid-template-columns: 1fr; min-height: 0; }
-      a { color: #111; }
+    @media print{
+      body{background:white;color:#111}body::before,.nav{display:none}.page{width:100%}
+      header,section,.panel,.card,details{box-shadow:none;background:white;color:#111;border-color:#ccc;break-inside:avoid}
+      .hero-art{display:none}.hero{grid-template-columns:1fr;min-height:0}a{color:#111}
     }
   </style>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to report</a>
+  <a class="skip" href="#main">Skip to report</a>
   <div class="page">
-    <a class="brand-lockup" href="/" aria-label="Ciru home">
-      <span class="logo-plate"><img src="/ciruai.png" alt="Ciru"></span>
-      <span><span class="brand-title">Ciru Research</span><span class="brand-subtitle">ciru.ai / market intelligence</span></span>
+    <a class="brand" href="/" aria-label="Ciru home">
+      <span class="logo"><img src="/ciruai.png" alt="Ciru"></span>
+      <span><span class="brand-title">Ciru Research</span><span class="brand-sub">ciru.ai / market intelligence</span></span>
     </a>
 
     <header>
       <div class="hero">
         <div class="hero-copy">
-          <span class="kicker">Crown Citadel Research Report · July 20, 2026</span>
-          <h1>1.136 PB<br>resale plan</h1>
-          <p class="dek">Current eBay sold-price evidence, recent-market sensitivity, sell-through estimates, three duration-adjusted cash-out ranges, cost modeling, and a practical listing strategy for 79 boxed WD Elements and easystore desktop drives.</p>
+          <span class="kicker">Corrected item-level market audit · July 20, 2026</span>
+          <h1>Corrected<br>resale plan</h1>
+          <p class="dek">A recency-first eBay analysis for 79 boxed WD Elements and easystore drives. This revision separates displayed sale prices from physical-unit counters and replaces the misleading original valuation and 24–48 month timeline.</p>
           <div class="badges">
             <span class="badge"><strong>79</strong> drives</span>
             <span class="badge"><strong>1,136 TB</strong> advertised raw</span>
-            <span class="badge"><strong>58</strong> exact price observations</span>
-            <span class="badge"><strong>US eBay</strong> market</span>
+            <span class="badge"><strong>$18.5k–$20.2k</strong> normal modeled net</span>
+            <span class="badge"><strong>9–15 months</strong> normal planning</span>
           </div>
         </div>
         <div class="hero-art">
@@ -238,287 +188,262 @@
         </div>
       </div>
       <nav class="nav" aria-label="Report sections">
-        <a href="#verdict">Verdict</a><a href="#inventory">Inventory</a><a href="#market">Market</a><a href="#recency">Recency</a><a href="#scenarios">Scenarios</a><a href="#velocity">Sell-through</a><a href="#costs">Costs</a><a href="#plan">Selling plan</a><a href="#evidence">Evidence</a><a href="#sources">Sources</a>
+        <a href="#correction">Correction</a><a href="#verdict">Verdict</a><a href="#inventory">Inventory</a><a href="#pricing">Pricing</a><a href="#velocity">Sell-through</a><a href="#scenarios">Ranges</a><a href="#costs">Costs</a><a href="#plan">Selling plan</a><a href="#evidence">Evidence</a><a href="#method">Method</a><a href="#sources">Sources</a>
       </nav>
     </header>
 
     <main id="main">
+      <section id="correction">
+        <div class="section-head">
+          <div><span class="eyebrow">Correction</span><h2>The old $16,600 / 24–48 month headline was not reliable</h2></div>
+          <span class="asof">FULL REPLACEMENT · JUL 20</span>
+        </div>
+        <div class="callout bad">
+          <p><strong>The original report counted listing rows as if they represented demand volume.</strong> It even recorded 16TB item <a href="https://www.ebay.com/itm/227213483438" target="_blank" rel="noopener">227213483438</a> as an active $382.19 ask while overlooking that the page was out of stock with 17 sold. The audit then found a 14TB page, <a href="https://www.ebay.com/itm/358002913086" target="_blank" rel="noopener">358002913086</a>, with 132 sold that had also been misclassified as active. Those are material research and QA failures, so the prior conclusions are withdrawn rather than patched around.</p>
+        </div>
+        <div class="grid g4" style="margin-top:12px">
+          <div class="stat"><b>17 sold</b><span>Previously missed 16TB counter</span></div>
+          <div class="stat"><b>132 sold</b><span>Previously missed 14TB counter</span></div>
+          <div class="stat"><b>$462.86</b><span>Price shown on July 20 completion page</span></div>
+          <div class="stat"><b>291+ direct</b><span>Plus 50 provisional 12TB units with field conflicts</span></div>
+        </div>
+        <div class="grid g2" style="margin-top:12px">
+          <div class="callout warning"><span class="label">What changed</span><p>Prices now use recent dated completion pages and current asks. Speed uses cumulative physical units, repeated counter snapshots where available, and seller-specific benchmarks. A multi-quantity page contributes one price observation but every visible unit to volume.</p></div>
+          <div class="callout good"><span class="label">What did not change</span><p>The inventory remains 24×12TB, 16×14TB, and 39×16TB. Fee, packing, label, and risk-reserve arithmetic was independently rebuilt. The new headline reconciles directly to the visible scenario and cost tables below.</p></div>
+        </div>
+      </section>
+
       <section id="verdict">
         <div class="section-head">
-          <div><span class="eyebrow">Bottom line</span><h2>Plan around about $16,600 duration-adjusted net</h2></div>
-          <span class="asof">NET CASH · BEFORE LABOR &amp; INCOME TAX</span>
+          <div><span class="eyebrow">Bottom line</span><h2>Normal planning: $18.5k–$20.2k net in about 9–15 months</h2></div>
+          <span class="asof">BEFORE LABOR &amp; INCOME TAX</span>
         </div>
-        <div class="stats">
-          <div class="stat"><b>$12.9–14.3k</b><span>Conservative price + time range</span></div>
-          <div class="stat"><b>$15.4–17.8k</b><span>Normal price + time range</span></div>
-          <div class="stat"><b>$16.9–20.0k</b><span>Aggressive price + time range</span></div>
-          <div class="stat"><b>$17.6–18.6k</b><span>Recent tape, duration-adjusted</span></div>
-        </div>
-        <div class="verdict">
+        <div class="grid g2">
           <div class="callout good">
-            <span class="label">My estimate</span>
-            <div class="big-number">≈ $16,600</div>
-            <p>This is the normal midpoint adjusted to a 36-month Store-carrying assumption, after modeled eBay fees, average domestic label cost, packing materials, and a 5% returns/claims reserve. It assumes all 79 drives test healthy and include the correct power adapter and USB cable.</p>
-            <p class="small"><strong>Transaction midpoint before extended carrying: $17,223.</strong> The sell-through evidence is incomplete, so duration is shown as a range rather than a promised liquidation date. This is not a present-value calculation and does not model inflation or future price drift.</p>
+            <span class="label">Normal duration-adjusted net</span>
+            <div class="big">$18.5k–$20.2k</div>
+            <p>Midpoint about <strong>$19.4k</strong>, after modeled eBay fees, 79 labels, packing materials, a 5% claims/returns reserve, and Basic Store carrying cost. Gross buyer-delivered receipts are $23.6k–$25.7k.</p>
           </div>
-          <div class="callout warning">
-            <span class="label">What controls the outcome</span>
-            <p><strong>SMART health and power-on hours matter more than the cardboard.</strong> Original boxes and complete accessories improve trust and help support upper-half pricing, but the evidence does not prove a fixed “box premium.”</p>
+          <div class="callout">
+            <span class="label">Expected sell-through</span>
+            <div class="big" style="color:var(--cyan)">9–15 mo</div>
+            <p>The 39-unit 16TB pool sets the overall clock. Competitive pricing can compress the campaign to roughly 6–10 months; holding for top prices expands it to about 15–30 months.</p>
           </div>
         </div>
-        <div class="callout" style="margin-top:14px">
-          <span class="label">Recent-market sensitivity</span>
-          <p>Marking the inventory mechanically to trailing-30-day medians produces about <strong>$18,505 transaction net</strong>; July MTD medians produce about <strong>$18,960</strong>. After the normal 24–48-month Store window, those sensitivities become roughly <strong>$17,619–$18,601</strong>. They are useful upside checks, not the core forecast: most of the uplift comes from applying one $363.50 July 16TB sale to all 39 units.</p>
-        </div>
+        <p class="small" style="margin:13px 0 0"><strong>My read:</strong> list in controlled cohorts, but do not price from the old multi-month median. The recent 16TB display tape is sharply higher: its trailing-30 page median is $382.19 and the July two-page midpoint is $413.18. That sample is tiny and concentrated—two of three trailing-30 rows come from one seller. Treat the $462.86 shown on the July 20 completion page as an upside test, not proof of its hidden accepted amount or of 39-unit depth.</p>
       </section>
 
       <section id="inventory">
         <div class="section-head">
-          <div><span class="eyebrow">Inventory</span><h2>79 drives · 1,136 TB advertised raw</h2></div>
-          <span class="asof">≈ 1,033 TiB · 1.009 PiB</span>
+          <div><span class="eyebrow">Inventory</span><h2>1.136 PB advertised raw capacity</h2></div>
+          <span class="asof">USER-PROVIDED COUNTS</span>
         </div>
-        <div class="inventory-grid">
-          <div class="card">
-            <span class="label">Capacity mix</span>
-            <div class="bars" style="margin-top:16px">
-              <div class="bar-group"><div class="bar-label"><strong>12TB · 24 drives</strong><span>288 TB</span></div><div class="track"><span class="fill" style="--w:25.35%"></span></div></div>
-              <div class="bar-group"><div class="bar-label"><strong>14TB · 16 drives</strong><span>224 TB</span></div><div class="track"><span class="fill red" style="--w:19.72%"></span></div></div>
-              <div class="bar-group"><div class="bar-label"><strong>16TB · 39 drives</strong><span>624 TB</span></div><div class="track"><span class="fill green" style="--w:54.93%"></span></div></div>
-            </div>
+        <div class="grid g4">
+          <div class="stat"><b>24 × 12TB</b><span>288TB · 30.4% of units</span></div>
+          <div class="stat"><b>16 × 14TB</b><span>224TB · 20.3% of units</span></div>
+          <div class="stat"><b>39 × 16TB</b><span>624TB · 49.4% of units</span></div>
+          <div class="stat"><b>79 total</b><span>~1,033.2TiB / ~1.009PiB binary</span></div>
+        </div>
+        <div class="grid g2" style="margin-top:12px">
+          <div class="chart">
+            <span class="label">Share of drive count</span>
+            <div class="bar-row"><span class="bar-name">12TB</span><span class="bar-track"><i class="bar-fill" style="--w:30.4%"></i></span><span class="bar-value">30.4%</span></div>
+            <div class="bar-row"><span class="bar-name">14TB</span><span class="bar-track"><i class="bar-fill green" style="--w:20.3%"></i></span><span class="bar-value">20.3%</span></div>
+            <div class="bar-row"><span class="bar-name">16TB</span><span class="bar-track"><i class="bar-fill orange" style="--w:49.4%"></i></span><span class="bar-value">49.4%</span></div>
           </div>
-          <div class="card">
-            <span class="label">Inventory reality</span>
-            <h3 style="margin-top:9px">The 16TB pool drives the financial result</h3>
-            <p class="small">The 39 × 16TB units are 49% of the drive count, 55% of raw capacity, and roughly 56% of gross receipts in the three main scenarios. Their current market is also the least stable: April sold prices clustered near $250 delivered, while one July sale reached $363.50 and live asks sit sharply above that older sold-price cluster.</p>
-            <p class="small"><strong>Implication:</strong> price the first few 16TB drives as a discovery batch, not all 39 from one optimistic comp.</p>
+          <div class="chart">
+            <span class="label">Share of advertised capacity</span>
+            <div class="bar-row"><span class="bar-name">12TB</span><span class="bar-track"><i class="bar-fill" style="--w:25.4%"></i></span><span class="bar-value">25.4%</span></div>
+            <div class="bar-row"><span class="bar-name">14TB</span><span class="bar-track"><i class="bar-fill green" style="--w:19.7%"></i></span><span class="bar-value">19.7%</span></div>
+            <div class="bar-row"><span class="bar-name">16TB</span><span class="bar-track"><i class="bar-fill orange" style="--w:54.9%"></i></span><span class="bar-value">54.9%</span></div>
           </div>
         </div>
+        <div class="callout warning" style="margin-top:12px"><p><strong>Condition gates every estimate.</strong> The model assumes complete, healthy, tested used drives with matching OEM power/USB cables and original retail boxes. High hours, bad SMART attributes, missing adapters, smoke exposure, damaged enclosures, or unverifiable capacity require separate grades and lower prices.</p></div>
       </section>
 
-      <section id="market">
+      <section id="pricing">
         <div class="section-head">
-          <div><span class="eyebrow">eBay market</span><h2>Sold prices are the anchor; asks are the ceiling</h2></div>
-          <span class="asof">SNAPSHOT · JUL 20, 2026</span>
+          <div><span class="eyebrow">Recency-first pricing</span><h2>Recent 16TB evidence is materially above the old tape</h2><p>The model does not average old low prices into the headline. Full-window medians remain visible for context; trailing-30, July, multi-quantity listing states, and current asks drive the scenarios.</p></div>
+          <span class="asof">DISPLAYED BUYER-DELIVERED USD</span>
         </div>
-        <div class="callout">
-          <p><strong>Method:</strong> U.S. used/pre-owned, single working WD Elements or easystore desktop externals. Empty boxes, enclosures, shucked/bare disks, lots, wrong capacities, nonworking drives, foreign listings, and new-only units were excluded. “Delivered” is item price plus shipping displayed during research, before tax. Best Offer acceptances with hidden prices were excluded from exact sold statistics. Quartiles use linear interpolation (type 7).</p>
+        <div class="grid g3">
+          <div class="card"><span class="capacity">12TB</span><p class="range">T30 $234.09 · July $249.85</p><p class="small">Normal modeled delivered range: <strong>$225–245</strong>. A boxed/tested page shows 50 sold at $229.99, but its title and feedback identify 12TB while structured capacity/MPN fields conflict; it is provisional evidence.</p></div>
+          <div class="card"><span class="capacity">14TB</span><p class="range">T30 $234.81 · July $243.76</p><p class="small">Normal modeled delivered range: <strong>$250–275</strong>, supported by high-volume listing states from $249.99 through $299.99.</p></div>
+          <div class="card"><span class="capacity">16TB</span><p class="range">T30 $382.19 · July $413.18</p><p class="small">Normal modeled delivered range: <strong>$365–395</strong>. July $413.18 is the midpoint of $363.50 and $462.86 completion-page displays.</p></div>
         </div>
-        <div class="capacity-grid">
-          <article class="card"><div class="capacity">12TB</div><p class="range">Sold median $202.93</p><p class="sub">n=38 · Q1 $191.16 · Q3 $225.20<br>Two complete-box observations: $230.87 delivered.</p></article>
-          <article class="card"><div class="capacity">14TB</div><p class="range">Sold median $226.34</p><p class="sub">n=10 · Q1 $184.31 · Q3 $236.24<br>Complete-box observations: $252.70 and $269.57.</p></article>
-          <article class="card"><div class="capacity">16TB</div><p class="range">Sold median $259.45</p><p class="sub">n=10 exact delivered · Q1 $252.08 · Q3 $266.92<br>Current July high: $363.50; treat as recent price evidence, not the new floor.</p></article>
-        </div>
-        <div class="card" style="margin-top:14px">
-          <span class="label">Median market comparison</span>
-          <div class="bars" style="margin-top:16px">
-            <div class="bar-group"><div class="bar-label"><strong>12TB sold</strong><span>$202.93</span></div><div class="track"><span class="fill" style="--w:50.73%"></span></div><div class="bar-label"><span>12TB active ask median</span><span>$274.81</span></div><div class="track"><span class="fill red" style="--w:68.70%"></span></div></div>
-            <div class="bar-group"><div class="bar-label"><strong>14TB sold</strong><span>$226.34</span></div><div class="track"><span class="fill" style="--w:56.59%"></span></div><div class="bar-label"><span>14TB active core median</span><span>$281.15</span></div><div class="track"><span class="fill red" style="--w:70.29%"></span></div></div>
-            <div class="bar-group"><div class="bar-label"><strong>16TB sold</strong><span>$259.45</span></div><div class="track"><span class="fill" style="--w:64.86%"></span></div><div class="bar-label"><span>16TB directional active median</span><span>$376.21</span></div><div class="track"><span class="fill red" style="--w:94.05%"></span></div></div>
+        <div class="grid g3" style="margin-top:12px">
+          <div class="chart">
+            <span class="label">12TB price tape</span>
+            <div class="bar-row"><span class="bar-name">Full window</span><span class="bar-track"><i class="bar-fill old" style="--w:67.6%"></i></span><span class="bar-value">$202.93</span></div>
+            <div class="bar-row"><span class="bar-name">Trailing 30</span><span class="bar-track"><i class="bar-fill" style="--w:78.0%"></i></span><span class="bar-value">$234.09</span></div>
+            <div class="bar-row"><span class="bar-name">July MTD</span><span class="bar-track"><i class="bar-fill july" style="--w:83.3%"></i></span><span class="bar-value">$249.85</span></div>
+            <div class="bar-row"><span class="bar-name">Normal mid</span><span class="bar-track"><i class="bar-fill green" style="--w:78.3%"></i></span><span class="bar-value">$235.00</span></div>
           </div>
-          <div class="legend"><span><i class="dot"></i>Observed sold median</span><span><i class="dot red"></i>Active asking median</span><span>Scale maximum: $400</span></div>
-          <p class="small" style="margin:13px 0 0">Active samples are thin (especially 12TB and 16TB) and contain ambitious sellers. They show where to start a listing, not what to put in the cash forecast.</p>
+          <div class="chart">
+            <span class="label">14TB price tape</span>
+            <div class="bar-row"><span class="bar-name">Full window</span><span class="bar-track"><i class="bar-fill old" style="--w:78.3%"></i></span><span class="bar-value">$234.97</span></div>
+            <div class="bar-row"><span class="bar-name">Trailing 30</span><span class="bar-track"><i class="bar-fill" style="--w:78.3%"></i></span><span class="bar-value">$234.81</span></div>
+            <div class="bar-row"><span class="bar-name">July MTD</span><span class="bar-track"><i class="bar-fill july" style="--w:81.3%"></i></span><span class="bar-value">$243.76</span></div>
+            <div class="bar-row"><span class="bar-name">Normal mid</span><span class="bar-track"><i class="bar-fill green" style="--w:87.5%"></i></span><span class="bar-value">$262.50</span></div>
+          </div>
+          <div class="chart">
+            <span class="label">16TB price tape</span>
+            <div class="bar-row"><span class="bar-name">Full window</span><span class="bar-track"><i class="bar-fill old" style="--w:57.2%"></i></span><span class="bar-value">$264.89</span></div>
+            <div class="bar-row"><span class="bar-name">Trailing 30</span><span class="bar-track"><i class="bar-fill" style="--w:82.6%"></i></span><span class="bar-value">$382.19</span></div>
+            <div class="bar-row"><span class="bar-name">July MTD</span><span class="bar-track"><i class="bar-fill july" style="--w:89.3%"></i></span><span class="bar-value">$413.18</span></div>
+            <div class="bar-row"><span class="bar-name">Normal mid</span><span class="bar-track"><i class="bar-fill green" style="--w:82.1%"></i></span><span class="bar-value">$380.00</span></div>
+          </div>
         </div>
-      </section>
+        <p class="tiny" style="margin:10px 0 0">Full-window medians are simple, unweighted numeric page-display medians: 38 rows for 12TB, 15 for 14TB, and 12 for 16TB. Trailing-30 sample sizes are n=10, n=3, and n=3; July sizes are n=7, n=2, and n=2. Windows differ by capacity and are not demand counts. Offer-enabled pages show listing-page prices, not necessarily accepted settlements.</p>
 
-      <section id="recency">
-        <div class="section-head">
-          <div><span class="eyebrow">Price recency</span><h2>Recent prices are higher—but the sample thins sharply</h2></div>
-          <span class="asof">DELIVERED · PRE-TAX · EXACT SOLD PRICES</span>
-        </div>
-        <div class="callout warning">
-          <p><strong>The concern about old prices is valid for the displayed market medians.</strong> The scenario model did not simply apply those medians: its normal midpoints are already 13.3% above the full-period 12TB median, 12.7% above 14TB, and 23.3% above 16TB. Recent-window counts are shown beside every value so a single sale cannot masquerade as a market.</p>
-        </div>
-        <div class="capacity-grid">
-          <article class="card">
-            <div class="capacity">12TB</div>
-            <div class="bars">
-              <div class="bar-group"><div class="bar-label"><strong>Full period · n=38</strong><span>$202.93</span></div><div class="track"><span class="fill" style="--w:50.73%"></span></div></div>
-              <div class="bar-group"><div class="bar-label"><strong>Trailing 30d · n=10</strong><span>$234.09</span></div><div class="track"><span class="fill green" style="--w:58.52%"></span></div></div>
-              <div class="bar-group"><div class="bar-label"><strong>July MTD · n=7</strong><span>$249.85</span></div><div class="track"><span class="fill red" style="--w:62.46%"></span></div></div>
-              <div class="bar-group"><div class="bar-label"><strong>Normal model</strong><span>$230.00</span></div><div class="track"><span class="fill violet" style="--w:57.50%"></span></div></div>
-            </div>
-          </article>
-          <article class="card">
-            <div class="capacity">14TB</div>
-            <div class="bars">
-              <div class="bar-group"><div class="bar-label"><strong>Full period · n=10</strong><span>$226.34</span></div><div class="track"><span class="fill" style="--w:56.59%"></span></div></div>
-              <div class="bar-group"><div class="bar-label"><strong>Trailing 30d · n=3</strong><span>$234.81</span></div><div class="track"><span class="fill green" style="--w:58.70%"></span></div></div>
-              <div class="bar-group"><div class="bar-label"><strong>July MTD · n=2</strong><span>$243.76</span></div><div class="track"><span class="fill red" style="--w:60.94%"></span></div></div>
-              <div class="bar-group"><div class="bar-label"><strong>Normal model</strong><span>$255.00</span></div><div class="track"><span class="fill violet" style="--w:63.75%"></span></div></div>
-            </div>
-          </article>
-          <article class="card">
-            <div class="capacity">16TB</div>
-            <div class="bars">
-              <div class="bar-group"><div class="bar-label"><strong>Full period · n=10</strong><span>$259.45</span></div><div class="track"><span class="fill" style="--w:64.86%"></span></div></div>
-              <div class="bar-group"><div class="bar-label"><strong>Trailing 30d · n=1</strong><span>$363.50</span></div><div class="track"><span class="fill green" style="--w:90.88%"></span></div></div>
-              <div class="bar-group"><div class="bar-label"><strong>July MTD · n=1</strong><span>$363.50</span></div><div class="track"><span class="fill red" style="--w:90.88%"></span></div></div>
-              <div class="bar-group"><div class="bar-label"><strong>Normal model</strong><span>$320.00</span></div><div class="track"><span class="fill violet" style="--w:80%"></span></div></div>
-            </div>
-          </article>
-        </div>
-        <div class="legend"><span><i class="dot"></i>Full-period median</span><span><i class="dot green"></i>Trailing 30-day median</span><span><i class="dot red"></i>July MTD median (Jul 1–20)</span><span><i class="dot violet"></i>Normal model midpoint</span><span>Scale maximum: $400</span></div>
-        <div class="table-wrap" style="margin-top:14px">
+        <div class="table-wrap" style="margin-top:12px">
           <table>
-            <thead><tr><th>Capacity</th><th>Full sample span</th><th class="num">Full median</th><th class="num">Trailing 30d</th><th class="num">July MTD</th><th class="num">Normal band</th><th class="num">Aggressive band</th></tr></thead>
+            <thead><tr><th>Current listing snapshot</th><th class="num">Ask rows</th><th class="num">Comparable delivered asks</th><th>High-ask exceptions</th><th>Interpretation</th></tr></thead>
             <tbody>
-              <tr><td>12TB</td><td>Apr 26–Jul 20 · n=38</td><td class="num">$202.93</td><td class="num recommended">$234.09 · n=10</td><td class="num">$249.85 · n=7</td><td class="num">$225–235</td><td class="num">$270–280</td></tr>
-              <tr><td>14TB</td><td>Jan 26–Jul 19 · n=10</td><td class="num">$226.34</td><td class="num recommended">$234.81 · n=3</td><td class="num">$243.76 · n=2</td><td class="num">$245–265</td><td class="num">$275–295</td></tr>
-              <tr><td>16TB</td><td>Feb 9–Jul 2 · n=10</td><td class="num">$259.45</td><td class="num outlier">$363.50 · n=1</td><td class="num outlier">$363.50 · n=1</td><td class="num">$300–340</td><td class="num">$350–380</td></tr>
+              <tr><td><strong>12TB used</strong></td><td class="num">4</td><td class="num">$195–287.61</td><td>None excluded</td><td>Wide seller/condition spread; normal model sits below the ask midpoint.</td></tr>
+              <tr><td><strong>14TB used</strong></td><td class="num">11</td><td class="num">$223.45–300</td><td>$505.88 and $1,615</td><td>Typical asks support a $250–275 normal close zone; extreme asks are not value evidence.</td></tr>
+              <tr><td><strong>16TB used/open box</strong></td><td class="num">4</td><td class="num">$365.81–399.98</td><td>$541.32</td><td>US ask snapshot only; asking price alone does not prove depth.</td></tr>
             </tbody>
           </table>
         </div>
-        <div class="capacity-grid" style="margin-top:14px">
-          <article class="card"><span class="label">Core transaction model</span><div class="big-number" style="font-size:2rem">$17,223</div><p class="small">$22,080 gross. Uses the normal scenario bands and a 5% reserve.</p></article>
-          <article class="card"><span class="label">Trailing-30d sensitivity</span><div class="big-number" style="font-size:2rem">$18,505</div><p class="small">$23,552 gross if every unit clears at the capacity-specific 30-day median.</p></article>
-          <article class="card"><span class="label">July MTD sensitivity</span><div class="big-number" style="font-size:2rem">$18,960</div><p class="small">$24,073 gross. Approximately 85% of the gross uplift over normal comes from the lone 16TB July comp.</p></article>
-        </div>
-        <p class="small" style="margin:11px 0 0">Sensitivity nets use the normal transaction-cost assumptions, including six monthly Store payments. Extended Store carrying is modeled separately below. The exact recent 16TB source is <a href="https://www.ebay.com/itm/257583959262" target="_blank" rel="noopener">item 257583959262</a>.</p>
-      </section>
 
-      <section id="scenarios">
-        <div class="section-head">
-          <div><span class="eyebrow">Three outcomes</span><h2>Gross receipts and duration-adjusted cash</h2></div>
-          <span class="asof">PRICE + LIQUIDATION DURATION · PRE-TAX</span>
-        </div>
-        <div class="scenario-grid">
-          <article class="card scenario conservative">
-            <span class="label">Conservative</span>
-            <p class="gross">Gross $17.5–18.9k · midpoint $18,180</p>
-            <div class="net">$12.9–14.3k</div>
-            <p class="small">Midpoint at modeled duration <strong>$13,466–13,729</strong></p>
-            <ul><li>12TB: $190–200 delivered</li><li>14TB: $200–220 delivered</li><li>16TB: $250–270 delivered</li><li>10–24 months · 12-month minimum Store cost</li><li>5% risk reserve</li></ul>
-          </article>
-          <article class="card scenario normal">
-            <span class="label">Normal · planning case</span>
-            <p class="gross">Gross $21.0–23.1k · midpoint $22,080</p>
-            <div class="net">$15.4–17.8k</div>
-            <p class="small">Midpoint at modeled duration <strong>$16,337–16,864</strong></p>
-            <ul><li>12TB: $225–235 delivered</li><li>14TB: $245–265 delivered</li><li>16TB: $300–340 delivered</li><li>24–48 months · 5% risk reserve</li></ul>
-          </article>
-          <article class="card scenario aggressive">
-            <span class="label">Aggressive</span>
-            <p class="gross">Gross $24.5–26.3k · midpoint $25,395</p>
-            <div class="net">$16.9–20.0k</div>
-            <p class="small">Midpoint at modeled duration <strong>$17,645–19,226</strong></p>
-            <ul><li>12TB: $270–280 delivered</li><li>14TB: $275–295 delivered</li><li>16TB: $350–380 delivered</li><li>48–120 months · 5% risk reserve</li></ul>
-          </article>
-        </div>
-        <div class="table-wrap" style="margin-top:14px">
-          <table>
-            <thead><tr><th>Capacity</th><th class="num">Qty</th><th class="num">Conservative midpoint</th><th class="num">Normal midpoint</th><th class="num">Aggressive midpoint</th></tr></thead>
-            <tbody>
-              <tr><td>12TB</td><td class="num">24</td><td class="num">$195 / $4,680</td><td class="num recommended">$230 / $5,520</td><td class="num">$275 / $6,600</td></tr>
-              <tr><td>14TB</td><td class="num">16</td><td class="num">$210 / $3,360</td><td class="num recommended">$255 / $4,080</td><td class="num">$285 / $4,560</td></tr>
-              <tr><td>16TB</td><td class="num">39</td><td class="num">$260 / $10,140</td><td class="num recommended">$320 / $12,480</td><td class="num">$365 / $14,235</td></tr>
-              <tr><td><strong>Total delivered gross</strong></td><td class="num"><strong>79</strong></td><td class="num"><strong>$18,180</strong></td><td class="num recommended"><strong>$22,080</strong></td><td class="num"><strong>$25,395</strong></td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="small" style="margin:11px 0 0">The cash bands are independent-extreme envelopes: they pair the lowest price with the longest duration and the highest price with the shortest duration. Real price and speed are likely inversely related, so the midpoint lines are the better planning view. These are judgment ranges, not confidence intervals, and every scenario holds back the same conservative 5% claims reserve. “Duration-adjusted” means Store carrying only; it is not a discounted-cash-flow calculation.</p>
-        <div class="callout warning" style="margin-top:14px">
-          <p><strong>Long timelines do not mean every drive sits that long.</strong> The 12TB and 14TB pools may clear much earlier; the finish date is controlled by the 39-unit 16TB position. The aggressive floor is modeled at 120 months; every additional year of continuous Basic Store membership subtracts another $263.40. Future market prices can change enough that a multi-year projection becomes less reliable.</p>
+        <div class="callout" style="margin-top:12px">
+          <span class="label">Reconciling item 227408664711</span>
+          <p><a href="https://www.ebay.com/itm/227408664711" target="_blank" rel="noopener">The July 20 completion page</a> displays <strong>$462.86 with free shipping</strong>, and sequential snapshots establish two physical sales. Because Best Offer was enabled, eBay does not expose a settlement ledger or the earlier unit's price. The $462.86 display is included in the July page midpoint and aggressive range. If all 39 realized that amount while 12TB and 14TB stayed at normal midpoints, the model would produce roughly <strong>$22.2k net</strong> on a 12-month Store basis; that is an upside sensitivity, not the central forecast.</p>
         </div>
       </section>
 
       <section id="velocity">
         <div class="section-head">
-          <div><span class="eyebrow">Sell-through</span><h2>How fast can 79 drives actually sell?</h2></div>
-          <span class="asof">PRICE OBSERVATIONS + MULTI-QUANTITY EVIDENCE</span>
+          <div><span class="eyebrow">Physical-unit demand</span><h2>Multi-quantity counters overturn the old speed estimate</h2><p>These are cumulative unit floors across distinct comparable page IDs—not a single-period market rate. Repeated snapshots of the same listing are used separately when they support an interval change.</p></div>
+          <span class="asof">291+ UNAMBIGUOUS · 341+ INCLUDING PROVISIONAL 12TB</span>
         </div>
-        <div class="callout bad">
-          <p><strong>The 39 × 16TB pool determines the finish date.</strong> The recent $363.50 completion is useful price evidence, but it is the only exact 16TB sale captured in the last 60 days. It does not prove that dozens will clear quickly near $365.</p>
+        <div class="grid g3">
+          <div class="chart">
+            <span class="label">12TB provisional counter coverage</span>
+            <div class="big" style="color:var(--cyan)">39 + 50</div>
+            <p class="small">39 unambiguous completion pages plus a provisional 50-sold tested/original-packaging page.</p>
+            <div class="bar-row"><span class="bar-name">Your pool</span><span class="bar-track"><i class="bar-fill" style="--w:48%"></i></span><span class="bar-value">24</span></div>
+            <div class="bar-row"><span class="bar-name">Direct pages</span><span class="bar-track"><i class="bar-fill green" style="--w:78%"></i></span><span class="bar-value">39</span></div>
+            <div class="bar-row"><span class="bar-name">Provisional</span><span class="bar-track"><i class="bar-fill orange" style="--w:100%"></i></span><span class="bar-value">50</span></div>
+          </div>
+          <div class="chart">
+            <span class="label">14TB counter coverage</span>
+            <div class="big" style="color:var(--green)">212</div>
+            <p class="small">205 counter-confirmed units plus seven other distinct used completion pages.</p>
+            <div class="bar-row"><span class="bar-name">Your pool</span><span class="bar-track"><i class="bar-fill" style="--w:7.5%"></i></span><span class="bar-value">16</span></div>
+            <div class="bar-row"><span class="bar-name">Evidence</span><span class="bar-track"><i class="bar-fill green" style="--w:100%"></i></span><span class="bar-value">212</span></div>
+          </div>
+          <div class="chart">
+            <span class="label">16TB counter floor</span>
+            <div class="big" style="color:var(--orange)">40+</div>
+            <p class="small">Audited page-level minimum versus 39 units in this inventory.</p>
+            <div class="bar-row"><span class="bar-name">Your pool</span><span class="bar-track"><i class="bar-fill orange" style="--w:97.5%"></i></span><span class="bar-value">39</span></div>
+            <div class="bar-row"><span class="bar-name">Evidence</span><span class="bar-track"><i class="bar-fill green" style="--w:100%"></i></span><span class="bar-value">40+</span></div>
+          </div>
         </div>
-        <div class="capacity-grid" style="margin-top:14px">
-          <article class="card">
-            <div class="capacity">12TB</div>
-            <div class="bars">
-              <div class="bar-group"><div class="bar-label"><strong>Full observed rate</strong><span>3.09 obs/wk</span></div><div class="track"><span class="fill" style="--w:99.7%"></span></div></div>
-              <div class="bar-group"><div class="bar-label"><strong>Trailing 30d</strong><span>2.33 obs/wk</span></div><div class="track"><span class="fill green" style="--w:75.2%"></span></div></div>
-            </div>
-            <p class="small" style="margin:12px 0 0">38 dated price observations across 86 days; 10 in the trailing 30 days.</p>
-          </article>
-          <article class="card">
-            <div class="capacity">14TB</div>
-            <div class="bars">
-              <div class="bar-group"><div class="bar-label"><strong>Full observed rate</strong><span>0.40 obs/wk</span></div><div class="track"><span class="fill" style="--w:12.9%"></span></div></div>
-              <div class="bar-group"><div class="bar-label"><strong>Trailing 30d</strong><span>0.70 obs/wk</span></div><div class="track"><span class="fill green" style="--w:22.6%"></span></div></div>
-            </div>
-            <p class="small" style="margin:12px 0 0">10 dated price observations across 176 days; 3 in the trailing 30 days.</p>
-          </article>
-          <article class="card">
-            <div class="capacity">16TB</div>
-            <div class="bars">
-              <div class="bar-group"><div class="bar-label"><strong>Full observed rate</strong><span>0.43 obs/wk</span></div><div class="track"><span class="fill" style="--w:13.9%"></span></div></div>
-              <div class="bar-group"><div class="bar-label"><strong>Trailing 30d</strong><span>0.23 obs/wk</span></div><div class="track"><span class="fill red" style="--w:7.4%"></span></div></div>
-            </div>
-            <p class="small" style="margin:12px 0 0">10 exact delivered-price observations through Jul 20; 1 in 30 days, and still only 1 in 60 days.</p>
-          </article>
-        </div>
-        <p class="small" style="margin:11px 0 0">These are qualifying price observations per week, not total physical market units. The research was designed for clean price comparisons, not as a complete demand census, so multi-quantity listings were counted once and the rates above understate unit volume.</p>
 
-        <div class="table-wrap" style="margin-top:14px">
+        <div class="table-wrap" style="margin-top:12px">
           <table>
-            <thead><tr><th>Pricing posture</th><th class="num">12TB clearance</th><th class="num">14TB clearance</th><th class="num">16TB clearance</th><th class="num">Whole inventory</th></tr></thead>
+            <thead><tr><th>Capacity pool</th><th>Strongest speed evidence</th><th class="num">Competitive</th><th class="num">Normal</th><th class="num">Top-price</th></tr></thead>
             <tbody>
-              <tr><td><strong>Conservative proceeds / price to move</strong><br><span class="small">$190–200 / $200–220 / $250–270 delivered</span></td><td class="num">1–4 mo</td><td class="num">3–10 mo</td><td class="num">10–24 mo</td><td class="num recommended">10–24 mo</td></tr>
-              <tr><td><strong>Normal proceeds</strong><br><span class="small">$225–235 / $245–265 / $300–340 delivered</span></td><td class="num">3–8 mo</td><td class="num">9–20 mo</td><td class="num">24–48 mo</td><td class="num recommended">24–48 mo</td></tr>
-              <tr><td><strong>Aggressive proceeds / high asks</strong><br><span class="small">$270–280 / $275–295 / $350–380 delivered</span></td><td class="num">7–18 mo</td><td class="num">18–48 mo</td><td class="num">48–120 mo</td><td class="num outlier">48–120 mo</td></tr>
+              <tr><td><strong>24 × 12TB</strong></td><td>A comparable page shows 50 sold at $229.99, but exact unit dates and listing lifetime are not exposed and structured item fields conflict.</td><td class="num">1–2 mo</td><td class="num good-text">2–4 mo</td><td class="num">3–7 mo</td></tr>
+              <tr><td><strong>16 × 14TB</strong></td><td>Same page counter rose 83→132 between indexed listing states: +49 over roughly 52 revision-date days, directionally ~28/30d.</td><td class="num">&lt;1–2 mo</td><td class="num good-text">1–4 mo</td><td class="num">2–8 mo</td></tr>
+              <tr><td><strong>39 × 16TB</strong></td><td>Comparable seller sequence exposes 19 physical units across the Mar 5–Jul 20 indexed span: a conditional ~4.2/month benchmark because the exact start and early counter state are unknown.</td><td class="num">6–10 mo</td><td class="num good-text">9–15 mo</td><td class="num">15–30 mo</td></tr>
+              <tr><td><strong>Whole inventory</strong></td><td>Capacities list concurrently; the 16TB pool is the critical path.</td><td class="num">6–10 mo</td><td class="num good-text">9–15 mo</td><td class="num">15–30 mo</td></tr>
             </tbody>
           </table>
         </div>
-        <div class="formula">Orientation baseline, trailing 90 days: 12TB = 38 observations / 90 days = 12.67 per 30 days; 14TB = 7 / 90 = 2.33; 16TB = 7 / 90 = 2.33. Clearance bands are judgment assumptions—not outputs from a fixed factor—because physical units inside multi-quantity pages, incomplete search capture, seller share, account reputation, and the price/velocity relationship are not publicly observable.</div>
+        <div class="grid g2" style="margin-top:12px">
+          <div class="callout warning"><span class="label">Seller-specific, not guaranteed</span><p>The comparable 16TB seller had a 100% feedback record, an account since 2002, tested units, strong photographs, and fast/free shipping. A new or restricted account, weak testing evidence, slow handling, or poor packaging can materially widen the timeline. All timing bands are planning judgments, not statistical confidence intervals.</p></div>
+          <div class="callout"><span class="label">Counter discipline</span><p>Do not assign a final displayed price to every unit on a multi-quantity page. Item 227213483438 proves 17 units sold, but its prior 16 prices are hidden because the seller changed price/shipping and enabled Best Offer. Volume and price remain separate datasets.</p></div>
+        </div>
+      </section>
 
-        <div class="capacity-grid" style="margin-top:14px">
-          <article class="card"><span class="label">12TB volume evidence</span><div class="big-number" style="font-size:2rem">50 sold</div><p class="small">The seller title and buyer feedback identify tested 12TB easystore units with original packaging; the page displays $229.99 and 50 sold cumulatively, but its item-specific fields conflict. Treat this as directional volume evidence only. <a href="https://www.ebay.com/itm/358034798489" target="_blank" rel="noopener">Source</a></p></article>
-          <article class="card"><span class="label">14TB volume evidence</span><div class="big-number" style="font-size:2rem">26 sold</div><p class="small">A tested easystore page displays $219 + $5.97 shipping and 26 sold cumulatively. <a href="https://www.ebay.com/itm/278099427974" target="_blank" rel="noopener">Source</a></p></article>
-          <article class="card"><span class="label">16TB volume evidence</span><div class="big-number" style="font-size:2rem">6 sold</div><p class="small">An open-box easystore page displays $250 + $16.99 shipping and 6 sold cumulatively. <a href="https://www.ebay.com/itm/235446720284" target="_blank" rel="noopener">Source</a></p></article>
+      <section id="scenarios">
+        <div class="section-head">
+          <div><span class="eyebrow">Three outcome ranges</span><h2>Conservative, normal, and aggressive cash-out plans</h2><p>All capacity prices are buyer-delivered before tax: item price plus buyer-paid shipping. Net includes the duration-specific Store budget shown.</p></div>
+          <span class="asof">79 SEPARATE ORDERS MODELED</span>
         </div>
-        <p class="small" style="margin:11px 0 0">Cumulative counters prove that multi-unit demand exists; they do not expose transaction dates or unit-level accepted-price history, so they cannot establish a monthly rate or prove that every unit sold at the currently displayed price.</p>
-        <div class="callout good" style="margin-top:14px">
-          <span class="label">Turn the forecast into measured data</span>
-          <p>Launch two units per capacity at the target price for 30 days. Track impressions, views, watchers, offers, accepted price, and days to sale; replenish only after a sale. Reforecast after six weeks or ten completed sales. Keep only 2–4 units per capacity/grade visibly available so the listing does not advertise oversupply.</p>
+        <div class="grid g3">
+          <div class="card scenario quick">
+            <span class="label">Conservative / move it</span>
+            <div class="net">$16.6k–$17.9k</div>
+            <p class="small">Gross $21.4k–$23.0k · 6–10 months</p>
+            <ul><li>12TB: $210–225</li><li>14TB: $230–245</li><li>16TB: $325–350</li><li>Store: $168–234</li><li>5% risk reserve</li></ul>
+          </div>
+          <div class="card scenario normal">
+            <span class="label">Normal / recommended</span>
+            <div class="net">$18.5k–$20.2k</div>
+            <p class="small">Gross $23.6k–$25.7k · 9–15 months</p>
+            <ul><li>12TB: $225–245</li><li>14TB: $250–275</li><li>16TB: $365–395</li><li>Store: $220–347</li><li>5% risk reserve</li></ul>
+          </div>
+          <div class="card scenario max">
+            <span class="label">Aggressive / maximize</span>
+            <div class="net">$21.1k–$22.9k</div>
+            <p class="small">Gross $26.8k–$29.2k · 15–30 months</p>
+            <ul><li>12TB: $260–285</li><li>14TB: $285–300</li><li>16TB: $410–450</li><li>Store: $347–695</li><li>5% risk reserve</li></ul>
+          </div>
         </div>
+        <div class="table-wrap" style="margin-top:12px">
+          <table>
+            <thead><tr><th>Scenario</th><th class="num">Gross low</th><th class="num">Gross high</th><th class="num">Net low</th><th class="num">Net high</th><th class="num">Overall time</th></tr></thead>
+            <tbody>
+              <tr><td>Conservative / move it</td><td class="num">$21,395</td><td class="num">$22,970</td><td class="num">$16,626</td><td class="num">$17,932</td><td class="num">6–10 mo</td></tr>
+              <tr><td class="good-text">Normal / recommended</td><td class="num">$23,635</td><td class="num">$25,685</td><td class="num good-text">$18,526</td><td class="num good-text">$20,185</td><td class="num good-text">9–15 mo</td></tr>
+              <tr><td>Aggressive / maximize</td><td class="num">$26,790</td><td class="num">$29,190</td><td class="num">$21,148</td><td class="num">$22,892</td><td class="num">15–30 mo</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="formula">Gross = 24×P12 + 16×P14 + 39×P16. Net = 0.871355×Gross − $1,848.60 − Store carrying. The 0.871355 factor retains receipts after a modeled 7.35% Store final-value fee assessed on a 107% tax-inclusive base and a 5% claims reserve. Fixed $1,848.60 = 79×$0.40 order fees + 79×$18.50 placeholder labels + 79×$4.50 packing. Range endpoints are coherent pairs: lower price with the faster endpoint, higher price with the slower endpoint.</div>
       </section>
 
       <section id="costs">
         <div class="section-head">
-          <div><span class="eyebrow">Normal-case cost bridge</span><h2>How $22,080 becomes about $16,600 over time</h2></div>
-          <span class="asof">BASIC STORE · DOMESTIC · NO ADS</span>
+          <div><span class="eyebrow">Cost model</span><h2>Normal midpoint bridge: $24,660 gross to $19,376 net</h2></div>
+          <span class="asof">12-MONTH CORE ILLUSTRATION</span>
         </div>
-        <div class="cost-grid">
-          <div class="card cost-stack">
-            <div class="cost-row"><span>Buyer-delivered gross receipts</span><strong>$22,080</strong></div>
-            <div class="cost-row"><span>eBay final value fee estimate</span><strong>−$1,768</strong></div>
-            <div class="cost-row"><span>Shipping labels · $18.50 average × 79</span><strong>−$1,462</strong></div>
-            <div class="cost-row"><span>Outer cartons/padding · $4.50 × 79</span><strong>−$356</strong></div>
-            <div class="cost-row"><span>Basic Store · 6 × $27.95</span><strong>−$168</strong></div>
-            <div class="cost-row"><span>Returns/claims reserve · 5%</span><strong>−$1,104</strong></div>
-            <div class="cost-row total"><span>Transaction net after initial Store budget</span><strong>$17,223</strong></div>
-            <div class="cost-row"><span>Additional Store carrying to 24–48 mo</span><strong>−$359–886</strong></div>
-            <div class="cost-row total"><span>Duration-adjusted normal midpoint</span><strong>$16,337–16,864</strong></div>
-          </div>
-          <div>
-            <div class="callout good">
-              <span class="label">Basic Store is worth it</span>
-              <p>eBay’s current U.S. hard-drive rate is <strong>7.35% + $0.40/order</strong> for a Basic-or-higher Store versus <strong>13.6% + $0.40/order</strong> without a qualifying Store. The Store clearly pays during the active high-volume phase, but review it annually: at roughly <strong>$3,939 delivered sales per year</strong>, the annual Basic subscription and percentage-fee savings break even.</p>
-            </div>
-            <div class="callout warning" style="margin-top:10px">
-              <span class="label">Fee assumptions</span>
-              <p>The fee model assumes a U.S., Above Standard seller, the correct <em>Hard Drives (HDD, SSD &amp; NAS)</em> category, domestic buyers, no promoted ads, no international fee, and a 7% blended buyer sales-tax assumption solely because eBay assesses its percentage fee on tax too. Below Standard or elevated “item not as described” status can add seller-level surcharges.</p>
+        <div class="grid g2">
+          <div class="card">
+            <span class="label">Normal midpoint reconciliation</span>
+            <div class="cost-stack" style="margin-top:10px">
+              <div class="cost-row"><span>Buyer-delivered receipts</span><strong>$24,660.00</strong></div>
+              <div class="cost-row"><span>eBay percentage + order fees</span><strong>−$1,970.99</strong></div>
+              <div class="cost-row"><span>79 shipping labels (placeholder)</span><strong>−$1,461.50</strong></div>
+              <div class="cost-row"><span>79 outer boxes / padding</span><strong>−$355.50</strong></div>
+              <div class="cost-row"><span>5% claims / return reserve</span><strong>−$1,233.00</strong></div>
+              <div class="cost-row"><span>12-month Basic Store</span><strong>−$263.40</strong></div>
+              <div class="cost-row total"><span>Modeled net cash</span><strong>$19,375.61</strong></div>
             </div>
           </div>
+          <div class="card">
+            <span class="label">Basic Store carrying schedule</span>
+            <div class="table-wrap" style="margin-top:10px">
+              <table><thead><tr><th>Campaign</th><th>Cost-minimizing plan</th><th class="num">Budget</th></tr></thead><tbody>
+                <tr><td>6 months</td><td>Monthly renewal</td><td class="num">$167.70</td></tr>
+                <tr><td>9 months</td><td>Annual term + estimated early-termination fee</td><td class="num">$219.50</td></tr>
+                <tr><td>10 months</td><td>Annual term + estimated early-termination fee</td><td class="num">$234.13</td></tr>
+                <tr><td>12 months</td><td>Annual term, billed monthly</td><td class="num">$263.40</td></tr>
+                <tr><td>15 months</td><td>Annual + 3 monthly</td><td class="num">$347.25</td></tr>
+                <tr><td>24 months</td><td>Two annual terms</td><td class="num">$526.80</td></tr>
+                <tr><td>30 months</td><td>Two annual + 6 monthly</td><td class="num">$694.50</td></tr>
+              </tbody></table>
+            </div>
+            <p class="tiny" style="margin:10px 0 0">Initial partial-month proration can add a small timing-dependent amount. eBay permits plan changes and defines early-termination fees, so an annual Store is not always an unavoidable full-year cash cost.</p>
+          </div>
         </div>
-        <div class="formula">FVF estimate = delivered pre-tax receipts × 7.35% × (1 + 7% assumed buyer tax) + $0.40 × 79 orders. Shipping charged to buyers is included in delivered receipts, then the matching label budget is deducted. Duration-adjusted values replace the initial six-month $167.70 Store budget with $526.80–$1,053.60 for 24–48 months on annual Basic terms.</div>
-        <div class="table-wrap" style="margin-top:14px">
+        <div class="table-wrap" style="margin-top:12px">
           <table>
-            <thead><tr><th>Not deducted from duration-adjusted net</th><th>Planning treatment</th></tr></thead>
+            <thead><tr><th>Cost / risk</th><th>Included?</th><th>Effect or treatment</th></tr></thead>
             <tbody>
-              <tr><td>Labor</td><td>Expect roughly 40–60 hands-on hours for inventory control, health captures, wiping, photos, listings, messages, and packing. At $25/hour, that is an optional $1,000–$1,500 opportunity-cost adjustment.</td></tr>
-              <tr><td>Promoted Listings</td><td>Modeled at 0%. A 2% ad rate applied to every normal-case sale would cost roughly $473 after the model’s buyer-tax assumption. Use ads only on stale units.</td></tr>
-              <tr><td>Declared value</td><td>Not included. The $18.50 is a destination-sensitive label-only average. FedEx’s standard limit of liability is $100 unless a higher value is declared and paid for; quoting an additional $5–$7 planning allowance per parcel would reduce net by about $395–$553 if used on every drive.</td></tr>
-              <tr><td>Income tax</td><td>Not estimated. Cost basis, whether these were personal or business assets, prior depreciation, state rules, and realized gain/loss determine treatment. Keep purchase and expense records.</td></tr>
-              <tr><td>Unspent risk reserve</td><td>The 5% reserve is held back, not automatically spent. Any unused amount ultimately remains yours.</td></tr>
+              <tr><td>Buyer sales tax</td><td>Fee base only</td><td>7% blended assumption; not seller revenue. Actual buyer jurisdictions change fees slightly.</td></tr>
+              <tr><td>Shipping labels</td><td>Yes, placeholder</td><td>$18.50 per unit pending ship-from ZIP, packed dimensions/weight, service, and destination mix. Every $5 per-label increase lowers every modeled net by $395; every $10 lowers it by $790.</td></tr>
+              <tr><td>Promoted Listings</td><td>No</td><td>A 2% ad rate on the normal midpoint would cost about $528 when applied to a 107% fee base.</td></tr>
+              <tr><td>Seller labor</td><td>No</td><td>At 1.5 hours per unit and $25/hour, economic labor is about $2,963.</td></tr>
+              <tr><td>Declared value / extra cover</td><td>No</td><td>Carrier liability and claims rules differ. An extra $5–7 on every shipment would reduce net by $395–553.</td></tr>
+              <tr><td>Below Standard / high INAD surcharge</td><td>No</td><td>Account-specific eBay performance surcharges can materially increase fees. Verify Seller Hub before launch.</td></tr>
+              <tr><td>Income tax</td><td>No</td><td>Depends on basis, personal/business use, depreciation, and jurisdiction. Keep purchase and selling-expense records.</td></tr>
+              <tr><td>Unused 5% reserve</td><td>Held back</td><td>It is not automatically spent; any unused reserve ultimately remains yours.</td></tr>
             </tbody>
           </table>
         </div>
@@ -526,36 +451,36 @@
 
       <section id="plan">
         <div class="section-head">
-          <div><span class="eyebrow">Selling plan</span><h2>Maximize trust without flooding the market</h2></div>
-          <span class="asof">RECOMMENDED EXECUTION</span>
+          <div><span class="eyebrow">Execution</span><h2>Prove health, stage supply, and test the new 16TB ceiling</h2></div>
+          <span class="asof">RECOMMENDED LAUNCH</span>
         </div>
-        <div class="ops-grid">
+        <div class="grid g2">
           <div class="steps">
-            <div class="step"><div><h3>Build a serial ledger</h3><p>Record capacity, product family, enclosure model, serial, power-adapter match, cosmetic grade, warranty status, power-on hours, and SMART attributes for every unit.</p></div></div>
-            <div class="step"><div><h3>Wipe and prove health</h3><p>Complete a full read/long test, securely erase prior data, then capture a fresh SMART screenshot showing serial, hours, reallocated sectors, pending sectors, and uncorrectable errors.</p></div></div>
-            <div class="step"><div><h3>Grade into real condition bands</h3><p>A: low-hour/clean; B: healthy normal-hour; C: high-hour or cosmetic wear. Remove any drive with pending, reallocated, or uncorrectable sectors from the healthy pricing model.</p></div></div>
-            <div class="step"><div><h3>Release 2–4 per capacity</h3><p>First check the account’s Seller Hub selling limit. Use one multi-quantity fixed-price listing per genuinely identical grade/capacity, then replenish quietly. eBay discourages duplicate fixed-price listings, and a visible 39-unit quantity advertises oversupply.</p></div></div>
+            <div class="step"><div><h3>Build a serial ledger</h3><p>Record capacity, family, enclosure model, serial, matching adapter, cosmetic grade, warranty status, power-on hours, and SMART attributes for all 79 units.</p></div></div>
+            <div class="step"><div><h3>Wipe and prove health</h3><p>Complete a long/full read test, securely erase prior data, then capture a fresh serial-matched SMART screenshot. Pull any drive with pending, reallocated, or uncorrectable sectors out of the healthy model.</p></div></div>
+            <div class="step"><div><h3>Launch small cohorts</h3><p>Start with roughly 3×12TB, 3×14TB, and 4×16TB. Use multi-quantity listings only for genuinely identical grade/family units; replenish quietly after sales rather than displaying all 79.</p></div></div>
+            <div class="step"><div><h3>Reprice from actual outcomes</h3><p>After the first 8–10 completed 16TB orders, compare watchers, offers, days-to-sale, return rate, and net. Raise or lower the acceptance floor—do not let one $462.86 completion-page display dictate all 39.</p></div></div>
           </div>
           <div>
             <div class="card">
-              <span class="label">Practical starting asks</span>
-              <div class="table-wrap" style="margin-top:12px">
-                <table><thead><tr><th>Capacity</th><th class="num">Start + calculated ship</th><th class="num">Normal clean-offer zone</th></tr></thead><tbody>
-                  <tr><td>12TB</td><td class="num">$249.99</td><td class="num">$205–220 item</td></tr>
-                  <tr><td>14TB</td><td class="num">$279.99</td><td class="num">$225–245 item</td></tr>
-                  <tr><td>16TB</td><td class="num">$379.99</td><td class="num">$285–325 item</td></tr>
+              <span class="label">Buyer-delivered price ladder</span>
+              <div class="table-wrap" style="margin-top:10px">
+                <table><thead><tr><th>Capacity</th><th class="num">Initial test ask</th><th class="num">Normal close zone</th><th class="num">Quick floor</th></tr></thead><tbody>
+                  <tr><td>12TB</td><td class="num">$249.99</td><td class="num">$225–245</td><td class="num">$210–225</td></tr>
+                  <tr><td>14TB</td><td class="num">$299.99</td><td class="num">$250–275</td><td class="num">$230–245</td></tr>
+                  <tr><td>16TB</td><td class="num">$429.99</td><td class="num">$365–395</td><td class="num">$325–350</td></tr>
                 </tbody></table>
               </div>
-              <p class="small" style="margin:11px 0 0">Enable Best Offer. For 16TB, validate the first 4–6 outcomes before raising the acceptance floor; current asks are far ahead of the multi-month sold median.</p>
+              <p class="small" style="margin:10px 0 0">These are delivered totals. If using calculated shipping, subtract the buyer’s quoted shipping from the item price so the total stays in-zone. Enable Best Offer and use floors appropriate to grade.</p>
             </div>
             <div class="card" style="margin-top:10px">
               <span class="label">Listing title pattern</span>
               <p class="mono" style="margin:10px 0;color:var(--text);font-size:.82rem">WD [Elements/easystore] [12/14/16]TB External HDD · SMART Tested · OEM Power + USB · Box</p>
-              <p class="small">Use photos of the exact contents and the matching serial/SMART proof. State power-on hours and every cosmetic defect. Do not promise “low hours,” warranty, 7200 RPM, CMR, or a specific internal white-label model unless verified unit by unit.</p>
+              <p class="small">Photograph the exact contents and serial-matched SMART proof. State hours and every defect. Do not promise warranty, CMR, 7200 RPM, “low hours,” or a particular internal white-label model unless verified unit by unit.</p>
             </div>
             <div class="card" style="margin-top:10px">
-              <span class="label">Packing</span>
-              <p class="small" style="margin-top:10px">The retail box is presentation, not the shipping carton. Put it inside a strong outer box with immobilizing padding. Budget the model’s destination-sensitive $18.50 average label and $4.50 materials per unit; charge calculated shipping and purchase appropriate declared value or third-party coverage above the carrier’s included protection.</p>
+              <span class="label">Packing standard</span>
+              <p class="small" style="margin-top:10px">The retail box is presentation, not the shipping carton. Place it inside a strong outer box with immobilizing padding. Photograph packed high-value units, ship promptly, and use appropriate declared value/coverage after checking carrier terms.</p>
             </div>
           </div>
         </div>
@@ -563,178 +488,241 @@
 
       <section id="evidence">
         <div class="section-head">
-          <div><span class="eyebrow">Auditable evidence</span><h2>Direct eBay listing records</h2></div>
-          <span class="asof">58 EXACT SOLD-PRICE OBS · 20 ACTIVE/ASK OBS</span>
+          <div><span class="eyebrow">Auditable evidence</span><h2>Price pages, physical counters, and current asks stay separate</h2></div>
+          <span class="asof">65 NUMERIC PAGE DISPLAYS · 19 US ASK SNAPSHOTS</span>
         </div>
-        <p class="small">Open any item number to inspect the source page. Ended listings may eventually disappear or be relisted. Shipping is the amount eBay displayed during research and can vary by destination. Rows marked excluded were retained for transparency but were not used in exact sold statistics. Multi-quantity pages are one price observation here even when eBay shows several cumulative units sold; their unit counts are handled separately in the sell-through section. The 20 active/ask observations comprise 16 direct listings and four 16TB category-page snapshots.</p>
+        <details open>
+          <summary>Page-level sold-unit audit · 291+ unambiguous; 341+ including provisional 12TB page</summary>
+          <div class="detail-body">
+            <div class="table-wrap"><table>
+              <thead><tr><th>Capacity</th><th>Item / evidence group</th><th>Condition / family</th><th class="num">Unit floor</th><th>Displayed price evidence</th><th>Use and caveat</th></tr></thead>
+              <tbody>
+                <tr><td>12TB</td><td><a href="https://www.ebay.com/itm/358034798489" target="_blank" rel="noopener">358034798489</a></td><td>Used easystore; tested; original packaging</td><td class="num">50 provisional</td><td>$229.99 page display</td><td>Title/feedback say 12TB but structured MPN/capacity fields conflict; excluded from the unambiguous subtotal.</td></tr>
+                <tr><td>12TB</td><td>39 distinct completion pages below</td><td>Used WD external</td><td class="num">39</td><td>38 numeric totals; one shipping unavailable</td><td>One-unit floor per distinct page; no unshown multiplier assumed.</td></tr>
+                <tr><td>14TB</td><td><a href="https://www.ebay.com/itm/358002913086" target="_blank" rel="noopener">358002913086</a></td><td>Used easystore; tested / like new</td><td class="num">132</td><td>$249.99 older state; final page $299.99</td><td>Counter rose 83→132 between indexed states. Historic unit prices and accepted offers are not exposed.</td></tr>
+                <tr><td>14TB</td><td><a href="https://www.ebay.com/itm/357977306090" target="_blank" rel="noopener">357977306090</a></td><td>Used Elements; tested / like new</td><td class="num">27</td><td>$299.99 displayed</td><td>Out of stock; free shipping displayed.</td></tr>
+                <tr><td>14TB</td><td><a href="https://www.ebay.com/itm/278099427974" target="_blank" rel="noopener">278099427974</a></td><td>Used easystore</td><td class="num">26</td><td>$224.97 delivered latest page</td><td>One displayed completion price, 26 cumulative units.</td></tr>
+                <tr><td>14TB</td><td><a href="https://www.ebay.com/itm/178207160472" target="_blank" rel="noopener">178207160472</a></td><td>Used easystore</td><td class="num">6</td><td>$234.97 page display</td><td>Last visible sale June 12; Best Offer enabled, accepted amounts hidden.</td></tr>
+                <tr><td>14TB</td><td><a href="https://www.ebay.com/itm/157919375250" target="_blank" rel="noopener">157919375250</a></td><td>Used easystore</td><td class="num">5</td><td>$260.89 page display</td><td>Last visible sale June 6; Best Offer enabled, accepted amounts hidden.</td></tr>
+                <tr><td>14TB</td><td><a href="https://www.ebay.com/itm/226972850051" target="_blank" rel="noopener">226972850051</a></td><td>Used easystore</td><td class="num">4</td><td>$236.71 delivered</td><td>Four cumulative units; one completion-price row.</td></tr>
+                <tr><td>14TB</td><td><a href="https://www.ebay.com/itm/227137385156" target="_blank" rel="noopener">227137385156</a> + <a href="https://www.ebay.com/itm/257290054465" target="_blank" rel="noopener">257290054465</a></td><td>Used Elements</td><td class="num">4</td><td>$269.57 / $159.00</td><td>Two units on each page; $159 Media Mail page is a low outlier.</td></tr>
+                <tr><td>14TB</td><td><a href="https://www.ebay.com/itm/227118345085" target="_blank" rel="noopener">227118345085</a></td><td>Used easystore</td><td class="num">1</td><td>$223.45 current delivered ask</td><td>One sold, two available; accepted price not exposed.</td></tr>
+                <tr><td>14TB</td><td>Seven other distinct completion pages below</td><td>Used WD external</td><td class="num">7</td><td>Individual rows below</td><td>One-unit floor per page, including item 227275772181; no counter multiplier assumed.</td></tr>
+                <tr><td>16TB</td><td><a href="https://www.ebay.com/itm/227213483438" target="_blank" rel="noopener">227213483438</a></td><td>Used/tested Elements</td><td class="num">17</td><td>$382.19 final-page display</td><td>Exact counter; Best Offer settlements and prior 16 prices are not exposed.</td></tr>
+                <tr><td>16TB</td><td><a href="https://www.ebay.com/itm/227408664711" target="_blank" rel="noopener">227408664711</a></td><td>Used/tested Elements</td><td class="num">2</td><td>$462.86 Jul 20 page display</td><td>Two-unit floor inferred from sequential snapshots; accepted amounts are not exposed.</td></tr>
+                <tr><td>16TB</td><td><a href="https://www.ebay.com/itm/235446720284" target="_blank" rel="noopener">235446720284</a></td><td>Open-box easystore</td><td class="num">6</td><td>$266.99 delivered final page</td><td>Six cumulative units; historic accepted prices unavailable.</td></tr>
+                <tr><td>16TB</td><td><a href="https://www.ebay.com/itm/227182513908" target="_blank" rel="noopener">227182513908</a></td><td>Used/tested easystore; box</td><td class="num">2</td><td>$269.45 ask / offer enabled</td><td>Two sold; accepted prices opaque.</td></tr>
+                <tr><td>16TB</td><td>Nine other numeric completion pages below</td><td>Used WD external</td><td class="num">9</td><td>Individual rows below</td><td>One-unit floor per distinct page; no unshown multiplier assumed.</td></tr>
+                <tr><td>16TB</td><td>Four additional opaque / shipping-hidden pages below</td><td>Used / recertified WD external</td><td class="num">4</td><td>Accepted or delivered totals unavailable</td><td>Physical completion is visible; excluded from numeric price statistics.</td></tr>
+              </tbody>
+              <tfoot><tr><th colspan="3">Consistent page-level sold-unit floor</th><th class="num">291+ unambiguous<br>341+ incl. provisional</th><th colspan="2">Counter totals replace, rather than add to, the same page's one-row floor. The extra 50 are identity-caveated 12TB units. Neither total is a time-bounded demand rate or unit-weighted price evidence.</th></tr></tfoot>
+            </table></div>
+          </div>
+        </details>
+        <details>
+          <summary>12TB · 38 numeric completion displays + 1 shipping-hidden completion + 4 asks</summary>
+          <div class="detail-body"><div class="table-wrap"><table><thead><tr><th>Date/status</th><th>Family</th><th class="num">Item</th><th class="num">Ship</th><th class="num">Delivered</th><th>Source</th><th>Notes</th></tr></thead><tbody id="sold12"></tbody><tbody id="active12"></tbody></table></div></div>
+        </details>
+        <details>
+          <summary>14TB · 13 dated completion displays + 2 out-of-stock states + 11 asks</summary>
+          <div class="detail-body"><div class="table-wrap"><table><thead><tr><th>Date/status</th><th>Family</th><th class="num">Item</th><th class="num">Ship</th><th class="num">Delivered</th><th>Source</th><th>Notes</th></tr></thead><tbody id="sold14"></tbody><tbody id="active14"></tbody></table></div></div>
+        </details>
+        <details>
+          <summary>16TB · 12 numeric completion displays, 5 opaque/excluded sales, and 4 US asks</summary>
+          <div class="detail-body"><div class="table-wrap"><table><thead><tr><th>Date/status</th><th>Family</th><th class="num">Item</th><th class="num">Ship</th><th class="num">Delivered</th><th>Source</th><th>Notes</th></tr></thead><tbody id="sold16"></tbody><tbody id="active16"></tbody></table></div></div>
+        </details>
+      </section>
 
-        <details open><summary>12TB · 38 exact sold-price observations + 4 active asks</summary><div class="detail-body">
-          <p class="small"><a href="https://www.ebay.com/sch/i.html?_nkw=WD+12TB+external+hard+drive&amp;_sacat=0&amp;_from=R40&amp;rt=nc&amp;LH_Sold=1&amp;LH_Complete=1&amp;LH_ItemCondition=3000&amp;_ipg=240" target="_blank" rel="noopener">Refresh the eBay sold search</a> · <a href="https://www.ebay.com/sch/i.html?_nkw=WD+12TB+external+hard+drive&amp;_sacat=0&amp;_from=R40&amp;rt=nc&amp;LH_ItemCondition=3000&amp;_ipg=240" target="_blank" rel="noopener">Refresh active listings</a></p>
-          <div class="table-wrap"><table><thead><tr><th>Date/status</th><th>Family</th><th class="num">Item</th><th class="num">Ship</th><th class="num">Delivered</th><th>Source</th><th>Notes</th></tr></thead><tbody id="sold12"></tbody><tbody id="active12"></tbody></table></div>
-        </div></details>
-
-        <details><summary>14TB · 10 exact sold-price observations + 10 active asks</summary><div class="detail-body">
-          <div class="table-wrap"><table><thead><tr><th>Date/status</th><th>Family</th><th class="num">Item</th><th class="num">Ship</th><th class="num">Delivered</th><th>Source</th><th>Notes</th></tr></thead><tbody id="sold14"></tbody><tbody id="active14"></tbody></table></div>
-        </div></details>
-
-        <details><summary>16TB · exact sold-price observations, opaque sale evidence, and current asks</summary><div class="detail-body">
-          <div class="table-wrap"><table><thead><tr><th>Date/status</th><th>Family</th><th class="num">Item</th><th class="num">Ship</th><th class="num">Delivered</th><th>Source</th><th>Notes</th></tr></thead><tbody id="sold16"></tbody><tbody id="active16"></tbody></table></div>
-        </div></details>
+      <section id="method">
+        <div class="section-head">
+          <div><span class="eyebrow">Method and limits</span><h2>What the evidence can—and cannot—support</h2></div>
+          <span class="asof">RESEARCH SNAPSHOT · JUL 20</span>
+        </div>
+        <div class="grid g2">
+          <div class="card">
+            <span class="label">Included</span>
+            <ul class="notes" style="margin-top:10px">
+              <li>US eBay used/open-box WD Elements and easystore desktop external drives matching 12TB, 14TB, or 16TB.</li>
+              <li>Dated completion pages and explicitly labeled final out-of-stock listing states with visible item price and shipping for listing-level price statistics.</li>
+              <li>Multi-quantity sold counters as physical-unit floors, kept separate from price observations.</li>
+              <li>Current used/open-box ask snapshots for negotiation context, with extreme asks labeled.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="label">Excluded or caveated</span>
+            <ul class="notes" style="margin-top:10px">
+              <li>New, manufacturer-refurbished, internal/bare, My Book, RAID, defective, and non-WD comparables.</li>
+              <li>Hidden Best Offer settlements are not treated as exact accepted prices.</li>
+              <li>Sold counters do not reveal every unit date or historical price; one counter snapshot cannot establish a rate.</li>
+              <li>Repeated states can show a counter delta, but revision dates are only directional brackets—not a transaction ledger.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="callout warning" style="margin-top:12px"><p><strong>Marketplace pages are dynamic.</strong> eBay can relist, localize, revise, or eventually remove ended pages; shipping can vary by destination. The report records what the page or indexed state displayed during the July 20 audit. It is an estimate, not a guarantee of price, sale time, or tax treatment.</p></div>
       </section>
 
       <section id="sources">
         <div class="section-head">
-          <div><span class="eyebrow">Primary sources</span><h2>Rules, fees, product facts, and tax context</h2></div>
+          <div><span class="eyebrow">Primary sources</span><h2>Direct market pages and official fee/tax rules</h2></div>
           <span class="asof">LINKS CHECKED JUL 20, 2026</span>
         </div>
-        <div class="source-list">
-          <a class="source" href="https://www.ebay.com/help/selling/fees-credits-invoices/selling-fees?id=4822" target="_blank" rel="noopener"><b>eBay selling fees</b><span>Non-store rate, $0.40 order fee, and definition of total sale amount.</span></a>
-          <a class="source" href="https://www.ebay.com/help/selling/fees-credits-invoices/store-selling-fees-managed-payments-sellers?id=4809" target="_blank" rel="noopener"><b>eBay Store selling fees</b><span>Basic subscription price and 7.35% hard-drive category rate.</span></a>
-          <a class="source" href="https://www.ebay.com/help/policies/listing-policies/duplicate-listings-policy?id=4255" target="_blank" rel="noopener"><b>eBay duplicate-listing policy</b><span>Identical fixed-price items belong in a multi-quantity listing.</span></a>
-          <a class="source" href="https://www.ebay.com/help/selling/listings/selling-limits?id=4107" target="_blank" rel="noopener"><b>eBay selling limits</b><span>Active and sold listings count against account limits; check before launch.</span></a>
-          <a class="source" href="https://www.ebay.com/itm/358034798489" target="_blank" rel="noopener"><b>12TB multi-quantity evidence</b><span>Seller-title and buyer-feedback evidence showing 50 cumulative sales; conflicting item-specific fields require caution.</span></a>
-          <a class="source" href="https://www.ebay.com/itm/278099427974" target="_blank" rel="noopener"><b>14TB multi-quantity evidence</b><span>Tested easystore page displaying $219 + $5.97 shipping and 26 cumulative sales.</span></a>
-          <a class="source" href="https://www.ebay.com/itm/235446720284" target="_blank" rel="noopener"><b>16TB multi-quantity evidence</b><span>Open-box easystore page displaying $250 + $16.99 shipping and six cumulative sales.</span></a>
-          <a class="source" href="https://documents.westerndigital.com/content/dam/doc-library/en_us/assets/public/wd/product/external-storage/wd_elements/wd_elements_desktop/product-overview-wd-elements-desktop.pdf" target="_blank" rel="noopener"><b>WD Elements data sheet</b><span>Dimensions, weight, supported capacities, and official box contents.</span></a>
-          <a class="source" href="https://documents.westerndigital.com/content/dam/doc-library/en_us/assets/public/wd/product/external-storage/wd_easy_store/easystore-desktop/product-overview-easystore-desktop.pdf" target="_blank" rel="noopener"><b>WD easystore data sheet</b><span>Dimensions, weight, supported capacities, and official box contents.</span></a>
-          <a class="source" href="https://www.fedex.com/en-us/shipping/declared-value.html" target="_blank" rel="noopener"><b>FedEx declared value</b><span>Standard $100 liability limit, higher declared-value treatment, and packaging conditions.</span></a>
-          <a class="source" href="https://www.irs.gov/businesses/understanding-your-form-1099-k" target="_blank" rel="noopener"><b>IRS Form 1099-K overview</b><span>Reporting threshold, records, and the distinction between payment reporting and taxable income.</span></a>
-          <a class="source" href="https://www.irs.gov/businesses/what-to-do-with-form-1099-k" target="_blank" rel="noopener"><b>IRS personal-item sales guidance</b><span>Personal losses are not deductible; personal gains are taxable; gross forms need reconciliation.</span></a>
+        <div class="sources">
+          <a class="source" href="https://www.ebay.com/itm/227408664711" target="_blank" rel="noopener"><b>16TB July 20 completion page</b><span>Page displays $462.86; sequential snapshots establish two units; Best Offer settlement is not exposed.</span></a>
+          <a class="source" href="https://www.ebay.com/itm/227213483438" target="_blank" rel="noopener"><b>16TB 17-sold predecessor</b><span>Out-of-stock used/tested Elements page displaying $382.19; prior Best Offer prices are hidden.</span></a>
+          <a class="source" href="https://www.ebay.com/itm/358002913086" target="_blank" rel="noopener"><b>14TB 132-sold page</b><span>Used/tested easystore; repeated indexed states expose an 83→132 counter change.</span></a>
+          <a class="source" href="https://www.ebay.com/itm/357977306090" target="_blank" rel="noopener"><b>14TB 27-sold page</b><span>Used/tested Elements; $299.99 displayed and out of stock.</span></a>
+          <a class="source" href="https://www.ebay.com/itm/358034798489" target="_blank" rel="noopener"><b>12TB 50-sold page</b><span>Title/feedback support 12TB, tested, original packaging; structured fields conflict.</span></a>
+          <a class="source" href="https://www.ebay.com/help/selling/fees-credits-invoices/selling-fees?id=4822" target="_blank" rel="noopener"><b>eBay selling fees</b><span>$0.40 order fee and total-sale-amount fee base.</span></a>
+          <a class="source" href="https://www.ebay.com/help/selling/-/store-fees?id=4809" target="_blank" rel="noopener"><b>eBay Store fees</b><span>Basic subscription prices and 7.35% hard-drive category rate.</span></a>
+          <a class="source" href="https://pages.ebay.com/stores/subscriptionterms.html" target="_blank" rel="noopener"><b>eBay Store subscription terms</b><span>Annual term, plan changes, proration, and early-termination rules.</span></a>
+          <a class="source" href="https://www.ebay.com/help/policies/listing-policies/duplicate-listings-policy?id=4255" target="_blank" rel="noopener"><b>Duplicate-listing policy</b><span>Identical fixed-price items belong in multi-quantity listings.</span></a>
+          <a class="source" href="https://www.ebay.com/help/selling/listings/selling-limits?id=4107" target="_blank" rel="noopener"><b>eBay selling limits</b><span>Active and sold inventory can count against account limits.</span></a>
+          <a class="source" href="https://www.fedex.com/en-us/shipping/declared-value.html" target="_blank" rel="noopener"><b>FedEx declared value</b><span>Liability limit, higher declared-value treatment, and packing conditions.</span></a>
+          <a class="source" href="https://www.irs.gov/businesses/understanding-your-form-1099-k" target="_blank" rel="noopener"><b>IRS Form 1099-K overview</b><span>Current $20,000-and-over-200 TPSO threshold and recordkeeping context.</span></a>
+          <a class="source" href="https://www.irs.gov/businesses/what-to-do-with-form-1099-k" target="_blank" rel="noopener"><b>IRS personal-item guidance</b><span>Personal losses are nondeductible; personal gains are taxable.</span></a>
         </div>
-        <div class="callout warning" style="margin-top:14px">
-          <p><strong>Tax note, not tax advice:</strong> current federal marketplace reporting generally requires both more than $20,000 and more than 200 transactions, though a platform may issue a form below that and some states differ. Whether proceeds are taxable does not depend on receiving a form. Keep original purchase records, selling expenses, and any depreciation history.</p>
-        </div>
+        <div class="callout warning" style="margin-top:12px"><p><strong>Tax note, not tax advice:</strong> the federal TPSO reporting requirement generally applies only when payments exceed $20,000 and transactions exceed 200, though a marketplace may issue a form below that and state rules can differ. Taxability does not depend on receiving a form. Preserve basis, depreciation, and expense records.</p></div>
       </section>
     </main>
 
     <footer>
-      Research snapshot: July 20, 2026 · United States eBay market · Prices in USD · WD, Elements, easystore, and eBay are trademarks of their respective owners. Ciru is not affiliated with Western Digital or eBay. This is a market estimate, not a guarantee of sale price or tax advice.
+      Corrected research snapshot: July 20, 2026 · United States eBay market · Prices in USD · Previous valuation and timing conclusions replaced in full. WD, Elements, easystore, and eBay are trademarks of their respective owners. Ciru is not affiliated with Western Digital or eBay. Market estimate only; no guarantee of sale price, timing, or tax treatment.
     </footer>
   </div>
 
   <script>
-    (function () {
-      'use strict';
-      var sold12 = [
-        ['Jul 20','Elements',184,5.58,189.58,'407086292266','Low-hour, tested'],
-        ['Jul 17','Elements',183.50,0,183.50,'307063861741','78 bids'],
-        ['Jul 10','easystore',250,5.58,255.58,'398161680438',''],
-        ['Jul 7','Elements',299,0,299,'137486162715','197 hours'],
-        ['Jul 7','Elements',279,0,279,'137486123557','205 hours'],
-        ['Jul 3','easystore',245,0,245,'267716779227',''],
-        ['Jul 1','easystore',235,14.85,249.85,'227402813067','37 bids; low hours'],
-        ['Jun 28','Elements',209,0,209,'178261832478','600 hours'],
-        ['Jun 26','easystore',210,13.17,223.17,'287419034602',''],
-        ['Jun 22','Elements',182.77,0,182.77,'147391525368',''],
-        ['Jun 19','easystore',185.55,24.25,209.80,'298431915909',''],
-        ['Jun 16','Elements',185.99,26.05,212.04,'298419368037',''],
-        ['Jun 14','Elements',185.99,18.30,204.29,'147372142306',''],
-        ['Jun 14','Elements',185.99,18.30,204.29,'147372144708',''],
-        ['Jun 5','easystore',224.98,5.89,230.87,'336561458672','Original box, cables, instructions'],
-        ['Jun 2','Elements',190,7.17,197.17,'327189886935','Tested, health shown'],
-        ['Jun 1','Elements',165,0,165,'306970516679','29 bids'],
-        ['May 29','easystore',224.98,5.89,230.87,'336561450363','Original box, cables, instructions'],
-        ['May 23','easystore',192.50,20,212.50,'278000778436','2 bids; barely used'],
-        ['May 23','easystore',219.98,5.89,225.87,'336561431268',''],
-        ['May 20','Elements',219.99,5.89,225.88,'227338181993',''],
-        ['May 19','easystore',199.97,0,199.97,'406929472957',''],
-        ['May 14','Elements',165,0,165,'168373706882',''],
-        ['May 13','Elements',190,10.42,200.42,'327155736617','Tested'],
-        ['May 12','Elements',190,10.42,200.42,'327153966316','Tested'],
-        ['May 9','easystore',162.50,8.25,170.75,'137280602261','20 bids'],
-        ['May 8','Elements',175.99,7.15,183.14,'137290830030','Tested'],
-        ['May 4','Elements',209.99,5.89,215.88,'227323798689',''],
-        ['May 3','easystore',195,6.57,201.57,'137259435065','26 bids'],
-        ['May 2','Elements',190,7.95,197.95,'178084387834',''],
-        ['May 2','Elements',190,10.42,200.42,'327132575585','Tested'],
-        ['May 2','easystore',350,7.95,357.95,'358509386824','High sold outlier'],
-        ['May 1','Elements',190,10.42,200.42,'327132574983','Tested'],
-        ['May 1','easystore',175,7.95,182.95,'358509218782',''],
-        ['May 1','easystore',175,7.95,182.95,'358506456394',''],
-        ['Apr 27','easystore',189.99,5.89,195.88,'227318127467',''],
-        ['Apr 27','Elements',199.99,5.89,205.88,'227318135634',''],
-        ['Apr 26','Elements',175,13.70,188.70,'306900149176','Power included']
+    (function(){
+      "use strict";
+      var sold12=[
+        ["Jul 20","Elements",184,5.58,189.58,"407086292266","Low-hour, tested"],
+        ["Jul 17","Elements",183.50,0,183.50,"307063861741","78 bids"],
+        ["Jun 17","Elements",210,null,null,"287387182640","Completion visible; shipping unavailable; excluded from delivered stats"],
+        ["Jul 10","easystore",250,5.58,255.58,"398161680438",""],
+        ["Jul 7","Elements",299,0,299,"137486162715","197 hours"],
+        ["Jul 7","Elements",279,0,279,"137486123557","205 hours"],
+        ["Jul 3","easystore",245,0,245,"267716779227",""],
+        ["Jul 1","easystore",235,14.85,249.85,"227402813067","37 bids; low hours"],
+        ["Jun 28","Elements",209,0,209,"178261832478","600 hours"],
+        ["Jun 26","easystore",210,13.17,223.17,"287419034602",""],
+        ["Jun 22","Elements",182.77,0,182.77,"147391525368",""],
+        ["Jun 19","easystore",185.55,24.25,209.80,"298431915909",""],
+        ["Jun 16","Elements",185.99,26.05,212.04,"298419368037",""],
+        ["Jun 14","Elements",185.99,18.30,204.29,"147372142306",""],
+        ["Jun 14","Elements",185.99,18.30,204.29,"147372144708",""],
+        ["Jun 5","easystore",224.98,5.89,230.87,"336561458672","Original box, cables, instructions"],
+        ["Jun 2","Elements",190,7.17,197.17,"327189886935","Tested, health shown"],
+        ["Jun 1","Elements",165,0,165,"306970516679","29 bids"],
+        ["May 29","easystore",224.98,5.89,230.87,"336561450363","Original box, cables, instructions"],
+        ["May 23","easystore",192.50,20,212.50,"278000778436","2 bids; barely used"],
+        ["May 23","easystore",219.98,5.89,225.87,"336561431268",""],
+        ["May 20","Elements",219.99,5.89,225.88,"227338181993",""],
+        ["May 19","easystore",199.97,0,199.97,"406929472957",""],
+        ["May 14","Elements",165,0,165,"168373706882",""],
+        ["May 13","Elements",190,10.42,200.42,"327155736617","Tested"],
+        ["May 12","Elements",190,10.42,200.42,"327153966316","Tested"],
+        ["May 9","easystore",162.50,8.25,170.75,"137280602261","20 bids"],
+        ["May 8","Elements",175.99,7.15,183.14,"137290830030","Tested"],
+        ["May 4","Elements",209.99,5.89,215.88,"227323798689",""],
+        ["May 3","easystore",195,6.57,201.57,"137259435065","26 bids"],
+        ["May 2","Elements",190,7.95,197.95,"178084387834",""],
+        ["May 2","Elements",190,10.42,200.42,"327132575585","Tested"],
+        ["May 2","easystore",350,7.95,357.95,"358509386824","High sold outlier"],
+        ["May 1","Elements",190,10.42,200.42,"327132574983","Tested"],
+        ["May 1","easystore",175,7.95,182.95,"358509218782",""],
+        ["May 1","easystore",175,7.95,182.95,"358506456394",""],
+        ["Apr 27","easystore",189.99,5.89,195.88,"227318127467",""],
+        ["Apr 27","Elements",199.99,5.89,205.88,"227318135634",""],
+        ["Apr 26","Elements",175,13.70,188.70,"306900149176","Power included"]
       ];
-      var active12 = [
-        ['Active','Elements',195,0,195,'168548829495','Power + USB cables'],
-        ['Active','Elements',268,9.61,277.61,'137493836803','Tested, good SMART, cables'],
-        ['Active','Elements',278,9.61,287.61,'137505624544','Low-hour, SMART, cables'],
-        ['Active','easystore',260,12,272,'227434310636','Cables; zero-feedback seller']
+      var active12=[
+        ["Active","Elements",195,0,195,"168548829495","Power + USB cables"],
+        ["Active","Elements",268,9.61,277.61,"137493836803","Tested, good SMART, cables"],
+        ["Active","Elements",278,9.61,287.61,"137505624544","Low-hour, SMART, cables"],
+        ["Active","easystore",260,12,272,"227434310636","Cables; zero-feedback seller"]
       ];
-      var sold14 = [
-        ['Jan 26','Elements',159,0,159,'257290054465','Free Media Mail; floor/outlier'],
-        ['Mar 30','easystore',164.50,8.71,173.21,'198219533350',''],
-        ['Apr 8','Elements',172.50,7.17,179.67,'198247159166',''],
-        ['May 2','easystore',189.50,8.71,198.21,'198311365246',''],
-        ['Jun 23','easystore',219,5.97,224.97,'278099427974','Multi-quantity page counted once'],
-        ['Jun 16','easystore',219,8.71,227.71,'198409598409',''],
-        ['Jul 5','Elements',219,15.81,234.81,'198475113382',''],
-        ['Jun 6','easystore',220,16.71,236.71,'226972850051','Multi-quantity page counted once'],
-        ['Jul 19','Elements',239,13.70,252.70,'198483569652','Original box + complete accessories'],
-        ['May 7','Elements',249.59,19.98,269.57,'227137385156','Original box + complete accessories']
+      var sold14=[
+        ["Jun 11 state","easystore",299.99,0,299.99,"358002913086","132 sold; final displayed page; historic unit prices varied"],
+        ["May 27 state","Elements",299.99,0,299.99,"357977306090","27 sold; tested / like new"],
+        ["Jul 19","Elements",239,13.70,252.70,"198483569652","Original box + complete accessories"],
+        ["Jul 5","Elements",219,15.81,234.81,"198475113382",""],
+        ["Jun 23","easystore",219,5.97,224.97,"278099427974","26 cumulative units; page counted once for price"],
+        ["Jun 16","easystore",219,8.71,227.71,"198409598409",""],
+        ["Jun 12","easystore",234.97,0,234.97,"178207160472","6 cumulative units; Best Offer enabled; accepted prices hidden"],
+        ["Jun 6","easystore",255,5.89,260.89,"157919375250","5 cumulative units; Best Offer enabled; accepted prices hidden"],
+        ["Jun 6","Elements",249.99,5.83,255.82,"227275772181","Destination-specific shipping; displayed completion total"],
+        ["Jun 6","easystore",220,16.71,236.71,"226972850051","4 cumulative units"],
+        ["May 7","Elements",249.59,19.98,269.57,"227137385156","2 sold; original box + accessories"],
+        ["May 2","easystore",189.50,8.71,198.21,"198311365246",""],
+        ["Apr 8","Elements",172.50,7.17,179.67,"198247159166",""],
+        ["Mar 30","easystore",164.50,8.71,173.21,"198219533350",""],
+        ["Jan 26","Elements",159,0,159,"257290054465","2 sold; free Media Mail; low outlier"]
       ];
-      var active14 = [
-        ['Active','easystore',269.99,0,269.99,'358002913086','Clean SMART; accessories'],
-        ['Active','easystore',275,19.60,294.60,'188529927591',''],
-        ['Active','Elements',285,7.29,292.29,'377220212529',''],
-        ['Active','Elements',499.99,5.89,505.88,'227434083413','High-ask outlier'],
-        ['Active','Elements',239,9.81,248.81,'198483810327','Original retail box + accessories'],
-        ['Active','Elements',270,0,270,'257619797066','Tested/wiped/formatted'],
-        ['Active','Elements',250,6.86,256.86,'168497015678',''],
-        ['Active','Elements',1600,15,1615,'389353973789','Absurd high-ask outlier'],
-        ['Active','Elements',295,0,295,'278131874023','SMART self-test okay'],
-        ['Active','easystore',300,0,300,'267516453315','']
+      var active14=[
+        ["Active","easystore",204.95,18.50,223.45,"227118345085","1 sold, 2 available; accepted price opaque"],
+        ["Active","easystore",219,8.61,227.61,"277993606407","93 watchers; dynamic destination shipping"],
+        ["Active","easystore",275,19.60,294.60,"188529927591",""],
+        ["Active","Elements",285,7.29,292.29,"377220212529",""],
+        ["Active","Elements",499.99,5.89,505.88,"227434083413","High-ask outlier"],
+        ["Active","Elements",239,9.81,248.81,"198483810327","Original retail box + accessories"],
+        ["Active","Elements",270,0,270,"257619797066","Tested / wiped / formatted"],
+        ["Active","Elements",250,6.86,256.86,"168497015678",""],
+        ["Active","Elements",1600,15,1615,"389353973789","Extreme high-ask outlier"],
+        ["Active","Elements",295,0,295,"278131874023","SMART self-test okay"],
+        ["Active","easystore",300,0,300,"267516453315",""]
       ];
-      var sold16 = [
-        ['Jul 2','Elements',347.26,16.24,363.50,'257583959262','Tested good; high recent sale'],
-        ['May 3','easystore',256.50,6.57,263.07,'168339282201','10 bids'],
-        ['May 1','Elements',300,5,305,'336555514328',''],
-        ['Apr 29','Elements',250,5.83,255.83,'298273865472','SMART tested'],
-        ['Apr 28','Elements',250,5.83,255.83,'298265530861','SMART tested'],
-        ['Apr 25','Elements',245,5.83,250.83,'298257299102','SMART tested'],
-        ['Apr 22','Elements',235,14.14,249.14,'298250372384','SMART tested'],
-        ['Apr 20','Elements',235,null,null,'298229575011','Shipping unavailable; excluded from delivered stats'],
-        ['Apr 14','Elements',235,null,null,'298219037908','Shipping unavailable; excluded from delivered stats'],
-        ['Apr 12','easystore',250,16.71,266.71,'226972848623',''],
-        ['Apr 11','Elements',235,12.75,247.75,'298206259861','SMART tested'],
-        ['Apr 7','Elements',259.99,12,null,'298158146468','Best Offer accepted; actual price hidden'],
-        ['Mar 27','Elements',275,null,null,'257422893958','Best Offer accepted; recertified'],
-        ['Feb 9','easystore',250,16.99,266.99,'235446720284','Open box'],
-        ['Opaque','easystore',269.45,null,null,'227182513908','Original box; 2 sold; accepted prices unavailable']
+      var sold16=[
+        ["Jul 20","Elements",462.86,0,462.86,"227408664711","Completion-page display; Best Offer enabled; accepted amount not exposed"],
+        ["Jul 2","Elements",347.26,16.24,363.50,"257583959262","Tested good; recent sale"],
+        ["Jun 28","Elements",382.19,0,382.19,"227213483438","Final-page display; 17 sold; Best Offer settlements opaque"],
+        ["May 3","easystore",256.50,6.57,263.07,"168339282201","10 bids"],
+        ["May 1","Elements",300,5,305,"336555514328",""],
+        ["Apr 29","Elements",250,5.83,255.83,"298273865472","SMART tested"],
+        ["Apr 28","Elements",250,5.83,255.83,"298265530861","SMART tested"],
+        ["Apr 25","Elements",245,5.83,250.83,"298257299102","SMART tested"],
+        ["Apr 22","Elements",235,14.14,249.14,"298250372384","SMART tested"],
+        ["Apr 12","easystore",250,16.71,266.71,"226972848623","At least one dated completion"],
+        ["Apr 11","Elements",235,12.75,247.75,"298206259861","SMART tested"],
+        ["Feb 9","easystore",250,16.99,266.99,"235446720284","Open box; 6 cumulative units"],
+        ["Apr 20","Elements",235,null,null,"298229575011","Shipping unavailable; excluded from delivered stats"],
+        ["Apr 14","Elements",235,null,null,"298219037908","Shipping unavailable; excluded from delivered stats"],
+        ["Apr 7","Elements",259.99,12,null,"298158146468","Best Offer accepted; actual price hidden"],
+        ["Mar 27","Elements",275,null,null,"257422893958","Best Offer accepted; actual price hidden"],
+        ["Opaque","easystore",269.45,null,null,"227182513908","2 sold; original box; accepted prices unavailable"]
       ];
-      var active16 = [
-        ['Active','Elements',524.87,16.45,541.32,'287470784946','Verified live; high-ask outlier'],
-        ['Active','Elements',382.19,null,null,'227213483438','Verified live; destination shipping unavailable'],
-        ['Snapshot','Elements',350,15.81,365.81,'https://www.ebay.com/b/16-TB-Storage-Capacity-USB-3-0-USB-Specification-External-Hard-Disk-Drives/131553/bn_73297455','Open box; category snapshot'],
-        ['Snapshot','Elements',310,25,335,'https://www.ebay.com/b/16-TB-Storage-Capacity-USB-3-0-USB-Specification-External-Hard-Disk-Drives/131553/bn_73297455','Pre-owned; category snapshot'],
-        ['Snapshot','Elements',350,26.21,376.21,'https://www.ebay.com/b/16-TB-Storage-Capacity-USB-3-0-USB-Specification-External-Hard-Disk-Drives/131553/bn_73297455','Open box; category snapshot'],
-        ['Snapshot','Elements',389.99,9.99,399.98,'https://www.ebay.com/b/16-TB-Storage-Capacity-Desktop-External-HDD-External-Hard-Disk-Drives/131553/bn_73300665','Open-box test; category snapshot']
+      var active16=[
+        ["Active","Elements",524.87,16.45,541.32,"287470784946","Verified high-ask outlier"],
+        ["Snapshot","Elements",350,15.81,365.81,"https://www.ebay.com/b/16-TB-Storage-Capacity-USB-3-0-USB-Specification-External-Hard-Disk-Drives/131553/bn_73297455","Open box; category snapshot"],
+        ["Snapshot","Elements",350,26.21,376.21,"https://www.ebay.com/b/16-TB-Storage-Capacity-USB-3-0-USB-Specification-External-Hard-Disk-Drives/131553/bn_73297455","Open box; category snapshot"],
+        ["Snapshot","Elements",389.99,9.99,399.98,"https://www.ebay.com/b/16-TB-Storage-Capacity-Desktop-External-HDD-External-Hard-Disk-Drives/131553/bn_73300665","Open-box test; category snapshot"]
       ];
-
-      function money(v) {
-        if (v === null || typeof v === 'undefined') return '—';
-        return v === 0 ? 'Free' : '$' + Number(v).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+      function money(v){
+        if(v===null||typeof v==="undefined")return "—";
+        return v===0?"Free":"$"+Number(v).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
       }
-      function render(id, rows, active) {
-        var el = document.getElementById(id);
-        if (!el) return;
-        rows.forEach(function (r) {
-          var tr = document.createElement('tr');
-          var url = String(r[5]).indexOf('http') === 0 ? r[5] : 'https://www.ebay.com/itm/' + r[5];
-          var noteClass = /outlier/i.test(r[6]) ? 'outlier' : (/excluded|hidden|unavailable/i.test(r[6]) ? 'excluded' : '');
-          tr.innerHTML = '<td>' + r[0] + (active ? ' <span class="outlier">ask</span>' : '') + '</td>' +
-            '<td>' + r[1] + '</td>' +
-            '<td class="num">' + money(r[2]) + '</td>' +
-            '<td class="num">' + money(r[3]) + '</td>' +
-            '<td class="num"><strong>' + money(r[4]) + '</strong></td>' +
-            '<td><a href="' + url + '" target="_blank" rel="noopener">' + (String(r[5]).indexOf('http') === 0 ? 'category' : r[5]) + '</a></td>' +
-            '<td class="' + noteClass + '">' + (r[6] || '') + '</td>';
+      function cell(tr,text,cls){
+        var td=document.createElement("td");td.textContent=text;if(cls)td.className=cls;tr.appendChild(td);return td;
+      }
+      function render(id,rows,active){
+        var el=document.getElementById(id);if(!el)return;
+        rows.forEach(function(r){
+          var tr=document.createElement("tr");
+          cell(tr,r[0]+(active?" · ask":""));
+          cell(tr,r[1]);
+          cell(tr,money(r[2]),"num");
+          cell(tr,money(r[3]),"num");
+          cell(tr,money(r[4]),"num");
+          var td=document.createElement("td"),a=document.createElement("a");
+          a.href=String(r[5]).indexOf("http")===0?r[5]:"https://www.ebay.com/itm/"+r[5];
+          a.target="_blank";a.rel="noopener";a.textContent=String(r[5]).indexOf("http")===0?"category":r[5];td.appendChild(a);tr.appendChild(td);
+          var note=cell(tr,r[6]||"");
+          if(/outlier|extreme/i.test(r[6]))note.className="warn-text";
+          if(/excluded|hidden|unavailable|opaque/i.test(r[6]))note.className="bad-text";
           el.appendChild(tr);
         });
       }
-      render('sold12', sold12, false); render('active12', active12, true);
-      render('sold14', sold14, false); render('active14', active14, true);
-      render('sold16', sold16, false); render('active16', active16, true);
+      render("sold12",sold12,false);render("active12",active12,true);
+      render("sold14",sold14,false);render("active14",active14,true);
+      render("sold16",sold16,false);render("active16",active16,true);
     }());
   </script>
 </body>
