@@ -16,8 +16,8 @@ const PixelReveal = lazy(
 const practices = [
   {
     number: "01",
-    title: "Make capable models practical",
-    body: "Model adaptation, low-bit formats, and inference recipes aimed at real hardware—not only datacenter assumptions.",
+    title: "Build local LLM systems",
+    body: "Local LLM buildouts spanning model selection, adaptation, low-bit formats, and inference stacks shaped around the hardware and workload.",
   },
   {
     number: "02",
@@ -26,8 +26,8 @@ const practices = [
   },
   {
     number: "03",
-    title: "Turn research into systems",
-    body: "Benchmarks, agents, data pipelines, and public tools that connect a research idea to something people can actually run.",
+    title: "Engineer agents and workflows",
+    body: "Agentic engineering and automated business workflows that connect models to tools, data, and clear human checkpoints.",
   },
 ];
 
@@ -196,10 +196,11 @@ function App() {
             />
 
             <p className="hero-copy">
-              I research efficient inference, low-bit model formats, agent
-              behavior, and rigorous evaluation. Ciru is where that work becomes
-              published models, reproducible benchmarks, open tooling, and
-              research you can inspect.
+              I research efficient inference, low-bit models, agent behavior,
+              and rigorous evaluation—then turn that work into local LLM
+              buildouts, agentic engineering, and automated workflows for
+              businesses. Ciru is where the work becomes published models,
+              reproducible benchmarks, and systems people can use.
             </p>
 
             <div className="hero-actions">
@@ -218,9 +219,10 @@ function App() {
 
             <div className="focus-line" aria-label="Research focus">
               <span>Efficient inference</span>
-              <span>Low-bit models</span>
-              <span>Agent evaluation</span>
-              <span>Public evidence</span>
+              <span>Local LLM buildouts</span>
+              <span>Agentic engineering</span>
+              <span>Workflow automation</span>
+              <span>Reproducible evaluation</span>
             </div>
           </div>
 
@@ -235,8 +237,9 @@ function App() {
             <p className="section-kicker">The practice</p>
             <h2>Research should survive contact with reality.</h2>
             <p>
-              Ciru works across the whole path—from a model idea, through the
-              runtime, to a result someone else can examine.
+              Ciru works across the whole path—from models and local
+              infrastructure to agents, workflows, and a result someone else
+              can examine.
             </p>
           </div>
 
@@ -333,8 +336,8 @@ function App() {
           <p className="section-kicker">A quiet invitation</p>
           <h2 id="contact-title">At Advancing AI? Let’s compare notes.</h2>
           <p>
-            I’m also open to selected collaborations in inference, evaluation,
-            and applied AI systems.
+            I’m open to selected collaborations in local LLM buildouts, agentic
+            systems, evaluation, and business workflow automation.
           </p>
           <a className="contact-email" href="mailto:jc@ciru.ai">
             jc@ciru.ai
