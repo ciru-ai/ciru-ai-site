@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎪🎂 AMD Strix HALO Toolbox Clown Tutorial! 🎂🎪</title>
+    <style>
+        /* ===== CLOWN PARTY BASE STYLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Chalkboard SE', cursive, sans-serif;
+            background: linear-gradient(45deg, #ff69b4, #ff1493, #ff69b4, #ff1493);
+            background-size: 400% 400%;
+            animation: rainbowGradient 8s ease infinite;
+            color: #333;
+            overflow-x: hidden;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        @keyframes rainbowGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* ===== FLOATING CONFETTI ===== */
+        .confetti {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            opacity: 0.8;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+            }
+        }
+
+        /* ===== BIG PARTY HEADER ===== */
+        .party-header {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(45deg, #ffd700, #ff6b00, #ffd700);
+            border: 8px dashed #fff;
+            border-radius: 25px;
+            margin: 20px auto;
+            max-width: 900px;
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.7);
+            position: relative;
+            overflow: hidden;
+            animation: wiggle 3s ease-in-out infinite;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-3deg) scale(1); }
+            25% { transform: rotate(3deg) scale(1.02); }
+            50% { transform: rotate(-2deg) scale(1.03); }
+            75% { transform: rotate(2deg) scale(1); }
+        }
+
+        .party-header h1 {
+            font-size: 3.5em;
+            color: #fff;
+            text-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+            animation: bounce 2s ease infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .party-header .subtitle {
+            font-size: 1.5em;
+            color: #fff;
+            text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.4);
+            margin-bottom: 15px;
+        }
+
+        .clown-emoji {
+            font-size: 4em;
+            display: inline-block;
+            animation: spin 4s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(10deg) scale(1.2); }
+            50% { transform: rotate(0deg) scale(1); }
+            75% { transform: rotate(-10deg) scale(1.2); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        /* ===== STEP CARDS ===== */
+        .step-container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        .step-card {
+            background: rgba(255, 255, 255, 0.95);
+            border: 6px solid #ffd700;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            animation: cardGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes cardGlow {
+            0%, 100% { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(255, 215, 0, 0.6); }
+        }
+
+        .step-card:hover {
+            transform: scale(1.02) rotate(1deg);
+            border-color: #ff6b00;
+        }
+
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, transparent 50%, rgba(255, 255, 255, 0.3) 50%);
+            background-size: 4px 4px;
+            border-radius: 25px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff1493, #ff69b4);
+            color: white;
+            font-size: 1.8em;
+            font-weight: bold;
+            padding: 10px 25px;
+            border-radius: 50px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); }
+            50% { transform: scale(1.1); box-shadow: 0 0 25px rgba(255, 20, 147, 0.7); }
+        }
+
+        .step-title {
+            font-size: 1.8em;
+            color: #d2691e;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.5);
+        }
+
+        .step-content {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        /* ===== CODE BLOCKS ===== */
+        .code-block {
+            background: #1e1e1e;
+            border: 4px solid #ff6b00;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1em;
+            line-height: 1.6;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .code-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ff69b4, #ffd700, #ff69b4);
+        }
+
+        .code-block code {
+            color: #00ff88;
+            display: block;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            text-shadow: 0 0 5px rgba(0, 255, 136, 0.5);
+        }
+
+        .code-block .command {
+            color: #ff6b00;
+            font-weight: bold;
+        }
+
+        .code-block .flag {
+            color: #ffd700;
+        }
+
+        .code-block .warning {
+            color: #ff4444;
+            font-weight: bold;
+        }
+
+        /* ===== WARNING BOXES ===== */
+        .warning-box {
+            background: linear-gradient(45deg, #fff8dc, #ffd700);
+            border: 4px dashed #ff4500;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+            font-size: 1.2em;
+            text-align: center;
+            animation: flash 1.5s ease-in-out infinite;
+        }
+
+        @keyframes flash {
+            0%, 100% { background: linear-gradient(45deg, #fff8dc, #ffd700); }
+            50% { background: linear-gradient(45deg, #ffd700, #fff8dc); }
+        }
+
+        .warning-box::before {
+            content: '⚠️ ';
+        }
+
+        /* ===== TOOLBOX SELECTOR ===== */
+        .toolbox-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .toolbox-btn {
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            color: white;
+            border: 3px solid #fff;
+            border-radius: 15px;
+            padding: 15px 25px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            min-width: 200px;
+        }
+
+        .toolbox-btn:hover {
+            transform: scale(1.1) rotate(3deg);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.7);
+            border-color: #ffd700;
+        }
+
+        .toolbox-btn:active {
+            transform: scale(0.95);
+        }
+
+        .toolbox-btn.selected {
+            background: linear-gradient(45deg, #ffd700, #ff6b00);
+            animation: selectedPulse 1s ease-in-out infinite;
+        }
+
+        @keyframes selectedPulse {
+            0%, 100% { transform: scale(1.1) rotate(3deg); }
+            50% { transform: scale(1.2) rotate(5deg); }
+        }
+
+        /* ===== PROGRESS TRACKER ===== */
+        .progress-tracker {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+            gap: 10px;
+        }
+
+        .progress-dot {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #ddd;
+            border: 3px solid #fff;
+            transition: all 0.5s ease;
+        }
+
+        .progress-dot.active {
+            background: #ffd700;
+            transform: scale(1.5);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+        }
+
+        .progress-dot.done {
+            background: #00ff88;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.7);
+        }
+
+        /* ===== BIRTHDAY CAKE ===== */
+        .birthday-cake {
+            text-align: center;
+            font-size: 4em;
+            margin: 30px 0;
+            animation: cakeFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes cakeFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+
+        /* ===== FOOTER ===== */
+        .party-footer {
+            text-align: center;
+            padding: 30px;
+            font-size: 1.5em;
+            color: white;
+            text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.5);
+            margin-top: 30px;
+        }
+
+        .party-footer .heart {
+            color: #ff0000;
+            animation: heartbeat 1s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.5); }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .party-header h1 { font-size: 2.2em; }
+            .step-card { padding: 15px; }
+            .toolbox-btn { min-width: 150px; font-size: 0.9em; }
+        }
+
+        /* ===== CLOWN NOSE ANIMATION ===== */
+        .clown-nose {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: #ff0000;
+            border-radius: 50%;
+            animation: noseBounce 2s ease-in-out infinite;
+        }
+
+        @keyframes noseBounce {
+            0%, 100% { transform: scale(1); background: #ff0000; }
+            50% { transform: scale(1.3); background: #ff6b00; }
+        }
+
+        /* ===== TYPING EFFECT ===== */
+        .typewriter {
+            overflow: hidden;
+            border-right: 0.15em solid #ff6b00;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: 0.15em;
+            animation: typing 3.5s steps(40, end) 1s normal both;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        /* ===== GPU ANIMATION ===== */
+        .gpu-animation {
+            font-size: 3em;
+            text-align: center;
+            margin: 20px 0;
+            animation: gpuPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes gpuPulse {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.2) rotate(5deg); }
+            50% { transform: scale(1) rotate(0deg); }
+            75% { transform: scale(1.2) rotate(-5deg); }
+        }
+
+        /* ===== MODEL DOWNLOAD ANIMATION ===== */
+        .download-animation {
+            text-align: center;
+            font-size: 1.5em;
+            margin: 20px 0;
+        }
+
+        .download-arrow {
+            display: inline-block;
+            animation: downloadMove 2s ease-in-out infinite;
+        }
+
+        @keyframes downloadMove {
+            0% { transform: translateY(-20px); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(20px); opacity: 0; }
+        }
+
+        /* ===== LLAMA ANIMATION ===== */
+        .llama-dance {
+            font-size: 2.5em;
+            text-align: center;
+            margin: 20px 0;
+            animation: llamaDance 2s ease-in-out infinite;
+        }
+
+        @keyframes llamaDance {
+            0%, 100% { transform: translateX(0) rotate(0deg); }
+            25% { transform: translateX(10px) rotate(5deg); }
+            50% { transform: translateX(-10px) rotate(-5deg); }
+            75% { transform: translateX(10px) rotate(5deg); }
+        }
+
+        /* ===== HAPPY BIRTHDAY BANNER ===== */
+        .birthday-banner {
+            text-align: center;
+            font-size: 2.5em;
+            color: #ffd700;
+            text-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
+            margin: 30px 0;
+            padding: 20px;
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            border-radius: 20px;
+            animation: bannerGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes bannerGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
+            50% { box-shadow: 0 0 50px rgba(255, 215, 0, 0.9); }
+        }
+    </style>
+</head>
+<body>
+    <!-- CONFETTI CANVAS -->
+    <div class="confetti" id="confetti"></div>
+
+    <!-- PARTY HEADER -->
+    <div class="party-header">
+        <h1>🎪🎂 AMD STrix HALO TOOLBOX CLOWN TUTORIAL! 🎂🎪</h1>
+        <div class="subtitle">Made by a team of <span class="clown-nose"></span> clowns for a 5-year-old's birthday party who FINALLY got Strix Halo! 🎉</div>
+        <div class="clown-emoji">🤡🎈🎉🤡</div>
+        <div style="margin-top: 15px; font-size: 1.2em; color: #fff;">
+            "Today we learn to make the magic computer box go BRRRRR with LLaMAs!" 🦙✨
+        </div>
+    </div>
+
+    <!-- BIRTHDAY BANNER -->
+    <div class="birthday-banner">
+        🎂 HAPPY BIRTHDAY TO THE STrix HALO! LET'S MAKE SOME NOISE! 🎂
+    </div>
+
+    <!-- PROGRESS TRACKER -->
+    <div class="progress-tracker">
+        <div class="progress-dot" id="dot1"></div>
+        <div class="progress-dot" id="dot2"></div>
+        <div class="progress-dot" id="dot3"></div>
+        <div class="progress-dot" id="dot4"></div>
+        <div class="progress-dot" id="dot5"></div>
+        <div class="progress-dot" id="dot6"></div>
+    </div>
+
+    <div class="step-container">
+
+        <!-- STEP 1: CHECK YOUR SYSTEM -->
+        <div class="step-card">
+            <div class="step-number">STEP 1</div>
+            <h2 class="step-title">🎪 Check Your Magic Computer Box! 🎪</h2>
+            <div class="step-content">
+                <p>Hey hey hey! Before we make the magic happen, let's make sure your computer is ready for the big show! 🎪</p>
+                <p><strong>🎂 Birthday Requirement:</strong> You need a computer with AMD Ryzen AI Max "Strix Halo" - that's the fancy name for your birthday present! 🎁</p>
+
+                <div class="gpu-animation">🖥️➡️🎮➡️🚀</div>
+
+                <p><strong>Check your system:</strong></p>
+                <div class="code-block">
+                    <code><span class="command">uname</span> -r
+<span class="flag"># Should show kernel 6.18.4 or newer!</span>
+<span class="warning"># Kernels older than 6.18.4 are BAD! They make the magic crash! 💥</span></code>
+                </div>
+
+                <div class="code-block">
+                    <code><span class="command">cat</span> /proc/cpuinfo | <span class="command">grep</span> "Strix Halo"
+<span class="flag"># If you see text, your magic box is ready! ✨</span></code>
+                </div>
+
+                <div class="warning-box">
+                    ⚠️ CLOWN WARNING: Do NOT use linux-firmware-20251125! It breaks everything! 💥
+                    Use linux-firmware-20260110 or newer!
+                </div>
+
+                <p><strong>🎂 Birthday Boot Parameters (add these to make it FAST!):</strong></p>
+                <div class="code-block">
+                    <code>amd_iommu=off amdgpu.gttsize=126976 ttm.pages_limit=32505856</code>
+                </div>
+                <p><em>These tell your computer to share ALL its memory with the GPU! Like sharing your birthday cake with everyone! 🎂</em></p>
+            </div>
+        </div>
+
+        <!-- STEP 2: CHOOSE YOUR TOOLBOX -->
+        <div class="step-card">
+            <div class="step-number">STEP 2</div>
+            <h2 class="step-title">🎪 Pick Your Favorite Toolbox! 🎪</h2>
+            <div class="step-content">
+                <p>OKAY! Now we pick which magic toolbox to use! It's like picking which clown car to drive! 🚗💨</p>
+
+                <div class="birthday-cake">🎂🎂🎂</div>
+
+                <p><strong>Here are your options, little birthday star! 🎂</strong></p>
+
+                <div class="toolbox-selector">
+                    <div class="toolbox-btn" onclick="selectToolbox(this, 'vulkan-radv')" id="toolbox-vulkan-radv">
+                        🎨 Vulkan RADV<br>
+                        <small>Most stable! Like a reliable clown! 🤡</small>
+                    </div>
+                    <div class="toolbox-btn" onclick="selectToolbox(this, 'vulkan-amdvlk')" id="toolbox-vulkan-amdvlk">
+                        ⚡ Vulkan AMDVLK<br>
+                        <small>Fastest! Like a speedy clown! 🏃‍♂️</small>
+                    </div>
+                    <div class="toolbox-btn" onclick="selectToolbox(this, 'rocm-7.2.4')" id="toolbox-rocm-7.2.4">
+                        🚀 ROCm 7.2.4<br>
+                        <small>Best performance! Like a rocket clown! 🚀</small>
+                    </div>
+                    <div class="toolbox-btn" onclick="selectToolbox(this, 'rocm-6.4.4')" id="toolbox-rocm-6.4.4">
+                        🐢 ROCm 6.4.4<br>
+                        <small>Stable but slower! Like a turtle clown! 🐢</small>
+                    </div>
+                </div>
+
+                <div id="toolbox-info" style="text-align: center; margin: 20px 0; font-size: 1.3em; min-height: 60px;">
+                    👆 Click a toolbox to learn more!
+                </div>
+
+                <div class="warning-box">
+                    ⚠️ CLOWN WARNING: AMDVLK has a 2GB limit! Big models won't fit! Use RADV for big models!
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 3: CREATE THE TOOLBOX -->
+        <div class="step-card">
+            <div class="step-number">STEP 3</div>
+            <h2 class="step-title">🎪 Summon Your Magic Toolbox! 🎪</h2>
+            <div class="step-content">
+                <p>Now we summon the magic toolbox! It's like calling a clown to your birthday party! 🎪</p>
+
+                <div class="download-animation">
+                    <span class="download-arrow">⬇️</span>
+                    <span class="download-arrow">⬇️</span>
+                    <span class="download-arrow">⬇️</span>
+                </div>
+
+                <p><strong>Option A: Vulkan (RADV/AMDVLK) - Best for compatibility!</strong></p>
+                <div class="code-block">
+                    <code><span class="command">toolbox create</span> llama-vulkan-radv \<span class="flag">--image</span> docker.io/kyuz0/amd-strix-halo-toolboxes:vulkan-radv \<span class="flag">--</span> --device /dev/dri --group-add video --security-opt seccomp=unconfined</code>
+                </div>
+
+                <p><strong>Option B: ROCm (Recommended for Performance!)</strong></p>
+                <div class="code-block">
+                    <code><span class="command">toolbox create</span> llama-rocm-7.2.4 \<span class="flag">--image</span> docker.io/kyuz0/amd-strix-halo-toolboxes:rocm-7.2.4 \<span class="flag">--</span> --device /dev/dri --device /dev/kfd --group-add video --group-add render --group-add sudo --security-opt seccomp=unconfined</code>
+                </div>
+
+                <div class="llama-dance">🦙🦙🦙</div>
+
+                <p><strong>Ubuntu users!</strong> Use <code>distrobox</code> instead of <code>toolbox</code>! 🐧</p>
+
+                <div class="code-block">
+                    <code><span class="command">distrobox create</span> llama-rocm-7.2.4 \<span class="flag">--image</span> docker.io/kyuz0/amd-strix-halo-toolboxes:rocm-7.2.4 \<span class="flag">--</span> --device /dev/dri --device /dev/kfd --group-add video --group-add render --group-add sudo --security-opt seccomp=unconfined</code>
+                </div>
+
+                <p>Then enter your magic toolbox! 🎩✨</p>
+                <div class="code-block">
+                    <code><span class="command">toolbox enter</span> llama-vulkan-radv</code>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 4: CHECK GPU ACCESS -->
+        <div class="step-card">
+            <div class="step-number">STEP 4</div>
+            <h2 class="step-title">🎪 Check That Your GPU is Waving Hello! 🎪</h2>
+            <div class="step-content">
+                <p>Let's make sure your GPU is ready to party! 🎉</p>
+
+                <div class="gpu-animation">🎮✨🎮</div>
+
+                <div class="code-block">
+                    <code><span class="command">llama-cli</span> --list-devices</code>
+                </div>
+
+                <p>If you see your GPU listed, it's party time! 🎊</p>
+
+                <div class="warning-box">
+                    ⚠️ CLOWN WARNING: If you see "No devices found", check your --device flags!
+                    You need /dev/dri and /dev/kfd for ROCm!
+                </div>
+
+                <p><strong>Quick GPU check:</strong></p>
+                <div class="code-block">
+                    <code><span class="command">ls</span> -la /dev/dri/
+<span class="flag"># You should see card0 and renderD128!</span>
+
+<span class="command">ls</span> -la /dev/kfd
+<span class="flag"># This is the ROCm magic door! 🚪</span></code>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 5: DOWNLOAD A MODEL -->
+        <div class="step-card">
+            <div class="step-number">STEP 5</div>
+            <h2 class="step-title">🎪 Download Your AI Birthday Present! 🎪</h2>
+            <div class="step-content">
+                <p>Time to download your AI model! It's like getting presents on your birthday! 🎁🎁🎁</p>
+
+                <div class="download-animation">
+                    <span class="download-arrow">⬇️</span>
+                    <span class="download-arrow">⬇️</span>
+                    <span class="download-arrow">⬇️</span>
+                </div>
+
+                <p><strong>Example: Qwen3 Coder 30B (BF16) - A big brain model! 🧠</strong></p>
+
+                <div class="code-block">
+                    <code><span class="command">HF_XET_HIGH_PERFORMANCE</span>=1 <span class="command">hf download</span> unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF \<span class="flag">--local-dir</span> models/qwen3-coder-30B-A3B/</code>
+                </div>
+
+                <p><strong>Pro tip:</strong> Set your Hugging Face token for faster downloads! 🚀</p>
+                <div class="code-block">
+                    <code><span class="command">export</span> HF_TOKEN=your_token_here</code>
+                </div>
+
+                <div class="llama-dance">🦙🎂🦙</div>
+
+                <div class="warning-box">
+                    ⚠️ CLOWN WARNING: Models can be BIG! Like 30GB+! Make sure you have space! 💾
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 6: RUN INFERENCE -->
+        <div class="step-card">
+            <div class="step-number">STEP 6</div>
+            <h2 class="step-title">🎪 Make the Magic Happen! Run Your AI! 🎪</h2>
+            <div class="step-content">
+                <p>OKAY! THE BIG MOMENT! Let's make the AI go BRRRRR! 🚀🚀🚀</p>
+
+                <div class="gpu-animation">🎮⚡🎮</div>
+
+                <div class="warning-box">
+                    ⚠️ CLOWN WARNING: ALWAYS use -fa 1 (flash attention) and --no-mmap!
+                    Without these, the magic crashes! 💥💥💥
+                </div>
+
+                <p><strong>Option A: Server Mode (API) - Like a web server for your AI! 🌐</strong></p>
+                <div class="code-block">
+                    <code><span class="command">llama-server</span> -m models/qwen3-coder-30B-A3B/BF16/Qwen3-Coder-30B-A3B-Instruct-BF16-00001-of-00002.gguf \<span class="flag">-c</span> 8192 -ngl 999 -fa 1 --no-mmap</code>
+                </div>
+
+                <p><strong>Option B: CLI Mode - Chat directly with your AI! 💬</strong></p>
+                <div class="code-block">
+                    <code><span class="command">llama-cli</span> --no-mmap -ngl 999 -fa 1 \<<span class="flag">-m</span> models/qwen3-coder-30B-A3B/BF16/Qwen3-Coder-30B-A3B-Instruct-BF16-00001-of-00002.gguf \<<span class="flag">-p</span> "Write a Strix Halo toolkit haiku."</code>
+                </div>
+
+                <div class="llama-dance">🦙🎉🦙🎉🦙</div>
+
+                <p><strong>Router Mode (multi-model routing):</strong></p>
+                <div class="code-block">
+                    <code><span class="command">llama-server</span> --models-preset models.ini --host 0.0.0.0 --port 8080 --models-max 1 --parallel 1</code>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 7: KEEP UPDATED -->
+        <div class="step-card">
+            <div class="step-number">STEP 7</div>
+            <h2 class="step-title">🎪 Keep the Party Going! Stay Updated! 🎪</h2>
+            <div class="step-content">
+                <p>Like a good birthday party, you need to keep things fresh! 🎉</p>
+
+                <div class="download-animation">
+                    <span class="download-arrow">🔄</span>
+                    <span class="download-arrow">🔄</span>
+                    <span class="download-arrow">🔄</span>
+                </div>
+
+                <p><strong>Refresh your toolboxes to the latest versions:</strong></p>
+                <div class="code-block">
+                    <code><span class="command">./refresh-toolboxes.sh</span> all</code>
+                </div>
+
+                <p><strong>Or refresh a specific toolbox:</strong></p>
+                <div class="code-block">
+                    <code><span class="command">./refresh-toolboxes.sh</span> llama-rocm-7.2.4</code>
+                </div>
+
+                <div class="birthday-cake">🎂🎂🎂</div>
+
+                <p><strong>Available toolboxes to refresh:</strong></p>
+                <div class="code-block">
+                    <code>Stable:
+  - llama-vulkan-radv
+  - llama-vulkan-amdvlk
+  - llama-rocm-7.2.4
+  - llama-rocm-6.4.4
+
+Experimental:
+  - llama-rocm-7.2.4-rdma-fix
+  - llama-rocm-7.2.4-rocmfp4
+  - llama-rocm-7.2.4-turboquant
+  - llama-rocm7-nightlies</code>
+                </div>
+            </div>
+        </div>
+
+        <!-- BONUS: VRAM ESTIMATOR -->
+        <div class="step-card">
+            <div class="step-number">BONUS!</div>
+            <h2 class="step-title">🎪 VRAM Estimator - Will Your Model Fit? 🎪</h2>
+            <div class="step-content">
+                <p>Not sure if your model will fit in memory? Use the VRAM estimator! It's like a bouncer for your AI! 🚪</p>
+
+                <div class="gpu-animation">🧮📊🧮</div>
+
+                <div class="code-block">
+                    <code><span class="command">gguf-vram-estimator.py</span> models/my-model.gguf --contexts 32768</code>
+                </div>
+
+                <p><strong>Example output:</strong></p>
+                <div class="code-block">
+                    <code>--- Model 'Llama-4-Scout-17B-16E-Instruct' ---
+Model Size: 57.74 GiB
+Incl. Overhead: 2.00 GiB
+
+--- Memory Footprint Estimation ---
+   Context Size |  Context Memory | Est. Total VRAM
+---------------------------------------------------
+         4,096 |       1.88 GiB  |      61.62 GiB
+        32,768 |      15.06 GiB  |      74.80 GiB
+     1,048,576 |      49.12 GiB  |     108.87 GiB</code>
+                </div>
+
+                <div class="warning-box">
+                    ⚠️ CLOWN WARNING: Leave a margin for OS and other processes!
+                    Don't fill up ALL your memory! Share the cake! 🎂
+                </div>
+            </div>
+        </div>
+
+        <!-- BONUS: DISTRIBUTED INFERENCE -->
+        <div class="step-card">
+            <div class="step-number">BONUS 2!</div>
+            <h2 class="step-title">🎪 Distributed Inference - Multiple Computers! 🎪</h2>
+            <div class="step-content">
+                <p>Want to make it EVEN faster? Use multiple computers! Like having multiple clown cars! 🚗🚗🚗</p>
+
+                <div class="llama-dance">🦙🚀🦙🚀🦙</div>
+
+                <p><strong>Steps:</strong></p>
+                <ol style="font-size: 1.2em; line-height: 2; margin: 20px 0;">
+                    <li>Setup SSH keys between nodes 🔑</li>
+                    <li>Run <code>python3 run_distributed_llama.py</code> on the main node 🖥️</li>
+                    <li>Follow the TUI to launch the cluster 🎮</li>
+                </ol>
+
+                <div class="code-block">
+                    <code><span class="command">python3</span> run_distributed_llama.py</code>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- FINAL BIRTHDAY BANNER -->
+    <div class="birthday-banner">
+        🎉🎂🎈 HAPPY BIRTHDAY STrix HALO! YOU'RE NOW A CLOWN COMPUTER GENIUS! 🎈🎂🎉
+    </div>
+
+    <!-- PARTY FOOTER -->
+    <div class="party-footer">
+        Made with ❤️ by clowns for clowns!<br>
+        <span class="heart">🎂</span> Happy Birthday! <span class="heart">🎂</span><br>
+        <small>Based on <a href="https://github.com/kyuz0/amd-strix-halo-toolboxes" style="color: #ffd700; text-decoration: underline;">kyuz0/amd-strix-halo-toolboxes</a></small>
+    </div>
+
+    <script>
+        // ===== CONFETTI GENERATOR =====
+        function createConfetti() {
+            const confettiContainer = document.getElementById('confetti');
+            const colors = ['#ff69b4', '#ffd700', '#ff6b00', '#ff1493', '#00ff88', '#ff4444', '#ffffff'];
+
+            for (let i = 0; i < 150; i++) {
+                const piece = document.createElement('div');
+                piece.classList.add('confetti-piece');
+
+                const size = Math.random() * 10 + 5;
+                piece.style.width = size + 'px';
+                piece.style.height = size + 'px';
+
+                piece.style.left = Math.random() * 100 + 'vw';
+                piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+
+                const duration = Math.random() * 5 + 3;
+                piece.style.animationDuration = duration + 's';
+                piece.style.animationDelay = Math.random() * 5 + 's';
+
+                confettiContainer.appendChild(piece);
+            }
+        }
+
+        // ===== TOOLBOX SELECTOR =====
+        function selectToolbox(button, toolboxName) {
+            // Remove selected class from all buttons
+            const buttons = document.querySelectorAll('.toolbox-btn');
+            buttons.forEach(btn => btn.classList.remove('selected'));
+
+            // Add selected class to clicked button
+            button.classList.add('selected');
+
+            // Update info text
+            const info = document.getElementById('toolbox-info');
+            const toolboxInfo = {
+                'vulkan-radv': '🎨 Vulkan RADV: Most stable and compatible! Works with all models! Like a reliable clown friend! 🤡',
+                'vulkan-amdvlk': '⚡ Vulkan AMDVLK: Fastest backend! But 2GB limit - big models won\'t fit! Like a speedy but picky clown! 🏃‍♂️',
+                'rocm-7.2.4': '🚀 ROCm 7.2.4: Best performance! Latest stable! Like a rocket-powered clown! 🚀',
+                'rocm-6.4.4': '🐢 ROCm 6.4.4: Stable but slower! Like a wise old turtle clown! 🐢'
+            };
+
+            info.innerHTML = toolboxInfo[toolboxName];
+        }
+
+        // ===== PROGRESS TRACKER ANIMATION =====
+        function animateProgressDots() {
+            const dots = [
+                document.getElementById('dot1'),
+                document.getElementById('dot2'),
+                document.getElementById('dot3'),
+                document.getElementById('dot4'),
+                document.getElementById('dot5'),
+                document.getElementById('dot6')
+            ];
+
+            let currentDot = 0;
+
+            setInterval(() => {
+                dots.forEach(dot => {
+                    dot.classList.remove('active');
+                    dot.classList.remove('done');
+                });
+
+                // Mark previous dots as done
+                for (let i = 0; i < currentDot; i++) {
+                    dots[i].classList.add('done');
+                }
+
+                // Mark current dot as active
+                dots[currentDot].classList.add('active');
+
+                currentDot = (currentDot + 1) % dots.length;
+            }, 1500);
+        }
+
+        // ===== INITIALIZE EVERYTHING =====
+        window.addEventListener('DOMContentLoaded', () => {
+            createConfetti();
+            animateProgressDots();
+
+            // Add some extra celebration on click
+            document.querySelectorAll('.step-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    this.style.transform = 'scale(1.05) rotate(2deg)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 300);
+                });
+            });
+        });
+
+        // ===== EXTRA CLOWN EFFECTS =====
+        // Make the birthday cake bounce on click
+        document.querySelector('.birthday-cake').addEventListener('click', function() {
+            this.style.animation = 'none';
+            setTimeout(() => {
+                this.style.animation = 'cakeFloat 0.5s ease-in-out infinite';
+            }, 10);
+        });
+
+        // Make llama dance faster on click
+        document.querySelector('.llama-dance').addEventListener('click', function() {
+            this.style.animationDuration = '0.5s';
+            setTimeout(() => {
+                this.style.animationDuration = '2s';
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
