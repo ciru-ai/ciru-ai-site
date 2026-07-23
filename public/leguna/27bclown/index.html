@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🤡 THE STRIX HALO TOOLBOX CLOWN TUTORIAL 🤡</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&display=swap');
+
+  :root {
+    --clown-red: #ff2d55;
+    --clown-blue: #007aff;
+    --clown-yellow: #ffcc00;
+    --clown-green: #34c759;
+    --clown-purple: #af52de;
+    --clown-orange: #ff9500;
+    --clown-pink: #ff69b4;
+    --clown-cyan: #00d4ff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Comic Neue', cursive;
+    background: #1a0a2e;
+    color: #fff;
+    overflow-x: hidden;
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🤡</text></svg>") 16 0, auto;
+  }
+
+  /* === RAINBOW BACKGROUND === */
+  .rainbow-bg {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -2;
+    background: linear-gradient(45deg, #ff0000, #ff7700, #ffff00, #00ff00, #0000ff, #8b00ff, #ff0000);
+    background-size: 400% 400%;
+    animation: rainbowShift 8s ease infinite;
+    opacity: 0.15;
+  }
+  @keyframes rainbowShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* === FLOATING EMOJIS === */
+  .floating-emoji {
+    position: fixed;
+    font-size: 2rem;
+    z-index: -1;
+    pointer-events: none;
+    animation: floatUp linear infinite;
+    opacity: 0.6;
+  }
+  @keyframes floatUp {
+    0% { transform: translateY(110vh) rotate(0deg) scale(1); opacity: 0; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.6; }
+    100% { transform: translateY(-10vh) rotate(720deg) scale(0.3); opacity: 0; }
+  }
+
+  /* === CONFETTI === */
+  .confetti-piece {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    z-index: 9999;
+    pointer-events: none;
+    animation: confettiFall linear forwards;
+  }
+  @keyframes confettiFall {
+    0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(1080deg); opacity: 0; }
+  }
+
+  /* === HERO === */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    position: relative;
+  }
+
+  .hero h1 {
+    font-family: 'Bangers', cursive;
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    background: linear-gradient(90deg, var(--clown-red), var(--clown-yellow), var(--clown-green), var(--clown-blue), var(--clown-purple), var(--clown-red));
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: textRainbow 3s linear infinite, heroBounce 2s ease-in-out infinite;
+    text-shadow: none;
+    filter: drop-shadow(0 0 20px rgba(255, 204, 0, 0.5));
+    line-height: 1.1;
+  }
+  @keyframes textRainbow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 300% 50%; }
+  }
+  @keyframes heroBounce {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-15px) scale(1.03); }
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1rem, 3vw, 1.8rem);
+    margin-top: 1rem;
+    color: var(--clown-yellow);
+    animation: subtitleWiggle 1.5s ease-in-out infinite;
+  }
+  @keyframes subtitleWiggle {
+    0%, 100% { transform: rotate(-2deg); }
+    50% { transform: rotate(2deg); }
+  }
+
+  .hero-emoji-row {
+    font-size: 3rem;
+    margin-top: 1.5rem;
+    animation: emojiDance 0.8s ease-in-out infinite alternate;
+  }
+  @keyframes emojiDance {
+    0% { transform: scaleY(1); }
+    100% { transform: scaleY(1.3); }
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    font-size: 1.2rem;
+    color: var(--clown-pink);
+    animation: bounceDown 1.5s ease-in-out infinite;
+  }
+  @keyframes bounceDown {
+    0%, 100% { transform: translateY(0); opacity: 1; }
+    50% { transform: translateY(15px); opacity: 0.5; }
+  }
+
+  /* === SECTIONS === */
+  .section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+    position: relative;
+  }
+
+  .section-title {
+    font-family: 'Bangers', cursive;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+  }
+  .section-title .emoji-left,
+  .section-title .emoji-right {
+    display: inline-block;
+    animation: sideEmojiSpin 2s ease-in-out infinite;
+  }
+  .section-title .emoji-left { animation-delay: 0s; }
+  .section-title .emoji-right { animation-delay: 1s; }
+  @keyframes sideEmojiSpin {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    25% { transform: rotate(15deg) scale(1.2); }
+    75% { transform: rotate(-15deg) scale(1.2); }
+  }
+
+  /* === STEP CARDS === */
+  .step-card {
+    background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+    border: 2px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    backdrop-filter: blur(10px);
+  }
+  .step-card:hover {
+    transform: translateY(-5px) rotate(-0.5deg);
+    box-shadow: 0 20px 60px rgba(255, 204, 0, 0.15);
+  }
+  .step-card::before {
+    content: '';
+    position: absolute;
+    top: -2px; left: -2px;
+    right: -2px; bottom: -2px;
+    background: linear-gradient(45deg, var(--clown-red), var(--clown-yellow), var(--clown-green), var(--clown-blue), var(--clown-purple));
+    background-size: 400% 400%;
+    animation: borderRainbow 4s linear infinite;
+    border-radius: 22px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .step-card:hover::before { opacity: 1; }
+  @keyframes borderRainbow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 400% 50%; }
+  }
+
+  .step-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-family: 'Bangers', cursive;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    animation: numberPop 0.6s ease-out;
+  }
+  @keyframes numberPop {
+    0% { transform: scale(0) rotate(-180deg); }
+    60% { transform: scale(1.3) rotate(10deg); }
+    100% { transform: scale(1) rotate(0deg); }
+  }
+
+  .step-card h3 {
+    font-family: 'Bangers', cursive;
+    font-size: 1.5rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .step-card p, .step-card li {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.85);
+  }
+
+  .step-card ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  .step-card ul li::before {
+    content: '🎪 ';
+  }
+
+  /* === CODE BLOCKS === */
+  .code-block {
+    background: #0d0d1a;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 1.2rem 1.5rem;
+    margin: 1rem 0;
+    position: relative;
+    overflow-x: auto;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #a8e6cf;
+  }
+  .code-block .comment { color: #6a6a8a; }
+  .code-block .flag { color: var(--clown-yellow); }
+  .code-block .string { color: var(--clown-pink); }
+  .code-block .cmd { color: var(--clown-cyan); }
+
+  .copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-family: 'Comic Neue', cursive;
+    transition: all 0.2s;
+  }
+  .copy-btn:hover {
+    background: var(--clown-yellow);
+    color: #000;
+  }
+
+  /* === WARNING BOXES === */
+  .warning-box {
+    background: rgba(255, 45, 85, 0.15);
+    border: 2px solid var(--clown-red);
+    border-radius: 12px;
+    padding: 1.2rem 1.5rem;
+    margin: 1rem 0;
+    position: relative;
+    animation: warningPulse 2s ease-in-out infinite;
+  }
+  @keyframes warningPulse {
+    0%, 100% { border-color: var(--clown-red); }
+    50% { border-color: var(--clown-orange); }
+  }
+  .warning-box .warning-emoji {
+    font-size: 1.5rem;
+    position: absolute;
+    top: -15px;
+    left: 15px;
+    background: #1a0a2e;
+    padding: 0 5px;
+    animation: warningShake 0.5s ease-in-out infinite;
+  }
+  @keyframes warningShake {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-10deg); }
+    75% { transform: rotate(10deg); }
+  }
+
+  .tip-box {
+    background: rgba(52, 199, 89, 0.1);
+    border: 2px solid var(--clown-green);
+    border-radius: 12px;
+    padding: 1.2rem 1.5rem;
+    margin: 1rem 0;
+  }
+
+  /* === TABLE === */
+  .clown-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 1rem 0;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid rgba(255,255,255,0.1);
+  }
+  .clown-table th {
+    background: linear-gradient(135deg, var(--clown-purple), var(--clown-blue));
+    font-family: 'Bangers', cursive;
+    font-size: 1.1rem;
+    padding: 0.8rem 1rem;
+    text-align: left;
+  }
+  .clown-table td {
+    padding: 0.7rem 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.85);
+  }
+  .clown-table tr:nth-child(even) td {
+    background: rgba(255,255,255,0.03);
+  }
+  .clown-table tr:hover td {
+    background: rgba(255, 204, 0, 0.08);
+  }
+
+  /* === CLOWN MASCOT === */
+  .clown-mascot {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-size: 3rem;
+    z-index: 1000;
+    cursor: pointer;
+    animation: mascotBounce 1s ease-in-out infinite;
+    filter: drop-shadow(0 0 10px rgba(255, 204, 0, 0.5));
+    transition: transform 0.2s;
+  }
+  .clown-mascot:hover {
+    transform: scale(1.3) rotate(15deg);
+  }
+  @keyframes mascotBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .mascot-speech {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    background: #fff;
+    color: #000;
+    padding: 10px 16px;
+    border-radius: 16px;
+    font-size: 0.9rem;
+    font-family: 'Comic Neue', cursive;
+    font-weight: 700;
+    max-width: 250px;
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+  }
+  .mascot-speech::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    right: 20px;
+    width: 0; height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid #fff;
+  }
+  .mascot-speech.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* === PROGRESS BAR === */
+  .progress-bar-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    z-index: 10000;
+    background: rgba(0,0,0,0.3);
+  }
+  .progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--clown-red), var(--clown-yellow), var(--clown-green), var(--clown-blue), var(--clown-purple));
+    background-size: 200% 100%;
+    animation: progressRainbow 2s linear infinite;
+    transition: width 0.1s;
+  }
+  @keyframes progressRainbow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+  }
+
+  /* === DIVIDER === */
+  .clown-divider {
+    text-align: center;
+    font-size: 1.5rem;
+    margin: 2rem 0;
+    animation: dividerSpin 3s linear infinite;
+  }
+  @keyframes dividerSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  /* === FUN FACTS === */
+  .fun-fact {
+    background: linear-gradient(135deg, rgba(175, 82, 222, 0.15), rgba(0, 122, 255, 0.1));
+    border-left: 4px solid var(--clown-purple);
+    border-radius: 0 12px 12px 0;
+    padding: 1rem 1.5rem;
+    margin: 1rem 0;
+    font-style: italic;
+    color: rgba(255,255,255,0.8);
+  }
+  .fun-fact::before {
+    content: '🤓 Fun Fact: ';
+    font-style: normal;
+    font-weight: 700;
+    color: var(--clown-purple);
+  }
+
+  /* === CHECKLIST === */
+  .checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    margin: 0.6rem 0;
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.85);
+  }
+  .checklist-item .check-emoji {
+    flex-shrink: 0;
+    font-size: 1.3rem;
+    animation: checkPop 0.4s ease-out;
+  }
+  @keyframes checkPop {
+    0% { transform: scale(0); }
+    60% { transform: scale(1.4); }
+    100% { transform: scale(1); }
+  }
+
+  /* === FOOTER === */
+  .footer {
+    text-align: center;
+    padding: 3rem 1.5rem;
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.5);
+  }
+  .footer .big-emoji {
+    font-size: 4rem;
+    display: block;
+    margin-bottom: 1rem;
+    animation: footerSpin 4s linear infinite;
+  }
+  @keyframes footerSpin {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.2); }
+    100% { transform: rotate(360deg) scale(1); }
+  }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 600px) {
+    .step-card { padding: 1.5rem; }
+    .code-block { font-size: 0.8rem; padding: 1rem; }
+    .clown-mascot { font-size: 2rem; }
+  }
+
+  /* === SCROLL REVEAL === */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* === SPARKLE TRAIL === */
+  .sparkle {
+    position: fixed;
+    pointer-events: none;
+    font-size: 1rem;
+    z-index: 9998;
+    animation: sparkleFade 0.8s ease-out forwards;
+  }
+  @keyframes sparkleFade {
+    0% { transform: scale(1) rotate(0deg); opacity: 1; }
+    100% { transform: scale(0) rotate(180deg) translateY(-30px); opacity: 0; }
+  }
+
+  /* === HONK BUTTON === */
+  .honk-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--clown-yellow), var(--clown-orange));
+    color: #000;
+    font-family: 'Bangers', cursive;
+    font-size: 1.3rem;
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 15px rgba(255, 204, 0, 0.3);
+    margin: 1rem 0;
+  }
+  .honk-btn:hover {
+    transform: scale(1.1) rotate(-3deg);
+    box-shadow: 0 8px 30px rgba(255, 204, 0, 0.5);
+  }
+  .honk-btn:active {
+    transform: scale(0.95);
+  }
+
+  /* === OPTION TABS === */
+  .option-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+  .option-tab {
+    padding: 0.6rem 1.2rem;
+    border-radius: 50px;
+    border: 2px solid rgba(255,255,255,0.2);
+    background: transparent;
+    color: #fff;
+    font-family: 'Comic Neue', cursive;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .option-tab:hover, .option-tab.active {
+    background: var(--clown-yellow);
+    color: #000;
+    border-color: var(--clown-yellow);
+  }
+  .option-content {
+    display: none;
+  }
+  .option-content.active {
+    display: block;
+    animation: fadeInUp 0.4s ease-out;
+  }
+  @keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  /* === JIGGLE TEXT === */
+  .jiggle {
+    display: inline-block;
+    animation: jiggle 0.5s ease-in-out infinite;
+  }
+  @keyframes jiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-3deg); }
+    75% { transform: rotate(3deg); }
+  }
+
+  /* === MARQUEE === */
+  .marquee-container {
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 1rem 0;
+    background: rgba(255,255,255,0.03);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    margin: 2rem 0;
+  }
+  .marquee-text {
+    display: inline-block;
+    animation: marqueeScroll 20s linear infinite;
+    font-family: 'Bangers', cursive;
+    font-size: 1.3rem;
+    color: var(--clown-yellow);
+  }
+  @keyframes marqueeScroll {
+    0% { transform: translateX(100vw); }
+    100% { transform: translateX(-100%); }
+  }
+</style>
+</head>
+<body>
+
+<div class="rainbow-bg"></div>
+<div class="progress-bar-container"><div class="progress-bar" id="progressBar"></div></div>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>🤡 THE STRIX HALO<br>TOOLBOX CLOWN TUTORIAL 🤡</h1>
+  <p class="hero-subtitle">A guide so silly, even your GPU will laugh! 🎈</p>
+  <div class="hero-emoji-row">🎪🤹‍♂️🎭🎈🎉🤹‍♀️🎪</div>
+  <button class="honk-btn" onclick="honk()">📯 HONK TO BEGIN! 📯</button>
+  <div class="scroll-hint">⬇️ Scroll down, little clown! ⬇️</div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-container">
+  <span class="marquee-text">
+    🤡 HONK HONK 🎪 WELCOME TO THE STRIX HALO CLOWN CIRCUS 🎪 HONK HONK 🤡 YOUR GPU IS ABOUT TO GET A MAKEOVER 🎨 LLMs ARE LIKE MAGIC TRICKS BUT WITH MORE MATH 🧮 HONK HONK 📯 ROCm IS THE CLOWN CAR OF GPU COMPUTE 🚗🤡 VULKAN IS THE UNICYCLE OF GRAPHICS 🎪 HONK HONK 🤡
+  </span>
+</div>
+
+<!-- SECTION 1: WHAT IS THIS? -->
+<section class="section reveal">
+  <h2 class="section-title">
+    <span class="emoji-left">🎪</span>
+    WHAT IS THIS CLOWN CIRCUS?
+    <span class="emoji-right">🎪</span>
+  </h2>
+
+  <div class="step-card">
+    <div class="step-number" style="background: linear-gradient(135deg, var(--clown-yellow), var(--clown-orange));">🤔</div>
+    <h3>So You Got a Strix Halo and Now What?!</h3>
+    <p>
+      Congratulations, you magnificent little clown! 🎉 You just got an <strong>AMD Ryzen AI Max "Strix Halo"</strong> — that's a chip so powerful, it could calculate how many rubber chickens fit in the universe! 🐔🌌
+    </p>
+    <p style="margin-top: 0.8rem;">
+      This tutorial will teach you how to run <strong>LLMs (Large Language Models)</strong> on your Strix Halo using something called <strong>Toolboxes</strong> — which are like clown cars for your computer. They look small on the outside, but there's a WHOLE CIRCUS inside! 🎪🚗
+    </p>
+  </div>
+
+  <div class="fun-fact">
+    "Toolbox" is Fedora's way of running containers. Think of it like a clown's magic hat — you pull out a whole operating system from it! 🎩✨
+  </div>
+
+  <div class="step-card">
+    <h3>What's an LLM? (For the 5-Year-Old Clowns)</h3>
+    <p>
+      An LLM is like a <strong>super-smart parrot</strong> 🦜 that has read the entire internet and can talk to you about anything! You ask it questions, and it answers — like a magic talking parrot that went to college! 🎓🦜
+    </p>
+  </div>
+</section>
+
+<div class="clown-divider">🎪</div>
+
+<!-- SECTION 2: PREREQUISITES -->
+<section class="section reveal">
+  <h2 class="section-title">
+    <span class="emoji-left">📋</span>
+    BEFORE WE START — THE CLOWN CHECKLIST
+    <span class="emoji-right">📋</span>
+  </h2>
+
+  <div class="step-card">
+    <div class="step-number" style="background: linear-gradient(135deg, var(--clown-green), var(--clown-cyan));">✅</div>
+    <h3>Do You Have These Things?</h3>
+    <div class="checklist-item"><span class="check-emoji">🖥️</span> A computer with an <strong>AMD Ryzen AI Max "Strix Halo"</strong> processor (that's you!)</div>
+    <div class="checklist-item"><span class="check-emoji">🐧</span> <strong>Fedora Linux</strong> installed (version 42 or 43 — the good stuff!)</div>
+    <div class="checklist-item"><span class="check-emoji">📦</span> <strong>Toolbox</strong> installed (comes with Fedora, usually)</div>
+    <div class="checklist-item"><span class="check-emoji">🧠</span> At least <strong>128 GB of RAM</strong> (the more the merrier, like clown shoes!)</div>
+    <div class="checklist-item"><span class="check-emoji">🎭</span> A sense of humor (required!)</div>
+  </div>
+
+  <div class="warning-box">
+    <span class="warning-emoji">⚠️</span>
+    <strong>CLIFFHANGER WARNING!</strong> If you're on <strong>Ubuntu</strong> instead of Fedora, you need to use <strong>distrobox</strong> instead of <strong>toolbox</strong>. Same circus, different tent! 🎪
+  </div>
+
+  <div class="step-card">
+    <h3>Check Your Toolbox</h3>
+    <p>Open your terminal (the scary black box) and type:</p>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyCode(this)">📋 Copy</button>
+      <span class="cmd">toolbox</span> --version
+    </div>
+    <p>If it shows a version number, you're good! If not, install it:</p>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyCode(this)">📋 Copy</button>
+      <span class="cmd">sudo</span> dnf install toolbox
+    </div>
+  </div>
+</section>
+
+<div class="clown-divider">🎈</div>
+
+<!-- SECTION 3: HOST CONFIGURATION -->
+<section class="section reveal">
+  <h2 class="section-title">
+    <span class="emoji-left">⚙️</span>
+    STEP 1: PREPARE THE CLOWN CAR (HOST SETUP)
+    <span class="emoji-right">⚙️</span>
+  </h2>
+
+  <div class="step-card">
+    <div class="step-number" style="background: linear-gradient(135deg, var(--clown-red), var(--clown-pink));">1</div>
+    <h3>Kernel Parameters — The Magic Spells 🧙‍♂️</h3>
+    <p>
+      Your computer needs some <strong>magic kernel parameters</strong> to let the GPU do its clown tricks. These tell your computer to share memory with the GPU — like sharing your lunch with a friend! 🍱
+    </p>
+
+    <div class="warning-box">
+      <span class="warning-emoji">🚨</span>
+      <strong>DO NOT USE</strong> <code>linux-firmware-20251125</strong>! It's like giving your clown a whoopee cushion — it will crash and burn! 🔥 Check your version:
+    </div>
+
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyCode(this)">📋 Copy</button>
+      <span class="cmd">rpm</span> -qa | <span class="cmd">grep</span> linux-firmware
+    </div>
+
+    <p>If you see <strong>20251125</strong>, downgrade immediately:</p>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyCode(this)">📋 Copy</button>
+      <span class="comment"># For Fedora 43:</span><br>
+      <span class="cmd">mkdir</span> -p ~/linux-firmware-downgrade<br>
+      <span class="cmd">cd</span> ~/linux-firmware-downgrade<br>
+      <span class="cmd">wget</span> -r -np -nd -A '*.rpm' https://kojipkgs.fedoraproject.org/packages/linux-firmware/20251111/1.fc43/noarch/<br>
+      <span class="cmd">sudo</span> dnf downgrade ./*.rpm<br>
+      <span class="cmd">sudo</span> dracut -f
+    </div>
+
+    <p style="margin-top: 1rem;">Now add the <strong>magic kernel parameters</strong>:</p>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyCode(this)">📋 Copy</button>
+      <span class="comment"># Add these to your GRUB_CMDLINE_LINUX in /etc/default/grub:</span><br>
+      <span class="flag">amd_iommu=off</span> <span class="flag">amdgpu.gttsize=126976</span> <span class="flag">ttm.pages_limit=32505856</span>
+    </div>
+
+    <div class="tip-box">
+      <strong>🤡 What do these do?</strong>
+      <ul>
+        <li><code>amd_iommu=off</code> — Turns off the IOMMU. Makes things 5-12% faster! Like removing training wheels from your clown bike! 🚲</li>
+        <li><code>amdgpu.gttsize=126976</code> — Caps GPU memory to 124 GiB. That's a LOT of memory! 🧠</li>
+        <li><code>ttm.pages_limit=32505856</code> — Caps pinned memory to 124 GiB. More memory sharing! 🤝</li>
+      </ul>
+    </div>
+
+    <p>Apply the magic and reboot:</p>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyCode(this)">📋 Copy</button>
+      <span class="cmd">sudo</span> grub2-mkconfig -o /boot/grub2/grub.cfg<br>
+      <span class="cmd">sudo</span> reboot
+    </div>
+  </div>
+
+  <div class="fun-fact">
+    The kernel parameter <code>amd_iommu=off</code> was discovered to be faster by a clown named Lars Urban (@urbanswelt). He's basically the Einstein of clown computing! 🧠🤡
+  </div>
+</section>
+
+<div class="clown-divider">🎭</div>
+
+<!-- SECTION 4: CREATE TOOLBOX -->
+<section class="section reveal">
+  <h2 class="section-title">
+    <span class="emoji-left">🎪</span>
+    STEP 2: BUILD YOUR CLOWN CAR (CREATE TOOLBOX)
+    <span class="emoji-right">🎪</span>
+  </h2>
+
+  <div class="step-card">
+    <div class="step-number" style="background: linear-gradient(135deg, var(--clown-blue), var(--clown-cyan));">2</div>
+    <h3>Choose Your Clown Car Flavor! 🍦</h3>
+    <p>There are different toolbox images, each with a different "flavor" of GPU backend. Pick one!</p>
+
+    <table class="clown-table">
+      <thead>
+        <tr>
+          <th>🎨 Flavor</th>
+          <th>🔧 Backend</th>
+          <th>📝 Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>vulkan-radv</strong></td>
+          <td>Vulkan (Mesa RADV)</td>
+          <td>Most stable! Like vanilla ice cream — always good! 🍦</td>
+        </tr>
+        <tr>
+          <td><strong>vulkan-amdvlk</strong></td>
+          <td>Vulkan (AMDVLK)</td>
+          <td>Fastest! But has a 2 GiB limit. Like a speed demon clown! 🏎️</td>
+        </tr>
+        <tr>
+          <td><strong>rocm-7.2.4</strong></td>
+          <td>ROCm 7.2.4</td>
+          <td>Recommended for performance! The big top of clown cars! 🎪</td>
+        </tr>
+        <tr>
+          <td><strong>rocm-6.4.4</strong></td>
+          <td>ROCm 6.4.4</td>
+          <td>Older but stable. Like a classic clown car! 🚗</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="warning-box">
+      <span class="warning-emoji">⚠️</span>
+      <strong>AVOID</strong> <code>rocm7-nightlies</code> for now — it has a bug that caps memory at 64GB. It's like a clown car that only fits 2 clowns! 😢
+    </div>
+  </div>
+
+  <div class="step-card">
+    <h3>Create Your Toolbox!</h3>
+
+    <div class="option-tabs">
+      <button class="option-tab active" onclick="showTab(event, 'tab-vulkan')">🎨 Vulkan (RADV)</button>
+      <button class="option-tab" onclick="showTab(event, 'tab-rocm')">🚀 ROCm (Recommended)</button>
+    </div>
+
+    <div class="option-content active" id="tab-vulkan">
+      <p><strong>Option A: Vulkan (RADV)</strong> — Best for compatibility, like a clown who gets along with everyone! 🤝</p>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">📋 Copy</button>
+        <span class="cmd">toolbox</span> create llama-vulkan-radv \<br>
+        &nbsp;&nbsp;<span class="flag">--image</span> docker.io/kyuz0/amd-strix-halo-toolboxes:vulkan-radv \<br>
+        &nbsp;&nbsp;<span class="flag">--</span> <span class="flag">--device</span> /dev/dri \<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="flag">--group-add</span> video \<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="flag">--security-opt</span> seccomp=unconfined<br><br>
+        <span class="cmd">toolbox</span> enter llama-vulkan-radv
+      </div>
+    </div>
+
+    <div class="option-content" id="tab-rocm">
+      <p><strong>Option B: ROCm 7.2.4</strong> — Best for performance, like a clown on espresso! ☕🤡</p>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">📋 Copy</button>
+        <span class="cmd">toolbox</span> create llama-rocm-7.2.4 \<br>
+        &nbsp;&nbsp;<span class="flag">--image</span> docker.io/kyuz0/amd-strix-halo-toolboxes:rocm-7.2.4 \<br>
+        &nbsp;&nbsp;<span class="flag">--</span> <span class="flag">--device</span> /dev/dri \<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="flag">--device</span> /dev/kfd \<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="flag">--group-add</span> video \<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="flag">--group-add</span> render \<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="flag">--group-add</span> sudo \<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="flag">--security-opt</span> seccomp=unconfined<br><br>
+        <span class="cmd">toolbox</span> enter llama-rocm-7.2.4
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <h3>Check That Your GPU Is Working! 🎉</h3>
+    <p>Inside your toolbox, run this to see if your GPU is doing its clown tricks:</p>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyCode(this)">📋 Copy</button>
+      <span class="cmd">llama-cli</span> --list-devices
+    </div>
+    <p>If you see your GPU listed, <strong>HONK HONK</strong> — you did it! 📯📯</p>
+  </div>
+</section>
+
+<div class="clown-divider">🎈</div>
+
+<!-- SECTION 5: DOWNLOAD MODEL -->
+<section class="section reveal">
+  <h2 class="section-title">
+    <span class="emoji-left">📥</span>
+    STEP 3: DOWNLOAD A BRAIN (GET A MODEL)
+    <span class="emoji-right">📥</span>
+  </h2>
+
+  <div class="step-card">
+    <div class="step-number" style="background: linear-gradient(135deg, var(--clown-purple), var(--clown-pink));">3</div>
+    <h3>Download a Model — It's Like Getting a New Pet Parrot! 🦜</h3>
+    <p>
+      Now you need to download an LLM — that's the "brain" of your talking parrot. We'll use <strong>Qwen3 Coder 30B</strong>, which is like a parrot that went to coding school! 🎓🦜
+    </p>
+
+    <div class="tip-box">
+      <strong>💡 Pro Clown Tip:</strong> Set your Hugging Face token for faster downloads. It's like having a VIP pass to the clown circus! 🎟️
+    </div>
+
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyCode(this)">📋 Copy</button>
+      <span class="comment"># Download part 1 of the model:</span><br>
+      <span class="flag">HF_XET_HIGH_PERFORMANCE=1</span> <span class="cmd">hf</span> download unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF \<br>
+      &nbsp;&nbsp;<span class="string">BF16/Qwen3-Coder-30B-A3B-Instruct-BF16-00001-of-00002.gguf</span> \<br>
+      &nbsp;&nbsp;<span class="flag">--local-dir</span> models/qwen3-coder-30B-A3B/<br><br>
+      <span class="comment"># Download part 2 of the model:</span><br>
+      <span class="flag">HF_XET_HIGH_PERFORMANCE=1</span> <span class="cmd">hf</span> download unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF \<br>
+      &nbsp;&nbsp;<span class="string">BF16/Qwen3-Coder-30B-A3B-Instruct-BF16-00002-of-00002.gguf</span> \<br>
+      &nbsp;&nbsp;<span class="flag">--local-dir</span> models/qwen3-coder-30B-A3B/
+    </div>
+
+    <div class="fun-fact">
+      The <code>HF_XET_HIGH_PERFORMANCE=1</code> flag makes downloads faster — it's like giving your download a clown shoe rocket booster! 🚀👞
+    </div>
+  </div>
+</section>
+
+<div class="clown-divider">🎪</div>
+
+<!-- SECTION 6: RUN INFERENCE -->
+<section class="section reveal">
+  <h2 class="section-title">
+    <span class="emoji-left">🚀</span>
+    STEP 4: MAKE THE PARROT TALK! (RUN INFERENCE)
+    <span class="emoji-right">🚀</span>
+  </h2>
+
+  <div class="step-card">
+    <div class="step-number" style="background: linear-gradient(135deg, var(--clown-orange), var(--clown-red));">4</div>
+    <h3>Time to Talk to Your Parrot! 🦜💬</h3>
+
+    <div class="warning-box">
+      <span class="warning-emoji">🚨</span>
+      <strong>VERY IMPORTANT!</strong> Always use <code>-fa 1</code> (flash attention) and <code>--no-mmap</code> on Strix Halo. Without these, your parrot might fall off its perch! 🦜💥
+    </div>
+
+    <div class="option-tabs">
+      <button class="option-tab active" onclick="showTab(event, 'tab-server')">🌐 Server Mode</button>
+      <button class="option-tab" onclick="showTab(event, 'tab-cli')">💻 CLI Mode</button>
+      <button class="option-tab" onclick="showTab(event, 'tab-router')">🔀 Router Mode</button>
+    </div>
+
+    <div class="option-content active" id="tab-server">
+      <p><strong>Server Mode</strong> — Runs an API server. Like a parrot that answers questions through a walkie-talkie! 📻</p>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">📋 Copy</button>
+        <span class="cmd">llama-server</span> -m models/qwen3-coder-30B-A3B/BF16/Qwen3-Coder-30B-A3B-Instruct-BF16-00001-of-00002.gguf \<br>
+        &nbsp;&nbsp;<span class="flag">-c</span> 8192 <span class="flag">-ngl</span> 999 <span class="flag">-fa</span> 1 <span class="flag">--no-mmap</span>
+      </div>
+    </div>
+
+    <div class="option-content" id="tab-cli">
+      <p><strong>CLI Mode</strong> — Chat directly in the terminal. Like talking to the parrot face-to-face! 🗣️</p>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">📋 Copy</button>
+        <span class="cmd">llama-cli</span> <span class="flag">--no-mmap</span> <span class="flag">-ngl</span> 999 <span class="flag">-fa</span> 1 \<br>
+        &nbsp;&nbsp;-m models/qwen3-coder-30B-A3B/BF16/Qwen3-Coder-30B-A3B-Instruct-BF16-00001-of-00002.gguf \<br>
+        &nbsp;&nbsp;-p <span class="string">"Write a Strix Halo toolkit haiku."</span>
+      </div>
+    </div>
+
+    <div class="option-content" id="tab-router">
+      <p><strong>Router Mode</strong> — Multi-model routing with a config file. Like having a whole flock of parrots and a manager! 🦜👔</p>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">📋 Copy</button>
+        <span class="cmd">llama-server</span> <span class="flag">--models-preset</span> models.ini <span class="flag">--host</span> 0.0.0.0 <span class="flag">--port</span> 8080 <span class="flag">--models-max</span> 1 <span class="flag">--parallel</span> 1
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <h3>What Do Those Flags Mean? 🤓</h3>
+    <div class="checklist-item"><span class="check-emoji">🔥</span> <code>-fa 1</code> — Flash Attention. Makes things faster, like a clown on a pogo stick! 🤸</div>
+    <div class="checklist-item"><span class="check-emoji">🚫</span> <code>--no-mmap</code> — No memory mapping. Prevents crashes on Strix Halo. Like wearing a helmet while juggling chainsaws! ⛓️</div>
+    <div class="checklist-item"><span class="check-emoji">🎯</span> <code>-ngl 999</code> — Put all layers on GPU. Maximum clown power! 💪</div>
+    <div class="checklist-item"><span class="check-emoji">📏</span> <code>-c 8192</code> — Context length. How much the parrot can remember! 🧠</div>
+  </div>
+</section>
+
+<div class="clown-divider">🎭</div>
+
+<!-- SECTION 7: KEEP UPDATED -->
+<section class="section reveal">
+  <h2 class="section-title">
+    <span class="emoji-left">🔄</span>
+    STEP 5: KEEP YOUR CLOWN CAR SHINY (UPDATES)
+    <span class="emoji-right">🔄</span>
+  </h2>
+
+  <div class="step-card">
+    <div class="step-number" style="background: linear-gradient(135deg, var(--clown-green), var(--clown-yellow));">5</div>
+    <h3>Keep Your Toolbox Updated! 🧹✨</h3>
+    <p>
+      Just like a clown needs to keep their makeup fresh, your toolbox needs updates! Use the refresh script:
+    </p>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyCode(this)">📋 Copy</button>
+      <span class="cmd">./refresh-toolboxes.sh</span> all
+    </div>
+    <p>This pulls the latest builds — like getting a new outfit for your clown car! 👗🚗</p>
+  </div>
+
+  <div class="step-card">
+    <h3>Check Your VRAM (How Much Brain Space You Need) 🧠</h3>
+    <p>Use the built-in VRAM estimator to see if your model will fit:</p>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyCode(this)">📋 Copy</button>
+      <span class="cmd">gguf-vram-estimator.py</span> models/my-model.gguf <span class="flag">--contexts</span> 32768
+    </div>
+    <div class="fun-fact">
+      Strix Halo uses "unified memory" — that means your CPU and GPU share the same RAM. It's like two clowns sharing one big clown shoe! 👞🤡
+    </div>
+  </div>
+</section>
+
+<div class="clown-divider">🎈</div>
+
+<!-- SECTION 8: TROUBLESHOOTING -->
+<section class="section reveal">
+  <h2 class="section-title">
+    <span class="emoji-left">🔧</span>
+    TROUBLESHOOTING — WHEN CLOWNS FALL OFF THE UNICYCLE
+    <span class="emoji-right">🔧</span>
+  </h2>
+
+  <div class="step-card">
+    <h3>Common Clown Problems & Solutions 🩹</h3>
+
+    <div class="warning-box">
+      <span class="warning-emoji">🚨</span>
+      <strong>Problem:</strong> Everything crashes and burns! 🔥<br>
+      <strong>Solution:</strong> Check your <code>linux-firmware</code> version. If it's <code>20251125</code>, downgrade it! See Step 1 above.
+    </div>
+
+    <div class="warning-box">
+      <span class="warning-emoji">🚨</span>
+      <strong>Problem:</strong> Your model won't load or runs super slow! 🐌<br>
+      <strong>Solution:</strong> Make sure you're using <code>-fa 1</code> and <code>--no-mmap</code>. These are like the clown's safety net! 🥅
+    </div>
+
+    <div class="warning-box">
+      <span class="warning-emoji">🚨</span>
+      <strong>Problem:</strong> <code>llama-cli --list-devices</code> shows nothing! 😱<br>
+      <strong>Solution:</strong> Check your kernel parameters. Make sure <code>amd_iommu=off</code> and the other params are set. Also check that you passed <code>--device /dev/dri</code> when creating the toolbox.
+    </div>
+
+    <div class="warning-box">
+      <span class="warning-emoji">🚨</span>
+      <strong>Problem:</strong> Memory capped at 64GB! 📏<br>
+      <strong>Solution:</strong> You're probably using <code>rocm7-nightlies</code>. Switch to <code>rocm-7.2.4</code> instead!
+    </div>
+
+    <div class="warning-box">
+      <span class="warning-emoji">🚨</span>
+      <strong>Problem:</strong> Kernel older than 6.18.4! 📅<br>
+      <strong>Solution:</strong> Upgrade your kernel! Older kernels have a bug that causes instability on gfx1151. It's like trying to ride a unicycle with square wheels! 🎡
+    </div>
+  </div>
+</section>
+
+<div class="clown-divider">🎪</div>
+
+<!-- SECTION 9: YOU DID IT -->
+<section class="section reveal">
+  <h2 class="section-title">
+    <span class="emoji-left">🎉</span>
+    YOU DID IT, LITTLE CLOWN!
+    <span class="emoji-right">🎉</span>
+  </h2>
+
+  <div class="step-card" style="text-align: center;">
+    <div style="font-size: 5rem; animation: heroBounce 1s ease-in-out infinite;">🏆</div>
+    <h3 style="font-size: 2rem; margin: 1rem 0;">CONGRATULATIONS!</h3>
+    <p style="font-size: 1.2rem;">
+      You've successfully set up your Strix Halo toolbox and can now run LLMs! 🎉<br>
+      You're officially a <span class="jiggle">GPU Clown</span>! 🤡💻
+    </p>
+    <p style="margin-top: 1rem;">
+      Your talking parrot is ready to chat! Go ask it to write haikus, solve math problems, or tell you why the sky is blue! 🦜💬
+    </p>
+    <button class="honk-btn" onclick="honk()" style="margin-top: 1.5rem;">📯 HONK IN CELEBRATION! 📯</button>
+  </div>
+
+  <div class="step-card">
+    <h3>What's Next? 🤔</h3>
+    <div class="checklist-item"><span class="check-emoji">📖</span> Read the <a href="https://github.com/kyuz0/amd-strix-halo-toolboxes" style="color: var(--clown-cyan);">official docs</a> for more advanced stuff</div>
+    <div class="checklist-item"><span class="check-emoji">📊</span> Check out the <a href="https://kyuz0.github.io/amd-strix-halo-toolboxes/" style="color: var(--clown-cyan);">performance benchmarks</a></div>
+    <div class="checklist-item"><span class="check-emoji">🌐</span> Visit the <a href="https://strix-halo-toolboxes.com" style="color: var(--clown-cyan);">Strix Halo Toolboxes website</a></div>
+    <div class="checklist-item"><span class="check-emoji">☕</span> <a href="https://buymeacoffee.com/dcapitella" style="color: var(--clown-cyan);">Buy the creator a coffee</a> — they deserve it! 🤡☕</div>
+    <div class="checklist-item"><span class="check-emoji">🎪</span> Go juggle some more clown cars!</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <span class="big-emoji">🤡</span>
+  <p>Made with 🤡 and ❤️ by a team of clowns for a 5-year-old's birthday party</p>
+  <p style="margin-top: 0.5rem; font-size: 0.9rem;">Based on <a href="https://github.com/kyuz0/amd-strix-halo-toolboxes" style="color: var(--clown-yellow);">kyuz0/amd-strix-halo-toolboxes</a></p>
+  <p style="margin-top: 0.5rem; font-size: 0.8rem; color: rgba(255,255,255,0.3);">🎪 Honk honk! 🎪</p>
+</footer>
+
+<!-- CLOWN MASCOT -->
+<div class="clown-mascot" id="clownMascot" onclick="mascotSpeak()">🤡</div>
+<div class="mascot-speech" id="mascotSpeech"></div>
+
+<script>
+// === FLOATING EMOJIS ===
+const emojis = ['🤡', '🎪', '🎈', '🎉', '🎭', '🤹', '🎠', '🎡', '🎪', '🎈', '🎉', '🤡', '🎭', '🤹', '🎠', '🎡', '📯', '👞', '🍦', '🦜'];
+function createFloatingEmoji() {
+  const emoji = document.createElement('div');
+  emoji.className = 'floating-emoji';
+  emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+  emoji.style.left = Math.random() * 100 + 'vw';
+  emoji.style.animationDuration = (8 + Math.random() * 12) + 's';
+  emoji.style.animationDelay = Math.random() * 5 + 's';
+  emoji.style.fontSize = (1.2 + Math.random() * 1.5) + 'rem';
+  document.body.appendChild(emoji);
+  setTimeout(() => emoji.remove(), 25000);
+}
+setInterval(createFloatingEmoji, 800);
+
+// === CONFETTI BURST ===
+function burstConfetti() {
+  const colors = ['#ff2d55', '#ffcc00', '#34c759', '#007aff', '#af52de', '#ff9500', '#ff69b4', '#00d4ff'];
+  for (let i = 0; i < 80; i++) {
+    const confetti = document.createElement('div');
+    confetti.className = 'confetti-piece';
+    confetti.style.left = Math.random() * 100 + 'vw';
+    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    confetti.style.animationDuration = (2 + Math.random() * 3) + 's';
+    confetti.style.animationDelay = Math.random() * 0.5 + 's';
+    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+    confetti.style.width = (6 + Math.random() * 8) + 'px';
+    confetti.style.height = (6 + Math.random() * 8) + 'px';
+    document.body.appendChild(confetti);
+    setTimeout(() => confetti.remove(), 5000);
+  }
+}
+
+// === HONK ===
+function honk() {
+  burstConfetti();
+  const mascot = document.getElementById('clownMascot');
+  mascot.textContent = '📯';
+  mascot.style.transform = 'scale(1.5) rotate(20deg)';
+  setTimeout(() => {
+    mascot.textContent = '🤡';
+    mascot.style.transform = '';
+  }, 1000);
+}
+
+// === MASCOT SPEECH ===
+const mascotLines = [
+  "Honk honk! 📯 You're doing great!",
+  "Did you know? Your GPU is basically a clown car! 🚗🤡",
+  "LLMs are like magic parrots! 🦜✨",
+  "Remember to use -fa 1 and --no-mmap! 🎯",
+  "Your Strix Halo is the star of the circus! ⭐",
+  "ROCm is the clown car of GPU compute! 🎪",
+  "Flash attention makes things go zoom! 🚀",
+  "You're a GPU clown now! 🤡💻",
+  "Honk honk honk! 📯📯📯",
+  "The sky is blue because the GPU says so! 🌌",
+  "Unified memory = sharing is caring! 🤝",
+  "Your parrot is ready to talk! 🦜💬",
+];
+let mascotIndex = 0;
+function mascotSpeak() {
+  const speech = document.getElementById('mascotSpeech');
+  speech.textContent = mascotLines[mascotIndex % mascotLines.length];
+  speech.classList.add('show');
+  mascotIndex++;
+  setTimeout(() => speech.classList.remove('show'), 3000);
+}
+// Auto-speak every 15 seconds
+setInterval(mascotSpeak, 15000);
+
+// === COPY CODE ===
+function copyCode(btn) {
+  const codeBlock = btn.parentElement;
+  const text = codeBlock.textContent.replace('📋 Copy', '').trim();
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = '✅ Copied!';
+    setTimeout(() => btn.textContent = '📋 Copy', 2000);
+  });
+}
+
+// === TABS ===
+function showTab(event, tabId) {
+  const parent = event.target.closest('.step-card');
+  parent.querySelectorAll('.option-tab').forEach(t => t.classList.remove('active'));
+  parent.querySelectorAll('.option-content').forEach(c => c.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById(tabId).classList.add('active');
+}
+
+// === SCROLL PROGRESS ===
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = (scrollTop / docHeight) * 100;
+  document.getElementById('progressBar').style.width = progress + '%';
+});
+
+// === SCROLL REVEAL ===
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// === SPARKLE TRAIL ===
+let sparkleThrottle = 0;
+document.addEventListener('mousemove', (e) => {
+  if (Date.now() - sparkleThrottle < 80) return;
+  sparkleThrottle = Date.now();
+  const sparkle = document.createElement('div');
+  sparkle.className = 'sparkle';
+  sparkle.textContent = ['✨', '⭐', '🌟', '💫'][Math.floor(Math.random() * 4)];
+  sparkle.style.left = e.clientX + 'px';
+  sparkle.style.top = e.clientY + 'px';
+  document.body.appendChild(sparkle);
+  setTimeout(() => sparkle.remove(), 800);
+});
+
+// === INITIAL CONFETTI ===
+setTimeout(burstConfetti, 500);
+</script>
+
+</body>
+</html>
