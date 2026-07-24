@@ -1,0 +1,16 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "x.ciru.ai"
+        }
+      ],
+      "destination": "https://x.com/i/chat/group_join/g2059210683468702051/3EHdePkCLV",
+      "permanent": false
+    }
+  ]
+}
