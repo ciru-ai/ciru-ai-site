@@ -2,6 +2,11 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "redirects": [
     {
+      "source": "/leguna/:path*",
+      "destination": "/laguna/:path*",
+      "permanent": true
+    },
+    {
       "source": "/(.*)",
       "has": [
         {
