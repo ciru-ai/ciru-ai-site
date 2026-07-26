@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Coffee Tetris ☕</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-border-box; }
+  html, body { height: 100%; width: 100%; overflow: hidden; }
+  body {
+    font-family: 'Segoe UI', 'Courier New', sans-serif;
+    background: #1a0f0a;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #3e2723;
+    touch-action: none;
+  }
+
+  h1 {
+    color: #6f4e37;
+    font-size: 2rem;
+    margin-bottom: 8px;
+    text-shadow: 2px 2px 0 rgba(255,255,255,0.3);
+    letter-spacing: 2px;
+  }
+
+  .subtitle {
+    color: #bc9f7b;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+  }
+
+  /* Coffee cup / board container */
+  .coffee-cup {
+    position: relative;
+    background: #2d1a0f;
+    border: 6px solid #4e342e;
+    border-radius: 50% 50% 0 0 / 60% 60% 0 0;
+    padding: 2px;
+    box-shadow: inset 0 0 30px rgba(0,0,0,0.6);
+  }
+
+  .coffee-cup::before {
+    content: "";
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 50px;
+    border: 6px solid #4e342e;
+    border-bottom: none;
+    border-radius: 50%;
+    z-index: 2;
+  }
+
+  .coffee-cup::after {
+    content: "";
+    position: absolute;
+    top: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 25px;
+    background: #fff9;
+    border-radius: 50%;
+    z-index: 1;
+  }
+
+  #game-board {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(20, 1fr);
+    gap: 1px;
+    background: #5d4037;
+    border-radius: 4px;
+    box-shadow: 0 0 40px rgba(111,78,55,0.4);
+  }
+
+  .cell {
+    width: 28px;
+    height: 28px;
+    background: #2d1a0f;
+    border-radius: 2px;
+  }
+
+  .cell.coffee { background: #4e342e; box-shadow: inset 0 0 8px rgba(0,0,0,0.4); }
+  .cell.milk { background: #f5e0c3; box-shadow: inset 0 0 6px rgba(111,78,55,0.4); }
+  .cell.dark { background: #3e2723; box-shadow: inset 0 0 6px rgba(0,0,0,0.5); }
+  .cell.light { background: #6f4e37; box-shadow: inset 0 0 5px rgba(0,0,0,0.3); }
+  .cellfoam { background: #f0d9c5; box-shadow: inset 0 0 4px rgba(0,0,0,0.2); }
+
+  .stats {
+    display: flex;
+    gap: 30px;
+    margin: 20px 0;
+    color: #bc9f7b;
+    font-size: 1.1rem;
+  }
+
+  .stat-item { text-align: center; }
+  .stat-value { font-size: 1.8rem; font-weight: bold; color: #6f4e37; }
+
+  .controls-hint {
+    color: #8d6e63;
+    font-size: 0.8rem;
+    margin-top: 10px;
+  }
+
+  /* Mobile touch controls */
+  .mobile-controls {
+    display: none;
+    width: 100%;
+    max-width: 480px;
+    margin-top: 20px;
+  }
+
+  .control-row {
+    display: flex;
+    justify-content: space-around;
+    margin: 8px 0;
+  }
+
+  .ctrl-btn {
+    width: 70px;
+    height: 70px;
+    border: 2px solid #4e342e;
+    border-radius: 12px;
+    background: #4e342e;
+    color: #fff;
+    font-size: 0.9rem;
+    cursor: pointer;
+    user-select: none;
+    touch-action: manipulation;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.1s;
+  }
+
+  .ctrl-btn:active {
+    transform: scale(0.92);
+    background: #6f4e37;
+  }
+
+  .ctrl-btn.rotate { width: 70px; }
+  .ctrl-btn.drop { width: 70px; height: 100px; border-radius: 12px; }
+
+  .stat-label { font-size: 0.8rem; color: #bc9f7b; }
+
+  @media (max-width: 768px) {
+    .mobile-controls { display: block; }
+    #game-board { 
+      gap: 1px;
+      transform: scale(0.85);
+    }
+    h1 { font-size: 1.6rem; }
+  }
+
+  @media (max-width: 480px) {
+    #game-board { transform: scale(0.7); }
+    .ctrl-btn { width: 60px; height: 60px; font-size: 0.8rem; }
+    .ctrl-btn.drop { height: 85px; }
+  }
+</style>
+</head>
+<body>
+  <h1>☕ Coffee Tetris</h1>
+  <p class="subtitle">Drop the coffee beans into the cup!</p>
+
+  <div class="coffee-cup">
+    <div id="game-board"></div>
+  </div>
+
+  <div class="stats">
+    <div class="stat-item">
+      <div class="stat-value" id="score">0</div>
+      <div class="stat-label">Points</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value" id="level">1</div>
+      <div class="stat-label">Level</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value" id="lines">0</div>
+      <div class="stat-label">Lines</div>
+    </div>
+  </div>
+
+  <p class="controls-hint">
+    ← → Move | ↑ Rotate | ↓ Soft Drop | Space Hard Drop | <strong>0</strong> Pause
+  </p>
+
+  <!-- Mobile Controls -->
+  <div class="mobile-controls">
+    <div class="control-row">
+      <div class="ctrl-btn" id="leftBtn">← Left</div>
+      <div class="ctrl-btn" id="rotateBtn">↻ Rotate</div>
+      <div class="ctrl-btn" id="rightBtn">→ Right</div>
+    </div>
+    <div class="control-row">
+      <div class="ctrl-btn drop" id="dropBtn">⌵ Drop</div>
+    </div>
+  </div>
+
+<script>
+  // Coffee-themed Tetris
+
+  const COLS = 10;
+  const ROWS = 20;
+  const BLOCK_SIZE = 1;
+
+  // Coffee piece types with colors
+  const PIECES = [
+    { name: 'milk', shape: [[1,1],[1,1]], color: 'milk' },          // O - milk foam
+    { name: 'dark', shape: [[0,1,0,0],[0,1,0,0],[0,1,0,0],[0,1,0,0]], color: 'dark' },  // I - dark roast
+    { name: 'coffee', shape: [[0,1,0],[1,1,0],[1,0,0]], color: 'coffee' },  // J
+    { name: 'coffee', shape: [[0,1,0],[0,1,1],[0,0,1]], color: 'coffee' },  // L
+    { name: 'foam', shape: [[0,1,0],[1,1,1],[0,0,0]], color: 'foam' },  // T
+    { name: 'milk', shape: [[0,0,0,0],[1,1,0,0],[0,1,1],[0,0,0]], color: 'milk' },  // S
+    { name: 'dark', shape: [[0,0,0,0],[0,0,1,1],[1,1,0],[0,0,0]], color: 'dark' },  // Z
+  ];
+
+  // Game state
+  let board = [];
+  let currentPiece = null;
+  let dropCounter = 0;
+  let dropInterval = 1000;
+  let lastUpdate = 0;
+  let score = 0;
+  let level = 1;
+  let lines = 0;
+  let gameOver = false;
+  let paused = false;
+
+  const boardEl = document.getElementById('game-board');
+  const scoreEl = document.getElementById('score');
+  const levelEl = document.getElementById('level');
+  const linesEl = document.getElementById('lines');
+
+  // Initialize board
+  function initBoard() {
+    board = [];
+    for (let r = 0; r < ROWS; r++) {
+      board.push(new Array(COLS).fill(0));
+    }
+  }
+
+  // Create a random piece
+  function randomPiece() {
+    const pc = PIECES[Math.floor(Math.random() * PIECES.length)];
+    const shape = pc.shape.map(row => [...row]);
+
+    // Center the piece
+    let offsetX = Math.floor((COLS - shape[0].length) / 2);
+
+    return {
+      shape: shape,
+      color: pc.color,
+      x: offsetX,
+      y: 0,
+      name: pc.name
+    };
+  }
+
+  // Check collision
+  function collide(piece, offsetX = 0, offsetY = 0) {
+    for (let r = 0; r < piece.shape.length; r++) {
+      for (let c = 0; c < piece.shape[r].length; c++) {
+        if (!piece.shape[r][c]) continue;
+
+        const x = piece.x + c + offsetX;
+        const y = piece.y + r + offsetY;
+
+        if (x < 0 || x >= COLS || y >= ROWS) return true;
+        if (y < 0) continue;
+        if (board[y][x]) return true;
+      }
+    }
+    return false;
+  }
+
+  // Rotate piece
+  function rotatePiece(piece) {
+    const N = piece.shape.length;
+    const rotated = [];
+    for (let r = 0; r < N; r++) {
+      rotated.push(new Array(N).fill(0));
+    }
+
+    for (let r = 0; r < N; r++) {
+      for (let c = 0; c < N; c++) {
+        rotated[c][N - 1 - r] = piece.shape[r][c];
+      }
+    }
+
+    const oldShape = piece.shape;
+    piece.shape = rotated;
+
+    // Simple wall kick
+    if (collide(piece)) {
+      piece.x -= 2;
+      if (collide(piece)) {
+        piece.x += 1;
+        if (collide(piece)) {
+          piece.x += 2;
+          if (collide(piece)) {
+            piece.x -= 1;
+          }
+        }
+      }
+    }
+
+    // Adjust x if collision persists
+    if (collide(piece)) {
+      // Try shifting left/right
+      let valid = false;
+      for (let i = -3; i <= 3; i++) {
+        piece.x = oldShape ? piece.x : piece.x;
+        const testX = piece.x + i;
+        piece.x = testX;
+        if (!collide(piece)) { valid = true; break; }
+      }
+      if (!valid) {
+        piece.shape = oldShape;
+        piece.x = oldShape ? piece.x : piece.x;
+      }
+    }
+  }
+
+  // Merge piece into board
+  function mergePiece(piece) {
+    for (let r = 0; r < piece.shape.length; r++) {
+      for (let c = 0; c < piece.shape[r].length; c++) {
+        if (piece.shape[r][c]) {
+          const x = piece.x + c;
+          const y = piece.y + r;
+          if (y >= 0 && y < ROWS && x >= 0 && x < COLS) {
+            board[y][x] = piece.color;
+          }
+        }
+      }
+    }
+  }
+
+  // Clear full lines
+  function clearLines() {
+    let linesCleared = 0;
+    outer: for (let y = ROWS - 1; y >= 0; y--) {
+      for (let x = 0; x < COLS; x++) {
+        if (!board[y][x]) continue outer;
+      }
+      // Remove the line
+      const row = board.splice(y, 1)[0].fill(0);
+      board.unshift(row);
+      linesCleared++;
+      y++;
+    }
+    return linesCleared;
+  }
+
+  // Update score
+  function updateScore(linesCleared) {
+    if (linesCleared === 0) return;
+
+    const lineScores = { 1: 100, 2: 300, 3: 500, 4: 800 };
+    score += (lineScores[linesCleared] || 0) * level;
+    lines += linesCleared;
+    level = Math.floor(lines / 10) + 1;
+    dropInterval = 1000 - (level - 1) * 50;
+    if (dropInterval < 150) dropInterval = 150;
+
+    scoreEl.textContent = score;
+    levelEl.textContent = level;
+    linesEl.textContent = lines;
+  }
+
+  // Draw everything
+  function draw() {
+    boardEl.innerHTML = '';
+    for (let r = 0; r < ROWS; r++) {
+      for (let c = 0; c < COLS; c++) {
+        const cell = document.createElement('div');
+        cell.classList.add('cell');
+        if (board[r][c]) {
+          cell.classList.add(board[r][c]);
+        }
+        boardEl.appendChild(cell);
+      }
+    }
+
+    // Draw current piece
+    if (currentPiece) {
+      const startIdx = currentPiece.y * COLS + currentPiece.x;
+      for (let r = 0; r < currentPiece.shape.length; r++) {
+        for (let c = 0; c < currentPiece.shape[r].length; c++) {
+          if (currentPiece.shape[r][c]) {
+            const idx = startIdx + r * COLS + c;
+            const cell = boardEl.children[idx];
+            if (cell) {
+              cell.classList.add(currentPiece.color);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Game loop
+  function update(time = 0) {
+    if (paused || gameOver) return;
+
+    const delta = time - lastUpdate;
+    lastUpdate = time;
+    dropCounter += delta;
+
+    if (dropCounter > dropInterval) {
+      dropCounter = 0;
+      moveDown();
+    }
+
+    draw();
+    requestAnimationFrame(update);
+  }
+
+  function moveDown() {
+    if (collide(currentPiece, 0, 1)) {
+      mergePiece(currentPiece);
+      const cleared = clearLines();
+      updateScore(cleared);
+      spawnPiece();
+    } else {
+      currentPiece.y++;
+    }
+  }
+
+  function moveSide(dir) {
+    if (!collide(currentPiece, dir, 0)) {
+      currentPiece.x += dir;
+    }
+  }
+
+  function spawnPiece() {
+    currentPiece = randomPiece();
+    if (collide(currentPiece, 0, 0)) {
+      gameOver = true;
+      alert("Game Over! Your coffee overflowed. Score: " + score);
+      return;
+    }
+  }
+
+  // Controls
+  document.addEventListener('keydown', e => {
+    if (gameOver) return;
+    if (e.code === 'Space' && !paused) {
+      e.preventDefault();
+      hardDrop();
+    }
+    if (e.key === 'ArrowLeft') { moveSide(-1); }
+    if (e.key === 'ArrowRight') { moveSide(1); }
+    if (e.key === 'ArrowDown') { moveDown(); }
+    if (e.key === 'ArrowUp' || e.key === 'X') { rotatePiece(currentPiece); }
+    if (e.key === '0' || e.key === 'p' || e.key === 'P') { togglePause(); }
+  });
+
+  function hardDrop() {
+    while (!collide(currentPiece, 0, 1)) {
+      currentPiece.y++;
+    }
+    mergePiece(currentPiece);
+    const cleared = clearLines();
+    updateScore(cleared);
+    spawnPiece();
+  }
+
+  function togglePause() {
+    paused = !paused;
+    if (paused) {
+      lastUpdate = 0;
+    } else {
+      requestAnimationFrame(update);
+    }
+  }
+
+  // Mobile button controls
+  document.getElementById('leftBtn').addEventListener('touchstart', e => {
+    e.preventDefault();
+    moveSide(-1);
+  });
+  document.getElementById('rightBtn').addEventListener('touchstart', e => {
+    e.preventDefault();
+    moveSide(1);
+  });
+  document.getElementById('rotateBtn').addEventListener('touchstart', e => {
+    e.preventDefault();
+    rotatePiece(currentPiece);
+  });
+  document.getElementById('dropBtn').addEventListener('touchstart', e => {
+    e.preventDefault();
+    hardDrop();
+  });
+
+  // Prevent zoom
+  document.addEventListener('touchstart', e => {
+    if (e.touches.length > 1) e.preventDefault();
+  }, { passive: false });
+
+  // Init and start
+  initBoard();
+  spawnPiece();
+  draw();
+  requestAnimationFrame(update);
+</script>
+</body>
+</html>
