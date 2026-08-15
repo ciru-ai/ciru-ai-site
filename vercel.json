@@ -1,5 +1,15 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    {
+      "source": "/kairic",
+      "destination": "https://kairic-site.vercel.app/kairic"
+    },
+    {
+      "source": "/kairic/:path*",
+      "destination": "https://kairic-site.vercel.app/kairic/:path*"
+    }
+  ],
   "redirects": [
     {
       "source": "/leguna/",
