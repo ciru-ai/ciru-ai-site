@@ -1,0 +1,19 @@
+{
+  "name": "Tilt Bloom",
+  "short_name": "Tilt Bloom",
+  "description": "A relaxing gravity garden of color, motion, and light.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#02060f",
+  "theme_color": "#02060f",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "./favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
