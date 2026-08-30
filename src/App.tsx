@@ -5,6 +5,7 @@ import {
   GitBranch,
   HeartHandshake,
   Mail,
+  Microscope,
 } from "lucide-react";
 import StaggeredText from "@/components/react-bits/staggered-text";
 import "./App.css";
@@ -381,21 +382,16 @@ function App() {
         <section className="contact-section" aria-labelledby="contact-title">
           <div className="contact-orbit" aria-hidden="true" />
           <div className="contact-icon" aria-hidden="true">
-            <GitBranch size={22} />
+            <Microscope size={22} />
           </div>
-          <p className="section-kicker">Give back upstream</p>
-          <h2 id="contact-title">
-            Open source made this lab possible. Strengthening it is part of the
-            work.
-          </h2>
+          <p className="section-kicker">Open collaboration</p>
+          <h2 id="contact-title">Have a project worth pursuing? Let’s collaborate.</h2>
           <p>
-            Ciru turns hard-won research back into public value: reproducible
-            evidence, honest failure reports, practical build notes, open
-            artifacts, and focused upstream contributions. The goal is simple:
-            leave the tools behind local AI better than we found them.
+            I’m open to selected collaborations in local LLM buildouts, agentic
+            systems, evaluation, and business workflow automation.
           </p>
           <a className="contact-email" href="mailto:jc@ciru.ai">
-            Connect on open source
+            jc@ciru.ai
             <ArrowUpRight size={19} aria-hidden="true" />
           </a>
         </section>
