@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ArrowDown,
   ArrowUpRight,
@@ -9,10 +9,6 @@ import {
 } from "lucide-react";
 import StaggeredText from "@/components/react-bits/staggered-text";
 import "./App.css";
-
-const PixelReveal = lazy(
-  () => import("@/components/react-bits/pixel-reveal"),
-);
 
 const practices = [
   {
@@ -95,6 +91,25 @@ function usePrefersReducedMotion() {
   return prefersReducedMotion;
 }
 
+function useDeferredHeroVideo(prefersReducedMotion: boolean) {
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
+  const saveData = Boolean(
+    (navigator as Navigator & { connection?: { saveData?: boolean } })
+      .connection?.saveData,
+  );
+
+  useEffect(() => {
+    if (prefersReducedMotion || saveData) {
+      return;
+    }
+
+    const timeoutId = window.setTimeout(() => setShouldLoadVideo(true), 700);
+    return () => window.clearTimeout(timeoutId);
+  }, [prefersReducedMotion, saveData]);
+
+  return shouldLoadVideo && !prefersReducedMotion && !saveData;
+}
+
 function ExternalLink({
   href,
   children,
@@ -118,6 +133,8 @@ function ExternalLink({
 
 function App() {
   const prefersReducedMotion = usePrefersReducedMotion();
+  const shouldLoadHeroVideo = useDeferredHeroVideo(prefersReducedMotion);
+  const [heroVideoReady, setHeroVideoReady] = useState(false);
 
   return (
     <div className="site-shell">
@@ -151,29 +168,25 @@ function App() {
             alt=""
             aria-hidden="true"
           />
-          {!prefersReducedMotion && (
-            <Suspense
-              fallback={
-                <div
-                  className="hero-pixel-reveal hero-reveal-cover"
-                  aria-hidden="true"
-                />
-              }
+          {shouldLoadHeroVideo && (
+            <video
+              className={`hero-video${heroVideoReady ? " is-ready" : ""}`}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              poster="/assets/home/ciru-research-hero.webp"
+              disablePictureInPicture
+              aria-hidden="true"
+              onCanPlay={() => setHeroVideoReady(true)}
+              onError={() => setHeroVideoReady(false)}
             >
-              <PixelReveal
-                className="hero-pixel-reveal"
-                imageSrc="/assets/home/ciru-research-hero.webp"
-                width="100%"
-                height="100%"
-                gridSize={22}
-                transitionColor="#07110c"
-                edgeHeight={0.18}
-                duration={1.7}
-                easing="easeOut"
-                direction="right"
-                triggerOnce
+              <source
+                src="/assets/home/ciru-research-hero-loop-v1.mp4"
+                type="video/mp4"
               />
-            </Suspense>
+            </video>
           )}
           <div className="hero-wash" aria-hidden="true" />
 
