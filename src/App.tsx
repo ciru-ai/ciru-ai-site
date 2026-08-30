@@ -383,21 +383,50 @@ function App() {
           <div className="contact-icon" aria-hidden="true">
             <GitBranch size={22} />
           </div>
-          <p className="section-kicker">Give back upstream</p>
+          <p className="section-kicker">Ways to work with Ciru</p>
           <h2 id="contact-title">
-            Open source made this lab possible. Strengthening it is part of the
-            work.
+            Strengthen the commons. Build what your organization needs.
           </h2>
-          <p>
-            Ciru turns hard-won research back into public value: reproducible
-            evidence, honest failure reports, practical build notes, open
-            artifacts, and focused upstream contributions. The goal is simple:
-            leave the tools behind local AI better than we found them.
+          <p className="contact-intro">
+            Ciru works in public where research can strengthen the ecosystem,
+            and commercially where organizations need focused engineering.
           </p>
-          <a className="contact-email" href="mailto:jc@ciru.ai">
-            Connect on open source
-            <ArrowUpRight size={19} aria-hidden="true" />
-          </a>
+
+          <div className="engagement-grid">
+            <article className="engagement-card">
+              <span className="engagement-label">Open source</span>
+              <h3>Give back upstream.</h3>
+              <p>
+                Ciru returns research to the ecosystem through reproducible
+                evidence, practical build notes, open artifacts, and focused
+                upstream contributions.
+              </p>
+              <a
+                className="engagement-link engagement-link-secondary"
+                href="mailto:jc@ciru.ai?subject=Open%20source%20conversation"
+              >
+                Connect on open source
+                <ArrowUpRight size={17} aria-hidden="true" />
+              </a>
+            </article>
+
+            <article className="engagement-card engagement-card-services">
+              <span className="engagement-label">Professional services</span>
+              <h3>Turn advanced AI into working systems.</h3>
+              <p>
+                Ciru works with organizations on local LLM systems, agentic
+                engineering, rigorous evaluation, and workflow automation
+                through separately scoped commercial engagements.
+              </p>
+              <a
+                className="engagement-link engagement-link-primary"
+                href="mailto:jc@ciru.ai?subject=Ciru%20project%20inquiry"
+              >
+                Discuss a project
+                <ArrowUpRight size={17} aria-hidden="true" />
+              </a>
+            </article>
+          </div>
         </section>
       </main>
 
