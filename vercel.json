@@ -2,7 +2,7 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "headers": [
     {
-      "source": "/assets/home/ciru-research-hero-loop-v1.mp4",
+      "source": "/assets/home/ciru-research-hero-loop-v2.mp4",
       "headers": [
         {
           "key": "Cache-Control",
