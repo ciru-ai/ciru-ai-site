@@ -3,6 +3,7 @@ import {
   ArrowDown,
   ArrowUpRight,
   GitBranch,
+  HeartHandshake,
   Mail,
   Microscope,
 } from "lucide-react";
@@ -133,6 +134,7 @@ function App() {
           <a href="#practice">Practice</a>
           <a href="#work">Selected work</a>
           <a href="#resources">Resources</a>
+          <a href="#support">Support</a>
         </nav>
 
         <a className="header-contact" href="mailto:jc@ciru.ai">
@@ -325,6 +327,46 @@ function App() {
                 )}
               </ExternalLink>
             ))}
+          </div>
+        </section>
+
+        <section
+          className="section support-section"
+          id="support"
+          aria-labelledby="support-title"
+        >
+          <div className="support-card">
+            <div className="support-copy">
+              <p className="section-kicker">Keep the lab moving</p>
+              <h2 id="support-title">Support independent Ciru research.</h2>
+              <p>
+                If the models, benchmarks, and open technical work are useful
+                to you, you can make a one-time payment in any amount you
+                choose. Support helps fund compute, evaluation, and continued
+                publication of the work.
+              </p>
+            </div>
+
+            <div className="support-action">
+              <ExternalLink
+                className="button button-primary support-button"
+                href="https://buy.stripe.com/aFa14n6ZfbQpfql5T8bMQ00"
+              >
+                Choose your amount
+                <HeartHandshake size={18} aria-hidden="true" />
+              </ExternalLink>
+              <p className="support-note">
+                This is voluntary, one-time support. It does not purchase
+                consulting services, create a subscription, or promise a
+                deliverable. Ciru does not represent it as a tax-deductible
+                charitable contribution.
+              </p>
+              <p className="support-contact">
+                Made a payment in error or need help? Email{" "}
+                <a href="mailto:jc@ciru.ai">jc@ciru.ai</a> with the receipt
+                email so the payment can be reviewed.
+              </p>
+            </div>
           </div>
         </section>
 
