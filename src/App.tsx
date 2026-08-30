@@ -179,11 +179,7 @@ function App() {
 
           <div className="hero-content">
             <div className="hero-kicker">
-              <span className="conference-pill">
-                <span className="status-dot" aria-hidden="true" />
-                At Advancing AI
-              </span>
-              <span>JC · Independent AI researcher</span>
+              <span>Independent AI Research</span>
             </div>
 
             <StaggeredText
@@ -375,8 +371,8 @@ function App() {
           <div className="contact-icon" aria-hidden="true">
             <Microscope size={22} />
           </div>
-          <p className="section-kicker">A quiet invitation</p>
-          <h2 id="contact-title">At Advancing AI? Let’s compare notes.</h2>
+          <p className="section-kicker">Open collaboration</p>
+          <h2 id="contact-title">Have a project worth pursuing? Let’s collaborate.</h2>
           <p>
             I’m open to selected collaborations in local LLM buildouts, agentic
             systems, evaluation, and business workflow automation.
